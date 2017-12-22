@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+
+  <label>Sending FAX by Twilio</label>
+
+  <configs>
+    <config name="AccountSid" required="true">
+      <label>C1. ACCOUNT SID</label>
+    </config>
+    <config name="AuthToken" required="true">
+      <label>C2. AUTH TOKEN</label>
+    </config>
+    <config name="From" required="true">
+      <label>C3. From Telephone Number (You got at Twilio) ex. +8150XXXXXXXX</label>
+    </config>
+    <config name="To" required="true" el-enabled="true">
+      <label>I1. To Telephone Number ex. +8175XXXXXXXX</label>
+    </config>
+    <config name="PdfUrl" required="true" el-enabled="true">
+      <label>I2. URL of PDF sending as FAX</label>
+    </config>
+    <config name="StatusUrlItem" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+      <label>O1. Data Item to save status confirmation url</label>
+    </config>
+    <config name="FaxSidItem" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+      <label>O2. Data Item to save FAX SID</label>
+    </config>
+    <config name="ErrorItem" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>O3. Data Item to save error</label>
+    </config>
+  </configs>
+  
+  <script><![CDATA[
+(function(){
+  var accountSid = configs.get("AccountSid");
+  var authToken = configs.get("AuthToken");
+  var from = configs.get("From");
+  var to = configs.get("To");
+  var pdfUrl = configs.get("PdfUrl");
+  var statusUrlItem = configs.get("StatusUrlItem");
+  var faxSidItem = configs.get("FaxSidItem");
+  var errorItem = configs.get("ErrorItem");
+
+  var response;
+  try{
+    response = httpClient.begin()
+      .basic(accountSid, authToken)
+      .formParam('To', to)
+      .formParam('From', from)
+      .formParam('MediaUrl', pdfUrl)
+      .formParam('quality', 'standard')
+      .post('https://fax.twilio.com/v1/Faxes');
+  } catch(e) {
+    if(errorItem != null) {
+      engine.setDataByNumber(errorItem, e.message);
+      return; // ここで終了
+    }
+    throw e;
+  }
+
+  if (response.getStatusCode() != 201) {
+    var error = response.getStatusCode() + "\n" + response.getResponseAsString();
+    if (errorItem != null) {
+      engine.setDataByNumber(errorItem, error);
+      return; // ここで終了
+    }
+    throw error;
+  }
+
+  var responseJson = JSON.parse(response.getResponseAsString());
+  if (statusUrlItem != null) {
+    engine.setDataByNumber(statusUrlItem, responseJson["url"]);
+  }
+  if (faxSidItem != null) {
+    engine.setDataByNumber(faxSidItem, responseJson["sid"]);
+  }
+  engine.setDataByNumber(errorItem, '');
+})();
+  ]]></script>
+  
+  <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPHSURBVHhe7ZvdUdwwEMchBWQmlSR0EF7yDB1A
+B6GS0EHoAJ7zAh2QdJJJA+S/vpVH1lnSfsnHDfxmbqTzSd7dv2R92L6Td944p5wO59/nbz+RXO2+
+dbn7+OfXNeeHMkwABPwDyffdNze3EOSG86GEC4DAXzg7BAgR6nPYyUYHXhIlhPskWwde4hXCXBmB
+f0HyvPt2cM4gxG/OqzAJcOhWr2HpDeoKrzX4hFYEVeGA4G/g4C3nV4ENmjppCjWjEUFc0Bq8pVvm
+jLYrKmRxwht4ySgfugW0hqMDL4n25wOnq8AYTXViRgdPaG30YmgKAKTz/PUWwSfYlnSz1Iyh6rSi
+q32CQ385vyncuqJGqjVQrwf0oJY/SPAEbNPqz7VtXlVF2vo1VRM4zz2SC3yeUPZ8OigEdR+RfMXn
+AXUvp4MVPP6aBWgF36ovEM1U1+rz3oGRwSdq9Q9h2zsGLJA4QKyV89T1sBAAJ++uwVstoAG2aGyY
+yPMeJL6VMZY9wHwPDyemAU9DXl5V12ArZxGj6hLoKBzSikKqtrQ9NHIMeOJ0C8JszQKgW9F9ezNQ
+XjXPgztOiTzfxWBrQR5r3gN6Dy1C78sjiHkFl+eD6Pk6xyq+BOBk804OgTLS62+tBUWtKrEh8TUR
+OQZMCBw8R5m9a5iPNUWQBK8lXACCHS3X7/S873Qt+AT9xnXLMeGSj4cznxQDQ3OFNcqBUUjjGdID
+jolhAqAFLqgVso94mqWyRd1hi6whApDTSMrl6hUHQ3v8Veg3rltOyfd8PJxwAQSOPq6JwMfoJkiV
+ESKIBYDx7kZJ4eBaoM3gExIbEl8TuQC95ajrcVUJnJzHhDwfRM/XOdZZAEwLruUoghC1YEZ+nUvf
+HZow2FqQxxo5BlQHtwGE2VIJAOVb198Dp1tQtdXxcY9SAPEmogTdqnnreoW8vKquwVbOIsa95a1E
+wbSMLNGoX57DUzdh8T1yDKg6VrJWzlPXw+rJPL2AaNXvBWCta/XZ3AN6jrKxNFhN29xWAImsXNo2
+06OxZl1J8DW8J6WHo6r7edHAT1pDdBdSNQG9YwDt2lQvUUTCtl2ryKoArS5X8MytsCls0/VuANHr
+AWec9pj275wfDtuStnwzhm4rawNT9BwT0f6InLW0brQQo3wQO2lxgPAKMdquyjmrMxnH+6psIkCE
+oWh7nFoA4rWKYLncTAshNiSdIreA/jBhakxTpZxD9wZr4Am3AImthfAGnggTIDFaiKjAE+ECJCAE
+TWXml64KjuePkzUgCK3dpZumzf46+87b5uTkP4D50skW/Mt0AAAAAElFTkSuQmCC</icon>
+</service-task-definition>
