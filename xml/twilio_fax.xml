@@ -2,6 +2,7 @@
 <service-task-definition>
 
   <label>Sending FAX by Twilio</label>
+  <version>2017-12-14</version>
 
   <configs>
     <config name="AccountSid" required="true">
