@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+  <script><![CDATA[
+(function(){
+  var parentFolderId = configs.get("ParentFolderId");
+  if (parentFolderId == "") {
+    throw "Parent Folder ID is blank";
+  }
+  var folderName = configs.get("FolderName");
+  if (folderName == "") {
+    throw "Folder Name is blank";
+  }
+  
+  var email = configs.get("Email");
+  var quser = quserDao.findByEmail(email);
+  if (quser == null) {
+    throw "User not found:" + email;
+  }
+  
+  // get OAuth token
+  var token = httpClient.getGoogleOAuth2Token(quser, "Drive");
+  
+  var json = createFolder(token, parentFolderId, folderName);
+
+  setData("FolderIdItem", json, "id");
+  setData("WebViewUrlItem", json, "webViewLink");
+  
+  //save Data to process data
+  function setData(configName, json, property) {
+    var item = configs.get(configName);
+    if (item == null) {
+      return;
+    }
+    var data = json[property];
+    engine.setDataByNumber(item, data);
+  }
+  
+  //create folder on google drive
+  function createFolder(token, parentFolderId, name) {
+    var json = {};
+    //mime type of google drive folder
+    json["mimeType"] = "application/vnd.google-apps.folder";
+    json["parents"] = [ parentFolderId + '' ];
+    json["name"] = name + '';
+    
+    var url = 'https://www.googleapis.com/drive/v3/files/';
+    var response = httpClient.begin()
+      .bearer(token)
+      .queryParam("fields", "id, webViewLink")
+      .body(JSON.stringify(json), "application/json; charset=UTF-8")
+      .post(url);
+    var status = response.getStatusCode();
+    var responseTxt = response.getResponseAsString();
+    engine.log("status:" + status);
+    engine.log(responseTxt);
+    if (status >= 300) {
+      var error = "Failed to delete:" + fileId + "\n" + status + "\n" + responseTxt;
+      throw error;
+    }
+    json = JSON.parse(responseTxt);
+    return json;
+  }
+})();
+
+  ]]></script>
+
+  <label>Creating Folder on Google Drive</label>
+  <label locale="ja">Google Drive フォルダ生成</label>
+
+  <help-page-url>https://www.questetra.com/tour/m4/m415/addon-googledrive-foldercreate/</help-page-url>
+  <help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-googledrive-foldercreate/</help-page-url>
+
+  <last-modified>2018-01-09</last-modified>
+
+  <configs>
+    <config name="Email" required="true">
+      <label>C1. User's email who connect to Google Drive</label>
+      <label locale="ja">C1. Google Drive に接続するユーザのメールアドレス</label>
+    </config>
+    <config name="ParentFolderId" required="true" el-enabled="true">
+      <label>I1. Parent Folder ID to create Folder</label>
+      <label locale="ja">I1. 生成するフォルダの親フォルダのID</label>
+    </config>
+    <config name="FolderName" required="true" el-enabled="true">
+      <label>I2. Folder Name to create</label>
+      <label locale="ja">I2. 生成するフォルダの名称</label>
+    </config>
+    <config name="FolderIdItem" form-type="SELECT" select-data-type="STRING" required="true">
+      <label>O1. Data Item that will save Folder ID (update)</label>
+      <label locale="ja">O1. 生成したフォルダのIDを保存するデータ項目 (更新)</label>
+    </config>
+    <config name="WebViewUrlItem" form-type="SELECT" select-data-type="STRING">
+      <label>O2. Data Item that will save web view url of Folder (update)</label>
+      <label locale="ja">O2. 生成したフォルダの表示URLを保存するデータ項目 (更新)</label>
+    </config>
+  </configs>
+  
+  <summary>Create a new folder in the specified folder on Google Drive</summary>
+  <summary locale="ja">Google Drive の指定フォルダ内に新しいフォルダを作成します</summary>
+    
+  <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAECElEQVRYR8VXbYhUZRR+zr0z986d
+VttFF6NCWyJQI1wTIhSZzR/rgJFJJhKk6w//BOFKgXeIyj5wViJ2JPoV0UZBwRK5kjSzP3TECPsh
+rYiyGKRGrabFzrrivfN1T7x3nJ3Z+zV32rD3zx3mfc85zznvcz5ewv+8qB37/YeLzxNXEwTqZXCn
++Ap5Bk8QqCC+gJzP6epYWL0tAfQNc2esZO5j5kECdYZRzOACEWVMJXYkv58KQTKBAJJpY4CJh8Ma
+dhoSQJjkPeMH1KN+IHwBbB66kyHQvjAetzrD4ExOj+/3OucJIJk2RkDY3Upxm/sjWV3b45RxAfgv
+Pfe4kiM5PT7Y/P88AOLOQfgsyLPtT0WQWC1DdkAvV4HjP1cwfr4aGBiLpG3NnJhTI9iuFo3LQYRL
+rJKxa2MEmkLous9t59J1hv5VEUbJH4MgZlHVeurZMQcgmTYOgvB2EPz0TgW9KyRcKzCWLiJE5fmn
+RRRGz1TwxQ+VYHow3smmtIPi0ByAzUNGgYD7/SR3PB3BSxsiUCOAWQZmDUb3YjeHr88wDh8rYXKK
+fUGIKOT0eNccAFHhJLa+9ZN4qIvwxjYFPd0Ng3/NAnEViCvzpSwGTlyo4sPj5VBcsDW2Yv7eTRE8
+ty6CiNTQWbGAm7cYD4iC7DBVuAN8lC3hx1+soCjYGWHLJtNGHoSE1+k1yyW8/qyCpYvcu5NTFroX
+S1jS4d6buGoh9XUgG09lU1pfHcAVEFZ4AUhtjWLjStnl5awJfDxexuMPS9iyVobkCIPgycipMsbO
+eqelaFw5Pb62BmDI8GRM/xMy9m6KoiPmvuf8xSo++K6M5UsIb72gQPDEuX69wTh0tIQ/pr0JmdU1
+8gWgKcB7Lyq2h87lZHpzhjSfFTw5draCT054p2UDQNpwXUE7StsBWwfI4HM5Pd7rS8LhlxWsfNDt
+/dQ047YJVxGSJUCNArWYNlbVAr6fqGL0J0cUGA0SeqXh1nUyBhJRxKINZUEFyC/fxP2/+00Jv/09
+nwcMbqShXyF6f4eCJ3skOwOE+LXpWvVzlmA/46UKbM+/9CjN9aYUWIrXPybh1aSCzjjssAtSid9h
+14XfLbw5WnI1JwZmcrpmj3ctm9FrW6J4ZrWMP2dqVc+Z735gbheBT0+WkT3nUQe8mlGtHZtXnA1J
+5Pkr/VE8ukxChxrOd3FdpyerSI+5+4HwvqjGHnG147slueVAEg6C/ynfgaQu0qoxLQhAU+jreu7d
+UMr4PJvSBpwO3JOxHB6eB0agvll7ilkjQZNS0JUIwjFJA//qYVJXbD/NTHOQCWJ48B3ZmoEIw8TI
+mLFYZkFPM6d3dx+nfcTUy2Q/TteIM6KxEFOBiSeY5HyQx6E5sCC2tyH8Dy7zwTCeL47AAAAAAElF
+TkSuQmCC</icon>
+</service-task-definition>
