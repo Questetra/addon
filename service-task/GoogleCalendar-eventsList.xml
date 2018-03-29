@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Google Calendar events list</label>
+<label locale="ja">Google Calendar イベントリスト</label>
+
+<last-modified>2017-08-01</last-modified>
+
+<summary>1. Get Secret: https://console.developers.google.com/apis/dashboard
+2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/calendar.readonly
+</summary>
+
+<help-page-url>https://www.questetra.com/tour/m4/m415/addon-googlecalendar-eventslist/</help-page-url>
+<help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-googlecalendar-eventslist/</help-page-url>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_CalendarId" required="true" form-type="TEXTFIELD">
+    <label>B: Set CalendarID (e.g japanese__ja@holiday.calendar.google.com)</label>
+    <label locale="ja">B: CalendarIdをセットしてください japanese__ja@holiday.calendar.google.com</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>C: Select DATE DATA for Start Date</label>
+    <label locale="ja">C: 参照期間の開始日が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>D: Select DATE DATA for End Date</label>
+    <label locale="ja">D: 参照期間の終了日が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_Timezone" required="true" form-type="TEXTFIELD">
+    <label>E: Set Timezone of Date Data (e.g -07:00)</label>
+    <label locale="ja">E: UTCとの時差をセットしてください (例 +09:00)</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>F: Select STRING DATA for Events List (update)</label>
+    <label locale="ja">F: 予定リストが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Google Calendar Events List via Calendar API v3 (ver. 20170801)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2  = configs.get( "conf_OAuth2" ) + "";
+var calendarId  = configs.get( "conf_CalendarId" ) + "";
+var timezone    = configs.get( "conf_Timezone" ) + "";
+
+var dataIdC = configs.get( "conf_DataIdC" ); // returns key
+var dataIdD = configs.get( "conf_DataIdD" ); // returns key
+var dataIdF = configs.get( "conf_DataIdF" ); // returns key
+var dataIdX = configs.get( "conf_DataIdX" ); // returns key
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var startDate = data.get( dataIdC ) + ""; // "YYYY-MM-DD"
+var endDate   = data.get( dataIdD ) + ""; // "YYYY-MM-DD"
+
+//// == 演算 / Calculating ==
+// Set API Request
+var apiRequest = httpClient.begin();
+apiRequest.queryParam( "calendarId", calendarId );
+apiRequest.queryParam( "orderBy", "startTime" );
+apiRequest.queryParam( "singleEvents", "true" );
+apiRequest.queryParam( "timeMax", endDate + "T23:59:59" + timezone ); // for request
+apiRequest.queryParam( "timeMin", startDate + "T00:00:00" + timezone );
+apiRequest.queryParam( "timeZone", timezone ); // Time zone for response
+
+// Set OAuth2 Access Token
+var token = httpClient.getOAuth2Token( oauth2 );
+apiRequest.bearer( token );
+
+// API Access
+var accessLog = "";
+var uri = "https://www.googleapis.com/calendar/v3/calendars/calendarId/events";
+var response = apiRequest.get( uri );
+var statusCode = response.getStatusCode() + "";
+accessLog += "---GET request--- " + statusCode + "\n";
+accessLog += response.getResponseAsString() + "\n";
+
+// Retreive Response-JSON Properties
+var calendarEventsStr = "";
+if( statusCode == "200" ){
+  var responseObj = JSON.parse( response.getResponseAsString() );
+  for( var i = 0; i < responseObj.items.length; i++ ){
+    if( "date" in responseObj.items[i].start ){
+      // "date": "2017-07-24"
+      calendarEventsStr += responseObj.items[i].start.date;
+      calendarEventsStr += "\t(--:--):\t";
+      calendarEventsStr += responseObj.items[i].summary; // 
+    }else if( "dateTime" in responseObj.items[i].start ){
+      // "dateTime": "2017-07-24T12:00:00+09:00"
+      calendarEventsStr += responseObj.items[i].start.dateTime.substring(0,10);
+      calendarEventsStr += "\t(" + responseObj.items[i].start.dateTime.substring(11,16) + "):\t";
+      calendarEventsStr += responseObj.items[i].summary; // 
+    }
+    calendarEventsStr += "\n";
+  }
+}
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdF, calendarEventsStr );
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+
+//retVal.put( "q_debugLog", debugLog );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEt0lEQVRYR8VXX2xTVRj/ndv2tmv3
+p1cGDyqM8SBRx9jcNBEMW7apSMKYMWoiD9sSEhITQ33AB23DyOaDJmoxGqPRbBgwEhMdUSRKS4ri
+XMA/I4jJhkZQIEhgbdm69ra395hz72572t5u3UbwvDS99/vO+Z3v+/2+77sE//MiCzm/vT/cRYjQ
+AtAGAG4A7JetMQARgIwBJBTwVh4udd95AbT2hd1Wm7CLqtRDiHbovItSRIhA/EpK3RfqkyJzOcwJ
+oO3VcA9RyVulHpx/EAMC0N6gTxouBqIogPb+sJ8Qsmve65ZkQPwBb9WLZqamANoHwkMEpLukvUs0
+oiBDQW9Vb755AQD+5utrrGirs8FmmZcqpjAmp1UcPJlAPKm/ppTuC/okD2+cszPLuUDJoGHwTm85
+1t5p0f5ejaoYnVCwuUGEw2Z+7ZkkcPy3JDautUFyEagUGD6dxHvH4hkHSumTPCcyABjbLRbyF0+4
+D3dWoKZa0Jwvh1WEzqXQ9aAdLrs5gJgMfP2rjLY6EcvK9a2PjiXx5hEeACLpNK011JEB0NEf7gMh
+e4ytm9dY0V4ngpaYYzMzgQBTCYpDIwlcn+J2onRvwCf1MZ8sgIEwKyRVxkb+7nLcf7ce/qWstAp8
+fkrGB8EElwZEgj63lAGgVzjyBX/Q69tdaFxtXcrZmm8qDRwakbH/uyyAWUJqXNAiYKb53VudeKy+
+CNsWAIsp4N1v4/jmzKwUZn0NRWgAOvrDIRDSwu/b0+LAMw/bYeOy8PcNFYOhBG5MqRo/Hq0X4RQB
+Rr7xKwrGLirY1mTHsoqsuCIxijeOzGD0vJILm9ITAZ/UqkdgIHyBgNTwFtuaRexoK8tIjpHp4EkZ
+Tz1kR3UlwU9/KojJVJPc8GkZVU4BlybT6Gyyo5oDwNTzyqcxXJ5U8+M2FvC6G/UIDEQKyL7pXhs8
+T5Shoky/DdM0y6do1Zl7aVLFqT9S6Gy2g7Gdke3Ln5NgfjyA81fTeP6jadOkBbxuUhRA3UoLXu5y
+YXllbhWUFeBaVMWxs0m03idizQq9TjBwZgBGJhTs+Sw2NwCzFNx1h4DnNjrgduUCiMsUCYXi93/S
+WFUtYGW1ThIWgdGJFNatsqLSmfUZv5LGx3kKmFXBmaBPaihKwgdqrXip05mpaPlX+DdK8dUvMrY/
+4tB4UiwCjJi7D5hEIIeEJq23Y50NL2x2aixni/WCHycUbG0SYRWAUgFcvK5ix/tTBSnIkaFZIere
+5MCzG7IyZCRkveDaTRW1KywYGdf7Qu08HGAl+LXDM5pE+WU0paKl2LOlDFsaxWytZu0UwHSC4mac
+YnmFoCnCWAwgAye5BNi556xGvH10BsfPpbjzaTTglbTxrmgz2vu0CxvuuTWl+JMfEjjwvZwFYNaM
+tOHTigtGQ+JngQVU3gLTwpmARhUFqwvaMfPkB5KdHQ48Xi/CsshpyEAyHacYPBFH4KyegqIDieFw
+a4fRvIBwoTfe3MahlO4PeqWe/BzdnrHc5OZzRoBLRxchGOInpYURkkYpRc+iPkyMgzR1WOABgad0
+IDQKCr+Shn9Jn2b5t2UVEwAbIhoo4CaErDcaCwFYT2cfqaG5blwyBxYW6sVb/wdgbxw/u9E3bAAA
+AABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
