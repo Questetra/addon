@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<label>CheckTheUserIsInTheOrganization</label>
+<label>Check The User Is In The Organization</label>
 <label locale="ja">ユーザの指定組織への所属を判定</label>
 <last-modified>2018-03-30</last-modified>
 <summary>If the specified user is the leader of the specified organization, this task returns "L". If he or she is one of the its members,it returns "M". If he or she doesn't belong to it, it returns nothing. </summary>
