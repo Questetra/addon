@@ -4,7 +4,7 @@
 <label locale="ja">ユーザの指定組織への所属を判定</label>
 <last-modified>2018-03-30</last-modified>
 <summary>If the specified user is the leader of the specified organization, this task returns "L". If he or she is one of the its members,it returns "M". If he or she doesn't belong to it, it returns nothing. </summary>
-<summary locale="ja">指定したユーザが指定した組織のリーダであれば"L" を、メンバであれば"M" を、所属していなければ空を返します。</summary>
+<summary locale="ja">指定したユーザが指定した組織のリーダであれば"L" を、スタッフであれば"S" を、所属していなければ空を返します。</summary>
 <configs>
   <config name="userField" form-type="SELECT" select-data-type="QUSER" required="true">
     <label>I1.User Data(Data Type:User)</label>
@@ -33,7 +33,7 @@ function main() {
   if (check(true, userIs, groupIs)) {
     result = "L";
   } else if (check(false, userIs, groupIs)) {
-    result = "M";
+    result = "S";
   }
   //set result to O1
   engine.setDataByNumber(configs.get("result"), result);
