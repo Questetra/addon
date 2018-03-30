@@ -8,15 +8,15 @@
 <configs>
   <config name="userField" form-type="SELECT" select-data-type="QUSER" required="true">
     <label>I1.User Data(Data Type:User)</label>
-    <label locale="ja">I1.ユーザデータ(指定:ユーザ型データ)</label>
+    <label locale="ja">I1. ユーザデータ(指定:ユーザ型データ)</label>
   </config>
   <config name="groupField" form-type="SELECT" select-data-type="QGROUP" required="true">
     <label>I2.Organization Data(Data Type:Organization)</label>
-    <label locale="ja">I2.組織データ(指定:組織型データ)</label>
+    <label locale="ja">I2. 組織データ(指定:組織型データ)</label>
   </config>
   <config name="result" form-type="SELECT" select-data-type="STRING_TEXTFIELD" required="true">
     <label>O1.Result(Data Type:Single-line string)</label>
-    <label locale="ja">O1.結果出力先(指定:単一行文字型データ)</label>
+    <label locale="ja">O1. 結果出力先(指定:単一行文字型データ)</label>
   </config>
 </configs>
 <script><![CDATA[
