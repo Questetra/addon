@@ -1,0 +1,40 @@
+{
+  "services":[
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleCalendar-eventsList.xml",
+      "last-modified":"2017-08-01",
+      "label":{
+        "en":"Google Calendar events list",
+        "ja":"Google Calendar イベントリスト"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlecalendar-eventslist/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/"
+      }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleCalendar-insertEvent.xml",
+      "last-modified":"2016-10-25",
+      "label":{
+        "en":"Insert event to Google Calendar",
+        "ja":"Google Calendar 予定追加"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlecalendar-insertevent/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlecalendar-insertevent/"
+      }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleDrive-simpleUpload.xml",
+      "last-modified":"2016-10-25",
+      "label":{
+        "en":"Google Drive Simple Uploads",
+        "ja":"Google Drive アップロード"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googledrive-simpleupload/",
+        "ja":"https://support.questetra.com/ja/addons/services/googledrive-simpleupload/"
+      }
+    }
+  ]
+}

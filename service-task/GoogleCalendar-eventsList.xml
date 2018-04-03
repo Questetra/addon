@@ -9,8 +9,8 @@
 2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/calendar.readonly
 </summary>
 
-<help-page-url>https://www.questetra.com/tour/m4/m415/addon-googlecalendar-eventslist/</help-page-url>
-<help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-googlecalendar-eventslist/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/services/googlecalendar-eventslist/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/</help-page-url>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
