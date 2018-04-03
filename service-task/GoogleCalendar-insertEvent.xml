@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Insert event to Google Calendar</label>
+<label locale="ja">Google Calendar 予定追加</label>
+<last-modified>2016-10-25</last-modified>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for Calendar ID (Non-existent Error)</label>
+    <label locale="ja">B: Calendar ID が格納されている文字列型データor選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for Event Title</label>
+    <label locale="ja">C: 予定タイトルが格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="DATETIME">
+    <label>D: Select DATETIME DATA for Event Start</label>
+    <label locale="ja">D: 予定開始時刻が格納されている日時型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="false" form-type="SELECT" select-data-type="DATETIME">
+    <label>E: Select DATETIME DATA for Event End (Not-selected +1:00)</label>
+    <label locale="ja">E: 予定終了時刻が格納されている日時型データを選択してください（未設定の場合、+1:00）</label>
+  </config>
+  <config name="conf_DataIdF" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>F: Select STRING DATA for Location</label>
+    <label locale="ja">F: 場所情報が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdG" required="false" form-type="SELECT" select-data-type="STRING">
+    <label>G: Select STRING DATA for Description</label>
+    <label locale="ja">G: 説明情報が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_EventTimeZone" required="true" form-type="TEXTFIELD">
+    <label>H: Set Default Time Zone ("America/New_York" "GMT+9:00")</label>
+    <label locale="ja">H: デフォルトTimeZoneをセットしてください （"GMT+9:00" "America/New_York"）</label>
+  </config>
+  <config name="conf_DataIdI" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>I: Select STRING/SELECT DATA for Start TZ</label>
+    <label locale="ja">I: 開始時刻のTZが格納されている文字列or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdJ" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>J: Select STRING/SELECT DATA for End TZ</label>
+    <label locale="ja">J: 終了時刻のTZが格納されている文字列or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_EventSource" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>K: Set EventSource Title (e.g. "BPMS" "#{processInstanceTitle}")</label>
+    <label locale="ja">K: 情報元のタイトルをセットしてください （例 "BPMS" "#{processInstanceTitle}"）</label>
+  </config>
+  <config name="conf_EventSourceUrl" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>L: Set EventSource URL (e.g. "${var[applicationRoot]}")</label>
+    <label locale="ja">L: 情報元のURLをセットしてください （例 "${var[applicationRoot]}"）</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Insert Event to Google Calendar via Calendar API v3 (ver. 20161025)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2 = configs.get( "conf_OAuth2" );
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
+var dataIdF = configs.get( "conf_DataIdF" ); // (returns Number)
+var dataIdG = configs.get( "conf_DataIdG" ); // (returns Number)
+var eventStartTimeZone = configs.get( "conf_EventTimeZone" ) + ""; //default
+var eventEndTimeZone = configs.get( "conf_EventTimeZone" ) + ""; //default
+var dataIdI = configs.get( "conf_DataIdI" ); // (returns Number)
+var dataIdJ = configs.get( "conf_DataIdJ" ); // (returns Number)
+var eventSource = configs.get( "conf_EventSource" ) + "";
+var eventSourceUrl = configs.get( "conf_EventSourceUrl" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ); // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var calendarId = "";
+if( data.get( dataIdB ) instanceof java.util.ArrayList ){
+  calendarId = data.get( dataIdB ).get(0).getValue() + "";
+}else if( data.get( dataIdB ) instanceof java.lang.String ){
+  calendarId = data.get( dataIdB ) + "";
+}
+var eventSummary = data.get( dataIdC ) + "";
+var eventStart = data.get( dataIdD ).toString() + "";
+eventStart = eventStart.replace(" ", "T") + ":00";
+if( dataIdE !== "" && data.get( dataIdE ) !== null ){
+  var eventEnd = data.get( dataIdE ).toString() + "";
+  eventEnd = eventEnd.replace(" ", "T") + ":00";
+}else{
+  var eventEnd = data.get( dataIdD ).addHours(1).toString() + "";
+  eventEnd = eventEnd.replace(" ", "T") + ":00";
+}
+var eventLocation = "";
+if( dataIdF !== "" && data.get( dataIdF ) !== null ){
+  eventLocation = data.get( dataIdF ) + "";
+}
+var eventDescription = "";
+if( dataIdG !== "" && data.get( dataIdG ) !== null ){
+  eventDescription = data.get( dataIdG ) + "";
+}
+if( dataIdI !== "" ){
+  if( data.get( dataIdI ) instanceof java.util.ArrayList ){
+    eventStartTimeZone = data.get( dataIdI ).get(0).getValue() + "";
+    eventEndTimeZone = data.get( dataIdI ).get(0).getValue() + "";
+  }else if( data.get( dataIdI ) instanceof java.lang.String ){
+    eventStartTimeZone = data.get( dataIdI ) + "";
+    eventEndTimeZone = data.get( dataIdI ) + "";
+  }
+}
+if( dataIdJ !== "" ){
+  if( data.get( dataIdJ ) instanceof java.util.ArrayList ){
+    eventEndTimeZone = data.get( dataIdJ ).get(0).getValue() + "";
+  }else if( data.get( dataIdJ ) instanceof java.lang.String ){
+    eventEndTimeZone = data.get( dataIdJ ) + "";
+  }
+}
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var token = httpClient.getOAuth2Token( oauth2 );
+
+var uri = "https://www.googleapis.com/calendar/v3/calendars/";
+uri += calendarId;
+uri += "/events";
+
+var myObj = {};
+myObj.summary = eventSummary;
+myObj.location = eventLocation;
+myObj.description = eventDescription;
+myObj.start = {};
+myObj.start.dateTime = eventStart;
+myObj.start.timeZone = eventStartTimeZone;
+myObj.end = {};
+myObj.end.dateTime = eventEnd;
+myObj.end.timeZone = eventEndTimeZone;
+myObj.source = {};
+if( eventSource !== "" ){
+  myObj.source.title = eventSource;
+}
+if( eventSourceUrl !== "" ){
+  myObj.source.url = eventSourceUrl;
+}
+//debug
+//accessLog += JSON.stringify( myObj ) + "\n"; 
+
+var response = httpClient.begin()
+  .bearer( token )
+  .body( JSON.stringify( myObj ), "application/json" )
+  .post( uri );
+accessLog += "---POST request--- " + response.getStatusCode() + "\n";
+accessLog += response.getResponseAsString() + "\n";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACbElEQVRYR+2XTW7aQBTH3/MSL2pOkPQEpSeos2SMVHKCJDcgJ2hygiYnSHqCEAmP2dWcIBwhPQGuBOw8r/pbnmowNnIlJ+qCWZmZ8Xs/v2+YGlYURRMi+m6MOU+SZFp3LYqipYiI1vpz3flwOBx7nvckIlda68e6O9wEoJRKmfmLiNxqrW8aAAT7cRzXylFK3TDzNxFZaK3DRoDRaBTmeV4IwxKRX57nPVoAIpqKyAdXQJIkiyiK/gJUZTDzbyIaWwBjzCUzn1RlFORWkANwS0ShA1A8uy/jq12AGhkLIoIVCwvY56qMQwADZv4KF1gY9+XNZtP3fX+FPffZ+QgX4JmIloBpC7AkoiuYMMuyh36/j99BxYfXxphX7Hmed4qArZxnq9VqEAQB5EyZGUH4qRVAGQevzAzfw49QsLdEpMgOZh43nB+UATfWuqApM7re3wE4lCpdK7YpfgQ4WqC1BcIwDHq93oWtBcaYH/P5vKgB1aWUuiSik+12e5+madZwp+gzrQBK5T+ZeeAIy5j5fDabpXYP93zff0LVLGvDmXvugvxTFti2LCL3WuuJ83unw9nOZxUxczcAEIhOt16vl9akbhOyCgGG0szME5i3U4CK+dCkXkTkWWu9V4KteTsHUEohBh4QCyKCXh9qrdGkdtabAlQ62nUcx3fvBmAVlZZAGkkcx/13B4BCa+Y8zz9W60HnLlBK3THzhYicwedlXXjBjFA3jHYOYEfr0tSpiJxCedO03DkAFAMC+U1EyATMdtO6ACzdg8DEvUldlrgubFWKux5GjgBHCzRagIgwPOzV9rcIwjJLgv/if8EfAsmFPyUl4jkAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
