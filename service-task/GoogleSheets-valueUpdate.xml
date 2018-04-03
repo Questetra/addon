@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Google Spreadsheets value update</label>
+<label locale="ja">Google Spreadsheets セル値の更新</label>
+
+<summary>1. Get Secret: https://console.developers.google.com/apis/dashboard
+2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/spreadsheets
+</summary>
+
+<help-page-url>https://support.questetra.com/addons/services/googlesheets-valueupdate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-valueupdate/</help-page-url>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT DATA for Spreadsheet ID</label>
+    <label locale="ja">B: Spreadsheet ID が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>C: Select STRING/SELECT DATA for Sheet Title</label>
+    <label locale="ja">C: Sheet の名前が格納されている文字列型データor選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>D: Select STRING/SELECT DATA for Cell Coordinate (e.g. "A1")</label>
+    <label locale="ja">D: 更新セルの座標が格納されている文字列型or選択肢型データを選択してください (例 "A1")</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING|SELECT_SINGLE|DECIMAL|DATE|DATETIME|QUSER|QGROUP">
+    <label>E: Select DATA ITEM for Stored Value</label>
+    <label locale="ja">E: セルを更新するデータが格納されているデータ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Google Spreadsheets Value Update via Sheets API v4 (ver. 20170828)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+////// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2  = configs.get( "conf_OAuth2" ) + "";
+// Convert from 'java.lang.String' to 'JavaScript string' by '+""'
+var dataIdB = configs.get( "conf_DataIdB" ) + ""; // Data Identification Number (e.g. "9")
+var dataIdC = configs.get( "conf_DataIdC" ) + ""; 
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+
+////// == ワークフローデータの参照 / Data Retrieving ==
+var fileId = ""; // e.g. "1PEZ5KEZc0RkUn7AbAe2lYaHXzbJ9jnZ2swIWPszRz6U"
+if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType( "STRING_TEXTFIELD" ) ){
+  fileId = data.get( dataIdB ) + ""; // convert to JavaScript string
+}else if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType( "SELECT_SINGLE" ) ){
+  fileId = data.get( dataIdB ).get(0).getValue() + "";
+}
+var sheetTitle = ""; // e.g. "Sheet1"
+if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType( "STRING_TEXTFIELD" ) ){
+  sheetTitle = data.get( dataIdC ) + "";
+}else if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType( "SELECT_SINGLE" ) ){
+  sheetTitle = data.get( dataIdC ).get(0).getValue() + "";
+}
+var cellCoordinate = ""; // e.g. "A1"
+if( engine.findDataDefinitionByNumber( dataIdD ).matchDataType( "STRING_TEXTFIELD" ) ){
+  cellCoordinate = data.get( dataIdD ) + "";
+}else if( engine.findDataDefinitionByNumber( dataIdD ).matchDataType( "SELECT_SINGLE" ) ){
+  cellCoordinate = data.get( dataIdD ).get(0).getValue() + "";
+}
+var updateValue = "";
+if( engine.findDataDefinitionByNumber( dataIdE ).matchDataType( "SELECT_SINGLE" ) ){
+  updateValue = data.get( dataIdE ).get(0).getValue() + "";
+}else{
+  updateValue = data.get( dataIdE ) + "";
+}
+
+////// == 演算 / Calculating ==
+// preparing for API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+
+// preparing for API Request (OAuth2 Access Token)
+var token = httpClient.getOAuth2Token( oauth2 );
+apiRequest = apiRequest.bearer( token );
+
+// preparing for API Request (Path parameters)
+var apiUri = "https://sheets.googleapis.com/v4/spreadsheets/";
+  apiUri += fileId + "/values/" + sheetTitle + "!" + cellCoordinate;
+
+// preparing for API Request (Query parameters)
+apiRequest = apiRequest.queryParam( "valueInputOption", "USER_ENTERED" );
+
+// preparing for API Request (JSON Body)
+var requestObj = {};
+  requestObj.values = [];
+  requestObj.values[0] = [];
+  requestObj.values[0][0] = updateValue;
+apiRequest = apiRequest.body( JSON.stringify( requestObj ), "application/json" );
+
+// PUT Request to the API
+var response = apiRequest.put( apiUri ); // HttpResponseWrapper
+var statusCode = response.getStatusCode() + "";
+var accessLog = "";
+accessLog += "---PUT request--- " + statusCode + "\n";
+accessLog += response.getResponseAsString() + "\n";
+
+// Retrieve Properties from Response-JSON
+// (no action)
+
+////// == ワークフローデータへの代入 / Data Updating ==
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACuUlEQVRYR82X0VHbQBCGd8UT8BA6iFMBTgXxIwjP4A4SKoBUEFNBTAU4HTgz6PCjqCCkgpAOnBf5Sfdnfs3JcxKSLBmUyc34wZLu9t/d2+/2VFqMk5OTwd7e3gcRGfIHYKCqA38qgCdVfRKRR/7SNH1YLpf83zi06W0Yhp9E5FJVabjzAPCoqrMoir7VTa4UMB6PR9ba27KXnRW4CYxOEAQXd3d3cXmNZwLotare7mqsaR6AC2PM3P+mIMDl+lcfxvM10zR95++NgoCzs7MrEfnapwAR+RxF0Sy3URDQZ/hzg+U0FASMRqOjg4MDltObPqIA4E+SJIM4jleVEeBDV3qz1xZB40EQTMqVUFmGYRiy7imC8HnxAPAgIlfGGEKqMBpBdHp6OlFVluX5LioAfAcwv7+/X7QCEasAAIwxN/4E7o39/f2RIyKjc8T3eYSch3zE3D6SgOv1OvZz7dI7VdVVUxXwgy+O69MmhLaNCMUfHh6eA7iiAwCujTHTujLMBHiLrwAwfAtr7c82h4vzdKiqxwAYtUkeMb7rKqDK0YznALJwu1SMvA83Kaqa/BoC2ka/7rtGEjJ0P15qoWk+gPd+OVadhqz/yz5EALgxxvC82Yw6EL26iCrj2f6p89TRkFWxE4TydQkjEZlWUfCZAJKvDBD2CEEQcJeznLhH3m7J8W9XHYskSRY+jLgWWeCTsXwc0+NLALMkSW7KJMsNMzpBEGQ0zIe1dlXnpTtl2VuStNwHrUC0gZAxhmHsPFxv+dGH0a4cyKGTtdzW2sp2W1VJPkaGMPLhtBG/q4DO3tdN+L8F/IumtLEndCXH20xvPaG1dljbljNvfXbGWy8m+cZx5TPfBp22OxMA4TTp3BO6aPDwOG5rzP/OtWrz8nVs62FUNubhOLueiwiRWkCy83JzPbfWxm06qL/sgpkwsGVshgAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>

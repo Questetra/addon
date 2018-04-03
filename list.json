@@ -107,6 +107,18 @@
         "en":"https://support.questetra.com/addons/services/googlesheets-appendtsv/",
         "ja":"https://support.questetra.com/ja/addons/services/googlesheets-appendtsv/"
       }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleSheets-valueUpdate.xml",
+      "last-modified":"2017-08-28",
+      "label":{
+        "en":"Google Spreadsheets value update",
+        "ja":"Google Spreadsheets セル値の更新"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlesheets-valueupdate/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlesheets-valueupdate/"
+      }
     }
   ]
 }
