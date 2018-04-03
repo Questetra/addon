@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Google Drive Files Copy</label>
+<label locale="ja">Google Drive ファイルコピー</label>
+
+<last-modified>2017-11-26<last-modified>
+
+<summary>Creates a copy of a file into the Folder (supports Team Drives)</summary>
+<summary locale="ja">既存ファイルを複製し、指定フォルダに新規保存します (チームドライブ対応)</summary>
+
+<help-page-url>https://support.questetra.com/addons/services/googledrive-filescopy/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googledrive-filescopy/</help-page-url>
+
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可の設定名 (←［OAuth 2.0 設定］における設定名)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT DATA for File ID</label>
+    <label locale="ja">B: ファイル ID が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>C: Select STRING/SELECT DATA for Folder ID to store</label>
+    <label locale="ja">C: 保存先フォルダ ID が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>D: Select STRING DATA for Name of the New File</label>
+    <label locale="ja">D: 新しいファイルのファイル名が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>E: Select STRING DATA for New File ID (update)</label>
+    <label locale="ja">E: 新しいファイルの ID が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdF" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>F: Select STRING DATA for New File MimeType (update)</label>
+    <label locale="ja">F: 新しいファイルの MimeType が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Google Drive Files Copy (ver. 20171126)
+// (c) 2017, Questetra, Inc. (the MIT License)
+// by Google Drive APIs Files get
+// https://developers.google.com/drive/v3/reference/files/copy
+
+// OAuth2 config sample at [OAuth 2.0 Setting]
+// - Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// - Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// - Scope: "https://www.googleapis.com/auth/drive" or "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata"
+// - Consumer Key: (Get by Google Developers Console)
+// - Consumer Secret: (Get by Google Developers Console)
+
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var oauth2 = configs.get( "conf_OAuth2" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ) + "";
+var dataIdF = configs.get( "conf_DataIdF" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+// convert 'java.lang.String' to 'javascript string'
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var fileId = "";
+if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType( "SELECT_SINGLE" ) ){
+    fileId = engine.findDataByNumber( dataIdB ).get(0).getValue() + "";
+}else{
+    fileId = engine.findDataByNumber( dataIdB ) + "";
+}
+var folderId = "";
+if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType( "SELECT_SINGLE" ) ){
+    folderId = engine.findDataByNumber( dataIdC ).get(0).getValue() + "";
+}else{
+    folderId = engine.findDataByNumber( dataIdC ) + "";
+}
+var newFileName = "";
+if ( dataIdD !== "" ){ 
+  if ( engine.findDataByNumber( dataIdD ) !== null ){ 
+    newFileName = engine.findDataByNumber( dataIdD ) + "";
+  }
+}
+
+
+//// == Calculating / 演算 ==
+// preparing for API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+// com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+
+// Request HEADER (OAuth2 Token, HTTP Basic Auth, etc)
+var token  = httpClient.getOAuth2Token( oauth2 );
+apiRequest = apiRequest.bearer( token );
+
+// Request PATH (https://example.com/abc/def/)
+var apiUri = "https://www.googleapis.com/drive/v3/files/";
+    apiUri += fileId;
+    apiUri += "/copy";
+
+// Request QUERY (?a=b)
+apiRequest = apiRequest.queryParam( "supportsTeamDrives", true );
+
+// Request BODY (JSON, Form Parameters, etc)
+var requestObj = {};
+  requestObj.parents = [];
+  requestObj.parents[0] = folderId;
+  if ( newFileName !== "" ){ 
+    requestObj.name = newFileName;
+  }
+apiRequest = apiRequest.body( JSON.stringify( requestObj ), "application/json" );
+
+// Access to the API (POST, GET, PUT, etc)
+var response = apiRequest.post( apiUri ); // HttpResponseWrapper
+var httpStatus = response.getStatusCode() + "";
+var accessLog = "---POST request--- " + httpStatus + "\n";
+accessLog += response.getResponseAsString() + "\n";
+var responseObj = JSON.parse( response.getResponseAsString() );
+
+// Retrieve Properties from Response-JSON
+var newFileId = responseObj.id;
+var newFileMimetype = responseObj.mimeType;
+
+// Error Handling
+// (no set)
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if ( dataIdE !== "" ){ engine.setDataByNumber( dataIdE, newFileId ); }
+if ( dataIdF !== "" ){ engine.setDataByNumber( dataIdF, newFileMimetype ); }
+if ( dataIdX !== "" ){ engine.setDataByNumber( dataIdX, accessLog ); }
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACR0lEQVRYR92XzW3bQBCF5y10kWAg
+6iDqIHYFoW7SUgengjgd2BVEriDuIEoFyUFc6Wa6gqgEu4LEgHQT+IIRvApFi+JGJODAvHJ23sf5
+4c5AAh5r7amIfAZwHmDuTVKSV865xaEzqHKo4gBuSQLAG5LXVWf0vcKSpHPu7GgALy4iD1mWjY0x
+35MkqYRWweFweB5iX+osL75araKTk5NTkrehAKPRKAqx3wtQFE/T9HeoQx/uvL36I6npe5jP5/f5
+lDwD2CeuB2oCpADeqx+SE+fcJw+xA1AmXgSIoqjbbrffFYsr/4V54MFg0Gu1Wj2S2k1fAPSn02m6
+KVbvRJ12Op2fAB415xr2vIC19gLAV60B73wPwLVzbnwoYnEca3Ns7bYAXoDkAsCOOMkuAM3jnXMu
+CmnDspQdAhgD0J9Nv0xguVwuipEpsz0aILTNqqLQCICmRUTeVon598aYO19cTQHciIhWbuijLTY5
+tgg3NfBfpSD0s/fZNZKCFwew1t4AePbHKwMj+a3RGnjqgl5oJIwxaaNdECr8emvgxSNgrd3e4yEw
++VuukTbU+cAY0w0RV5v1en3vJ55GAEKFX0cR+pCRvNShpM7Xb0Yt4FJE+s65nRSWDiR6KI5jvck+
+1hXX8yQfSV7MZrMfeX8HAdTQD5B1IfwfseinEqB4wFo7zrJsUpznjwX8ZwA9kGXZh2Io6wCIyFWS
+JDrs/B3Lyxxaa3WT+SUiO7k8EkAXXV1az/zWXLloPq3mei1vNps6jy4uIjL2V7b6+gMMhak/PHHp
+2QAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>

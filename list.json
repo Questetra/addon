@@ -47,6 +47,18 @@
         "en":"https://support.questetra.com/addons/services/googledrive-filesget/",
         "ja":"https://support.questetra.com/ja/addons/services/googledrive-filesget/"
       }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleDrive-filesCopy.xml",
+      "last-modified":"2017-11-26",
+      "label":{
+        "en":"Google Drive Files Copy",
+        "ja":"Google Drive ファイルコピー"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googledrive-filescopy/",
+        "ja":"https://support.questetra.com/ja/addons/services/googledrive-filescopy/"
+      }
     }
   ]
 }
