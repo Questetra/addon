@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Batch to Get Two Column Values from Google Sheet</label>
+<label locale="ja">Google Sheet 2列データの一括取得</label>
+
+<last-modified>2016-09-21</last-modified>
+<help-page-url>https://support.questetra.com/addons/services/googlesheets-getidslabels/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-sumnumbers/</help-page-url>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for Spreadsheet ID (Non-existent Error)</label>
+    <label locale="ja">B: Spreadsheet ID が格納されている文字列型データor選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>C: Select STRING/SELECT for Sheet Title (Non-existent Error)</label>
+    <label locale="ja">C: Sheet タイトルが格納されている文字列型データor選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>D: Select STRING/SELECT for a Range of Choice-IDs (e.g. "A1:A")</label>
+    <label locale="ja">D: 選択肢IDの領域情報が格納されている文字列型or選択肢型データを選択してください (例 "A2:A", "A:A")</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>E: Select STRING/SELECT for a Range of Labels (e.g. "D2:D")</label>
+    <label locale="ja">E: 選択肢ラベルの領域情報が格納されている文字列型or選択肢型データを選択してください (例 "B2:B", "B:B")</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>F: Select STRING DATA for Choise-IDs (update)</label>
+    <label locale="ja">F: 選択肢IDの一覧が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdG" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>G: Select STRING DATA for Labels (update)</label>
+    <label locale="ja">G: 選択肢ラベルの一覧が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdH" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>H: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">H: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Batch to Get Data via Google Sheets API (ver. 20160921)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+// OAuth2 config
+// Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// Scope: https://www.googleapis.com/auth/spreadsheets
+// Consumer Key: (Get by Google Developers Console)
+// Consumer Secret: (Get by Google Developers Console)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2 = configs.get( "conf_OAuth2" );
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
+var dataIdF = configs.get( "conf_DataIdF" ); // (returns Number)
+var dataIdG = configs.get( "conf_DataIdG" ); // (returns Number)
+var dataIdH = configs.get( "conf_DataIdH" ) + ""; // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var docId = "";
+if( data.get( dataIdB ) instanceof java.util.ArrayList ){
+  docId = data.get( dataIdB ).get(0).getValue() + "";
+}else if( data.get( dataIdB ) instanceof java.lang.String ){
+  docId = data.get( dataIdB ) + "";
+}
+var sheet = "";
+if( data.get( dataIdC ) instanceof java.util.ArrayList ){
+  sheet = data.get( dataIdC ).get(0).getValue() + "";
+}else if( data.get( dataIdC ) instanceof java.lang.String ){
+  sheet = data.get( dataIdC ) + "";
+}
+var rangeI = "";
+if( data.get( dataIdD ) instanceof java.util.ArrayList ){
+  rangeI = data.get( dataIdD ).get(0).getValue() + "";
+}else if( data.get( dataIdD ) instanceof java.lang.String ){
+  rangeI = data.get( dataIdD ) + "";
+}
+var rangeL = "";
+if( data.get( dataIdE ) instanceof java.util.ArrayList ){
+  rangeL = data.get( dataIdE ).get(0).getValue() + "";
+}else if( data.get( dataIdE ) instanceof java.lang.String ){
+  rangeL = data.get( dataIdE ) + "";
+}
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var responseJson = "";
+var token = httpClient.getOAuth2Token( oauth2 );
+
+var choiseIds = "";
+var choiseLabels = "";
+
+try{
+  // Method: spreadsheets.values.batchGet
+  var uri = "https://sheets.googleapis.com/v4/spreadsheets/";
+  uri += docId;
+  uri += "/values/:batchGet";
+
+  var response = httpClient.begin()
+    .bearer(token)
+    .queryParam( "ranges", sheet + "!" + rangeI )
+    .queryParam( "ranges", sheet + "!" + rangeL )
+    .queryParam( "valueRenderOption", "UNFORMATTED_VALUE" )
+    .queryParam( "majorDimension", "COLUMNS" )
+    .get( uri ); 
+  accessLog += "---GET request--- " + response.getStatusCode() + "\n";
+  responseJson = response.getResponseAsString();
+  if( response.getStatusCode() == 200 ){
+    var jsonObj = JSON.parse( responseJson );
+    for( var i = 0; i < jsonObj.valueRanges[0].values[0].length; i++ ){
+      choiseIds += jsonObj.valueRanges[0].values[0][i] + "\n";
+      choiseLabels += jsonObj.valueRanges[1].values[0][i] + "\n";
+    }
+  }
+}catch(e){
+  accessLog += e.message + "\n";
+}
+// for Debug
+// accessLog += responseJson + "\n";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdF, choiseIds );
+retVal.put( dataIdG, choiseLabels );
+if( dataIdH !== "" ){
+  retVal.put( dataIdH, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVRYR+1WS24aQRCtghUfKdwgvoG5QSY76EEKOUHICeKcwM4JQm6ATxAsMQ27jG8AN3Bu4Eh8Vsyz3qgHDQMMg0y8oiQEdFdXv/q9apUcMcY0ReS9iPC7qaoNAA1V5f8dATBV1WcAzyIydZ+/1lr+3iuaXW23211V/SQinqpe5QEsugfgSURCERlaax/S5zYAjDE9EbnNXgrgkYfpmarGnszn82kYhvRyI57nNer1ehwZAE1GyjnxIa1HMKp6FwTBPddjAL7vD0TkS0rxPoqi4Xg8Hhb1Mk+PUS2VSt30HQAG1tqv6jZ/OwOz9XrdnUwmDNnZpdVqXZXLZTp1TeNRFH1WY8ydqt4mC+fy+hD6tMMAfmwBSMJydtdTBtPp3gHg9EIA/Wy1vhaU8/wbCzOxdQhAss9+HqpqGEXR02q1mmUr/xAodkSlUrl2fEH+YAGyK7YkBtDpdDwAf4p6mJDNPv08ktqnr6of4zY0xrA3yXhvKbMgCJoJABIIyebdWyAA8I+1QIreMCHzVqvVSJdxj/5HmS0WCy+pp51ZYIzpqyqr9ewC4Je19iZteAeAqwnOBQI5S0pcyG+staT8LdkLwIFg+/DAa1MyA9A7NJIPAiAI1kW1Wh248XxySgA8LJfLXh5/5AJIbvR9n3n7eSKC70EQ9I+dKQSARkhYHNHH6oL55ugdjUbsqKNSGECSkiOtutViR29PHiRFFNM6vu/zZZQtzpjZTrV1UgQS48YYsmb2qfVord1MuqJALgAuEbhE4BKBSwReALxRW/c7i890AAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>

@@ -155,6 +155,19 @@
         "en":"https://support.questetra.com/addons/services/googlesheets-sumnumbers/",
         "ja":"https://support.questetra.com/ja/addons/services/googlesheets-sumnumbers/"
       }
+    },
+    {
+      "id":"GoogleSheets-getIdsLabels",
+      "file":"https://questetra.github.io/addon/service-task/GoogleSheets-getIdsLabels.xml",
+      "last-modified":"2016-09-21",
+      "label":{
+        "en":"Batch to Get Two Column Values from Google Sheet",
+        "ja":"Google Sheet 2列データの一括取得"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlesheets-getidslabels/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlesheets-getidslabels//"
+      }
     }
   ]
 }
