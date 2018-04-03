@@ -1,9 +1,31 @@
 (function($) {
   $(document).ready(function() {
     $(".status").html("ready");
-    $.getJSON("list.json", function(data) {
+    $.getJSON("urls.json", function(data) {
       $(".status").html("loaded");
-      console.log(data);
+
+      for(var i = 0; i < data.services.length; i++){
+        var service = data.services[i];
+        var rowHtml = '<tr>';
+
+        rowHtml += '<th rowspan="2">' + service.id + '</th>';
+        rowHtml += '<td>ja</td>';
+        rowHtml += '<td>' + service.label.ja + '</td>';
+        rowHtml += '<td><a help="' + service.help.ja + '">help</a></td>';
+        rowHtml += '<th rowspan="2"><a href="' + service.file + '">' + service.file + '</a></th>';
+        rowHtml += '<th rowspan="2">' + service['last-modified'] + '</th>';
+
+
+        rowHtml += '<td>en</td>';
+        rowHtml += '<td>' + service.label.en + '</td>';
+        rowHtml += '<td><a help="' + service.help.en + '">help</a></td>';
+
+        rowHtml += '</tr>';
+
+        $('tbody.services').append(rowHtml);
+      }
+
+
       /*
       for (var i = 0; i < data.length; i++) {
         var dataRow = data[i];
