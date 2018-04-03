@@ -35,6 +35,18 @@
         "en":"https://support.questetra.com/addons/services/googledrive-simpleupload/",
         "ja":"https://support.questetra.com/ja/addons/services/googledrive-simpleupload/"
       }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleDrive-filesGet.xml",
+      "last-modified":"2017-11-20",
+      "label":{
+        "en":"Google Drive Files Get",
+        "ja":"Google Drive ファイル取得"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googledrive-filesget/",
+        "ja":"https://support.questetra.com/ja/addons/services/googledrive-filesget/"
+      }
     }
   ]
 }

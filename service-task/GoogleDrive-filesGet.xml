@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Google Drive Files Get</label>
+<label locale="ja">Google Drive ファイル取得</label>
+
+<last-modified>2017-11-20</last-modified>
+
+<summary>Download Drive-File and Add to file-type data (FileID via Link URL at Shareing settings Advanced)</summary>
+<summary locale="ja">GoogleDriveファイルをダウンロードし、ファイル型データ項目に追加します (FileIDは共有メニュー詳細設定にある共有リンクから取得)</summary>
+
+<help-page-url>https://support.questetra.com/addons/services/googledrive-filesget/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googledrive-filesget/</help-page-url>
+
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可の設定名 (←［OAuth 2.0 設定］における設定名)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT DATA for File ID</label>
+    <label locale="ja">B: File ID が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="FILE">
+    <label>C: Select FILE DATA for File Saved (update)</label>
+    <label locale="ja">C: ファイルが追加格納されるファイル型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Google Drive Files Get (ver. 20171120)
+// (c) 2017, Questetra, Inc. (the MIT License)
+// by Google Drive APIs Files get
+// https://developers.google.com/drive/v3/reference/files/get
+// https://developers.google.com/drive/v3/web/manage-downloads
+
+// OAuth2 config sample at [OAuth 2.0 Setting]
+// - Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// - Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// - Scope: https://www.googleapis.com/auth/drive.readonly
+// - Consumer Key: (Get by Google Developers Console)
+// - Consumer Secret: (Get by Google Developers Console)
+
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var oauth2 = configs.get( "conf_OAuth2" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+// convert 'java.lang.String' to 'javascript string'
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var fileId = "";
+if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType( "SELECT_SINGLE" ) ){
+    fileId = engine.findDataByNumber( dataIdB ).get(0).getValue() + "";
+}else{
+    fileId = engine.findDataByNumber( dataIdB ) + "";
+}
+var processFiles = engine.findDataByNumber( dataIdC );
+// java.util.ArrayList <com.questetra.bpms.core.event.scripttask.QfileView>
+if (processFiles === null) {
+  processFiles = new java.util.ArrayList();
+}
+
+
+//// == Calculating / 演算 ==
+// preparing for API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+// com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+
+// Request HEADER (OAuth2 Token, HTTP Basic Auth, etc)
+var token  = httpClient.getOAuth2Token( oauth2 );
+apiRequest = apiRequest.bearer( token );
+
+// Request PATH (https://example.com/abc/def/)
+var apiUri = "https://www.googleapis.com/drive/v3/files/";
+    apiUri += fileId;
+
+// Request QUERY (?a=b)
+apiRequest = apiRequest.queryParam( "supportsTeamDrives", "true" );
+
+// Request BODY (JSON, Form Parameters, etc)
+// (no set)
+
+// Access to the API (POST, GET, PUT, etc)
+var response = apiRequest.get( apiUri ); // HttpResponseWrapper
+var httpStatus = response.getStatusCode() + "";
+var accessLog = "---GET request--- " + httpStatus + "\n";
+accessLog += response.getResponseAsString() + "\n";
+var responseObj = JSON.parse( response.getResponseAsString() );
+
+// Retrieve Properties from Response-JSON
+var fileName = responseObj.name;
+
+// Error Handling
+// (no action)
+
+// 2nd) preparing for API Request
+var apiRequest2 = httpClient.begin(); // HttpRequestWrapper
+// com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+
+// 2nd) Request HEADER (OAuth2 Token, HTTP Basic Auth, etc)
+apiRequest2 = apiRequest2.bearer( token );
+
+// 2nd) Request QUERY (?a=b)
+apiRequest2 = apiRequest2.queryParam( "supportsTeamDrives", "true" );
+apiRequest2 = apiRequest2.queryParam( "alt", "media" );
+
+// 2nd) Request BODY (JSON, Form Parameters, etc)
+// (no set)
+
+// 2nd) Access to the API (POST, GET, PUT, etc)
+var response2 = apiRequest2.get( apiUri ); // HttpResponseWrapper
+var httpStatus2 = response2.getStatusCode() + "";
+accessLog += "---GET request--- " + httpStatus2 + "\n";
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+processFiles.add(
+  new com.questetra.bpms.core.event.scripttask.NewQfile( 
+    fileName, response2.getContentType(), response2.getResponse()
+  )
+);
+engine.setDataByNumber( dataIdC, processFiles );
+if ( dataIdX !== "" ){ engine.setDataByNumber( dataIdX, accessLog ); }
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACQ0lEQVRYR+2XS3LaQBCG50esWHGD
+kBuEE1jeUT1UJTlBnBMknCC5gckJTG5gV6GBneUThJzA5ATBVZRYjTrVWEoJ9BzA9sazopCm+5ue
+vx+CeuGFF/avXgEaRWAwGPQAvJHr2mw2v8MwXJ3q6ioBhsOhH8fxJYB3WYfMvGTm0Ww2uz4WpBRA
+a32plPpa5YCZJ8aYz8dAFAJorcWxANQuZv5hjKkErTKSA5D79jzvl1KqW+s9ecFa+1Z+ep53xsyi
+l6W19m4+ny/rbOQAXE6fMS6izAHLFUVRNKoSbQ6AiEIAZ3XkTZ+LYKMo6pdBPDlAAhoGQXBeBP1c
+AArA+XQ6DfchigCuAFzUhZiZb1qt1tha2wUwTgtV2b6ybPkPQERSbMT5TtEpM5g9URPdMPOdMcYv
+jIA4B3DrknquAEopyZQJM/80xixSkG0EiOgeQK8u7NnnBwBkt4+DIBjJHyCiCwBXLs63GzOiIqJr
+AO9dbKRlXACc8j6O44+e562yipbq2W63e3EcfwDwpSmIHAJa678ud1+mZt/3u51O57apiAVSMkkA
+uClx+p5EYb8VE1Gj9M1lAREt63K4AHBlre2nzeZQHW21pLWeKKU+uUaBmRfGmH6SwtI9nRcz/0HS
+fu+ddz/eoUxEUkOcUjj1JXpK68B3AN8OgTh0DzM/RFHUy5ZiqeeNU+hQx4n6H5RSvlTEnWaUDKES
+jZPNA/ug0hNk1kzLceFMmBaWY05ZtHe9Xi/2B5NG3wWnBtnpKU9pvInt1wj8AxoJCp7R7cV+AAAA
+AElFTkSuQmCC
+</icon>
+
+</service-task-definition>
