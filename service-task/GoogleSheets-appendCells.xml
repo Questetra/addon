@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Google Sheets Append Cells</label>
+<label locale="ja">Google Sheets 行追加</label>
+<last-modified>2017-10-31</last-modified>
+
+<summary>Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.</summary>
+<summary locale="ja">シート末尾に１行追加し、その各セルにデータを入力します。必要あれば行領域を拡大します。</summary>
+
+<help-page-url>https://support.questetra.com/addons/services/googlesheets-appendcells/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-appendcells/</help-page-url>
+
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>V: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">V: OAuth2通信許可の設定名 (←［OAuth 2.0 設定］における設定名)</label>
+  </config>
+  <config name="conf_DataIdW" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>W: Select STRING/SELECT DATA for Spreadsheet ID (File ID)</label>
+    <label locale="ja">W: Spreadsheet ID （ファイルのID）が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdX" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE|DECIMAL">
+    <label>X: Select STRING/SELECT/NUMERIC DATA for SheetGID (Worksheet ID)</label>
+    <label locale="ja">X: Sheet GID （WorksheetのID）が格納されている文字列型or選択肢型or数値型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdY" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>Y: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">Y: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdA" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>A: Select DATA for Column-A Value of New Row</label>
+    <label locale="ja">A: 末尾行のA列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>B: Select DATA for Column-B Value of New Row</label>
+    <label locale="ja">B: 末尾行のB列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>C: Select DATA for Column-C Value of New Row</label>
+    <label locale="ja">C: 末尾行のC列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>D: Select DATA for Column-D Value of New Row</label>
+    <label locale="ja">D: 末尾行のD列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>E: Select DATA for Column-E Value of New Row</label>
+    <label locale="ja">E: 末尾行のE列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdF" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>F: Select DATA for Column-F Value of New Row</label>
+    <label locale="ja">F: 末尾行のF列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdG" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>G: Select DATA for Column-G Value of New Row</label>
+    <label locale="ja">G: 末尾行のG列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdH" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>H: Select DATA for Column-H Value of New Row</label>
+    <label locale="ja">H: 末尾行のH列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdI" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>I: Select DATA for Column-I Value of New Row</label>
+    <label locale="ja">I: 末尾行のI列に追加される値が格納されているデータを選択してください</label>
+  </config>
+  <config name="conf_DataIdJ" required="false" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT_SINGLE|QUSER|QGROUP|FILE">
+    <label>J: Select DATA for Column-J Value of New Row</label>
+    <label locale="ja">J: 末尾行のJ列に追加される値が格納されているデータを選択してください</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Google Sheets Append Cells (ver. 20171031)
+// (c) 2017, Questetra, Inc. (the MIT License)
+// by spreadsheets.batchUpdate [AppendCellsRequest] (not by spreadsheets.values.append)
+// https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#appendcellsrequest
+
+// OAuth2 config sample at [OAuth 2.0 Setting]
+// - Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// - Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// - Scope: https://www.googleapis.com/auth/spreadsheets
+// - Consumer Key: (Get by Google Developers Console)
+// - Consumer Secret: (Get by Google Developers Console)
+
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var oauth2 = configs.get( "conf_OAuth2" ) + "";
+var dataIdW = configs.get( "conf_DataIdW" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+var dataIdY = configs.get( "conf_DataIdY" ) + "";
+var dataIdA = configs.get( "conf_DataIdA" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ) + "";
+var dataIdF = configs.get( "conf_DataIdF" ) + "";
+var dataIdG = configs.get( "conf_DataIdG" ) + "";
+var dataIdH = configs.get( "conf_DataIdH" ) + "";
+var dataIdI = configs.get( "conf_DataIdI" ) + "";
+var dataIdJ = configs.get( "conf_DataIdJ" ) + "";
+// convert 'java.lang.String' to 'javascript string'
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var spreadsheetId = "";
+if( engine.findDataDefinitionByNumber( dataIdW ).matchDataType( "SELECT_SINGLE" ) ){
+    spreadsheetId = engine.findDataByNumber( dataIdW ).get(0).getValue() + "";
+}else{
+    spreadsheetId = engine.findDataByNumber( dataIdW ) + "";
+}
+var sheetId       = "";
+if( engine.findDataDefinitionByNumber( dataIdX ).matchDataType( "SELECT_SINGLE" ) ){
+    sheetId       = engine.findDataByNumber( dataIdX ).get(0).getValue() + "";
+}else if( engine.findDataDefinitionByNumber( dataIdX ).matchDataType( "DECIMAL" ) ){
+    sheetId       = engine.findDataByNumber( dataIdX ) + "";
+    sheetId       = sheetId.replace(/,/g,"").replace(/\./g,""); // Remove dots and commas
+}else{
+    sheetId       = engine.findDataByNumber( dataIdX ) + "";
+}
+
+
+//// == Calculating / 演算 ==
+// preparing for API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+// com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+
+// Request HEADER (OAuth2 Token, HTTP Basic Auth, etc)
+var token  = httpClient.getOAuth2Token( oauth2 );
+apiRequest = apiRequest.bearer( token );
+
+// Request PATH (https://example.com/abc/def/)
+var apiUri = "https://sheets.googleapis.com/v4/spreadsheets/";
+    apiUri += spreadsheetId + ":batchUpdate";
+
+// Request QUERY (?a=b)
+// (no set)
+
+// Request BODY (JSON, Form Parameters, etc)
+function cellDataObject( dataId ){
+  var dataObj = {};
+  dataObj.userEnteredValue = {};
+  if( dataId === "" ){
+    dataObj.userEnteredValue.stringValue = "";
+  }else if( engine.findDataDefinitionByNumber( dataId ).matchDataType( "SELECT_SINGLE" ) ){
+    dataObj.userEnteredValue.stringValue = engine.findDataByNumber( dataId ).get(0).getDisplay() + "";
+  }else if( engine.findDataDefinitionByNumber( dataId ).matchDataType( "FILE" ) ){
+    dataObj.userEnteredValue.stringValue = engine.findDataByNumber( dataId ).get(0).getName() + "";
+  }else if( engine.findDataDefinitionByNumber( dataId ).matchDataType( "QUSER" ) ){
+    dataObj.userEnteredValue.stringValue = engine.findDataByNumber( dataId ).getName() + "";
+  }else if( engine.findDataDefinitionByNumber( dataId ).matchDataType( "QGROUP" ) ){
+    dataObj.userEnteredValue.stringValue = engine.findDataByNumber( dataId ).getName() + "";
+  }else if( engine.findDataDefinitionByNumber( dataId ).matchDataType( "DATE" ) ){
+    var serialDays = ( engine.findDataByNumber( dataId ).getTime() + engine.getTimeZoneOffsetInMinutes() * 60000 ) / 86400000 + 25569;
+    dataObj.userEnteredValue.numberValue = serialDays;
+    dataObj.userEnteredFormat = {};
+    dataObj.userEnteredFormat.numberFormat = {};
+    dataObj.userEnteredFormat.numberFormat.type = "DATE";
+  }else if( engine.findDataDefinitionByNumber( dataId ).matchDataType( "DATETIME" ) ){
+    var serialDays2 = ( engine.findDataByNumber( dataId ).getTime() + engine.getTimeZoneOffsetInMinutes() * 60000 ) / 86400000 + 25569;
+    dataObj.userEnteredValue.numberValue = serialDays2;
+    dataObj.userEnteredFormat = {};
+    dataObj.userEnteredFormat.numberFormat = {};
+    dataObj.userEnteredFormat.numberFormat.type = "DATE_TIME";
+  }else if( engine.findDataDefinitionByNumber( dataId ).matchDataType( "DECIMAL" ) ){
+    dataObj.userEnteredValue.numberValue = engine.findDataByNumber( dataId ) - 0;
+  }else{ // for "STRING" 
+    dataObj.userEnteredValue.stringValue = engine.findDataByNumber( dataId ) + "";
+  }
+  return dataObj;
+}
+var requestObj = {};
+  requestObj.requests = [];
+  requestObj.requests[0] = {};
+  requestObj.requests[0].appendCells = {};
+  requestObj.requests[0].appendCells.sheetId = sheetId;
+  requestObj.requests[0].appendCells.fields = "*";
+  requestObj.requests[0].appendCells.rows = [];
+  requestObj.requests[0].appendCells.rows[0] = {};
+  requestObj.requests[0].appendCells.rows[0].values = [];
+
+  requestObj.requests[0].appendCells.rows[0].values[0] = cellDataObject( dataIdA );
+  requestObj.requests[0].appendCells.rows[0].values[1] = cellDataObject( dataIdB );
+  requestObj.requests[0].appendCells.rows[0].values[2] = cellDataObject( dataIdC );
+  requestObj.requests[0].appendCells.rows[0].values[3] = cellDataObject( dataIdD );
+  requestObj.requests[0].appendCells.rows[0].values[4] = cellDataObject( dataIdE );
+  requestObj.requests[0].appendCells.rows[0].values[5] = cellDataObject( dataIdF );
+  requestObj.requests[0].appendCells.rows[0].values[6] = cellDataObject( dataIdG );
+  requestObj.requests[0].appendCells.rows[0].values[7] = cellDataObject( dataIdH );
+  requestObj.requests[0].appendCells.rows[0].values[8] = cellDataObject( dataIdI );
+  requestObj.requests[0].appendCells.rows[0].values[9] = cellDataObject( dataIdJ );
+
+apiRequest = apiRequest.body( JSON.stringify( requestObj ), "application/json" );
+
+// Access to the API (POST, GET, PUT, etc)
+var response = apiRequest.post( apiUri ); // HttpResponseWrapper
+var httpStatus = response.getStatusCode() + "";
+var accessLog = "---POST request--- " + httpStatus + "\n";
+accessLog += response.getResponseAsString() + "\n";
+//var responseObj = JSON.parse( response.getResponseAsString() );
+
+// Retrieve Properties from Response-JSON
+// (no action)
+
+// Error Handling - https://stripe.com/docs/api#errors
+// (no action)
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if ( dataIdY !== "" ){ engine.setDataByNumber( dataIdY, accessLog ); }
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACuUlEQVRYR82X0VHbQBCGd8UT8BA6
+iFMBTgXxIwjP4A4SKoBUEFNBTAU4HTgz6PCjqCCkgpAOnBf5Sfdnfs3JcxKSLBmUyc34wZLu9t/d
+2+/2VFqMk5OTwd7e3gcRGfIHYKCqA38qgCdVfRKRR/7SNH1YLpf83zi06W0Yhp9E5FJVabjzAPCo
+qrMoir7VTa4UMB6PR9ba27KXnRW4CYxOEAQXd3d3cXmNZwLotare7mqsaR6AC2PM3P+mIMDl+lcf
+xvM10zR95++NgoCzs7MrEfnapwAR+RxF0Sy3URDQZ/hzg+U0FASMRqOjg4MDltObPqIA4E+SJIM4
+jleVEeBDV3qz1xZB40EQTMqVUFmGYRiy7imC8HnxAPAgIlfGGEKqMBpBdHp6OlFVluX5LioAfAcw
+v7+/X7QCEasAAIwxN/4E7o39/f2RIyKjc8T3eYSch3zE3D6SgOv1OvZz7dI7VdVVUxXwgy+O69Mm
+hLaNCMUfHh6eA7iiAwCujTHTujLMBHiLrwAwfAtr7c82h4vzdKiqxwAYtUkeMb7rKqDK0YznALJw
+u1SMvA83Kaqa/BoC2ka/7rtGEjJ0P15qoWk+gPd+OVadhqz/yz5EALgxxvC82Yw6EL26iCrj2f6p
+89TRkFWxE4TydQkjEZlWUfCZAJKvDBD2CEEQcJeznLhH3m7J8W9XHYskSRY+jLgWWeCTsXwc0+NL
+ALMkSW7KJMsNMzpBEGQ0zIe1dlXnpTtl2VuStNwHrUC0gZAxhmHsPFxv+dGH0a4cyKGTtdzW2sp2
+W1VJPkaGMPLhtBG/q4DO3tdN+L8F/IumtLEndCXH20xvPaG1dljbljNvfXbGWy8m+cZx5TPfBp22
+OxMA4TTp3BO6aPDwOG5rzP/OtWrz8nVs62FUNubhOLueiwiRWkCy83JzPbfWxm06qL/sgpkwsGVs
+hgAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>

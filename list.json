@@ -71,6 +71,18 @@
         "en":"https://support.questetra.com/addons/services/googledrive-foldercreate/",
         "ja":"https://support.questetra.com/ja/addons/services/googledrive-filescopy/"
       }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleSheets-appendCells.xml",
+      "last-modified":"2017-10-31",
+      "label":{
+        "en":"Google Sheets Append Cells",
+        "ja":"Google Sheets 行追加"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlesheets-appendcells/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlesheets-appendcells/"
+      }
     }
   ]
 }
