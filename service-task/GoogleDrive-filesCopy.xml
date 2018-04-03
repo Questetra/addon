@@ -3,7 +3,7 @@
 <label>Google Drive Files Copy</label>
 <label locale="ja">Google Drive ファイルコピー</label>
 
-<last-modified>2017-11-26<last-modified>
+<last-modified>2017-11-26</last-modified>
 
 <summary>Creates a copy of a file into the Folder (supports Team Drives)</summary>
 <summary locale="ja">既存ファイルを複製し、指定フォルダに新規保存します (チームドライブ対応)</summary>
