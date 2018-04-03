@@ -129,6 +129,32 @@
         "en":"https://support.questetra.com/addons/services/googlesheets-valueupdate/",
         "ja":"https://support.questetra.com/ja/addons/services/googlesheets-valueupdate/"
       }
+    },
+    {
+      "id":"GoogleSheets-sumNumbersCom",
+      "file":"https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml",
+      "last-modified":"2017-08-28",
+      "label":{
+        "en":"Sum of cells in a Google Spreadsheet",
+        "ja":"Google スプレッドシートのセル合計"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlesheets-sumnumberscom/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/"
+      }
+    },
+    {
+      "id":"GoogleSheets-sumNumbers",
+      "file":"https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbers.xml",
+      "last-modified":"2017-08-28",
+      "label":{
+        "en":"Sum of cells in a Google Spreadsheet",
+        "ja":"Google スプレッドシートのセル合計"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlesheets-sumnumbers/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlesheets-sumnumbers/"
+      }
     }
   ]
 }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Sum of cells in a Google Spreadsheet</label>
+<label locale="ja">Google スプレッドシートのセル合計</label>
+
+<last-modified>2016-09-13</last-modified>
+<help-page-url>https://support.questetra.com/addons/services/googlesheets-sumnumbers/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-sumnumbers/</help-page-url>
+
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for Spreadsheet ID (Non-existent Error)</label>
+    <label locale="ja">B: Spreadsheet ID が格納されている文字列型データor選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>C: Select STRING/SELECT for Sheet Title (Non-existent Error)</label>
+    <label locale="ja">C: Sheet タイトルが格納されている文字列型データor選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>D: Select STRING/SELECT for a Range (e.g. "D2:D")</label>
+    <label locale="ja">D: 領域が格納されている文字列型データor選択肢型データを選択してください (例 "D1:D1", "D2:D")</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>E: Select NUMERIC DATA for Sum of a Series of Numbers (update)</label>
+    <label locale="ja">E: 合計値が格納される数値型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>F: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">F: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Sum of a series of numbers in a Google Spreadsheet (ver. 20160913)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+// OAuth2 config
+// Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// Scope: https://www.googleapis.com/auth/spreadsheets
+// Consumer Key: (Get by Google Developers Console)
+// Consumer Secret: (Get by Google Developers Console)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2 = configs.get( "conf_OAuth2" );
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
+var dataIdF = configs.get( "conf_DataIdF" ); // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var docId = "";
+if( data.get( dataIdB ) instanceof java.util.ArrayList ){
+  docId = data.get( dataIdB ).get(0).getValue() + "";
+}else if( data.get( dataIdB ) instanceof java.lang.String ){
+  docId = data.get( dataIdB ) + "";
+}
+var sheet = "";
+if( data.get( dataIdC ) instanceof java.util.ArrayList ){
+  sheet = data.get( dataIdC ).get(0).getValue() + "";
+}else if( data.get( dataIdC ) instanceof java.lang.String ){
+  sheet = data.get( dataIdC ) + "";
+}
+var range = "";
+if( data.get( dataIdD ) instanceof java.util.ArrayList ){
+  range = data.get( dataIdD ).get(0).getValue() + "";
+}else if( data.get( dataIdD ) instanceof java.lang.String ){
+  range = data.get( dataIdD ) + "";
+}
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var responseJson = "";
+var sum = 0;
+var token = httpClient.getOAuth2Token( oauth2 );
+
+try{
+  var uri = "https://sheets.googleapis.com/v4/spreadsheets/";
+  uri += docId;
+  uri += "/values/";
+  uri += sheet;
+  uri += "!";
+  uri += range;
+
+  var response = httpClient.begin()
+    .bearer(token)
+    .get( uri ); 
+  accessLog += "---GET request--- " + response.getStatusCode() + "\n";
+  responseJson = response.getResponseAsString();
+  if( response.getStatusCode() == 200 ){
+    var jsonObj = JSON.parse( responseJson );
+    for( var i = 0; i < jsonObj.values.length; i++ ){
+      for( var j = 0; j < jsonObj.values[i].length; j++ ){
+        if( !isNaN( parseFloat( jsonObj.values[i][j] ) ) ){
+          sum += parseFloat( jsonObj.values[i][j] );
+        }
+      }
+    }
+  }
+}catch(e){
+  accessLog += e.message + "\n";
+}
+// for Debug
+// accessLog += responseJson + "\n";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdE, java.math.BigDecimal( sum ) );
+retVal.put( dataIdF, accessLog );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVRYR+1WS24aQRCtghUfKdwgvoG5QSY76EEKOUHICeKcwM4JQm6ATxAsMQ27jG8AN3Bu4Eh8Vsyz3qgHDQMMg0y8oiQEdFdXv/q9apUcMcY0ReS9iPC7qaoNAA1V5f8dATBV1WcAzyIydZ+/1lr+3iuaXW23211V/SQinqpe5QEsugfgSURCERlaax/S5zYAjDE9EbnNXgrgkYfpmarGnszn82kYhvRyI57nNer1ehwZAE1GyjnxIa1HMKp6FwTBPddjAL7vD0TkS0rxPoqi4Xg8Hhb1Mk+PUS2VSt30HQAG1tqv6jZ/OwOz9XrdnUwmDNnZpdVqXZXLZTp1TeNRFH1WY8ydqt4mC+fy+hD6tMMAfmwBSMJydtdTBtPp3gHg9EIA/Wy1vhaU8/wbCzOxdQhAss9+HqpqGEXR02q1mmUr/xAodkSlUrl2fEH+YAGyK7YkBtDpdDwAf4p6mJDNPv08ktqnr6of4zY0xrA3yXhvKbMgCJoJABIIyebdWyAA8I+1QIreMCHzVqvVSJdxj/5HmS0WCy+pp51ZYIzpqyqr9ewC4Je19iZteAeAqwnOBQI5S0pcyG+staT8LdkLwIFg+/DAa1MyA9A7NJIPAiAI1kW1Wh248XxySgA8LJfLXh5/5AJIbvR9n3n7eSKC70EQ9I+dKQSARkhYHNHH6oL55ugdjUbsqKNSGECSkiOtutViR29PHiRFFNM6vu/zZZQtzpjZTrV1UgQS48YYsmb2qfVord1MuqJALgAuEbhE4BKBSwReALxRW/c7i890AAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
