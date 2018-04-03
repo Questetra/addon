@@ -11,7 +11,7 @@
         rowHtml += '<th rowspan="2">' + service.id + '</th>';
         rowHtml += '<td>ja</td>';
         rowHtml += '<td>' + service.label.ja + '</td>';
-        rowHtml += '<td><a help="' + service.help.ja + '">help</a></td>';
+        rowHtml += '<td><a href="' + service.help.ja + '">help</a></td>';
         rowHtml += '<th rowspan="2"><a href="' + service.file + '">' + service.file + '</a></th>';
         rowHtml += '<th rowspan="2">' + service['last-modified'] + '</th>';
 
@@ -21,7 +21,7 @@
 
         rowHtml += '<td>en</td>';
         rowHtml += '<td>' + service.label.en + '</td>';
-        rowHtml += '<td><a help="' + service.help.en + '">help</a></td>';
+        rowHtml += '<td><a href="' + service.help.en + '">help</a></td>';
 
         rowHtml += '</tr>';
 
