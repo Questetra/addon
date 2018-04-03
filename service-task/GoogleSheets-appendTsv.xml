@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>New Record to Google Sheets (TSV)</label>
+<label locale="ja">Google Sheets 行追加 (TSV)</label>
+
+<last-modified>2016-09-15</last-modified>
+<help-page-url>https://support.questetra.com/addons/services/googlesheets-appendtsv/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-appendtsv/</help-page-url>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>A: Select TSV STRING DATA</label>
+    <label locale="ja">A: TSV が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_ColIds" required="true" form-type="TEXTFIELD">
+    <label>B: Set THROW COL IDs (e.g. "0,1,5d,3n,6")</label>
+    <label locale="ja">B: 送出データの項目 ID をセットしてください (例 "0,1,5d,3n,6")</label>
+  </config>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>C: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">C: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>D: Select STRING/SELECT for Spreadsheet ID (Non-existent Error)</label>
+    <label locale="ja">D: Spreadsheet ID が格納されている文字列型or選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>E: Select STRING/SELECT for Sheet Title (Non-existent Create)</label>
+    <label locale="ja">E: Sheet タイトルが格納されている文字列型or選択肢型データを選択してください（存在しない場合、追加）</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>F: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">F: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Append TSV Records to Google Sheets (ver. 20160915)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+// OAuth2 config
+// Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// Scope: https://www.googleapis.com/auth/spreadsheets
+// Consumer Key: (Get by Google Developers Console)
+// Consumer Secret: (Get by Google Developers Console)
+
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" ); // (returns Number)
+var colIds = configs.get( "conf_ColIds" ) + "";
+var oauth2 = configs.get( "conf_OAuth2" );
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
+var dataIdF = configs.get( "conf_DataIdF" ); // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var myTsv = data.get( dataIdA ) + "";
+var docId = "";
+if( data.get( dataIdD ) instanceof java.util.ArrayList ){
+  docId = data.get( dataIdD ).get(0).getValue() + "";
+}else if( data.get( dataIdD ) instanceof java.lang.String ){
+  docId = data.get( dataIdD ) + "";
+}
+var sheet = "";
+if( data.get( dataIdE ) instanceof java.util.ArrayList ){
+  sheet = data.get( dataIdE ).get(0).getValue() + "";
+}else if( data.get( dataIdE ) instanceof java.lang.String ){
+  sheet = data.get( dataIdE ) + "";
+}
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var responseJson = "";
+var sheetId = -1;
+var token = httpClient.getOAuth2Token( oauth2 );
+
+try{
+  // check spreadsheet
+  var uri = "https://sheets.googleapis.com/v4/spreadsheets/";
+  uri += docId;
+  uri += "?includeGridData=false";
+  var response = httpClient.begin()
+    .bearer(token)
+    .get( uri ); 
+  accessLog += "---GET request--- " + response.getStatusCode() + "\n";
+  responseJson = response.getResponseAsString();
+  if( response.getStatusCode() == 200 ){
+    var jsonObj = JSON.parse( responseJson );
+    accessLog += " SPREADSHEET TITLE: \"" + jsonObj.properties.title + "\" has";
+    accessLog += jsonObj.sheets.length + " sheets\n";
+    for( var i = 0; i < jsonObj.sheets.length; i++ ){
+      if( jsonObj.sheets[i].properties.title == sheet ){
+        sheetId = parseInt( jsonObj.sheets[i].properties.sheetId, 10 );
+        accessLog += " SHEET TITLE: \"" + sheet + "\" exists (id: " + sheetId + ")\n";
+      }else{
+        accessLog += " SHEET TITLE: \"" + sheet + "\" does not exist\n";
+      }
+    }
+  }else{
+    sheetId = -2;
+  }
+
+  // add sheet (not exsist)
+  if( sheetId == -1 ){  
+    var uri2 = "https://sheets.googleapis.com/v4/spreadsheets/";
+    uri2 += docId;
+    uri2 += ":batchUpdate";
+
+    sheetId = processInstance.getProcessInstanceId() - 0;
+    var myObj2 = {};
+    myObj2.requests = []; // Array
+    myObj2.requests[0] = {};
+    myObj2.requests[0].addSheet = {};
+    myObj2.requests[0].addSheet.properties = {};
+    myObj2.requests[0].addSheet.properties.sheetId = sheetId;
+    myObj2.requests[0].addSheet.properties.title = sheet;
+
+    var response2 = httpClient.begin()
+      .bearer(token)
+      .body( JSON.stringify( myObj2 ), "application/json" )
+      .post( uri2 ); 
+    accessLog += "---POST request--- " + response2.getStatusCode() + "\n";
+    if( response2.getStatusCode() == 200 ){
+      accessLog += " SHEET TITLE: \"" + sheet + "\" created (id: " + sheetId + ")\n";
+    }
+  }
+
+  // append records
+  if( sheetId >= 0 ){
+    if( myTsv !== ""){
+      var colIdArray = colIds.split(",");
+      var numOfCols = colIdArray.length;
+
+      var tsvRecords = myTsv.split("\n");
+      var numOfRows = tsvRecords.length; // 行（TSVのレコード数）
+
+      var myObj3 = {};
+      myObj3.requests = []; // Array
+      myObj3.requests[0] = {};
+      myObj3.requests[0].appendCells = {};
+      myObj3.requests[0].appendCells.rows = []; // Array
+      myObj3.requests[0].appendCells.sheetId = sheetId;
+      myObj3.requests[0].appendCells.fields = "*";
+
+      for( var i = 0; i < numOfRows; i++ ){
+        myObj3.requests[0].appendCells.rows[i] = {};
+        myObj3.requests[0].appendCells.rows[i].values = []; // Array
+        var cellValues = tsvRecords[i].split("\t");
+
+        for( var j = 0; j < numOfCols; j++ ){
+          if( colIdArray[j].slice(-1) == "n" ){
+            myObj3.requests[0].appendCells.rows[i].values[j]
+            = {"userEnteredValue": {"numberValue" : cellValues[parseInt( colIdArray[j] )] } }; 
+          }else if( colIdArray[j].slice(-1) == "d" ){
+            var dateTimeSerialNumber = new Date( cellValues[parseInt( colIdArray[j] )] )/86400000 + 25569;
+            myObj3.requests[0].appendCells.rows[i].values[j]
+            = {"userEnteredFormat": {"numberFormat": { "type": "DATE_TIME" } },
+               "userEnteredValue": {"numberValue": dateTimeSerialNumber }}; 
+          }else{
+            myObj3.requests[0].appendCells.rows[i].values[j]
+            = {"userEnteredValue": {"stringValue": cellValues[parseInt( colIdArray[j] )] }}; 
+          }
+        }
+      }
+
+      var uri3 = "https://sheets.googleapis.com/v4/spreadsheets/";
+      uri3 += docId;
+      uri3 += ":batchUpdate";
+
+      var response3 = httpClient.begin()
+        .bearer(token)
+        .body( JSON.stringify( myObj3 ), "application/json" )
+        .post( uri3 ); 
+      accessLog += "---POST request--- " + response3.getStatusCode() + "\n";
+      if( response3.getStatusCode() == 200 ){
+        accessLog += " ADDED DATA: " + colIds + " x " + numOfRows + "cells\n";
+      }
+    }
+  }
+}catch(e){
+  accessLog += e.message + "\n";
+}
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdF, accessLog );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACuUlEQVRYR82X0VHbQBCGd8UT8BA6iFMBTgXxIwjP4A4SKoBUEFNBTAU4HTgz6PCjqCCkgpAOnBf5Sfdnfs3JcxKSLBmUyc34wZLu9t/d2+/2VFqMk5OTwd7e3gcRGfIHYKCqA38qgCdVfRKRR/7SNH1YLpf83zi06W0Yhp9E5FJVabjzAPCoqrMoir7VTa4UMB6PR9ba27KXnRW4CYxOEAQXd3d3cXmNZwLotare7mqsaR6AC2PM3P+mIMDl+lcfxvM10zR95++NgoCzs7MrEfnapwAR+RxF0Sy3URDQZ/hzg+U0FASMRqOjg4MDltObPqIA4E+SJIM4jleVEeBDV3qz1xZB40EQTMqVUFmGYRiy7imC8HnxAPAgIlfGGEKqMBpBdHp6OlFVluX5LioAfAcwv7+/X7QCEasAAIwxN/4E7o39/f2RIyKjc8T3eYSch3zE3D6SgOv1OvZz7dI7VdVVUxXwgy+O69MmhLaNCMUfHh6eA7iiAwCujTHTujLMBHiLrwAwfAtr7c82h4vzdKiqxwAYtUkeMb7rKqDK0YznALJwu1SMvA83Kaqa/BoC2ka/7rtGEjJ0P15qoWk+gPd+OVadhqz/yz5EALgxxvC82Yw6EL26iCrj2f6p89TRkFWxE4TydQkjEZlWUfCZAJKvDBD2CEEQcJeznLhH3m7J8W9XHYskSRY+jLgWWeCTsXwc0+NLALMkSW7KJMsNMzpBEGQ0zIe1dlXnpTtl2VuStNwHrUC0gZAxhmHsPFxv+dGH0a4cyKGTtdzW2sp2W1VJPkaGMPLhtBG/q4DO3tdN+L8F/IumtLEndCXH20xvPaG1dljbljNvfXbGWy8m+cZx5TPfBp22OxMA4TTp3BO6aPDwOG5rzP/OtWrz8nVs62FUNubhOLueiwiRWkCy83JzPbfWxm06qL/sgpkwsGVshgAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
