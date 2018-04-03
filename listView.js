@@ -15,6 +15,9 @@
         rowHtml += '<th rowspan="2"><a href="' + service.file + '">' + service.file + '</a></th>';
         rowHtml += '<th rowspan="2">' + service['last-modified'] + '</th>';
 
+        rowHtml += '</tr>';
+
+        rowHtml += '<tr>';
 
         rowHtml += '<td>en</td>';
         rowHtml += '<td>' + service.label.en + '</td>';
