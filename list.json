@@ -168,6 +168,19 @@
         "en":"https://support.questetra.com/addons/services/googlesheets-getidslabels/",
         "ja":"https://support.questetra.com/ja/addons/services/googlesheets-getidslabels//"
       }
+    },
+    {
+      "id":"GoogleGroup-memberAdd",
+      "file":"https://questetra.github.io/addon/service-task/GoogleGroup-memberAdd.xml",
+      "last-modified":"2017-07-03",
+      "label":{
+        "en":"Google Group member add",
+        "ja":"Google Group メンバー追加"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlegroup-memberadd/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlegroup-memberadd/"
+      }
     }
   ]
 }
