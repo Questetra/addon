@@ -1,6 +1,7 @@
 {
   "services":[
     {
+      "id":"GoogleCalendar-eventsList",
       "file":"https://questetra.github.io/addon/service-task/GoogleCalendar-eventsList.xml",
       "last-modified":"2017-08-01",
       "label":{
@@ -13,6 +14,7 @@
       }
     },
     {
+      "id":"GoogleCalendar-insertEvent",
       "file":"https://questetra.github.io/addon/service-task/GoogleCalendar-insertEvent.xml",
       "last-modified":"2016-10-25",
       "label":{
@@ -25,6 +27,7 @@
       }
     },
     {
+      "id":"GoogleDrive-simpleUpload",
       "file":"https://questetra.github.io/addon/service-task/GoogleDrive-simpleUpload.xml",
       "last-modified":"2016-10-25",
       "label":{
@@ -37,6 +40,7 @@
       }
     },
     {
+      "id":"GoogleDrive-filesGet",
       "file":"https://questetra.github.io/addon/service-task/GoogleDrive-filesGet.xml",
       "last-modified":"2017-11-20",
       "label":{
@@ -49,6 +53,7 @@
       }
     },
     {
+      "id":"GoogleDrive-filesCopy",
       "file":"https://questetra.github.io/addon/service-task/GoogleDrive-filesCopy.xml",
       "last-modified":"2017-11-26",
       "label":{
@@ -61,6 +66,7 @@
       }
     },
     {
+      "id":"GoogleDrive-folderCreate",
       "file":"https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml",
       "last-modified":"2018-01-09",
       "label":{
@@ -73,6 +79,7 @@
       }
     },
     {
+      "id":"GoogleSheets-appendCells",
       "file":"https://questetra.github.io/addon/service-task/GoogleSheets-appendCells.xml",
       "last-modified":"2017-10-31",
       "label":{
@@ -85,6 +92,7 @@
       }
     },
     {
+      "id":"GoogleSheets-appendTable",
       "file":"https://questetra.github.io/addon/service-task/GoogleSheets-appendTable.xml",
       "last-modified":"2016-09-15",
       "label":{
@@ -97,6 +105,7 @@
       }
     },
     {
+      "id":"GoogleSheets-appendTsv",
       "file":"https://questetra.github.io/addon/service-task/GoogleSheets-appendTsv.xml",
       "last-modified":"2016-09-15",
       "label":{
@@ -109,6 +118,7 @@
       }
     },
     {
+      "id":"GoogleSheets-valueUpdate",
       "file":"https://questetra.github.io/addon/service-task/GoogleSheets-valueUpdate.xml",
       "last-modified":"2017-08-28",
       "label":{
