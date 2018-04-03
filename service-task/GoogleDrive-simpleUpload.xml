@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Google Drive Simple Uploads</label>
+<label locale="ja">Google Drive アップロード</label>
+<last-modified>2017-11-27</last-modified>
+
+<summary>Upload Files Less than 5 MB, and Update Metadata. File IDs are Comma-separated List if Multiple (supports Team Drives)</summary>
+<summary locale="ja">5MB以下のファイルを簡易アップロードし、メタデータを更新します。ファイルIDは複数時カンマ区切り (チームドライブ対応)</summary>
+
+<help-page-url>https://support.questetra.com/addons/services/googledrive-simpleupload/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googledrive-simpleupload/</help-page-url>
+
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可の設定名 (←［OAuth 2.0 設定］における設定名)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="FILE">
+    <label>B: Select FILE DATA for Upload File</label>
+    <label locale="ja">B: アップロードファイルが格納されているファイル型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>C: Select STRING/SELECT DATA for Folder ID</label>
+    <label locale="ja">C: フォルダ ID が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>D: Select STRING DATA for File IDs (update)</label>
+    <label locale="ja">D: ファイル IDs が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Google Drive Simple Uploads (ver. 20171127)
+// (c) 2017, Questetra, Inc. (the MIT License)
+// by Google Drive APIs Files get
+// https://developers.google.com/drive/v3/web/simple-upload
+// https://developers.google.com/drive/v3/reference/files/update
+
+// OAuth2 config sample at [OAuth 2.0 Setting]
+// - Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// - Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// - Scope: "https://www.googleapis.com/auth/drive" or "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.metadata"
+// - Consumer Key: (Get by Google Developers Console)
+// - Consumer Secret: (Get by Google Developers Console)
+
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var oauth2 = configs.get( "conf_OAuth2" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+// convert 'java.lang.String' to 'javascript string'
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var uploadFiles = engine.findDataByNumber( dataIdB );
+// java.util.ArrayList <com.questetra.bpms.core.event.scripttask.QfileView>
+if (uploadFiles === null) {
+  throw new Error("No Files attached in this Process");
+} // error
+var folderId = "";
+if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType( "SELECT_SINGLE" ) ){
+    folderId = engine.findDataByNumber( dataIdC ).get(0).getValue() + "";
+}else{
+    folderId = engine.findDataByNumber( dataIdC ) + "";
+}
+
+
+//// == Calculating / 演算 ==
+var fileIds = "";
+var accessLog = "";
+var token  = httpClient.getOAuth2Token( oauth2 );
+var numOfFiles = uploadFiles.size() - 0;
+
+for( var i = 0; i < numOfFiles; i++  ){
+  var uri = "https://www.googleapis.com/upload/drive/v3/files";
+  var response = httpClient.begin()
+    .bearer( token )
+    .queryParam( "uploadType", "media" )
+    .body( uploadFiles.get(i) )
+    .post( uri );
+  accessLog += "---POST request--- " + response.getStatusCode() + "\n";
+  accessLog += response.getResponseAsString() + "\n";
+  var responseObj = JSON.parse( response.getResponseAsString() );
+
+  var uri2 = "https://www.googleapis.com/drive/v3/files/";
+    uri2 += responseObj.id;
+  fileIds += responseObj.id;
+  if( i !== numOfFiles - 1 ){ fileIds += ","; }
+  var request2Obj = {};
+    request2Obj.name = uploadFiles.get(i).getName() + "";
+  var response2 = httpClient.begin()
+    .bearer( token )
+    .queryParam( "addParents", folderId )
+    .queryParam( "removeParents", "root" )
+    .queryParam( "supportsTeamDrives", true )
+    .body( JSON.stringify( request2Obj ), "application/json" )
+    .patch( uri2 );
+  accessLog += "---PATCH request--- " + response2.getStatusCode() + "\n";
+  accessLog += response2.getResponseAsString() + "\n";
+}
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if ( dataIdD !== "" ){ engine.setDataByNumber( dataIdD, fileIds ); }
+if ( dataIdX !== "" ){ engine.setDataByNumber( dataIdX, accessLog ); }
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABoElEQVRYR+2WwVXCQBCG9w83TpZA
+CVCByQ0mvKdUIFSgViBWoFYgViAHMnAzHUAJlJBTbuz4lmd8ATewiTz0kDnlsDv/t7PzTxZKKUVE
+YwAP5vtcISKPzDxGDfAvKtDv932ttX+u+zc6nufFs9ks3vZA1fB9/8LsjeM4qZqjMoARbzabH0aY
+mTtnBwjDcKKUujHCIjJh5lEViEoVCMPwTin1tCd4H0XRc1mI0gC9Xu/a87x3m5DWejCfz6dlIEoB
+EFEbgLn3bfNZIhGRgJlXrhDOAF9NtwTQOpRcRNZpmnZcneEMQEQxgEvHk8VRFAUua50A8h3vkrSM
+M44CENEQwKurcH6diIyY2di1MA4CmBEtItthUzUABGbkFu0vBOh2u61Go7E80PGuTMlms+ksFou1
+bYMVIBuzANquKkecsUrTNLA5wwpARFMAV6cQz3KIyJSZB/s5fwAQ0TOA21OK5yBemNmM8e/YAfhN
+x7sC7ztjB8B0fVEiERlmfz8HsTcAVvtprZP8qD46BzKxMi/n7MXrAKpqgLoCdQXqCvx5BT4B10IB
+MHMpvgcAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>

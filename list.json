@@ -23,6 +23,18 @@
         "en":"https://support.questetra.com/addons/services/googlecalendar-insertevent/",
         "ja":"https://support.questetra.com/ja/addons/services/googlecalendar-insertevent/"
       }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleDrive-simpleUpload.xml",
+      "last-modified":"2016-10-25",
+      "label":{
+        "en":"Google Drive Simple Uploads",
+        "ja":"Google Drive アップロード"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googledrive-simpleupload/",
+        "ja":"https://support.questetra.com/ja/addons/services/googledrive-simpleupload/"
+      }
     }
   ]
 }
