@@ -4,6 +4,9 @@
 <label locale="ja">Google Calendar 予定追加</label>
 <last-modified>2016-10-25</last-modified>
 
+<help-page-url>https://support.questetra.com/addons/services/googlecalendar-insertevent/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlecalendar-insertevent/</help-page-url>
+
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
     <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>

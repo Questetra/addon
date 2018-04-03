@@ -6,6 +6,10 @@
       "label":{
         "en":"Google Calendar events list",
         "ja":"Google Calendar イベントリスト"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlecalendar-eventslist/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/"
       }
     },
     {
@@ -14,6 +18,10 @@
       "label":{
         "en":"Insert event to Google Calendar",
         "ja":"Google Calendar 予定追加"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlecalendar-insertevent/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlecalendar-insertevent/"
       }
     }
   ]
