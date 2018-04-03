@@ -83,6 +83,18 @@
         "en":"https://support.questetra.com/addons/services/googlesheets-appendcells/",
         "ja":"https://support.questetra.com/ja/addons/services/googlesheets-appendcells/"
       }
+    },
+    {
+      "file":"https://questetra.github.io/addon/service-task/GoogleSheets-appendTable.xml",
+      "last-modified":"2016-09-15",
+      "label":{
+        "en":"New Record to Google Sheets (Table)",
+        "ja":"Google Sheets 行追加 (Table)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlesheets-appendtable/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlesheets-appendtable/"
+      }
     }
   ]
 }
