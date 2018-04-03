@@ -1,7 +1,7 @@
 (function($) {
   $(document).ready(function() {
     $(".status").html("ready");
-    $.getJSON("urls.json", function(data) {
+    $.getJSON("list.json", function(data) {
       $(".status").html("loaded");
 
       for(var i = 0; i < data.services.length; i++){
