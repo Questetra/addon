@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<label>Check The User Is In The Organization</label>
+<label locale="ja">ユーザの指定組織への所属を判定</label>
+
+<last-modified>2018-03-30</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/questetra-userorgposition/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/questetra-userorgposition/</help-page-url>
+
+<summary>If the specified user is the leader of the specified organization, this task returns "L". If he or she is one of the its members,it returns "M". If he or she doesn't belong to it, it returns nothing. </summary>
+<summary locale="ja">指定したユーザが指定した組織のリーダであれば"L" を、スタッフであれば"M" を、所属していなければ空を返します。</summary>
+<configs>
+  <config name="userField" form-type="SELECT" select-data-type="QUSER" required="true">
+    <label>I1.User Data(Data Type:User)</label>
+    <label locale="ja">I1. ユーザデータ(指定:ユーザ型データ)</label>
+  </config>
+  <config name="groupField" form-type="SELECT" select-data-type="QGROUP" required="true">
+    <label>I2.Organization Data(Data Type:Organization)</label>
+    <label locale="ja">I2. 組織データ(指定:組織型データ)</label>
+  </config>
+  <config name="result" form-type="SELECT" select-data-type="STRING_TEXTFIELD" required="true">
+    <label>O1.Result(Data Type:Single-line string)</label>
+    <label locale="ja">O1. 結果出力先(指定:単一行文字型データ)</label>
+  </config>
+</configs>
+<script><![CDATA[
+main();
+
+function main() {
+  //set group data from I2
+  var groupIs = engine.findDataByNumber(configs.get("groupField"));
+  //set user data from I2
+  var userIs = engine.findDataByNumber(configs.get("userField"));
+  var result = "";
+  //Error
+  errorCheck(groupIs, userIs);
+  if (check(true, userIs, groupIs)) {
+    result = "L";
+  } else if (check(false, userIs, groupIs)) {
+    result = "M";
+  }
+  //set result to O
+  engine.setDataByNumber(configs.get("result"), result);
+}
+//check whether the user is the leader or a member of the group
+function check(LM, user, group) {
+  var temp;
+  var list = quserDao.findByQgroupAndPosition(group, LM);
+  for (var i = 0; i < list.size(); i++) {
+    temp = list.get(i);
+    if (user.getId().equals(temp.getId())) {
+      return true;
+    }
+  }
+}
+
+function errorCheck(group, user) {
+  if (group == null && user != null) {
+    throw "Organization Not Selected";
+  } else if (group != null && user == null) {
+    throw "User Not Selected";
+  } else if (group == null && user == null) {
+    throw "Organization and User Not Selected";
+  }
+  var userC = quserDao.findById(user.getId());
+  var groupC = qgroupDao.findById(group.getId());
+  if (userC == null && groupC != null) {
+    throw "Selected user doesn't exist";
+  } else if (userC != null && groupC == null) {
+    throw "Selected Organization doesn't exist";
+  } else if (userC == null && groupC == null) {
+    throw "Selected Organization and User don't exist";
+  }
+}
+]]>
+</script>
+<icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEIElEQVRYR8WXXWhTZxjHfydJU2vr
+zHRVxqyrUBfXCbZCcThs7YWXQoMwUBxJG0uqCNsuRBRxK+qFVVjVi6agWFsmpQOn9HJMEhiF1W1t
+ZTjDbJ0o2s1a0rhGlzY54z3HpCfnI42zuBcOyTnvc/7P/3ne5+tI/M9Lein9nTQAdchUIeECql68
+P4xMFAnxG6KFa/nizk/gIi4SfAp8BorSfFYUaMfJGRoR/y1XbgId+LDx1Uso1isSyhsJcNWKgTWB
+IO1IiuULsdoJ8LkZkDmBTroA70JozmDIdNFCox7TSCCH5X63H6/bi3upmyUFSyi0F5JIJYjPxhmN
+jdJ/r59jvxyz5i1zhhYlljIrm4B65hf1CJWuSrrqu9j41kbskj2nYyLRCAd/PMi1e5aJ4NHGxBwB
+Ndrv6gPOU+6hY0sHK4tW5n0isUSME0MnaBtpM3snipM16eyYI9DJl8AX2jeE5de3XzdV/vj5Y+7/
+fR+3y02xo9igaHp2mqZQE31jfWYkWgko+tASECmzVCs96BmkprTGFHzz1c3cnLzJ/g/2c+6jc6be
+EQRXX15t7oUAb84RUCvct1pJ73tezteex2FzGAAmnk9Q2l2qPBdxccNzA5tkMyURvBVk7w97zfaU
+WFA9YBL54e1hat+utTz3gT8HGBgfoGFNAxVvVFjKieyo6DXZf5ERKoFOQkqN16zxT8bzCryUnLK0
+XsDNpGZYfmk5T2ee6kmGCbA1TeAP4F2tRLwpTpGjyNKypJxkaGJIuZrfb86ZITu/30nvaK9eZpgA
+1WkCsn432Zy0tGwsNsapkVMEfwvStqmNAxsO5CRw9Kej5gUqgGRJ4Jn/GYvsi0yB78Tu8HD6IXX9
+dXkR2BPew4XIBSOWhoDhCJ54n7CscJmlZaIOrOheMS8BcVTll8t5MP0gG0tmhBaqLIPQqgakUfIl
+IBSXfV1mZogmCE3S8HD1YY7XHEfS1CotSr4Erty9wo7vdhgJ6NLQUIjEG7c/vq2UWv2aTc0SmYqw
+/pv17Kvcx+kPT5tmzOQ/k4r7TVJQQGoKkVoLDKVYNKLu+m5KCkqyOIiOt65vXeZZT30Pu9fuzpIR
++S8aUuvPrWbunyKgjnc5m5EQOFJ9hEPVh1jsWJwBEoGVSCYy93abHafNmbkXynt+78Ef9lsFsUkz
+UtuxyIashiQQdlXs4uSmk6wqXpUz38WmcPvZX89aWS5EpnBSbmzHYstiIElrDW4Jsu2dbZSVlFFg
+K8jyyKP4Iwb/GsQX8lmdeVreYiDJaFnQYVTvsYzr0xuvbyiFSwTw6Rm9rrHcYHluD6R31UFFjOiG
+wJw3GlWBKcD33z5M0hrU7BCjtLjyJSIUi0+z9lf7NNObKTwisxWJKmRcSGxQRERjkYgiM4xEKJfF
++cdAnj5+VbF/AXMrdTDYXSDuAAAAAElFTkSuQmCC</icon>
+</service-task-definition>
