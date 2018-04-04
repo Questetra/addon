@@ -220,6 +220,19 @@
         "en":"https://support.questetra.com/addons/services/googleanalytics-reportsdomain/",
         "ja":"https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/"
       }
+    },
+    {
+      "id":"GoogleAnalytics-reportsPv",
+      "file":"https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsPv.xml",
+      "last-modified":"2017-07-24",
+      "label":{
+        "en":"Google Analytics reports (PV ranking)",
+        "ja":"Google Analytics レポート (PV ranking)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googleanalytics-reportspv/",
+        "ja":"https://support.questetra.com/ja/addons/services/googleanalytics-reportspv/"
+      }
     }
   ]
 }
