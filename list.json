@@ -415,6 +415,19 @@
         "en":"https://support.questetra.com/addons/services/paypal-createjpy/",
         "ja":"https://support.questetra.com/ja/addons/services/paypal-createjpy/"
       }
+    },
+    {
+      "id":"Paypal-send",
+      "file":"https://questetra.github.io/addon/service-task/Paypal-send.xml",
+      "last-modified":"2017-06-02",
+      "label":{
+        "en":"PayPal Invoicing Send",
+        "ja":"PayPal 請求書 送信指示"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/paypal-send/",
+        "ja":"https://support.questetra.com/ja/addons/services/paypal-send/"
+      }
     }
   ]
 }

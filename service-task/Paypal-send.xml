@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>PayPal Invoicing Send</label>
+<label locale="ja">PayPal 請求書 送信指示</label>
+
+<last-modified>2017-06-02</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/paypal-send/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/paypal-send/</help-page-url>
+
+<configs>
+  <config name="conf_ClientId_Secret" required="true" form-type="TEXTAREA">
+    <label>A: Set CLIENT-ID and SECRET for PayPal-REST-API (2-lines)</label>
+    <label locale="ja">A: PayPal-REST-API の Client ID と SECRET を2行に分けてセットしてください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>B: Select STRING DATA for Paypal Invoice ID</label>
+    <label locale="ja">B: Paypal Invoce ID が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for Paypal Invoice Status (update)</label>
+    <label locale="ja">C: Paypal Invoce Status が格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// PayPal Invoicing Send (ver. 20170602)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var clientId_secret = configs.get( "conf_ClientId_Secret" ) + "";
+var array_clientId_secret = clientId_secret.split("\n");
+var clientId = array_clientId_secret[0];
+var secret   = array_clientId_secret[1];
+
+var dataIdB = configs.get( "conf_DataIdB" );
+var dataIdC = configs.get( "conf_DataIdC" );
+
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var paypalId         = data.get( dataIdB ) + "";
+
+
+//// == 演算 / Calculating ==
+// Get OAuth Token with Client Credentials
+var uri = "https://api.paypal.com/v1/oauth2/token";
+var response = httpClient.begin()
+  .basic( clientId, secret )
+  .formParam( "grant_type", "client_credentials" )
+  .post( uri );
+var oauthTokenObj = JSON.parse( response.getResponseAsString() );
+var oauthToken = oauthTokenObj.access_token;
+
+// Send invoice
+var uriSend = "https://api.paypal.com/v1/invoicing/invoices/" + paypalId + "/send";
+var responseSend = httpClient.begin()
+  .bearer( oauthToken )
+  .post( uriSend );
+var statusByCode = responseSend.getStatusCode() + "";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdC, statusByCode );
+///retVal.put( "q_accessLog", responseSend.getResponseAsString() ); // for debug
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABc0lEQVRYR+2WQW6CUBCG55cViUntDbxB7QmqOzMseoTqSWpPUnuDNoEXl9ygeILaG9AEwgqmeaQYxCoY+rQLZsPiwZv//cPM+0AXDlw4P3UCdhwYj8cD27ZvTJYlSZK17/thkSMXwMwjInoGoJ/GQ0QCIporpQJMp9OhZVnvRDQQkS8i0osmYwTgiojCNE1vwcyvAO6J6MXzvJnJzMXejuMsiehBRN60gFAriuP4ulwbk0J+XP8QkQ0cxxGdzPO8s7Zkkff/CDBp+bG9tw50ArqfsHOg6gAzLwA8Ft0hIk9KqUW1W5jZB3BX10UAJq7r+qVxnA/Ag4PoBAH6/hjWCciybLlarTZ/LqAu8aH12lF8ggNHS1C1vrEDTU/GzEdLULV+T8CFr+PPLZCIyFIpNW968jbv7QCJhoNerxcUmHQOJCvwL8uy0RZKAWhMMkrEJdfWIjLLobRspcbyfr9vlIyjKAr2sLxNPdt+e1YO/E1sJ+AbULfr6IobKF4AAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
