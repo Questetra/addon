@@ -571,6 +571,19 @@
         "en":"https://support.questetra.com/addons/services/questetra-userorgposition/",
         "ja":"https://support.questetra.com/ja/addons/services/questetra-userorgposition/"
       }
+    },
+    {
+      "id":"Http-filesGet",
+      "file":"https://questetra.github.io/addon/service-task/Http-filesGet.xml",
+      "last-modified":"2017-11-19",
+      "label":{
+        "en":"Download via HTTP and Add to file-type data",
+        "ja":"HTTPでファイルをダウンロードし、ファイル型データ項目に追加します"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/http-filesget/",
+        "ja":"https://support.questetra.com/ja/addons/services/http-filesget/"
+      }
     }
   ]
 }
