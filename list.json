@@ -456,6 +456,19 @@
       }
     },
     {
+      "id":"Stripe-cardRegistrationMmyy",
+      "file":"https://questetra.github.io/addon/service-task/Stripe-cardRegistrationMmyy.xml",
+      "last-modified":"2016-10-06",
+      "label":{
+        "en":"Card Info to Stripe",
+        "ja":"Stripe カード情報登録"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/stripe-cardregistrationmmyy/",
+        "ja":"https://support.questetra.com/ja/addons/services/stripe-cardregistrationmmyy/"
+      }
+    },
+    {
       "id":"Stripe-customerCreate",
       "file":"https://questetra.github.io/addon/service-task/Stripe-customerCreate.xml",
       "last-modified":"2017-09-01",
@@ -466,6 +479,19 @@
       "help":{
         "en":"https://support.questetra.com/addons/services/stripe-customercreate/",
         "ja":"https://support.questetra.com/ja/addons/services/stripe-customercreate/"
+      }
+    },
+    {
+      "id":"Stripe-chargeCreate",
+      "file":"https://questetra.github.io/addon/service-task/Stripe-chargeCreate.xml",
+      "last-modified":"2017-09-25",
+      "label":{
+        "en":"Stripe Charge to Customer ID",
+        "ja":"Stripe 課金（Customer ID）"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/stripe-chargecreate/",
+        "ja":"https://support.questetra.com/ja/addons/services/stripe-chargecreate/"
       }
     }
   ]

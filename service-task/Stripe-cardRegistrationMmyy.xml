@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Card Info to Stripe</label>
+<label locale="ja">Stripe カード情報登録</label>
+
+<last-modified>2016-10-06</last-modified>
+<help-page-url>https://support.questetra.com/addons/services/stripe-cardregistrationmmyy/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/stripe-cardregistrationmmyy/</help-page-url>
+
+<configs>
+  <config name="conf_SecretKey" required="true" form-type="TEXTFIELD">
+    <label>A: Set SecretKey for Stripe Access (sk_xxx: 32 letters)</label>
+    <label locale="ja">A: Stripe SecretKey をセットしてください (sk_xxx: 32文字)</label>
+  </config>
+  <config name="conf_DataIdB" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT DATA for Description (e.g. Corp Name)</label>
+    <label locale="ja">B: Description情報が格納されている文字列型or選択肢型データを選択してください（例: 法人名）</label>
+  </config>
+  <config name="conf_DataIdC" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for Email</label>
+    <label locale="ja">C: Email情報が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>D: Select STRING/SELECT DATA for ExpMonth (e.g. "02/18")</label>
+    <label locale="ja">D: 有効期限（MM/YY）情報が格納されている文字列型or選択肢型データを選択してください（例: "02/18"）</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>F: Select STRING DATA for CardNumber (without any separators)</label>
+    <label locale="ja">F: クレジットカード番号情報が格納されている文字列型データを選択してください （区切り無し）</label>
+  </config>
+  <config name="conf_DataIdG" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>G: Select STRING DATA for CVC</label>
+    <label locale="ja">G: CVC情報が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdH" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>H: Select STRING DATA for Cardholder's Name</label>
+    <label locale="ja">H: カード名義情報が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdI" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>I: Select STRING DATA for Customer ID on Stripe (update)</label>
+    <label locale="ja">I: Stripe Customer ID が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdJ" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>J: Select STRING DATA for Last4 of CardNumber (update)</label>
+    <label locale="ja">J: カード番号下4桁が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdW" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>W: Select STRING DATA for Status Code Log (update)</label>
+    <label locale="ja">W: 通信ステータスが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Card Info to Stripe (ver. 20161007)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var secretKey = configs.get( "conf_SecretKey" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" );
+var dataIdC = configs.get( "conf_DataIdC" );
+var dataIdD = configs.get( "conf_DataIdD" );
+///var dataIdE = configs.get( "conf_DataIdE" );
+var dataIdF = configs.get( "conf_DataIdF" );
+var dataIdG = configs.get( "conf_DataIdG" );
+var dataIdH = configs.get( "conf_DataIdH" );
+var dataIdI = configs.get( "conf_DataIdI" );
+var dataIdJ = configs.get( "conf_DataIdJ" );
+var dataIdW = configs.get( "conf_DataIdW" );
+var dataIdX = configs.get( "conf_DataIdX" );
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var stripeDesc = "";
+if( data.get( dataIdB ) instanceof java.util.ArrayList ){
+  stripeDesc = data.get( dataIdB ).get(0).getValue() + "";
+}else if( data.get( dataIdB ) instanceof java.lang.String ){
+  stripeDesc = data.get( dataIdB ) + "";
+}
+var expMonth = "";
+if( data.get( dataIdD ) instanceof java.util.ArrayList ){
+  expMonth = data.get( dataIdD ).get(0).getValue() + "";
+}else if( data.get( dataIdD ) instanceof java.lang.String ){
+  expMonth = data.get( dataIdD ) + "";
+}
+var expYear = expMonth.slice(3, 5); ///
+expMonth = expMonth.slice(0, 2); ///
+///if( data.get( dataIdE ) instanceof java.util.ArrayList ){
+///  expYear = data.get( dataIdE ).get(0).getValue() + "";
+///}else if( data.get( dataIdE ) instanceof java.lang.String ){
+///  expYear = data.get( dataIdE ) + "";
+///}
+var stripeEmail = data.get( dataIdC ) + "";
+var stripeCardNum = data.get( dataIdF ) + "";
+var stripeCardCvc = data.get( dataIdG ) + "";
+var stripeCardName = data.get( dataIdH ) + "";
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var responseJson = "";
+var uri = "https://api.stripe.com/v1/customers";
+var response = httpClient.begin()
+  .basic( secretKey, "" )
+  .formParam( "description", stripeDesc )
+  .formParam( "email", stripeEmail )
+  .formParam( "source[object]", "card" )
+  .formParam( "source[exp_month]", expMonth )
+  .formParam( "source[exp_year]", expYear )
+  .formParam( "source[number]", stripeCardNum )
+  .formParam( "source[cvc]", stripeCardCvc )
+  .formParam( "source[name]", stripeCardName )
+  .post( uri );
+var httpStatus = response.getStatusCode() + "";
+accessLog += "---POST request--- " + httpStatus + "\n";
+accessLog += response.getResponseAsString() + "\n";
+responseJson += response.getResponseAsString() + "";
+
+var cusId = "";
+var last4 = "";
+if( httpStatus == "200" ){
+  var jsonObj = JSON.parse( responseJson );
+  cusId = jsonObj.id;
+  last4 = jsonObj.sources.data[0].last4;
+}
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdI, cusId );
+retVal.put( dataIdJ, last4 );
+retVal.put( dataIdW, httpStatus );
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABc0lEQVRYR+2WQW6CUBCG55cViUntDbxB7QmqOzMseoTqSWpPUnuDNoEXl9ygeILaG9AEwgqmeaQYxCoY+rQLZsPiwZv//cPM+0AXDlw4P3UCdhwYj8cD27ZvTJYlSZK17/thkSMXwMwjInoGoJ/GQ0QCIporpQJMp9OhZVnvRDQQkS8i0osmYwTgiojCNE1vwcyvAO6J6MXzvJnJzMXejuMsiehBRN60gFAriuP4ulwbk0J+XP8QkQ0cxxGdzPO8s7Zkkff/CDBp+bG9tw50ArqfsHOg6gAzLwA8Ft0hIk9KqUW1W5jZB3BX10UAJq7r+qVxnA/Ag4PoBAH6/hjWCciybLlarTZ/LqAu8aH12lF8ggNHS1C1vrEDTU/GzEdLULV+T8CFr+PPLZCIyFIpNW968jbv7QCJhoNerxcUmHQOJCvwL8uy0RZKAWhMMkrEJdfWIjLLobRspcbyfr9vlIyjKAr2sLxNPdt+e1YO/E1sJ+AbULfr6IobKF4AAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
