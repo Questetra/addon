@@ -196,7 +196,7 @@
       }
     },
     {
-      "id":"GoogleGroup-membersRetrieve.xml",
+      "id":"GoogleGroup-membersRetrieve",
       "file":"https://questetra.github.io/addon/service-task/GoogleGroup-membersRetrieve.xml",
       "last-modified":"2017-07-04",
       "label":{
@@ -206,6 +206,19 @@
       "help":{
         "en":"https://support.questetra.com/addons/services/googlegroup-memberdelete/",
         "ja":"https://support.questetra.com/ja/addons/services/googlegroup-membersretrieve/"
+      }
+    },
+    {
+      "id":"GoogleAnalytics-reportsDomain",
+      "file":"https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsDomain.xml",
+      "last-modified":"2017-07-24",
+      "label":{
+        "en":"Google Analytics reports (Domain ranking)",
+        "ja":"Google Analytics レポート (Domain ranking)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googleanalytics-reportsdomain/",
+        "ja":"https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/"
       }
     }
   ]

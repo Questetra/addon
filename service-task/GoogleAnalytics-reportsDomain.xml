@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Google Analytics reports (Domain ranking)</label>
+<label locale="ja">Google Analytics レポート (Domain ranking)</label>
+
+<last-modified>2017-07-24</last-modified>
+
+<summary>1. Get Secret: https://console.developers.google.com/apis/dashboard
+2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/analytics.readonly
+</summary>
+
+<help-page-url>https://support.questetra.com/addons/services/googleanalytics-reportsdomain/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/</help-page-url>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_ViewId" required="true" form-type="TEXTFIELD">
+    <label>B: Set ViewID of Group Analytics</label>
+    <label locale="ja">B: Analytics ViewId をセットしてください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>C: Select DATE DATA for Log Start Date</label>
+    <label locale="ja">C: アクセスログの開始日が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>D: Select DATE DATA for Log End Date</label>
+    <label locale="ja">D: アクセスログの終了日が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_NumOfRanking" required="true" form-type="TEXTFIELD">
+    <label>E: Set Nuber of Ranking List (e.g. 20)</label>
+    <label locale="ja">E: ランキング件数をセットしてください (例 20)</label>
+  </config>
+  <config name="conf_RankingFilter" required="false" form-type="TEXTFIELD">
+    <label>F: Set Ranking Filter for List (e.g. ga:pagePath=~/2016/|/2017/)</label>
+    <label locale="ja">F: Ranking フィルタをセットしてください (例 ga:pagePath=~/2016/|/2017/)</label>
+  </config>
+  <config name="conf_DataIdG" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>G: Select STRING DATA for Ranking List (update)</label>
+    <label locale="ja">G: ランキング一覧が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Google Analytics reports via Analytics Reporting API v4 (ver. 20170724)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2  = configs.get( "conf_OAuth2" ) + "";
+var viewId  = configs.get( "conf_ViewId" ) + "";
+var numOfRanking  = configs.get( "conf_NumOfRanking" ) - 0;
+var rankingFilter = configs.get( "conf_RankingFilter" ) + "";
+
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns key)
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns key)
+var dataIdG = configs.get( "conf_DataIdG" ); // (returns key)
+var dataIdX = configs.get( "conf_DataIdX" ); // (returns key)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var startDate = data.get( dataIdC ) + ""; // (YYYY-MM-DD)
+var endDate   = data.get( dataIdD ) + ""; // (YYYY-MM-DD)
+
+//// == 演算 / Calculating ==
+var requestObj = {};
+  requestObj.reportRequests = [];
+  requestObj.reportRequests[0] = {};
+  requestObj.reportRequests[0].viewId = viewId;
+  requestObj.reportRequests[0].dateRanges = [];
+  requestObj.reportRequests[0].dateRanges[0] = {};
+  requestObj.reportRequests[0].dateRanges[0].startDate = startDate;
+  requestObj.reportRequests[0].dateRanges[0].endDate = endDate;
+  requestObj.reportRequests[0].dimensions = [];
+  requestObj.reportRequests[0].dimensions[0] = {};
+  requestObj.reportRequests[0].dimensions[0].name = "ga:networkDomain";
+  requestObj.reportRequests[0].dimensions[1] = {};
+  requestObj.reportRequests[0].dimensions[1].name = "ga:pageTitle";
+  requestObj.reportRequests[0].metrics = [];
+  requestObj.reportRequests[0].metrics[0] = {};
+  requestObj.reportRequests[0].metrics[0].expression = "ga:pageviews";
+  requestObj.reportRequests[0].metrics[1] = {};
+  requestObj.reportRequests[0].metrics[1].expression = "ga:sessions";
+  if( rankingFilter !== "" ){
+    requestObj.reportRequests[0].filtersExpression = rankingFilter;
+  }
+  requestObj.reportRequests[0].orderBys = [];
+  requestObj.reportRequests[0].orderBys[0] = {};
+  requestObj.reportRequests[0].orderBys[0].sortOrder = "DESCENDING";
+  requestObj.reportRequests[0].orderBys[0].fieldName = "ga:pageviews";
+  requestObj.reportRequests[0].orderBys[1] = {};
+  requestObj.reportRequests[0].orderBys[1].sortOrder = "DESCENDING";
+  requestObj.reportRequests[0].orderBys[1].fieldName = "ga:sessions";
+  requestObj.reportRequests[0].pageSize = numOfRanking;
+
+var accessLog = "";
+var token = httpClient.getOAuth2Token( oauth2 );
+var uri = "https://analyticsreporting.googleapis.com/v4/reports:batchGet";
+var response = httpClient.begin()
+  .bearer( token )
+  .body( JSON.stringify( requestObj ), "application/json" )
+  .post( uri );
+accessLog += "---POST request--- " + response.getStatusCode() + "\n";
+accessLog += response.getResponseAsString() + "\n";
+
+var rankingStr = "";
+var statusCode = response.getStatusCode() + "";
+if( statusCode == "200" ){
+  var reportObj = JSON.parse( response.getResponseAsString() );
+  rankingStr += reportObj.reports[0].columnHeader.metricHeader.metricHeaderEntries[0].name + "\t";
+  rankingStr += reportObj.reports[0].columnHeader.metricHeader.metricHeaderEntries[1].name + "\t";
+  rankingStr += reportObj.reports[0].columnHeader.dimensions[0] + "\t";
+  rankingStr += reportObj.reports[0].columnHeader.dimensions[1] ;
+  rankingStr += "\n";
+
+  for( var i = 0; i < reportObj.reports[0].data.rows.length; i++ ){
+    rankingStr += reportObj.reports[0].data.rows[i].metrics[0].values[0] + "\t";
+    rankingStr += reportObj.reports[0].data.rows[i].metrics[0].values[1] + "\t";
+    rankingStr += reportObj.reports[0].data.rows[i].dimensions[0] + "\t";
+    rankingStr += reportObj.reports[0].data.rows[i].dimensions[1];
+    rankingStr += "\n";
+  }
+}
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdG, rankingStr );
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACuUlEQVRYR82X0VHbQBCGd8UT8BA6iFMBTgXxIwjP4A4SKoBUEFNBTAU4HTgz6PCjqCCkgpAOnBf5Sfdnfs3JcxKSLBmUyc34wZLu9t/d2+/2VFqMk5OTwd7e3gcRGfIHYKCqA38qgCdVfRKRR/7SNH1YLpf83zi06W0Yhp9E5FJVabjzAPCoqrMoir7VTa4UMB6PR9ba27KXnRW4CYxOEAQXd3d3cXmNZwLotare7mqsaR6AC2PM3P+mIMDl+lcfxvM10zR95++NgoCzs7MrEfnapwAR+RxF0Sy3URDQZ/hzg+U0FASMRqOjg4MDltObPqIA4E+SJIM4jleVEeBDV3qz1xZB40EQTMqVUFmGYRiy7imC8HnxAPAgIlfGGEKqMBpBdHp6OlFVluX5LioAfAcwv7+/X7QCEasAAIwxN/4E7o39/f2RIyKjc8T3eYSch3zE3D6SgOv1OvZz7dI7VdVVUxXwgy+O69MmhLaNCMUfHh6eA7iiAwCujTHTujLMBHiLrwAwfAtr7c82h4vzdKiqxwAYtUkeMb7rKqDK0YznALJwu1SMvA83Kaqa/BoC2ka/7rtGEjJ0P15qoWk+gPd+OVadhqz/yz5EALgxxvC82Yw6EL26iCrj2f6p89TRkFWxE4TydQkjEZlWUfCZAJKvDBD2CEEQcJeznLhH3m7J8W9XHYskSRY+jLgWWeCTsXwc0+NLALMkSW7KJMsNMzpBEGQ0zIe1dlXnpTtl2VuStNwHrUC0gZAxhmHsPFxv+dGH0a4cyKGTtdzW2sp2W1VJPkaGMPLhtBG/q4DO3tdN+L8F/IumtLEndCXH20xvPaG1dljbljNvfXbGWy8m+cZx5TPfBp22OxMA4TTp3BO6aPDwOG5rzP/OtWrz8nVs62FUNubhOLueiwiRWkCy83JzPbfWxm06qL/sgpkwsGVshgAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
