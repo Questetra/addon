@@ -51,7 +51,31 @@
 
         $('tbody.options').append(rowHtml);
       }
-      
+
+      for(var i = 0; i < data.pdf.length; i++){
+        var pdf = data.pdf[i];
+        var rowHtml = '<tr>';
+
+        rowHtml += '<th rowspan="2">' + pdf.id + '</th>';
+        rowHtml += '<td>ja</td>';
+        rowHtml += '<td>' + pdf.label.ja + '</td>';
+        rowHtml += '<td><a href="' + pdf.help.ja + '">help</a></td>';
+        rowHtml += '<th rowspan="2"><a href="' + pdf.file + '">' + pdf.file + '</a></th>';
+        rowHtml += '<th rowspan="2">' + pdf['last-modified'] + '</th>';
+
+        rowHtml += '</tr>';
+
+        rowHtml += '<tr>';
+
+        rowHtml += '<td>en</td>';
+        rowHtml += '<td>' + pdf.label.en + '</td>';
+        rowHtml += '<td><a href="' + pdf.help.en + '">help</a></td>';
+
+        rowHtml += '</tr>';
+
+        $('tbody.pdf').append(rowHtml);
+      }
+
     });
   });
 })(window.jQuery);

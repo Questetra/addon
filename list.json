@@ -665,5 +665,33 @@
         "ja":"https://support.questetra.com/ja/addons/options/japan-zipcodebusiness/"
       }
     }
+  ],
+  "pdf":[
+    {
+      "id":"year-end-adjustment-a",
+      "file":"https://questetra.github.io/addon/pdf/adjustment-withheld-tax-h00-family.base_.pdf",
+      "last-modified":"2015-10-08",
+      "label":{
+        "en":"Year-end-tax-adjustment Form : Application for (Change in) Exemption for Dependents of Employment Income Earner for 20XX",
+        "ja":"年末調整書類 : 平成X年分 給与所得者の扶養控除等（異動）申請書"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/pdf/year-end-adjustment/",
+        "ja":"https://support.questetra.com/ja/addons/pdf/year-end-adjustment/"
+      }
+    },
+    {
+      "id":"year-end-adjustment-b",
+      "file":"https://questetra.github.io/addon/pdf/adjustment-withheld-tax-insurance-201512-base.pdf",
+      "last-modified":"2015-10-08",
+      "label":{
+        "en":"Year-end-tax-adjustment Form : Application for Deduction for Insurance Premiums for Employment Income Earner and Application for Special Exemption for Spouse of Employment Income Earner for 20XX ",
+        "ja":"年末調整書類 : 平成X年分 給与所得者の保険料控除申請書 兼 給与所得者の配偶者特別控除申請書 "
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/pdf/year-end-adjustment/",
+        "ja":"https://support.questetra.com/ja/addons/pdf/year-end-adjustment/"
+      }
+    }
   ]
 }
