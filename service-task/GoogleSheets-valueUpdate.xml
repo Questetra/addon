@@ -2,6 +2,7 @@
 
 <label>Google Spreadsheets value update</label>
 <label locale="ja">Google Spreadsheets セル値の更新</label>
+<last-modified>2017-08-28</last-modified>
 
 <summary>1. Get Secret: https://console.developers.google.com/apis/dashboard
 2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/spreadsheets
