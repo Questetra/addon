@@ -612,6 +612,19 @@
         "en":"https://support.questetra.com/addons/options/japan-prefecture-code/",
         "ja":"https://support.questetra.com/ja/addons/options/japan-prefecture-code/"
       }
+    },
+    {
+      "id":"Japan-CityCode",
+      "file":"https://questetra.github.io/addon/service-task/JapanCityCode-jis-x-0402.xml",
+      "last-modified":"2015-10-08",
+      "label":{
+        "en":"Identification code for cities, towns and villages (in Japanese)",
+        "ja":" 市区町村コード（日本）"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/options/japan-citycode/",
+        "ja":"https://support.questetra.com/ja/addons/options/japan-citycode/"
+      }
     }
   ]
 }
