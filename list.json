@@ -285,6 +285,19 @@
         "en":"https://support.questetra.com/addons/services/box-fileupdate/",
         "ja":"https://support.questetra.com/ja/addons/services/box-fileupdate/"
       }
+    },
+    {
+      "id":"Box-upload",
+      "file":"https://questetra.github.io/addon/service-task/Box-upload.xml",
+      "last-modified":"2016-10-18",
+      "label":{
+        "en":"Upload to box",
+        "ja":"box アップロード"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/box-upload/",
+        "ja":"https://support.questetra.com/ja/addons/services/box-upload/"
+      }
     }
   ]
 }

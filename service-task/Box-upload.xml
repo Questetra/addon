@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Upload to box</label>
+<label locale="ja">box アップロード</label>
+<last-modified>2016-10-18</last-modified>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for Folder ID on box ("0" for Root)</label>
+    <label locale="ja">B: boxのフォルダIDが格納されている文字列型or選択肢型データを選択してください（ルートフォルダは"0"）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="FILE">
+    <label>C: Select FILE DATA for Upload</label>
+    <label locale="ja">C: アップロードファイルが格納されているファイル型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+<help-page-url>https://support.questetra.com/addons/services/box-upload/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/box-upload/</help-page-url>
+
+
+<script><![CDATA[
+// Upload to box via boxAPI (ver. 20161018)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+// OAuth2 config
+// Authorization Endpoint URL: https://app.box.com/api/oauth2/authorize
+// Token Endpoint URL: https://app.box.com/api/oauth2/token
+// Scope: 
+// Consumer Key: (Get by box Application on box Developers)
+// Consumer Secret: (Get by box Application on box Developers)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2 = configs.get( "conf_OAuth2" );
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdX = configs.get( "conf_DataIdX" ); // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var folderId = "";
+if( data.get( dataIdB ) instanceof java.util.ArrayList ){
+  folderId = data.get( dataIdB ).get(0).getValue() + "";
+}else if( data.get( dataIdB ) instanceof java.lang.String ){
+  folderId = data.get( dataIdB ) + "";
+}
+var files = data.get( dataIdC );
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var responseJson = "";
+var token = httpClient.getOAuth2Token( oauth2 );
+
+if (files !== null) {
+  for (var i=0; i< files.size(); i++) {
+    var file = files.get(i);
+    var attributes = {
+      //parent : '0'
+      parent : {id : folderId}
+    };
+    attributes["name"] = String(file.getName());
+
+    var response = httpClient.begin()
+      .bearer(token)
+      .multipart('attributes', JSON.stringify(attributes))
+      .multipart('file', file)
+      .post('https://upload.box.com/api/2.0/files/content');
+    accessLog += "---POST request--- " + response.getStatusCode() + "\n";
+    accessLog += file.getName() + "\n";
+    responseJson += response.getResponseAsString() + "\n";
+    
+    //if (response.getStatusCode() !== 201) {
+    //  throw "failed to upload: " + file.getName() + " status:" + response.getStatusCode();
+    //}
+  }
+}
+
+// for Debug
+accessLog += responseJson + "\n";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABoElEQVRYR+2WwVXCQBCG9w83TpZACVCByQ0mvKdUIFSgViBWoFYgViAHMnAzHUAJlJBTbuz4lmd8ATewiTz0kDnlsDv/t7PzTxZKKUVEYwAP5vtcISKPzDxGDfAvKtDv932ttX+u+zc6nufFs9ks3vZA1fB9/8LsjeM4qZqjMoARbzabH0aYmTtnBwjDcKKUujHCIjJh5lEViEoVCMPwTin1tCd4H0XRc1mI0gC9Xu/a87x3m5DWejCfz6dlIEoBEFEbgLn3bfNZIhGRgJlXrhDOAF9NtwTQOpRcRNZpmnZcneEMQEQxgEvHk8VRFAUua50A8h3vkrSMM44CENEQwKurcH6diIyY2di1MA4CmBEtItthUzUABGbkFu0vBOh2u61Go7E80PGuTMlms+ksFou1bYMVIBuzANquKkecsUrTNLA5wwpARFMAV6cQz3KIyJSZB/s5fwAQ0TOA21OK5yBemNmM8e/YAfhNx7sC7ztjB8B0fVEiERlmfz8HsTcAVvtprZP8qD46BzKxMi/n7MXrAKpqgLoCdQXqCvx5BT4B10IBMHMpvgcAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
