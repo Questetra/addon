@@ -558,6 +558,19 @@
         "en":"https://support.questetra.com/addons/services/questetra-rolemembershipdel/",
         "ja":"https://support.questetra.com/ja/addons/services/questetra-rolemembershipdel/"
       }
+    },
+    {
+      "id":"Questetra-userOrgPosition",
+      "file":"https://questetra.github.io/addon/service-task/Questetra-userOrgPosition.xml",
+      "last-modified":"2018-03-30",
+      "label":{
+        "en":"Check The User Is In The Organization",
+        "ja":"ユーザの指定組織への所属を判定"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/questetra-userorgposition/",
+        "ja":"https://support.questetra.com/ja/addons/services/questetra-userorgposition/"
+      }
     }
   ]
 }
