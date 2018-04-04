@@ -602,7 +602,7 @@
   "options":[
     {
       "id":"JapanPrefectureCode",
-      "file":"https://questetra.github.io/addon/service-task/JapanPrefectureCode-JIS-X-0401-ISO-3166-2-JP.xml",
+      "file":"https://questetra.github.io/addon/options/JapanPrefectureCode-JIS-X-0401-ISO-3166-2-JP.xml",
       "last-modified":"2015-10-08",
       "label":{
         "en":"Get Info via Corporate Number API",
@@ -615,7 +615,7 @@
     },
     {
       "id":"Japan-CityCode",
-      "file":"https://questetra.github.io/addon/service-task/JapanCityCode-jis-x-0402.xml",
+      "file":"https://questetra.github.io/addon/options/JapanCityCode-jis-x-0402.xml",
       "last-modified":"2015-10-08",
       "label":{
         "en":"Identification code for cities, towns and villages (in Japanese)",
