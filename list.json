@@ -298,6 +298,19 @@
         "en":"https://support.questetra.com/addons/services/box-upload/",
         "ja":"https://support.questetra.com/ja/addons/services/box-upload/"
       }
+    },
+    {
+      "id":"Dropbox-upload",
+      "file":"https://questetra.github.io/addon/service-task/Dropbox-upload.xml",
+      "last-modified":"2016-10-05",
+      "label":{
+        "en":"Upload to Dropbox",
+        "ja":"Dropbox アップロード"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/dropbox-upload/",
+        "ja":"https://support.questetra.com/ja/addons/services/dropbox-upload/"
+      }
     }
   ]
 }
