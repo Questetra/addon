@@ -493,6 +493,32 @@
         "en":"https://support.questetra.com/addons/services/stripe-chargecreate/",
         "ja":"https://support.questetra.com/ja/addons/services/stripe-chargecreate/"
       }
+    },
+    {
+      "id":"Nhk-programSearch",
+      "file":"https://questetra.github.io/addon/service-task/Nhk-programSearch.xml",
+      "last-modified":"2017-04-13",
+      "label":{
+        "en":"NHK Program Search",
+        "ja":"NHK Program Search"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/nhk-programsearch/",
+        "ja":"https://support.questetra.com/ja/addons/services/nhk-programsearch/"
+      }
+    },
+    {
+      "id":"Questetra-membershipAdd",
+      "file":"https://questetra.github.io/addon/service-task/Questetra-membershipAdd.xml",
+      "last-modified":"2017-12-04",
+      "label":{
+        "en":"Questetra Org Add Membership",
+        "ja":"Questetra 組織メンバー追加"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/questetra-membershipadd/",
+        "ja":"https://support.questetra.com/ja/addons/services/questetra-membershipadd/"
+      }
     }
   ]
 }
