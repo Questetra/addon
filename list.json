@@ -350,7 +350,19 @@
         "en":"https://support.questetra.com/addons/services/slack-post-fixed-phrase/",
         "ja":"https://support.questetra.com/ja/addons/services/slack-postfixedphrase/"
       }
+    },
+    {
+      "id":"Salesforce-getAccounts",
+      "file":"https://questetra.github.io/addon/service-task/Salesforce-getAccounts.xml",
+      "last-modified":"2016-10-17",
+      "label":{
+        "en":"Batch to Get Accounts from salesforce",
+        "ja":"salesforce 取引先の一括取得"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/salesforce-getaccounts/",
+        "ja":"https://support.questetra.com/ja/addons/services/salesforce-getaccounts/"
+      }
     }
-
   ]
 }

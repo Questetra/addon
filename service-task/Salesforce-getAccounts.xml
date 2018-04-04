@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Batch to Get Accounts from salesforce</label>
+<label locale="ja">salesforce 取引先の一括取得</label>
+<last-modified>2016-10-17</last-modified>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_SubDomain" required="true" form-type="TEXTFIELD">
+    <label>B: Set Sub-Domain (https://{subdomain}.salesforce.com/)</label>
+    <label locale="ja">B: サブドメインをセットしてください (https://{subdomain}.salesforce.com/)</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>C: Select STRING DATA for Choise-IDs (update)</label>
+    <label locale="ja">C: 選択肢IDの一覧が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>D: Select STRING DATA for Labels (update)</label>
+    <label locale="ja">D: 選択肢ラベルの一覧が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+<help-page-url>https://support.questetra.com/addons/services/salesforce-getaccounts/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/salesforce-getaccounts/</help-page-url>
+
+<script><![CDATA[
+// Batch to Get Accounts from Salesforce via Salesforce REST API (ver. 20161017)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+// OAuth2 config
+// Authorization Endpoint URL: https://login.salesforce.com/services/oauth2/authorize
+// Token Endpoint URL: https://login.salesforce.com/services/oauth2/token
+// Scope: 
+// Consumer Key: (Get by Salesforce Connected App screen)
+// Consumer Secret: (Get by Salesforce Connected App screen)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var oauth2 = configs.get( "conf_OAuth2" );
+var subDomain = configs.get( "conf_SubDomain" );
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdX = configs.get( "conf_DataIdX" ) + ""; // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var responseJson = "";
+var token = httpClient.getOAuth2Token( oauth2 );
+
+var choiseIds = "";
+var choiseLabels = "";
+
+try{
+  var uri = "https://";
+  uri += subDomain;
+  uri += ".salesforce.com/services/data/v37.0/query/";
+
+  var response = httpClient.begin()
+    .bearer(token)
+    .queryParam("q", "SELECT Id, Name from Account")
+    .get(uri);
+  accessLog += "---GET request--- " + response.getStatusCode() + "\n";
+  responseJson = response.getResponseAsString();
+  if( response.getStatusCode() == 200 ){
+    var jsonObj = JSON.parse( responseJson );
+    for( var i = 0; i < jsonObj.records.length; i++ ){
+      choiseIds += jsonObj.records[i].Id + "\n";
+      choiseLabels += jsonObj.records[i].Name + "\n";
+    }
+  }
+}catch(e){
+  accessLog += e.message + "\n";
+}
+// for Debug
+// accessLog += responseJson + "\n";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdC, choiseIds );
+retVal.put( dataIdD, choiseLabels );
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVRYR+1WS24aQRCtghUfKdwgvoG5QSY76EEKOUHICeKcwM4JQm6ATxAsMQ27jG8AN3Bu4Eh8Vsyz3qgHDQMMg0y8oiQEdFdXv/q9apUcMcY0ReS9iPC7qaoNAA1V5f8dATBV1WcAzyIydZ+/1lr+3iuaXW23211V/SQinqpe5QEsugfgSURCERlaax/S5zYAjDE9EbnNXgrgkYfpmarGnszn82kYhvRyI57nNer1ehwZAE1GyjnxIa1HMKp6FwTBPddjAL7vD0TkS0rxPoqi4Xg8Hhb1Mk+PUS2VSt30HQAG1tqv6jZ/OwOz9XrdnUwmDNnZpdVqXZXLZTp1TeNRFH1WY8ydqt4mC+fy+hD6tMMAfmwBSMJydtdTBtPp3gHg9EIA/Wy1vhaU8/wbCzOxdQhAss9+HqpqGEXR02q1mmUr/xAodkSlUrl2fEH+YAGyK7YkBtDpdDwAf4p6mJDNPv08ktqnr6of4zY0xrA3yXhvKbMgCJoJABIIyebdWyAA8I+1QIreMCHzVqvVSJdxj/5HmS0WCy+pp51ZYIzpqyqr9ewC4Je19iZteAeAqwnOBQI5S0pcyG+staT8LdkLwIFg+/DAa1MyA9A7NJIPAiAI1kW1Wh248XxySgA8LJfLXh5/5AJIbvR9n3n7eSKC70EQ9I+dKQSARkhYHNHH6oL55ugdjUbsqKNSGECSkiOtutViR29PHiRFFNM6vu/zZZQtzpjZTrV1UgQS48YYsmb2qfVord1MuqJALgAuEbhE4BKBSwReALxRW/c7i890AAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
