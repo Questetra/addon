@@ -259,6 +259,20 @@
         "en":"https://support.questetra.com/addons/services/googlecloudprint-print/",
         "ja":"https://support.questetra.com/ja/addons/services/googlecloudprint-print/"
       }
+    },
+    {
+      "id":"GoogleCloudPrint-printSingle",
+      "file":"https://questetra.github.io/addon/service-task/GoogleCloudPrint-printSingle.xml",
+      "last-modified":"2016-11-07",
+      "label":{
+        "en":"Submit Print Job via GCP Service",
+        "ja":"Google Cloud Print ジョブ送信"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlecloudprint-printsingle/",
+        "ja":"hhttps://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/"
+      }
     }
+
   ]
 }
