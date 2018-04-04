@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Batch to Get Two Column Values from Kintone</label>
+<label locale="ja">Kintone 2列データの一括取得</label>
+<last-modified>2016-09-21</last-modified>
+
+<configs>
+  <config name="conf_SubDomain" required="true" form-type="TEXTFIELD">
+    <label>A: Set Sub-Domain (https://{subdomain}.kintone.com/)</label>
+    <label locale="ja">A: サブドメインをセットしてください (https://{subdomain}.kintone.com/)</label>
+  </config>
+  <config name="conf_AppId" required="true" form-type="TEXTFIELD">
+    <label>B: Set App-ID (/k/"3"/)</label>
+    <label locale="ja">B: アプリIDをセットしてください (/k/"3"/)</label>
+  </config>
+  <config name="conf_ApiToken" required="true" form-type="TEXTFIELD">
+    <label>C: Set Api-Token</label>
+    <label locale="ja">C: APIトークンをセットしてください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>D: Select STRING/SELECT for a Field-Code of Choice-IDs</label>
+    <label locale="ja">D: 選択肢IDのフィールドコード情報が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>E: Select STRING/SELECT for a Field-Code of Labels</label>
+    <label locale="ja">E: 選択肢ラベルのフィールドコード情報が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>F: Select STRING DATA for Choise-IDs (update)</label>
+    <label locale="ja">F: 選択肢IDの一覧が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdG" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>G: Select STRING DATA for Labels (update)</label>
+    <label locale="ja">G: 選択肢ラベルの一覧が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdH" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>H: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">H: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+<help-page-url>https://support.questetra.com/addons/services/kintone-getidslabels/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/kintone-getidslabels/</help-page-url>
+
+
+
+<script><![CDATA[
+// Batch to Get Data via Kintone REST API (ver. 20160921)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var subDomain = configs.get( "conf_SubDomain" );
+var appId     = configs.get( "conf_AppId" );
+var apiToken  = configs.get( "conf_ApiToken" );
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
+var dataIdF = configs.get( "conf_DataIdF" ); // (returns Number)
+var dataIdG = configs.get( "conf_DataIdG" ); // (returns Number)
+var dataIdH = configs.get( "conf_DataIdH" ) + ""; // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var fieldCodeI = "";
+if( data.get( dataIdD ) instanceof java.util.ArrayList ){
+  fieldCodeI = data.get( dataIdD ).get(0).getValue() + "";
+}else if( data.get( dataIdD ) instanceof java.lang.String ){
+  fieldCodeI = data.get( dataIdD ) + "";
+}
+var fieldCodeL = "";
+if( data.get( dataIdE ) instanceof java.util.ArrayList ){
+  fieldCodeL = data.get( dataIdE ).get(0).getValue() + "";
+}else if( data.get( dataIdE ) instanceof java.lang.String ){
+  fieldCodeL = data.get( dataIdE ) + "";
+}
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var responseJson = "";
+
+var choiseIds = "";
+var choiseLabels = "";
+
+try{
+  var uri = "https://";
+  uri += subDomain;
+  uri += ".cybozu.com/k/v1/records.json";
+
+  var response = httpClient.begin()
+    .header("X-Cybozu-API-Token", apiToken )
+    .queryParam( "app", appId )
+    .queryParam( "fields[0]", fieldCodeI )
+    .queryParam( "fields[1]", fieldCodeL )
+    .queryParam( "query", "order by " + fieldCodeI + " asc" )
+    .get( uri ); 
+  accessLog += "---GET request--- " + response.getStatusCode() + "\n";
+  responseJson = response.getResponseAsString();
+  if( response.getStatusCode() == 200 ){
+    var jsonObj = JSON.parse( responseJson );
+    for( var i = 0; i < jsonObj.records.length; i++ ){
+      choiseIds += jsonObj.records[i][fieldCodeI].value + "\n";
+      choiseLabels += jsonObj.records[i][fieldCodeL].value + "\n";
+    }
+  }
+}catch(e){
+  accessLog += e.message + "\n";
+}
+// for Debug
+// accessLog += responseJson + "\n";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdF, choiseIds );
+retVal.put( dataIdG, choiseLabels );
+if( dataIdH !== "" ){
+  retVal.put( dataIdH, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVRYR+1WS24aQRCtghUfKdwgvoG5QSY76EEKOUHICeKcwM4JQm6ATxAsMQ27jG8AN3Bu4Eh8Vsyz3qgHDQMMg0y8oiQEdFdXv/q9apUcMcY0ReS9iPC7qaoNAA1V5f8dATBV1WcAzyIydZ+/1lr+3iuaXW23211V/SQinqpe5QEsugfgSURCERlaax/S5zYAjDE9EbnNXgrgkYfpmarGnszn82kYhvRyI57nNer1ehwZAE1GyjnxIa1HMKp6FwTBPddjAL7vD0TkS0rxPoqi4Xg8Hhb1Mk+PUS2VSt30HQAG1tqv6jZ/OwOz9XrdnUwmDNnZpdVqXZXLZTp1TeNRFH1WY8ydqt4mC+fy+hD6tMMAfmwBSMJydtdTBtPp3gHg9EIA/Wy1vhaU8/wbCzOxdQhAss9+HqpqGEXR02q1mmUr/xAodkSlUrl2fEH+YAGyK7YkBtDpdDwAf4p6mJDNPv08ktqnr6of4zY0xrA3yXhvKbMgCJoJABIIyebdWyAA8I+1QIreMCHzVqvVSJdxj/5HmS0WCy+pp51ZYIzpqyqr9ewC4Je19iZteAeAqwnOBQI5S0pcyG+staT8LdkLwIFg+/DAa1MyA9A7NJIPAiAI1kW1Wh248XxySgA8LJfLXh5/5AJIbvR9n3n7eSKC70EQ9I+dKQSARkhYHNHH6oL55ugdjUbsqKNSGECSkiOtutViR29PHiRFFNM6vu/zZZQtzpjZTrV1UgQS48YYsmb2qfVord1MuqJALgAuEbhE4BKBSwReALxRW/c7i890AAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>

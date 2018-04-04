@@ -311,6 +311,19 @@
         "en":"https://support.questetra.com/addons/services/dropbox-upload/",
         "ja":"https://support.questetra.com/ja/addons/services/dropbox-upload/"
       }
+    },
+    {
+      "id":"Kintone-getIdsLabels",
+      "file":"https://questetra.github.io/addon/service-task/Kintone-getIdsLabels.xml",
+      "last-modified":"2016-09-21",
+      "label":{
+        "en":"Batch to Get Two Column Values from Kintone",
+        "ja":"Kintone 2列データの一括取得"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/kintone-getidslabels/",
+        "ja":"https://support.questetra.com/ja/addons/services/kintone-getidslabels/"
+      }
     }
   ]
 }
