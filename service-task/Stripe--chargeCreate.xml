@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Stripe Charge to Customer ID</label>
+<label locale="ja">Stripe 課金（Customer ID）</label>
+
+<last-modified>2017-09-25</last-modified>
+<help-page-url>https://support.questetra.com/addons/services/stripe-chargecreate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/stripe-chargecreate/</help-page-url>
+
+<configs>
+  <config name="conf_SecretKey" required="true" form-type="TEXTFIELD">
+    <label>A: Set SecretKey for Stripe Access (sk_xxx: 32 letters)</label>
+    <label locale="ja">A: Stripe SecretKey をセットしてください (sk_xxx: 32文字)</label>
+  </config>
+  <config name="conf_DataIdB" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>B: Select STRING DATA for Description (e.g. Corp Name)</label>
+    <label locale="ja">B: Description情報が格納されている文字列型データを選択してください（例: 法人名）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for CustomerID</label>
+    <label locale="ja">C: CustomerID情報が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|DECIMAL">
+    <label>D: Select NUMERIC/STRING DATA for Amount (Unit: Cent, Yen)</label>
+    <label locale="ja">D: チャージ額情報が格納されている数値型or文字列型データを選択してください（単位: 円、セント）</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>E: Select STRING/SELECT DATA for CurrencyCode (e.g. jpy, usd)</label>
+    <label locale="ja">E: 通貨コード情報が格納されている文字列型or選択肢型データを選択してください（例: jpy、usd）</label>
+  </config>
+  <config name="conf_DataIdF" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>F: Select STRING DATA for Charge ID on Stripe (update)</label>
+    <label locale="ja">F: Stripe Charge ID が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdG" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>G: Select STRING DATA for Last4 of CardNumber (update)</label>
+    <label locale="ja">G: カード番号下4桁が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdW" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>W: Select STRING DATA for Status Code Log (update)</label>
+    <label locale="ja">W: 通信ステータスが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Stripe Charge to Customer ID (ver. 20170925)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var secretKey = configs.get( "conf_SecretKey" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ) + "";
+var dataIdF = configs.get( "conf_DataIdF" ) + "";
+var dataIdG = configs.get( "conf_DataIdG" ) + "";
+var dataIdW = configs.get( "conf_DataIdW" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+// convet 'java.lang.String' to 'javascript string'
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var stripeDescr = engine.findDataByNumber( dataIdB ) + "";
+var stripeCusId = engine.findDataByNumber( dataIdC ) + "";
+var stripeAmount = engine.findDataByNumber( dataIdD ) + ""; // DECIMAL or STRING_TEXTFIELD
+  stripeAmount = stripeAmount.replace(/,/g,"").replace(/\./g,""); // Remove dots and commas
+  // NOTICE: Stripe only accepts a positive integer in the smallest currency unit
+  // (e.g., 100 cents to charge $1.00 or 100 to charge 100 jpy, a zero-decimal currency) 
+  // https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts
+var stripeCurrency = engine.findDataByNumber( dataIdE ) + ""; // SELECT_SINGLE or STRING_TEXTFIELD
+if( engine.findDataDefinitionByNumber( dataIdE ).matchDataType( "SELECT_SINGLE" ) ){
+    stripeCurrency = engine.findDataByNumber( dataIdE ).get(0).getValue() + "";
+}else if( engine.findDataDefinitionByNumber( dataIdE ).matchDataType( "STRING_TEXTFIELD" ) ){
+    stripeCurrency = engine.findDataByNumber( dataIdE ) + "";
+} // iso-code in all lowercase letters https://stripe.com/docs/currencies
+// convet 'java.lang.String' to 'javascript string'
+
+//// == Calculating / 演算 ==
+// preparing for API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+// com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+
+// preparing for API Request (OAuth2 Token, HTTP Basic Auth, etc)
+apiRequest = apiRequest.basic( secretKey, "" );
+
+// preparing for API Request (Path parameters)
+var apiUri = "https://api.stripe.com/v1/charges";
+
+// preparing for API Request (Query parameters)
+// (no set)
+
+// preparing for API Request (JSON Body, Form Parameters)
+apiRequest = apiRequest.formParam( "amount",   stripeAmount );
+apiRequest = apiRequest.formParam( "currency", stripeCurrency );
+apiRequest = apiRequest.formParam( "customer",   stripeCusId );
+apiRequest = apiRequest.formParam( "description", stripeDescr );
+
+// Request to the API (POST, GET, PUT, etc)
+var response = apiRequest.post( apiUri ); // HttpResponseWrapper
+var httpStatus = response.getStatusCode() + "";
+var accessLog = "---POST request--- " + httpStatus + "\n";
+accessLog += response.getResponseAsString() + "\n";
+var responseObj = JSON.parse( response.getResponseAsString() );
+
+// Retrieve Properties from Response-JSON
+var stripeChargeId = "";
+var stripeLast4 = "";
+if( httpStatus === "200" ){
+  stripeChargeId = responseObj.id;
+  stripeLast4 = responseObj.source.last4;
+}
+
+// Error Handling - https://stripe.com/docs/api#errors
+// (no action)
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if ( dataIdF !== "" ){ engine.setDataByNumber( dataIdF, stripeChargeId ); }
+if ( dataIdG !== "" ){ engine.setDataByNumber( dataIdG, stripeLast4 ); }
+engine.setDataByNumber( dataIdW, httpStatus );
+if ( dataIdX !== "" ){ engine.setDataByNumber( dataIdX, accessLog ); }
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABc0lEQVRYR+2WQW6CUBCG55cViUntDbxB7QmqOzMseoTqSWpPUnuDNoEXl9ygeILaG9AEwgqmeaQYxCoY+rQLZsPiwZv//cPM+0AXDlw4P3UCdhwYj8cD27ZvTJYlSZK17/thkSMXwMwjInoGoJ/GQ0QCIporpQJMp9OhZVnvRDQQkS8i0osmYwTgiojCNE1vwcyvAO6J6MXzvJnJzMXejuMsiehBRN60gFAriuP4ulwbk0J+XP8QkQ0cxxGdzPO8s7Zkkff/CDBp+bG9tw50ArqfsHOg6gAzLwA8Ft0hIk9KqUW1W5jZB3BX10UAJq7r+qVxnA/Ag4PoBAH6/hjWCciybLlarTZ/LqAu8aH12lF8ggNHS1C1vrEDTU/GzEdLULV+T8CFr+PPLZCIyFIpNW968jbv7QCJhoNerxcUmHQOJCvwL8uy0RZKAWhMMkrEJdfWIjLLobRspcbyfr9vlIyjKAr2sLxNPdt+e1YO/E1sJ+AbULfr6IobKF4AAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
