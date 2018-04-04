@@ -181,6 +181,19 @@
         "en":"https://support.questetra.com/addons/services/googlegroup-memberadd/",
         "ja":"https://support.questetra.com/ja/addons/services/googlegroup-memberadd/"
       }
+    },
+    {
+      "id":"GoogleGroup-memberDelete",
+      "file":"https://questetra.github.io/addon/service-task/GoogleGroup-memberDelete.xml",
+      "last-modified":"2017-07-04",
+      "label":{
+        "en":"Google Group member delete",
+        "ja":"Google Group メンバー削除"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlegroup-memberadd/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlegroup-memberadd/"
+      }
     }
   ]
 }
