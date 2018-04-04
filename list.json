@@ -233,6 +233,19 @@
         "en":"https://support.questetra.com/addons/services/googleanalytics-reportspv/",
         "ja":"https://support.questetra.com/ja/addons/services/googleanalytics-reportspv/"
       }
+    },
+    {
+      "id":"GoogleAnalytics-reportsRef",
+      "file":"https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsRef.xml",
+      "last-modified":"2017-07-24",
+      "label":{
+        "en":"Google Analytics reports (Referrer ranking)",
+        "ja":"Google Analytics レポート (Referrer ranking)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googleanalytics-reportsref/",
+        "ja":"https://support.questetra.com/ja/addons/services/googleanalytics-reportsref/"
+      }
     }
   ]
 }
