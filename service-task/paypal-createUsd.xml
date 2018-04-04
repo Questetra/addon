@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>PayPal Invoicing Create (USD)</label>
+<label locale="ja">PayPal 請求書 生成 (USD)</label>
+
+<last-modified>2018-01-29</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/paypal-createusd/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/paypal-createusd/</help-page-url>
+
+<configs>
+  <config name="conf_ClientId_Secret" required="true" form-type="TEXTAREA">
+    <label>A: Set CLIENT-ID and SECRET for PayPal-REST-API (2-lines)</label>
+    <label locale="ja">A: PayPal-REST-API の Client ID と SECRET を2行に分けてセットしてください</label>
+  </config>
+  <config name="conf_DataIdB" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>B: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">B: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_MerchantPostalCode" required="true" form-type="TEXTAREA">
+    <label>C: Set BisNAME/COUNTRY-CODE/POST/Pref/City for Merchant (5-lns)</label>
+    <label locale="ja">C: 販売人の商号/国コード("JP")/郵便番号/都道府県/市区町村を5行に分けてセットしてください</label>
+  </config>
+  <config name="conf_MerchantAddress" required="true" form-type="TEXTAREA">
+    <label>D: Set ADDRESS for Merchant (2-lines)</label>
+    <label locale="ja">D: 販売人の住所を2行に分けてセットしてください</label>
+  </config>
+  <config name="conf_MerchantPhoneEmail" required="true" form-type="TEXTAREA">
+    <label>E: Set PHONE-COUNTRY-CODE/NUMBER/EMAIL/URL for Merchant (4-lns)</label>
+    <label locale="ja">E: 販売人の国際電話国番号("81")/電話番号/メールアドレス/URLを4行に分けてセットしてください</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>F: Select STRING DATA for Billing Business Name</label>
+    <label locale="ja">F: 請求先の商号が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdG" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>G: Select STRING DATA for Billing Name1</label>
+    <label locale="ja">G: 請求先の名前１（姓・部署）が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdH" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>H: Select STRING DATA for Billing Name2</label>
+    <label locale="ja">H: 請求先の名前２（名・氏名）が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdI" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>I: Select STRING DATA for Billing Email</label>
+    <label locale="ja">I: 請求先のメールアドレスが格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdJ" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>J: Select STRING DATA for Item Name</label>
+    <label locale="ja">J: 商品名が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdK" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>K: Select STRING DATA for Item Description</label>
+    <label locale="ja">K: 商品説明が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdL" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>L: Select NUMERIC DATA for Item Quantity</label>
+    <label locale="ja">L: 商品数量が格納されている数値型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdM" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>M: Select NUMERIC DATA for Unit Price</label>
+    <label locale="ja">M: 商品単価が格納されている数値型データを選択してください</label>
+  </config>
+  <config name="conf_ItemTax" required="true" form-type="TEXTFIELD">
+    <label>N: Set ItemTax Percent (e.g. "8" "10")</label>
+    <label locale="ja">N: 税率をセットしてください (例: "8" "10")</label>
+  </config>
+  <config name="conf_DataIdO" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>O: Select STRING DATA for Invoice ID</label>
+    <label locale="ja">O: 請求書IDが格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdP" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>P: Select DATE DATA for Payment Due Date</label>
+    <label locale="ja">P: 支払期日が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdQ" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>Q: Select STRING DATA for Invoice Note</label>
+    <label locale="ja">Q: 請求書の備考文が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdR" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>R: Select STRING DATA for Invoice Terms</label>
+    <label locale="ja">R: 請求書の契約条件文が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_logoUrl" required="true" form-type="TEXTFIELD">
+    <label>S: Set Logo Url (e.g. "https://example.com/a.png")</label>
+    <label locale="ja">S: ロゴ画像のURLをセットしてください (例: "https://example.com/a.png")</label>
+  </config>
+  <config name="conf_DataIdT" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>T: Select STRING DATA for Paypal Invoice ID (update)</label>
+    <label locale="ja">T: Paypal Invoce ID が格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// PayPal Invoicing Create (USD/en_US) (ver. 20180129)
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var clientId_secret = configs.get( "conf_ClientId_Secret" ) + "";
+var array_clientId_secret = clientId_secret.split("\n");
+var clientId = array_clientId_secret[0];
+var secret   = array_clientId_secret[1];
+
+var merchantPostalCode   = configs.get( "conf_MerchantPostalCode" ) + "";
+var array_merchantPostalCode = merchantPostalCode.split("\n");
+var merchantBusinessName = array_merchantPostalCode[0];
+var merchantAddressCC    = array_merchantPostalCode[1];
+var merchantAddressPC    = array_merchantPostalCode[2];
+var merchantAddressState = array_merchantPostalCode[3];
+var merchantAddressCity  = array_merchantPostalCode[4];
+
+var merchantAddress      = configs.get( "conf_MerchantAddress" ) + "";
+var array_merchantAddress = merchantAddress.split("\n");
+var merchantAddress1     = array_merchantAddress[0];
+var merchantAddress2     = array_merchantAddress[1];
+
+var merchantPhoneEmail   = configs.get( "conf_MerchantPhoneEmail" ) + "";
+var array_merchantPhoneEmail  = merchantPhoneEmail.split("\n");
+var merchantPhoneCC      = array_merchantPhoneEmail[0];
+var merchantPhoneNum     = array_merchantPhoneEmail[1];
+var merchantEmail        = array_merchantPhoneEmail[2];
+var merchantWebsite      = array_merchantPhoneEmail[3];
+
+var billingLanguage      = "en_US"; /// HARD-CODED
+var itemUnitPriceCurrency = "USD"; /// HARD-CODED
+var itemTaxName          = "TAX"; /// HARD-CODED
+var itemTaxPercent       = configs.get( "conf_ItemTax" ) - 0;
+var logoUrl              = configs.get( "conf_logoUrl" ) + "";
+
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdF = configs.get( "conf_DataIdF" ) + "";
+var dataIdG = configs.get( "conf_DataIdG" ) + "";
+var dataIdH = configs.get( "conf_DataIdH" ) + "";
+var dataIdI = configs.get( "conf_DataIdI" ) + "";
+var dataIdJ = configs.get( "conf_DataIdJ" ) + "";
+var dataIdK = configs.get( "conf_DataIdK" ) + "";
+var dataIdL = configs.get( "conf_DataIdL" ) + "";
+var dataIdM = configs.get( "conf_DataIdM" ) + "";
+
+var dataIdO = configs.get( "conf_DataIdO" ) + "";
+var dataIdP = configs.get( "conf_DataIdP" ) + "";
+var dataIdQ = configs.get( "conf_DataIdQ" ) + "";
+var dataIdR = configs.get( "conf_DataIdR" ) + "";
+var dataIdT = configs.get( "conf_DataIdT" ) + "";
+
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var billingBusinessName  = engine.findDataByNumber( dataIdF ) + ""; // Max 100
+var billingName1         = engine.findDataByNumber( dataIdG ) + ""; // Max 30
+var billingName2         = engine.findDataByNumber( dataIdH ) + ""; // Max 30
+var billingEmail         = engine.findDataByNumber( dataIdI ) + ""; // Max 260
+var itemName             = engine.findDataByNumber( dataIdJ ) + ""; // Max 200
+var itemDescription      = engine.findDataByNumber( dataIdK ) + ""; // Max 1000
+var itemQuantity         = engine.findDataByNumber( dataIdL ) - 0;
+var itemUnitPriceNum     = engine.findDataByNumber( dataIdM ) - 0;
+var itemUnitPrice        = itemUnitPriceNum + ""; // STRING!! without Comma
+
+var invoiceNumber        = engine.findDataByNumber( dataIdO ) + ""; // Max 25
+var paymentTermDueDate   = engine.findDataByNumber( dataIdP ) + " PST";
+var invoiceNote          = engine.findDataByNumber( dataIdQ ) + ""; // Max 4000
+var invoiceTerms         = engine.findDataByNumber( dataIdR ) + ""; // Max 4000
+
+var merchantMemo = "BPMS Process ID: " + processInstance.getProcessInstanceId();
+
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+
+// Get OAuth Token with Client Credentials
+var uri = "https://api.paypal.com/v1/oauth2/token";
+var response = httpClient.begin()
+  .basic( clientId, secret )
+  .formParam( "grant_type", "client_credentials" )
+  .post( uri );
+var httpStatus = response.getStatusCode() + "";
+accessLog = "---POST request--- " + httpStatus + "\n";
+accessLog += response.getResponseAsString() + "\n";
+// Error Handling
+if( httpStatus !== "200" ){
+  throw new Error( accessLog );
+}
+
+var oauthTokenObj = JSON.parse( response.getResponseAsString() );
+var oauthToken = oauthTokenObj.access_token;
+
+
+// Create invoice
+var invoiceObj = {};
+  invoiceObj.number = invoiceNumber;
+  invoiceObj.payment_term = {};
+  invoiceObj.payment_term.due_date = paymentTermDueDate;
+  invoiceObj.note = invoiceNote;
+  invoiceObj.terms = invoiceTerms;
+  invoiceObj.logo_url = logoUrl;
+  invoiceObj.merchant_memo = merchantMemo;
+  invoiceObj.merchant_info = {};
+    invoiceObj.merchant_info.email = merchantEmail;
+    invoiceObj.merchant_info.business_name = merchantBusinessName;
+    invoiceObj.merchant_info.address = {};
+      invoiceObj.merchant_info.address.line1 = merchantAddress1;
+      invoiceObj.merchant_info.address.line2 = merchantAddress2;
+      invoiceObj.merchant_info.address.city = merchantAddressCity;
+      invoiceObj.merchant_info.address.state = merchantAddressState;
+      invoiceObj.merchant_info.address.postal_code = merchantAddressPC;
+      invoiceObj.merchant_info.address.country_code = merchantAddressCC;
+      invoiceObj.merchant_info.address.phone = {};
+        invoiceObj.merchant_info.address.phone.country_code = merchantPhoneCC;
+        invoiceObj.merchant_info.address.phone.national_number = merchantPhoneNum;
+    invoiceObj.merchant_info.website = merchantWebsite;
+  invoiceObj.billing_info = [];
+    invoiceObj.billing_info[0] = {};
+      invoiceObj.billing_info[0].email = billingEmail;
+      invoiceObj.billing_info[0].first_name = billingName1;
+      invoiceObj.billing_info[0].last_name = billingName2;
+      invoiceObj.billing_info[0].business_name = billingBusinessName;
+      invoiceObj.billing_info[0].language = billingLanguage;
+  invoiceObj.items = [];
+    invoiceObj.items[0] = {};
+      invoiceObj.items[0].name = itemName;
+      invoiceObj.items[0].description =itemDescription;
+      invoiceObj.items[0].quantity = itemQuantity;
+      invoiceObj.items[0].unit_price = {};
+        invoiceObj.items[0].unit_price.currency = itemUnitPriceCurrency;
+        invoiceObj.items[0].unit_price.value = itemUnitPrice;
+      if( itemTaxPercent !== 0 ){
+      invoiceObj.items[0].tax = {};
+        invoiceObj.items[0].tax.name = itemTaxName;
+        invoiceObj.items[0].tax.percent = itemTaxPercent;
+      }
+var uriCreate = "https://api.paypal.com/v1/invoicing/invoices/";
+var responseCreate = httpClient.begin()
+  .bearer( oauthToken )
+  .body( JSON.stringify( invoiceObj ), "application/json" )
+  .post( uriCreate );
+
+var httpStatusCreate = responseCreate.getStatusCode() + "";
+accessLog = "---POST request--- " + httpStatusCreate + "\n";
+accessLog += responseCreate.getResponseAsString() + "\n";
+// Error Handling
+if( httpStatusCreate !== "201" ){
+  throw new Error( accessLog );
+}
+
+var paypalIdObj = JSON.parse( responseCreate.getResponseAsString() );
+var paypalId    = paypalIdObj.id;
+
+
+//// == ワークフローデータへの代入 / Data Updating ==
+engine.setDataByNumber( dataIdT, paypalId );
+if ( dataIdB !== "" ){ engine.setDataByNumber( dataIdB, accessLog ); }
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABc0lEQVRYR+2WQW6CUBCG55cViUntDbxB7QmqOzMseoTqSWpPUnuDNoEXl9ygeILaG9AEwgqmeaQYxCoY+rQLZsPiwZv//cPM+0AXDlw4P3UCdhwYj8cD27ZvTJYlSZK17/thkSMXwMwjInoGoJ/GQ0QCIporpQJMp9OhZVnvRDQQkS8i0osmYwTgiojCNE1vwcyvAO6J6MXzvJnJzMXejuMsiehBRN60gFAriuP4ulwbk0J+XP8QkQ0cxxGdzPO8s7Zkkff/CDBp+bG9tw50ArqfsHOg6gAzLwA8Ft0hIk9KqUW1W5jZB3BX10UAJq7r+qVxnA/Ag4PoBAH6/hjWCciybLlarTZ/LqAu8aH12lF8ggNHS1C1vrEDTU/GzEdLULV+T8CFr+PPLZCIyFIpNW968jbv7QCJhoNerxcUmHQOJCvwL8uy0RZKAWhMMkrEJdfWIjLLobRspcbyfr9vlIyjKAr2sLxNPdt+e1YO/E1sJ+AbULfr6IobKF4AAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
