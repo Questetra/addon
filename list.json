@@ -441,6 +441,19 @@
         "en":"https://support.questetra.com/addons/services/paypal-status/",
         "ja":"https://support.questetra.com/ja/addons/services/paypal-status/"
       }
+    },
+    {
+      "id":"Stripe-cardRegistration",
+      "file":"https://questetra.github.io/addon/service-task/Stripe-cardRegistration.xml",
+      "last-modified":"2016-10-06",
+      "label":{
+        "en":"Card Info to Stripe",
+        "ja":"Stripe カード情報登録"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/stripe-cardregistration/",
+        "ja":"https://support.questetra.com/ja/addons/services/stripe-cardregistration/"
+      }
     }
   ]
 }
