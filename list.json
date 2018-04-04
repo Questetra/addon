@@ -324,6 +324,19 @@
         "en":"https://support.questetra.com/addons/services/kintone-getidslabels/",
         "ja":"https://support.questetra.com/ja/addons/services/kintone-getidslabels/"
       }
+    },
+    {
+      "id":"Slack-post",
+      "file":"https://questetra.github.io/addon/service-task/Slack-post.xml",
+      "last-modified":"2016-08-29",
+      "label":{
+        "en":"Post to Slack",
+        "ja":"Slack 投稿"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/slack-post/",
+        "ja":"https://support.questetra.com/ja/addons/services/slack-post/"
+      }
     }
   ]
 }
