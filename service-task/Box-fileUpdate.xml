@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<label>[box] upload file and set Password/ Expiration</label>
+<label locale="ja">Box ファイルアップロード（パスワード、期限）</label>
+<last-modified>2017-10-10</last-modified>
+
+<summary>Uploads (one) file which set in File type Data Item into "box" and obtain its URL for publication. At the same time, it sets and expiration date. It is recommended to set "Max number of files" of the File type Data Item where the file to be uploaded as 1.</summary>
+
+<summary locale="ja">ファイル型にセットされたファイル(1つ)を box にアップロードし、公開用URLを取得します。同時に、ダウンロード用パスワードと公開期限を設定します。アップロードするファイルが格納されるファイル型データ項目の「最大添付ファイル数」は 1 としておくことを推奨します。</summary>
+
+<help-page-url>https://support.questetra.com/addons/services/box-fileupdate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/box-fileupdate/</help-page-url>
+
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for Folder ID on box ("0" for Root)</label>
+    <label locale="ja">B: boxのフォルダIDが格納されている文字列型or選択肢型データを選択してください（ルートフォルダは"0"）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="FILE">
+    <label>C: Select FILE DATA for upload</label>
+    <label locale="ja">C: アップロードするファイル型データを選択してください。</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>D: Select DATE DATA for file download expiration</label>
+    <label locale="ja">D: ダウンロード期限が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>E: Select STRING DATA for download password</label>
+    <label locale="ja">E: ダウンロードパスワードが格納されている文字型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>F: Select STRING DATA for download URL (update)</label>
+    <label locale="ja">F: ダウンロードURLが格納される文字型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+
+</configs>
+
+<script><![CDATA[
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var oauth2  = configs.get("conf_OAuth2") + "";
+var dataIdB = configs.get("conf_DataIdB") + "";
+var dataIdC = configs.get("conf_DataIdC") + "";
+var dataIdD = configs.get("conf_DataIdD") + "";
+var dataIdE = configs.get("conf_DataIdE") + "";
+var dataIdF = configs.get("conf_DataIdF") + "";
+var dataIdX = configs.get("conf_DataIdX") + "";
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var folderId = "";
+if(engine.findDataByNumber(dataIdB) instanceof java.util.ArrayList ){
+  folderId = engine.findDataByNumber(dataIdB).get(0).getValue() + "";
+}else if( engine.findDataByNumber(dataIdB) instanceof java.lang.String ){
+  folderId = engine.findDataByNumber(dataIdB) + "";
+}
+var files = engine.findDataByNumber(dataIdC);
+var download_limit = engine.findDataByNumber(dataIdD) + "";
+var download_password = engine.findDataByNumber(dataIdE) + "";
+
+//// == File Upload ==
+var accessLog = "";
+var responseJson = "";
+var token = httpClient.getOAuth2Token( oauth2 );
+
+if (files !== null) {
+  var file = files.get(0);
+  var attributes = {
+    parent : {id : folderId}
+  };
+  attributes["name"] = String(file.getName());
+
+  var response = httpClient.begin()
+    .bearer(token)
+    .multipart('attributes', JSON.stringify(attributes))
+    .multipart('file', file)
+    .post('https://upload.box.com/api/2.0/files/content');
+  accessLog += "---POST request--- " + response.getStatusCode() + "\n";
+  accessLog += file.getName() + "\n";
+  responseJson += response.getResponseAsString() + "\n";
+}
+
+// for Debug
+accessLog += responseJson + "\n";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+if( dataIdX !== "" ){
+  engine.setDataByNumber(dataIdX,accessLog);
+}
+
+var update_info_obj = {};
+
+update_info_obj.shared_link = {};
+update_info_obj.shared_link.access = "open";
+update_info_obj.shared_link.password = download_password;
+update_info_obj.shared_link.unshared_at = download_limit;
+update_info_obj.shared_link.permissions = {};
+update_info_obj.shared_link.permissions.can_download = true;
+
+var file_obj = JSON.parse(responseJson);
+var file_id = file_obj.entries[0].id;
+
+var response_update = httpClient.begin()
+      .bearer(token)
+      .body(JSON.stringify(update_info_obj), "application/json" )
+      .put('https://api.box.com/2.0/files/' + file_id);
+
+accessLog += "---PUT request--- "
+    + response_update.getStatusCode() + "\n";
+var updateResponseJson = response_update.getResponseAsString() + "\n";
+var update_file_obj = JSON.parse(updateResponseJson);
+engine.setDataByNumber(dataIdF, update_file_obj.shared_link.download_url);
+
+// for Debug
+accessLog += updateResponseJson + "\n";
+
+if( dataIdX !== "" ){
+  engine.setDataByNumber(dataIdX,accessLog);
+}
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD2UlEQVRYR82XX2jbVRTHPze1mKZLl8n8t7Y2neZBk7pWpj7MuemTiLD5oqIyk+1BZLB1IG4v2il7KCLYSaGKuvz8N5AhaxHZg6jVgoNORoOLwlrM3LJNW2iapEtjTXrl3ixp+ssvbbq2m/flB/d37jnfc873nHuu4AYvsSj7/t+2w8wWoBWEC6G+gGQI5AQwhBD9BL19lepdGIA/4oLUXpDtCOGqSLFUYEQXOA5jNCtgZdf8APxhP8h3KzZsNqOB2AIY9/WWQ1AegP9MF0LsrcjjhYSk7MLw7bMSswYQOGOAeGkhvYv6LzEwvAHzmVIAy+l5aUoOY/jai7fnAlA5FwQX5dlihaV4upgTswA0269ErplwlQLRxKxtzldHEYDwQQQdlepZkpzkTQzvQaVjFkAgrOp1dV7xTwfcbPI42P7eeb4OTS7JXslhFQXDt2YWgOpwQh4vFhx8vZmN7hp2f36Znh9iywtAd88cF3IRsGB+HsCzPVGO/ZJYAQBSV0QOQCDcD6geX1gKwIPNNYwlszjtNuzVgvErWbq/G6ejd4zvX2viEY+D7EzuyLfhSVoa7NzqrOLRznOc/jPNqTfW80CTHf9HF/nsZNzsxI8EvVvzAM4BTVYASksZYqkst9RWlY3K8N/TDJxNsXOzCymxTqO6wAxvWx6ANGvLRyA1LXmrb5ShC2ne37EO99pqLaoUHz+d5JVPL3FkZz1P3r8KYdFXB/+Y4uFDEWuwQe/VI4FwWQBHBibYFbykFTz3UB1HX27QhkZGp/EcGCkoPv+Oh4Y11YwmM9xed5PeV+m7e/8wyfTVPJlhFAEoSYHK30a3nWOnEjzTE9VHd2128aF/nQYQHc/Q+OpZva84MtLp0flPpGdYXWPT+4mpGR57O8eH0iVDBH2tZUl4Yt9dPNGySof6y8EEY8kMOza5CsqVwtCFNN+EJtnW5sRbf7NlmCNj/7J+/7DVvyISWpThbc4qwofuYa1zLtkyWfj98j+0NFgbVJZ+Hpnii5MTdL94pza85+hfunrmLFlchhaNKB/avj2NtNTbsdngYixDR++oJl/3C3ewra2uQLyPB2I8tcGJy1HFls4I0ViGr3Y38vi9tTz/QZQTv5q66ZxGpKyZWnHZGlueH3GCXj3e/Y8uI3Udi5SqhsKFtDzOlmiJIx3u0utYyd3QgSQPdEVHstk5IG/u+g2lyE8I+vzmhFynsbzU8/kjUEiHHlSMJRAzjhT+a3uYFEDop1k7AjVOV1ohcSTqada1tKeZOWG5x+lWhGgF6QKxISciQyAmkHIIbP3zeVw5B1aoCZjV/gcHwnowAqeQowAAAABJRU5ErkJggg==</icon>
+
+</service-task-definition>

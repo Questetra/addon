@@ -270,9 +270,21 @@
       },
       "help":{
         "en":"https://support.questetra.com/addons/services/googlecloudprint-printsingle/",
-        "ja":"hhttps://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/"
+        "ja":"https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/"
+      }
+    },
+    {
+      "id":"Box-fileUpdate",
+      "file":"https://questetra.github.io/addon/service-task/Box-fileUpdate.xml",
+      "last-modified":"2017-10-10",
+      "label":{
+        "en":"[box] upload file and set Password/ Expiration",
+        "ja":"Box ファイルアップロード（パスワード、期限）"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/box-fileupdate/",
+        "ja":"https://support.questetra.com/ja/addons/services/box-fileupdate/"
       }
     }
-
   ]
 }
