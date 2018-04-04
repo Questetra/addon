@@ -454,6 +454,19 @@
         "en":"https://support.questetra.com/addons/services/stripe-cardregistration/",
         "ja":"https://support.questetra.com/ja/addons/services/stripe-cardregistration/"
       }
+    },
+    {
+      "id":"Stripe-customerCreate",
+      "file":"https://questetra.github.io/addon/service-task/Stripe-customerCreate.xml",
+      "last-modified":"2017-09-01",
+      "label":{
+        "en":"Stripe Customer ID Create from Token",
+        "ja":"Stripe Customer ID 生成（Token ID より）"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/stripe-customercreate/",
+        "ja":"https://support.questetra.com/ja/addons/services/stripe-customercreate/"
+      }
     }
   ]
 }

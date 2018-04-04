@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Stripe Customer ID Create from Token</label>
+<label locale="ja">Stripe Customer ID 生成（Token ID より）</label>
+
+<last-modified>2017-09-01</last-modified>
+<help-page-url>https://support.questetra.com/addons/services/stripe-customercreate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/stripe-customercreate/</help-page-url>
+
+<configs>
+  <config name="conf_SecretKey" required="true" form-type="TEXTFIELD">
+    <label>A: Set SecretKey for Stripe Access (sk_xxx: 32 letters)</label>
+    <label locale="ja">A: Stripe SecretKey をセットしてください (sk_xxx: 32文字)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>B: Select STRING DATA for Token Id</label>
+    <label locale="ja">B: Token ID が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for Customer Email</label>
+    <label locale="ja">C: Customer Email が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>D: Select STRING/SELECT DATA for Description (e.g. Corp Name)</label>
+    <label locale="ja">D: Customer Description 情報が格納されている文字列型or選択肢型データを選択してください（例: 法人名）</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>E: Select STRING DATA for Customer ID on Stripe (update)</label>
+    <label locale="ja">E: Stripe Customer ID が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdF" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>F: Select STRING DATA for Last4 of CardNumber (update)</label>
+    <label locale="ja">F: カード番号下4桁が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdW" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>W: Select STRING DATA for Http Status (update)</label>
+    <label locale="ja">W: HTTP ステータスが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Stripe Elements Token to Stripe Customer ID (ver. 20170901)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var secretKey = configs.get( "conf_SecretKey" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ) + "";
+var dataIdF = configs.get( "conf_DataIdF" ) + "";
+var dataIdW = configs.get( "conf_DataIdW" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+// convet 'java.lang.String' to 'javascript string'
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var stripeTokenId = engine.findDataByNumber( dataIdB ) + "";
+var customerEmail = engine.findDataByNumber( dataIdC ) + "";
+var customerDescr = "";
+if( engine.findDataDefinitionByNumber( dataIdD ).matchDataType( "SELECT_SINGLE" ) ){
+  customerDescr = engine.findDataByNumber( dataIdD ).get(0).getValue() + "";
+}else if( engine.findDataDefinitionByNumber( dataIdD ).matchDataType( "STRING_TEXTFIELD" ) ){
+  customerDescr = engine.findDataByNumber( dataIdD ) + "";
+}
+// convet 'java.lang.String' to 'javascript string'
+
+//// == Calculating / 演算 ==
+
+// preparing for API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+
+// preparing for API Request (OAuth2 Token, HTTP Basic Auth, etc)
+apiRequest = apiRequest.basic( secretKey, "" );
+
+// preparing for API Request (Path parameters)
+var apiUri = "https://api.stripe.com/v1/customers";
+
+// preparing for API Request (Query parameters)
+// (no set)
+
+// preparing for API Request (JSON Body, Form Parameters)
+apiRequest = apiRequest.formParam( "source",      stripeTokenId );
+apiRequest = apiRequest.formParam( "email",       customerEmail );
+apiRequest = apiRequest.formParam( "description", customerDescr );
+
+// Request to the API (POST, GET, PUT, etc)
+var response = apiRequest.post( apiUri ); // HttpResponseWrapper
+var httpStatus = response.getStatusCode() + "";
+var accessLog = "---POST request--- " + httpStatus + "\n";
+accessLog += response.getResponseAsString() + "\n";
+var responseObj = JSON.parse( response.getResponseAsString() );
+
+// Retrieve Properties from Response-JSON
+var stripeCustomerId = "";
+var stripeLast4 = "";
+if( httpStatus === "200" ){
+  stripeCustomerId  = responseObj.id;
+  stripeLast4 = responseObj.sources.data[0].last4;
+}
+
+// Error Handling - https://stripe.com/docs/api#errors
+// (no action)
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if ( dataIdE !== "" ){
+  engine.setDataByNumber( dataIdE, stripeCustomerId );
+}
+if ( dataIdF !== "" ){
+  engine.setDataByNumber( dataIdF, stripeLast4 );
+}
+if ( dataIdW !== "" ){
+  engine.setDataByNumber( dataIdW, httpStatus );
+}
+if ( dataIdX !== "" ){
+  engine.setDataByNumber( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABc0lEQVRYR+2WQW6CUBCG55cViUntDbxB7QmqOzMseoTqSWpPUnuDNoEXl9ygeILaG9AEwgqmeaQYxCoY+rQLZsPiwZv//cPM+0AXDlw4P3UCdhwYj8cD27ZvTJYlSZK17/thkSMXwMwjInoGoJ/GQ0QCIporpQJMp9OhZVnvRDQQkS8i0osmYwTgiojCNE1vwcyvAO6J6MXzvJnJzMXejuMsiehBRN60gFAriuP4ulwbk0J+XP8QkQ0cxxGdzPO8s7Zkkff/CDBp+bG9tw50ArqfsHOg6gAzLwA8Ft0hIk9KqUW1W5jZB3BX10UAJq7r+qVxnA/Ag4PoBAH6/hjWCciybLlarTZ/LqAu8aH12lF8ggNHS1C1vrEDTU/GzEdLULV+T8CFr+PPLZCIyFIpNW968jbv7QCJhoNerxcUmHQOJCvwL8uy0RZKAWhMMkrEJdfWIjLLobRspcbyfr9vlIyjKAr2sLxNPdt+e1YO/E1sJ+AbULfr6IobKF4AAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
