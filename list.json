@@ -391,8 +391,8 @@
       }
     },
     {
-      "id":"paypal-createUsd",
-      "file":"https://questetra.github.io/addon/service-task/paypal-createUsd.xml",
+      "id":"Paypal-createUsd",
+      "file":"https://questetra.github.io/addon/service-task/Paypal-createUsd.xml",
       "last-modified":"2018-01-29",
       "label":{
         "en":"PayPal Invoicing Create (USD)",
@@ -427,6 +427,19 @@
       "help":{
         "en":"https://support.questetra.com/addons/services/paypal-send/",
         "ja":"https://support.questetra.com/ja/addons/services/paypal-send/"
+      }
+    },
+    {
+      "id":"Paypal-status",
+      "file":"https://questetra.github.io/addon/service-task/Paypal-status.xml",
+      "last-modified":"2017-06-03",
+      "label":{
+        "en":"PayPal Invoicing Status",
+        "ja":"PayPal 請求書 ステータス確認"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/paypal-status/",
+        "ja":"https://support.questetra.com/ja/addons/services/paypal-status/"
       }
     }
   ]
