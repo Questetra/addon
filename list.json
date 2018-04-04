@@ -545,6 +545,19 @@
         "en":"https://support.questetra.com/addons/services/questetra-rolemembershipadd/",
         "ja":"https://support.questetra.com/ja/addons/services/questetra-rolemembershipadd/"
       }
+    },
+    {
+      "id":"Questetra-rolemembershipDel",
+      "file":"https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml",
+      "last-modified":"2017-12-11",
+      "label":{
+        "en":"Questetra Role Delete Membership",
+        "ja":"Questetra ロールメンバー削除"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/questetra-rolemembershipdel/",
+        "ja":"https://support.questetra.com/ja/addons/services/questetra-rolemembershipdel/"
+      }
     }
   ]
 }
