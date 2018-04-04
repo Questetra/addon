@@ -685,12 +685,25 @@
       "file":"https://questetra.github.io/addon/pdf/adjustment-withheld-tax-insurance-201512-base.pdf",
       "last-modified":"2015-10-08",
       "label":{
-        "en":"Year-end-tax-adjustment Form : Application for Deduction for Insurance Premiums for Employment Income Earner and Application for Special Exemption for Spouse of Employment Income Earner for 20XX ",
-        "ja":"年末調整書類 : 平成X年分 給与所得者の保険料控除申請書 兼 給与所得者の配偶者特別控除申請書 "
+        "en":"Year-end-tax-adjustment Form : Application for Deduction for Insurance Premiums for Employment Income Earner and Application for Special Exemption for Spouse of Employment Income Earner for 20XX",
+        "ja":"年末調整書類 : 平成X年分 給与所得者の保険料控除申請書 兼 給与所得者の配偶者特別控除申請書"
       },
       "help":{
         "en":"https://support.questetra.com/addons/pdf/year-end-adjustment/",
         "ja":"https://support.questetra.com/ja/addons/pdf/year-end-adjustment/"
+      }
+    },
+    {
+      "id":"Invoice-Sample",
+      "file":"https://questetra.github.io/addon/pdf/Invoice-Sample.pdf",
+      "last-modified":"2014-11-08",
+      "label":{
+        "en":"Invoice",
+        "ja":"見積書"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/pdf/invoice-sample/",
+        "ja":"https://support.questetra.com/ja/addons/pdf/invoice-sample/"
       }
     }
   ]
