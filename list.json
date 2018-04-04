@@ -618,12 +618,25 @@
       "file":"https://questetra.github.io/addon/options/JapanCityCode-jis-x-0402.xml",
       "last-modified":"2015-10-08",
       "label":{
-        "en":"Identification code for cities, towns and villages (in Japanese)",
-        "ja":" 市区町村コード（日本）"
+        "en":"JIS X 0402: Identification code for cities, towns and villages (5 digit code/cities, towns and villages name)",
+        "ja":" JIS X 0402: 市区町村コード(5桁コード/都道府県・市町村・特別区名)"
       },
       "help":{
         "en":"https://support.questetra.com/addons/options/japan-citycode/",
         "ja":"https://support.questetra.com/ja/addons/options/japan-citycode/"
+      }
+    },
+    {
+      "id":"Japan-CityCode-localGovernment",
+      "file":"https://questetra.github.io/addon/options/JapanCityCode-localGovernment.xml",
+      "last-modified":"2015-10-08",
+      "label":{
+        "en":"MIC: Japanese Local Goverment Code(6 digit/prefecture, cities, towns and villages)",
+        "ja":"総務省: 全国地方公共団体コード(6桁コード/都道府県・市町村・特別区名)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/options/japan-citycode-localgovernment/",
+        "ja":"https://support.questetra.com/ja/addons/options/japan-citycode-localgovernment/"
       }
     }
   ]
