@@ -651,6 +651,19 @@
         "en":"https://support.questetra.com/addons/options/japan-zipcode/",
         "ja":"https://support.questetra.com/ja/addons/options/japan-zipcode/"
       }
+    },
+    {
+      "id":"Japan-ZipCodeBusiness",
+      "file":"https://questetra.github.io/addon/options/JapanZipCode-business.zip",
+      "last-modified":"2015-10-08",
+      "label":{
+        "en":"Postal code (in Japanese)",
+        "ja":"郵便番号（日本）"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/options/japan-zipcodebusiness/",
+        "ja":"https://support.questetra.com/ja/addons/options/japan-zipcodebusiness/"
+      }
     }
   ]
 }
