@@ -363,6 +363,19 @@
         "en":"https://support.questetra.com/addons/services/salesforce-getaccounts/",
         "ja":"https://support.questetra.com/ja/addons/services/salesforce-getaccounts/"
       }
+    },
+    {
+      "id":"Salesforce-orderCreate",
+      "file":"https://questetra.github.io/addon/service-task/Salesforce-orderCreate.xml",
+      "last-modified":"2017-10-2",
+      "label":{
+        "en":"Salesforce Order Create",
+        "ja":"Salesforce 注文追加"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/salesforce-ordercreate/",
+        "ja":"https://support.questetra.com/ja/addons/services/salesforce-ordercreate/"
+      }
     }
   ]
 }

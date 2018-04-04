@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Salesforce Order Create</label>
+<label locale="ja">Salesforce 注文追加</label>
+
+<last-modified>2017-10-20</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/salesforce-ordercreate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/salesforce-ordercreate/</help-page-url>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_SubDomain" required="true" form-type="TEXTFIELD">
+    <label>B: Set Sub-Domain (https://{subdomain}.salesforce.com/)</label>
+    <label locale="ja">B: サブドメインをセットしてください (https://{subdomain}.salesforce.com/)</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>C: Select STRING/SELECT DATA for an Account ID</label>
+    <label locale="ja">C: 取引先IDが格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="DATE">
+    <label>D: Select DATE DATA for Order Effective Date</label>
+    <label locale="ja">D: 注文開始日が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>E: Select STRING/SELECT DATA for Status</label>
+    <label locale="ja">E: ステータスが格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdF" required="true" form-type="TEXTFIELD">
+    <label>F: Set Price List ID</label>
+    <label locale="ja">F: 価格表IDをセットしてください</label>
+  </config>
+  <config name="conf_DataIdG" required="true" form-type="SELECT" select-data-type="SELECT_SINGLE">
+    <label>G: Select SELECT DATA for Item</label>
+    <label locale="ja">G: 商品が格納されている選択型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdH" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>H: Select NUMERIC DATA for Unit Price</label>
+    <label locale="ja">H: 単価が格納されている数値型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdI" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>I: Select NUMERIC DATA for Quantity</label>
+    <label locale="ja">I: 数量が格納されている数値型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdJ" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>J: Select STRING DATA for Order ID (update)</label>
+    <label locale="ja">J: 注文IDが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+
+<script><![CDATA[
+// Salesforce Order Create (ver. 20171020)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+// OAuth2 config
+// Authorization Endpoint URL: https://login.salesforce.com/services/oauth2/authorize
+// Token Endpoint URL: https://login.salesforce.com/services/oauth2/token
+// Scope: 
+// Consumer Key: (Get by Salesforce Connected App screen)
+// Consumer Secret: (Get by Salesforce Connected App screen)
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var oauth2 = configs.get( "conf_OAuth2" ) + "";
+var subDomain = configs.get( "conf_SubDomain" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + ""; //AccountId
+var dataIdD = configs.get( "conf_DataIdD" ) + ""; //EffectiveDate
+var dataIdE = configs.get( "conf_DataIdE" ) + ""; //Status
+var priceBook = configs.get( "conf_DataIdF" ) + ""; //Pricebook2Id
+var dataIdG = configs.get( "conf_DataIdG" ) + ""; //ItemId
+var dataIdH = configs.get( "conf_DataIdH" ) + ""; //UnitPrice
+var dataIdI = configs.get( "conf_DataIdI" ) + ""; //Quantity
+var dataIdJ = configs.get( "conf_DataIdJ" ) + ""; //Order Id
+var dataIdX = configs.get( "conf_DataIdX" ) + ""; //Access Log
+// convet 'java.lang.String' to 'javascript string'
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var account = engine.findDataByNumber( dataIdC ) + ""; // SELECT_SINGLE or STRING_TEXTFIELD
+if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType( "SELECT_SINGLE" ) ){
+    account = engine.findDataByNumber( dataIdC ).get(0).getValue() + "";
+}else if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType( "STRING_TEXTFIELD" ) ){
+    account = engine.findDataByNumber( dataIdC ) + "";
+} 
+var effectiveDate = engine.findDataByNumber( dataIdD ) + "";
+var status = engine.findDataByNumber( dataIdE ).get(0).getValue() + ""; //Status
+
+var itemId = engine.findDataByNumber( dataIdG ) + ""; // SELECT_SINGLE or STRING_TEXTFIELD
+if( engine.findDataDefinitionByNumber( dataIdG ).matchDataType( "SELECT_SINGLE" ) ){
+    itemId = engine.findDataByNumber( dataIdG ).get(0).getValue() + "";
+}else if( engine.findDataDefinitionByNumber( dataIdG ).matchDataType( "STRING_TEXTFIELD" ) ){
+    itemId = engine.findDataByNumber( dataIdG ) + "";
+} 
+var unitPrice = engine.findDataByNumber( dataIdH) + "";
+var quantity = engine.findDataByNumber( dataIdI ) + "";
+// convet 'java.lang.String' to 'javascript string'
+
+
+//// == Calculating / 演算 ==
+// preparing for API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+// com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+
+// preparing for API Request (OAuth2 Token, HTTP Basic Auth, etc)
+var token = httpClient.getOAuth2Token( oauth2 );
+
+// preparing for API Request (Path parameters)
+var apiUri = "https://" + subDomain + ".salesforce.com/services/data/v40.0/commerce/sale/order/";
+
+// preparing for API Request (Query parameters)
+// (no set)
+
+// preparing for API Request (JSON Body, Form Parameters)
+var requestObj = {};
+requestObj.order = [];
+requestObj.order[0] = {};
+requestObj.order[0].attributes = {"type": "Order"};
+requestObj.order[0].EffectiveDate = effectiveDate;
+requestObj.order[0].Status = status;
+requestObj.order[0].Pricebook2Id = priceBook;
+requestObj.order[0].accountId = account;
+requestObj.order[0].OrderItems = {};
+requestObj.order[0].OrderItems.records = [];
+requestObj.order[0].OrderItems.records[0] = {};
+requestObj.order[0].OrderItems.records[0].attributes = {"type": "OrderItem"};
+requestObj.order[0].OrderItems.records[0].PricebookEntryId = itemId;
+requestObj.order[0].OrderItems.records[0].quantity = quantity;
+requestObj.order[0].OrderItems.records[0].UnitPrice = unitPrice;
+
+var requestJson = JSON.stringify( requestObj );
+
+// Request to the API (POST, GET, PUT, etc)
+var response = apiRequest.bearer( token )
+  .body( requestJson, "application/json")
+  .post(apiUri);
+
+var accessLog = "";
+var responseJson = "";
+accessLog += "---POST request--- " + response.getStatusCode() + "\n";
+responseJson = response.getResponseAsString();
+
+// Retrieve Properties from Response-JSON
+if( response.getStatusCode() == 201 ){
+  var jsonObj = JSON.parse( responseJson );
+  var orderId = jsonObj.records[0].Id + "";
+  engine.setDataByNumber( dataIdJ, orderId );
+}
+
+// Error Handling
+// (no action)
+
+//for Debug
+accessLog += "---requestJson---\n" + requestJson + "\n";
+accessLog += "---responseJson---\n" + responseJson + "\n";
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if ( dataIdX !== "" ){ engine.setDataByNumber( dataIdX, accessLog ); }
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADhElEQVRYR8VXXUiTURh+zuZ0mennT14IkcOiNtQ0gropJbrsQiVQr1KijYLQLrqIoJSCIILmTaAE2l03kdKVF5YVUVLmXzgk/KMsUyfHTOfPthPnm3Pfvp/tmzM9N2Pbe57nef/OeQ/BLi8SC7/QPFIG+EpASBHABIB/8sX6AULBWD8Mhm56+WiHXtyoAoTWcQHelTowVg8QQR8woyDEiQRzE6210Eh7IgoQWlw1AHukn1hOxSiYsZY6jrRridAUILQMOwFSp8/jKFaMOanDdl3NSlWA0OxqA8HFbSEPgbRRu7VWjqkQsK2eKzxgTdRuq5f+HCYgkHO0brPn4XDMUC6tiU0BYrWve8bVCu50TjKqDqdhn8mAbwtruPtpNg6NjMK0xxLsjpCAZlcDCO7IkZ+czUFFXiqkoZpb8eHzjAdncvYiOYHAy4Ce6WVUdf7A33V/dHEMjdRhbeCGUgEUBGnS3dcKM9B4MjuMPBL65OI6fi17YTYSzHi8cPa78WHao7KFUWq3pW8KEE844n8ht3xbYUFBZlJ0jzQs/Ay43zuLh31upcVGLYgR0Kr8rrJcHN9v3rIAvpFn5Fz7BAbdKzKcQEdsCHB1AyiRM72/YIEtPRQBnusEAvgYwAAYSSiHwf+CGNLv7WOLqO2aksO/oXZraTACEwA5KLW4UZyFmyeywMPIieJZ6gJYP7XbioMR4A5trhSTAYPVeUhPMoqe6uXnkVETqxEBULuVaAoYqj4EIcmgcFyLJFKEHg/N49bHGYWJRMBwWAqyzEb0VuYhNVEpQI4SLUK8NYuejap0AQaow1qkWYTvKizIj6MFOeNX9yoqO7/j55JXLUBhRai4enkUXpXn4kCKKab6ez76B6+nljA8v4q+WXnrSaGkbahxEHHzSzZBFHG1IBMmlYzQVT9+e7zwMYaOsUU8+DKnT7D0IBIPo2aX4iiWIt07lY0r+RkwSFqC3wnnX05ihK7pIw1aMSxQh1Uc76JeRlLkwkwzHPnp4iZOfrtHWdm6lKheRvw6XluZkF9IugBjMWJYQKI5V3Edi2nYzYEk6MR/HckkoQ/y7dxQyvCUOqx85AtbOzSWhyYg3QICrcmfYn4+oodNSrprjhccDDVbephs1kSgO/goXa9biEgMJxLNzrieZnJPA6Obr1R8lDIIIDgm2jAMgICKj1Rm7I7kcUwp0B3qOAz/ATAVazBmiCeSAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
