@@ -584,6 +584,19 @@
         "en":"https://support.questetra.com/addons/services/http-filesget/",
         "ja":"https://support.questetra.com/ja/addons/services/http-filesget/"
       }
+    },
+    {
+      "id":"CorpNumberAPI-getInfo",
+      "file":"https://questetra.github.io/addon/service-task/CorpNumberAPI-getInfo.xml",
+      "last-modified":"2016-11-02",
+      "label":{
+        "en":"Get Info via Corporate Number API",
+        "ja":"法人番号 API 企業情報の取得"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/corpnumberapi-getinfo/",
+        "ja":"https://support.questetra.com/ja/addons/services/corpnumberapi-getinfo/"
+      }
     }
   ]
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Get Info via Corporate Number API</label>
+<label locale="ja">法人番号 API 企業情報の取得</label>
+
+<last-modified>2016-11-02</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/corpnumberapi-getinfo/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/corpnumberapi-getinfo/</help-page-url>
+
+<configs>
+  <config name="conf_AppId" required="true" form-type="TEXTFIELD">
+    <label>A: Set Application Id (Access Key) for Houjin Web-API</label>
+    <label locale="ja">A: 法人番号 Web-API のアプリケーションID (Access Key) をセットしてください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for a Corporate Number</label>
+    <label locale="ja">B: 法人番号が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for Corporate Name (update)</label>
+    <label locale="ja">C: 法人商号が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>D: Select STRING DATA for Corporate PostCode (update)</label>
+    <label locale="ja">D: 法人郵便番号が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdE" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>E: Select STRING DATA for Corporate Address (update)</label>
+    <label locale="ja">E: 法人住所が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Get Info via Corporate Number API v1 (ver. 20161102)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var appId   = configs.get( "conf_AppId" );
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var corporateNumber = "";
+if( data.get( dataIdB ) instanceof java.util.ArrayList ){
+  corporateNumber = data.get( dataIdB ).get(0).getValue() + "";
+}else if( data.get( dataIdB ) instanceof java.lang.String ){
+  corporateNumber = data.get( dataIdB ) + "";
+}
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var uri = "https://api.houjin-bangou.nta.go.jp/1/num";
+var response = httpClient.begin()
+  .queryParam( "id", appId )
+  .queryParam( "number", corporateNumber )
+  .queryParam( "type", 12 ) // Response Format: XML
+  .queryParam( "history", 0 )
+  .get( uri ); 
+accessLog += "---GET request--- " + response.getStatusCode() + "\n";
+accessLog += response.getResponseAsString() + "";
+
+var responseXml = response.getResponseAsString() + "";
+responseXml = responseXml.replace(/^<\?xml\s+version\s*=\s*(["'])[^\1]+\1[^?]*\?>/, ""); 
+// E4X (ECMAScript for XML) bug 336551
+var xmlObj = new XML( responseXml );
+var responseName = xmlObj.corporation[0].name + "";
+var responsePostCode = xmlObj.corporation[0].postCode + "";
+var responseAddress = xmlObj.corporation[0].prefectureName + "";
+responseAddress += xmlObj.corporation[0].cityName + "";
+responseAddress += xmlObj.corporation[0].streetNumber + "";
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdC, responseName );
+if( dataIdD !== "" ){
+  retVal.put( dataIdD, responsePostCode );
+}
+if( dataIdE !== "" ){
+  retVal.put( dataIdE, responseAddress );
+}
+if( dataIdX !== "" ){
+  retVal.put( dataIdX, accessLog );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVRYR+1WS24aQRCtghUfKdwgvoG5QSY76EEKOUHICeKcwM4JQm6ATxAsMQ27jG8AN3Bu4Eh8Vsyz3qgHDQMMg0y8oiQEdFdXv/q9apUcMcY0ReS9iPC7qaoNAA1V5f8dATBV1WcAzyIydZ+/1lr+3iuaXW23211V/SQinqpe5QEsugfgSURCERlaax/S5zYAjDE9EbnNXgrgkYfpmarGnszn82kYhvRyI57nNer1ehwZAE1GyjnxIa1HMKp6FwTBPddjAL7vD0TkS0rxPoqi4Xg8Hhb1Mk+PUS2VSt30HQAG1tqv6jZ/OwOz9XrdnUwmDNnZpdVqXZXLZTp1TeNRFH1WY8ydqt4mC+fy+hD6tMMAfmwBSMJydtdTBtPp3gHg9EIA/Wy1vhaU8/wbCzOxdQhAss9+HqpqGEXR02q1mmUr/xAodkSlUrl2fEH+YAGyK7YkBtDpdDwAf4p6mJDNPv08ktqnr6of4zY0xrA3yXhvKbMgCJoJABIIyebdWyAA8I+1QIreMCHzVqvVSJdxj/5HmS0WCy+pp51ZYIzpqyqr9ewC4Je19iZteAeAqwnOBQI5S0pcyG+staT8LdkLwIFg+/DAa1MyA9A7NJIPAiAI1kW1Wh248XxySgA8LJfLXh5/5AJIbvR9n3n7eSKC70EQ9I+dKQSARkhYHNHH6oL55ugdjUbsqKNSGECSkiOtutViR29PHiRFFNM6vu/zZZQtzpjZTrV1UgQS48YYsmb2qfVord1MuqJALgAuEbhE4BKBSwReALxRW/c7i890AAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
