@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Backlog Add Issue</label>
+<label locale="ja">backlog 課題追加</label>
+
+<last-modified>2017-10-25</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/backlog-issueadd/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/backlog-issueadd/</help-page-url>
+
+<configs>
+  <config name="conf_SpaceId" required="true" form-type="TEXTFIELD">
+    <label>A: Space id</label>
+  </config>
+  <config name="conf_ApiKey" required="true" form-type="TEXTFIELD">
+    <label>B: API key</label>
+  </config>
+  <config name="conf_ProjectId" required="true" form-type="SELECT" select-data-type="SELECT_SINGLE">
+    <label>C: Select SELECT DATA for Project Id</label>
+    <label locale="ja">C: プロジェクトIDが格納されている選択型データ項目</label>
+  </config>
+  <config name="conf_Summary" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>D: Select TEXT DATA for Summary</label>
+    <label locale="ja">D: 課題の件名が格納されている文字列型データ項目</label>
+  </config>
+  <config name="conf_Description" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>E: Select TEXT DATA for Description</label>
+    <label locale="ja">E: 課題の詳細が格納されている文字列型データ項目</label>
+  </config>
+  <config name="conf_IssueTypeId" required="true" form-type="SELECT" select-data-type="SELECT_SINGLE">
+    <label>F: Select SELECT DATA for Issue Type Id</label>
+    <label locale="ja">F: 課題の種別のIDが格納されている選択型データ項目</label>
+  </config>
+  <config name="conf_PriorityId" required="true" form-type="SELECT" select-data-type="SELECT_SINGLE">
+    <label>G: Select SELECT DATA for Priority Id</label>
+    <label locale="ja">G: 課題の優先度のIDが格納されている選択型データ項目</label>
+  </config>
+  <config name="conf_AssigneeId" required="false" form-type="SELECT" select-data-type="SELECT_SINGLE">
+    <label>H: Select SELECT DATA for Assignee Id</label>
+    <label locale="ja">H: 担当者のIDが格納されている選択型データ項目</label>
+  </config>
+  <config name="conf_DueDate" required="false" form-type="SELECT" select-data-type="DATE">
+    <label>I: Select SELECT DATA for Due Date</label>
+    <label locale="ja">I: 締切日が格納されている日付型データ項目</label>
+  </config>
+  <config name="conf_CategoryId" required="false" form-type="SELECT" select-data-type="SELECT_SINGLE">
+    <label>J: Select SELECT DATA for Category Id</label>
+    <label locale="ja">J: カテゴリのIDが格納されている選択型データ項目</label>
+  </config>
+  <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select TEXT DATA for Log</label>
+    <label locale="ja">X: ログが格納される文字型データ項目 (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == コンフィグの参照 / Config Retrieving ==
+var apiKey = configs.get("conf_ApiKey") + "";
+var spaceId = configs.get("conf_SpaceId") + "";
+
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var projectId = engine.findDataByNumber( configs.get("conf_ProjectId") ).get(0).getValue() + "";
+var summary = engine.findDataByNumber( configs.get("conf_Summary") ) + "";
+var description = engine.findDataByNumber( configs.get("conf_Description") ) + "";
+var issueTypeId = engine.findDataByNumber( configs.get("conf_IssueTypeId") ).get(0).getValue() + "";
+var priorityId = engine.findDataByNumber( configs.get("conf_PriorityId") ).get(0).getValue() + "";
+
+//以下は必須指定でないもの
+var dataNum_AssigneeId = configs.get("conf_AssigneeId") + "";
+var assigneeId;
+if ((dataNum_AssigneeId !== "") && (engine.findDataByNumber( dataNum_AssigneeId ))) {
+  assigneeId = engine.findDataByNumber( dataNum_AssigneeId ).get(0).getValue() + "";
+}
+var dataNum_DueDate = configs.get("conf_DueDate") + "";
+var dueDate;
+if ((dataNum_DueDate !== "") && (engine.findDataByNumber( dataNum_DueDate ))) {
+  dueDate = engine.findDataByNumber( dataNum_DueDate ) + "";
+}
+var dataNum_CategoryId = configs.get("conf_CategoryId") + "";
+var categoryId;
+if ((dataNum_CategoryId !== "") && (engine.findDataByNumber( dataNum_CategoryId ))) {
+  categoryId = engine.findDataByNumber( dataNum_CategoryId ).get(0).getValue() + "";
+}
+
+
+//// == 演算 / Calculating ==
+//apiKey だけはクエリパラメータ
+var request = httpClient.begin()
+  .formParam( "projectId", projectId )
+  .formParam( "summary", summary )
+  .formParam( "description", description )
+  .formParam( "issueTypeId", issueTypeId )
+  .formParam( "priorityId", priorityId )
+  .queryParam("apiKey", apiKey);
+//以下は指定があれば
+if (assigneeId) {
+  request = request.formParam( "assigneeId", assigneeId );
+}
+if (dueDate) {
+  request = request.formParam( "dueDate", dueDate );
+}
+if (categoryId) {
+  request = request.formParam( "categoryId[]", categoryId );
+}
+
+var response = request.post( "https://" + spaceId + ".backlog.com/api/v2/issues" );
+
+
+//// == ワークフローデータへの代入 / Data Updating ==
+//ログデータの指定があれば
+var dataNum_Log = configs.get("conf_Log") + "";
+if (dataNum_Log !== "") {
+  var log = "";
+  log += "---POST request--- " + response.getStatusCode() + "\n";
+  log += response.getResponseAsString() + "\n";
+  engine.setDataByNumber( dataNum_Log, log );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADlElEQVRYR8WXS0hUURjH/+fKVEqlpT01e1gEQeXMUEQuNIsWQVC0qUXkHYIWEVrROqNa1KaRVm0cW7QIih7UIpCZkaKiaFR6KZTOZGFp6Iz5wsf94tx5NHO7594zJTWbgZnvfN/vfO/D8J8/LBv7Va2+fYqGSmIoB1DAoH+DgDYAUUZoI4WCAafnnqxeW4CqVl+BAtQSoY4BBTKKicMweDWgIehUo1ZnLAGqW301RLgia9hoiIMQgxp0qndFEEKA6lc+LxhqZW5sK0Pw+t3qSTM5U4AdocYmBnbEVnE2AoQmv1tVjUd+AzC7+YmSbdhdWJY6+2k8huOdD7IxH5clNPjdal36wQwAHnMQfEbNp0srsKdwXernyHgUnvfCsFqCaQz703MiBcCznRG6zRJuJgESibk6WR0pgOpXvnownDXDNwKMaJPoGOlHeDyKp9EetA33ZhcOwjm/W63nh9IAGqNgLF8GIF2GAAxPT+DF0Gfc+NqOyHjMFoZ7IeBSF6QA9A5HuCM6afSASG5kegJ3+jvg6w3ZQiRzQfeAXc3LAnBd0yA0D3zE5cgTa4hERegAO0KNQQZWKeuBvskRvB7+hrW5C7Fs9jzMYjkZRzUQ7vd34urn50IIArUEXJ6quAdCjWGArZQFSC/DIkceDi3ZpPeJPMWRUjE4NaZ74cXQF1O1fIAFXKozAeDjuST8yJTh3qL1OLrcjbk5s3Q9PBS3+97h2peXQr1+l8pmDIBbuVi2C9vml6QMBga7cSHcIgNgHYJjxVtwYPEG5CSqVtQJjZ4K/ejFmQ+PBCGg9oDLUy6VhDXLnDi4ZCMcTNGViQDOr9mJ7fkrpDyQmYQ2o1cGIOscSC9Du0ZkBbByTj4OLy1HRUFpRjnaVUFGI4o3I3ErNgLwWTA4OYaFjlzkKo5f/TzhfN4Hmge6cCny2DwBiWJ+t0df76SGkRHAqmR5+fkHutDQ8wxj2pQAwGQY6cunRmGzgSQDwBsJd/vNb29wq++tmJEopils1W/jWA+DYCHZOr8Yp0orsMiRl6GYGx2dntAnYEs0jIffO8W3ToZHtJAkNYsGE0+2stxC5MR7F/onRv9qD0ja+2dLKYGuB1yeGmNs/tVantqApAG4YPwpRk2iTcmqGvT/4glX80cPk6TyeHWgDqA6aRCiGMC8mgLvXz3NjDdMPE6riFHicco26xcFtccfp6xNUxC0unFWIbB18QwI/ARpcMowyyv3awAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>

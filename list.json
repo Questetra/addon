@@ -367,7 +367,7 @@
     {
       "id":"Salesforce-orderCreate",
       "file":"https://questetra.github.io/addon/service-task/Salesforce-orderCreate.xml",
-      "last-modified":"2017-10-2",
+      "last-modified":"2017-10-20",
       "label":{
         "en":"Salesforce Order Create",
         "ja":"Salesforce 注文追加"
@@ -375,6 +375,19 @@
       "help":{
         "en":"https://support.questetra.com/addons/services/salesforce-ordercreate/",
         "ja":"https://support.questetra.com/ja/addons/services/salesforce-ordercreate/"
+      }
+    },
+    {
+      "id":"Backlog-issueAdd",
+      "file":"https://questetra.github.io/addon/service-task/Backlog-issueAdd.xml",
+      "last-modified":"2017-10-25",
+      "label":{
+        "en":"Backlog Add Issue",
+        "ja":"backlog 課題追加"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/backlog-issueadd/",
+        "ja":"https://support.questetra.com/ja/addons/services/backlog-issueadd/"
       }
     }
   ]
