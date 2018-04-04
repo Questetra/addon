@@ -246,6 +246,19 @@
         "en":"https://support.questetra.com/addons/services/googleanalytics-reportsref/",
         "ja":"https://support.questetra.com/ja/addons/services/googleanalytics-reportsref/"
       }
+    },
+    {
+      "id":"GoogleCloudPrint-print",
+      "file":"https://questetra.github.io/addon/service-task/GoogleCloudPrint-print.xml",
+      "last-modified":"2016-11-07",
+      "label":{
+        "en":"Submit Print Job via GCP Service",
+        "ja":"Google Cloud Print ジョブ送信"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/googlecloudprint-print/",
+        "ja":"https://support.questetra.com/ja/addons/services/googlecloudprint-print/"
+      }
     }
   ]
 }
