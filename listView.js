@@ -28,30 +28,30 @@
         $('tbody.services').append(rowHtml);
       }
 
-
-      /*
-      for (var i = 0; i < data.length; i++) {
-        var dataRow = data[i];
+      for(var i = 0; i < data.options.length; i++){
+        var options = data.options[i];
         var rowHtml = '<tr>';
-        rowHtml += '<th rowspan="2">' + dataRow.id + '</th>';
+
+        rowHtml += '<th rowspan="2">' + options.id + '</th>';
         rowHtml += '<td>ja</td>';
-        rowHtml += '<td>' + dataRow.category.ja + '</td>';
-        rowHtml += '<td><a href="' + dataRow.url.ja + '" target="_blank">' + dataRow.title.ja + '</a></td>';
-        rowHtml += '<td><a href="' + dataRow.url.ja + '" target="_blank">' + dataRow.url.ja + '</a></td>';
-        rowHtml += '<td>[q_manual code="' + dataRow.id + '" lang="ja"]</td>';
+        rowHtml += '<td>' + options.label.ja + '</td>';
+        rowHtml += '<td><a href="' + options.help.ja + '">help</a></td>';
+        rowHtml += '<th rowspan="2"><a href="' + options.file + '">' + options.file + '</a></th>';
+        rowHtml += '<th rowspan="2">' + options['last-modified'] + '</th>';
+
         rowHtml += '</tr>';
 
         rowHtml += '<tr>';
+
         rowHtml += '<td>en</td>';
-        rowHtml += '<td>' + dataRow.category.en + '</td>';
-        rowHtml += '<td><a href="' + dataRow.url.en + '" target="_blank">' + dataRow.title.en + '</a></td>';
-        rowHtml += '<td><a href="' + dataRow.url.en + '" target="_blank">' + dataRow.url.en + '</a></td>';
-        rowHtml += '<td>[q_manual code="' + dataRow.id + '"]</td>';
+        rowHtml += '<td>' + options.label.en + '</td>';
+        rowHtml += '<td><a href="' + options.help.en + '">help</a></td>';
+
         rowHtml += '</tr>';
 
-        $('tbody.urls').append(rowHtml);
+        $('tbody.options').append(rowHtml);
       }
-      */
+      
     });
   });
 })(window.jQuery);

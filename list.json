@@ -598,5 +598,20 @@
         "ja":"https://support.questetra.com/ja/addons/services/corpnumberapi-getinfo/"
       }
     }
+  ],
+  "options":[
+    {
+      "id":"JapanPrefectureCode",
+      "file":"https://questetra.github.io/addon/service-task/JapanPrefectureCode-JIS-X-0401-ISO-3166-2-JP.xml",
+      "last-modified":"2015-10-08",
+      "label":{
+        "en":"Get Info via Corporate Number API",
+        "ja":"JIS X 0401: 北東から南西へ「01」から「47」まで (2桁コード/都道府県名)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/options/japan-prefecture-code/",
+        "ja":"https://support.questetra.com/ja/addons/options/japan-prefecture-code/"
+      }
+    }
   ]
 }
