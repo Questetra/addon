@@ -402,6 +402,19 @@
         "en":"https://support.questetra.com/addons/services/paypal-createusd/",
         "ja":"https://support.questetra.com/ja/addons/services/paypal-createusd/"
       }
+    },
+    {
+      "id":"Paypal-createJpy",
+      "file":"https://questetra.github.io/addon/service-task/Paypal-createJpy.xml",
+      "last-modified":"2018-01-29",
+      "label":{
+        "en":"PayPal Invoicing Create (JPY)",
+        "ja":"PayPal 請求書 生成 (JPY)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/paypal-createjpy/",
+        "ja":"https://support.questetra.com/ja/addons/services/paypal-createjpy/"
+      }
     }
   ]
 }
