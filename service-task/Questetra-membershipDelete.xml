@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Questetra Org Delete Membership</label>
+<label locale="ja">Questetra 組織メンバー削除</label>
+
+<summary>System Administrator Authority and User Manager Authority required
+1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
+2. Config [OAuth 2.0 Setting]
+</summary>
+
+<last-modified>2017-12-04</last-modified>
+<help-page-url>https://support.questetra.com/addons/services/questetra-membershipdelete/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/questetra-membershipdelete/</help-page-url>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_ApplicationRoot" required="true" el-enabled="true"	form-type="TEXTFIELD">
+    <label>A2: Set Application-Root URI ( https://... )</label>
+    <label locale="ja">A2: Application-Root URI をセットしてください ( https://... )</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="QGROUP|STRING_TEXTFIELD|SELECT_CHECKBOX">
+    <label>B: Select STRING/CHECKBOX DATA for Qgroup Id (Org Id)</label>
+    <label locale="ja">B: Qgroup ID（組織ID）が格納されている文字列型or組織型orチェックボックス型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="QUSER|STRING_TEXTFIELD">
+    <label>C: Select STRING/USER DATA for Quser Email</label>
+    <label locale="ja">C: Quser のメールアドレスが格納されている文字列型データorユーザ型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Deleting a Quser to Qgroup via Questetra System Settings API (ver. 20171204)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var oauth2  = configs.get( "conf_OAuth2" ) + "";
+var applicationRoot = configs.get( "conf_ApplicationRoot" ) + "";
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" ) + "";
+// convert 'java.lang.String' to 'javascript string'
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var targetGroups = [];
+if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType("SELECT_CHECKBOX") ){
+  var selectedGroups = engine.findDataByNumber( dataIdB );
+  for( var i = 0; i < selectedGroups.size(); i++ ){ // java.util.ArrayList
+    var pushGroup = selectedGroups.get(i).getValue() + "";
+    targetGroups.push( pushGroup );
+  }
+}else if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType( "QGROUP" ) ){
+  var pushGroup = engine.findDataByNumber( dataIdB ).getId() + "";
+  // com.questetra.bpms.core.event.scripttask.QgroupView
+  targetGroups.push( pushGroup );
+}else{
+  var pushGroup = engine.findDataByNumber( dataIdB ) + "";
+  targetGroups.push( pushGroup );
+}
+var userId = "";
+if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType("QUSER") ){
+  userId = engine.findDataByNumber( dataIdC ).getId() + "";
+  // com.questetra.bpms.core.event.scripttask.QuserView	
+}else{
+  var userEmail = engine.findDataByNumber( dataIdC ) + "";
+  userId = quserDao.findByEmail( userEmail ).getId() + "";
+}
+
+
+//// == Calculating / 演算 ==
+var accessLog = "";
+var token  = httpClient.getOAuth2Token( oauth2 );
+var apiUri = applicationRoot + "API/UGA/Membership/delete";
+
+for( var i = 0; i < targetGroups.length; i++  ){ // javascript array
+  // preparing for API Request
+  var apiRequest = httpClient.begin(); // HttpRequestWrapper
+  // com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+  apiRequest = apiRequest.bearer( token );
+  apiRequest = apiRequest.formParam( "quserId",  userId );
+  apiRequest = apiRequest.formParam( "qgroupId", targetGroups[i] );
+
+  // Access to the API (POST, GET, PUT, etc)
+  var response = apiRequest.post( apiUri ); // HttpResponseWrapper
+  var httpStatus = response.getStatusCode() + "";
+  accessLog = "---POST request--- " + httpStatus + "\n";
+  accessLog += response.getResponseAsString() + "\n";
+
+  // Error Handling
+  if( httpStatus !== "200" ){
+    if( dataIdX !== "" ){ engine.setDataByNumber( dataIdX, accessLog ); }
+    throw new Error( accessLog );
+  }
+}
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if ( dataIdX !== "" ){ engine.setDataByNumber( dataIdX, accessLog ); }
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACXUlEQVRYR81Xy3HbMBDF6igdYlcS
+u4LQ14Vm4lQQpYI4FUQdxB1EriDMjLBX0xXYnUQ+UNeXWQ3pIUFABBgrCa9Y7HvY31uSmfAx8w8i
+uu5eBVCKyIdcd5R7Qe2ttQjdc85l+8u+8FcIMPMFEd03Yf3kvzYnAsz8XdMF4EpEnnxfgwi04MaY
+MzUGsBGRFxLN+WMoBQAuuyAN+Kqx3YVI9Aj44C0IgCcAN0S0aorvQC7wKUippInologuPJsBiR4B
+a+2v9uVTijPxzs45d97a+gQ2xpiPiY6mmt0559q0mEENWGtPSaIHri8ItqG1Vqv17dQnRgr0QUSK
+0S5Qg+VyWQC4HyMA4OHwCqJ3Y7ZEdLXdbqskAsfSAOCZiNZ1XW+qqtqpw6IozhaLxQrAmojeRMgM
+wh9MQawVm5nwrHihgaLnetcYU0VIhOdASFiOhPOLc+72WLittTfGmG9jKWkeVFJsrIYc1HV93oY9
+BtCkQ+dJ0pdMQAsuVMUhFGbWNIwW5qEGUiPwzwko25OkgJlLInqflDBjRouQmbUVv6b4A/AzKMe5
+rdSCTWnh2Cg+pgfaz+v9fn/XHUTz+fwzEWkLxqQ6bRDljGKNVPP6wYwfjNycUczMj4FlIiWtURtd
+akTkclQLvDXqj0D9y/56N9CCU4K3ZHwS/k64O6JmrxINVVMReSnUwVIaakGdgrPZbA1AJfc6RrKR
+ap0rGwAqWr2lRs99NU2ZA732yVnLu3tFCDy4D3i6XnYXyDYHOT8mSkKjFtsj/s9fs7Fqy4nAmK9J
+EQgJmAqLiPR+2cfA9fw3F0l+y6naMeEAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
