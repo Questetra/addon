@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Post to Slack (Fixed phrase)</label>
+<label locale="ja">Slack 投稿 (定型文)</label>
+<last-modified>2016-08-31</last-modified>
+
+<configs>
+  <config name="conf_Channel" required="true" form-type="TEXTFIELD">
+    <label>A: Set SLACK CHANNEL to post (e.g. "#random")</label>
+  </config>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>B: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">B: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_Message" required="true" el-enabled="true" form-type="TEXTAREA">
+    <label>C: Set Message for post</label>
+    <label locale="ja">C: 投稿メッセージをセットしてください</label>
+  </config>
+</configs>
+
+<help-page-url>https://support.questetra.com/addons/services/slack-post-fixed-phrase/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/slack-postfixedphrase/</help-page-url>
+
+<script><![CDATA[
+//// == 注意 / Note ==
+// Authorization Code Request URL: https://slack.com/oauth/authorize
+// Access Token Request URL: https://slack.com/api/oauth.access
+// Scope: chat:write:bot
+// Client ID: ( from https://api.slack.com/apps )
+// Consumer Secret: ( from https://api.slack.com/apps )
+
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var slackChannel = configs.get("conf_Channel");
+var myOAuthConfig = configs.get("conf_OAuth2");
+var textForPost = configs.get("conf_Message");
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+// no need
+
+//// == 演算 / Calculating ==
+var token = httpClient.getOAuth2Token( myOAuthConfig );
+httpClient.begin()
+  .formParam( "token", token )
+  .formParam( "channel", slackChannel )
+  .formParam( "text", textForPost )
+  .post( "https://slack.com/api/chat.postMessage" );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAAA4QAAAOEAHQCiXcAAAMBSURBVEjHzdVdaJZlGAfw375dcxrMPjZ1n8YoBraaUNb0wEfdWsFmeBBz9sEgqKCjTqSOOwwiSjAPRowsxWLGCHwwcImkDtY6kViva67UTabTVrYvO3ifve/zts0d1n10P9fzv/7Xdf2v+75u/uuVtdyPgCyFHlJmnVKThiWMuRuuTBCQrdSTGjWoViJfnjl/Gfa1Q0YIlyMIoNgz2mxXJX+JxM5504U4RVaGe6EWr9vqvnsUPWC/nxYRBFDrPXsUrqhbj/0mFyhyUu71uuyW9y/wjBN+UKMgZqv2i4FqCZAdGUt96IklE+7U6ViGLU+nkoWP7Cj+y55NAaYc863ZCMysbww77ohbEaLBjhgB1tkbi9CrXYdzoMqjCO3wkg49ESJfq9wgRlBjU4xg3pzrevyq21suEt6SMG21NSnMVpXJTS6oUBQj2GKjYYd9YdRsmBR5rVe1eTqF2eApQ+kMSpLdwIwzDrpNeD0cNis3qAoeQIFXbIv1KMc2WUEqg6tmo11onwlCASWaNGt00PvGfGdzRi/qrXVzIYNxf6c6MCXfI0Exan2kXbnditHrkhO63YiQFTamS/jdRGRu1u1zoZ246Gew2WM4Y5e9OnwaIddYnxZxzHCST5EXQZOvTDilzo9OukL4p6GAVakjVKA8TfCHfo0ZFW633qhDeg2ajDQp1qbNrpiQyRJC6DMTOwcDjpohTIR9JuWqDEpR5B2tsZs6l86AfiNqov1p+/wWRb1fi2aNuh1wTb+6lPsdl9Iictnp1K8rrsn2cFCMSh9oV65JmZxUOBhNSpwDCdV3zWtLncsaLd41btCUJuV4UL0mz8eudZejJGKc3zsfCbnGa+AFXxJpk5O+f2DQJ8kBGx3hau6Y81xGkhU2abUzw5ZcQ952noTYTAxYrcseK61ZpxzQvzBYM4dqnc88fg/nGYMOO+LGclOZBh/bsoTrvKvOOu6k8ZXehUpvaLXBKlmYdtuIAX3OSpgOFzEvepkCspWpVS3XvMtGjbppfrHr/2X9A64y1xmbosc3AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE1LTExLTIzVDIyOjA4OjUxKzA4OjAwx0crCQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNS0xMS0yM1QyMjowODo1MSswODowMLYak7UAAABOdEVYdHNvZnR3YXJlAEltYWdlTWFnaWNrIDYuOC44LTEwIFExNiB4ODZfNjQgMjAxNS0wNy0xOSBodHRwOi8vd3d3LmltYWdlbWFnaWNrLm9yZwUMnDUAAABjdEVYdHN2Zzpjb21tZW50ACBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE4LjEuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgILu01mcAAAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFnZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6SGVpZ2h0ADQ4MLGD49MAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgANDgwInKzjgAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNDQ4Mjg3NzMxIlaw2wAAABN0RVh0VGh1bWI6OlNpemUAMTEuNEtCQtZTjksAAABadEVYdFRodW1iOjpVUkkAZmlsZTovLy9ob21lL3d3d3Jvb3Qvd3d3LmVhc3lpY29uLm5ldC9jZG4taW1nLmVhc3lpY29uLmNuL3NyYy8xMTk2NS8xMTk2NTUwLnBuZ7qtliEAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>

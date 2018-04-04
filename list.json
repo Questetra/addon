@@ -337,6 +337,20 @@
         "en":"https://support.questetra.com/addons/services/slack-post/",
         "ja":"https://support.questetra.com/ja/addons/services/slack-post/"
       }
+    },
+    {
+      "id":"Slack-postFixedPhrase",
+      "file":"https://questetra.github.io/addon/service-task/Slack-postFixedPhrase.xml",
+      "last-modified":"2016-08-31",
+      "label":{
+        "en":"Post to Slack (Fixed phrase)",
+        "ja":"Slack 投稿 (定型文)"
+      },
+      "help":{
+        "en":"https://support.questetra.com/addons/services/slack-post-fixed-phrase/",
+        "ja":"https://support.questetra.com/ja/addons/services/slack-postfixedphrase/"
+      }
     }
+
   ]
 }
