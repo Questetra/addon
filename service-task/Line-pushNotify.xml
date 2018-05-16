@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<label>Post message through LINE Notify</label>
+<label locale="ja">LINE Notifyでメッセージ投稿</label>
+<summary>Post message to your LINE Group through LINE Notify. In advance you have to get a personal access token. When get the one, choose where messages are sent. </summary>
+<summary locale="ja">LINE Notifyを通してLINEグループにメッセージを投稿します。事前にパーソナルアクセストークンを取得してください。送信先はトークンを取得するユーザー本人、またはその人の参加しているグループの中からトークン取得時に選択します。</summary>
+<help-page-url>https://www.questetra.com/tour/m4/m415/addon-line-push-notify/</help-page-url>
+<help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-line-push-notify/</help-page-url>
+<configs>
+  <config name="token" form-type="TEXTFIELD" required="true">
+    <label>C1.access token(choose the destination when you get the token)</label>
+    <label locale="ja">C1.アクセストークン(メッセージは取得時に指定したグループまたは個人へ送信されます)</label>
+  </config>
+  <config name="Message" form-type="TEXTAREA" el-enabled="true" required="true">
+    <label>C2.Text Message(Within 1000 characters)</label>
+    <label locale="ja">C2.テキスト(1000文字まで)</label>
+  </config>
+</configs>
+<script><![CDATA[
+main();
+function main(){
+  var token = configs.get("token");
+  var messageText = configs.get("Message");
+  //check length of message
+  messageCheck(messageText);
+  //send message to LINE Notify API
+  var response = httpClient.begin()
+    .bearer(token)
+    .multipart("message", messageText)
+    .post('https://notify-api.line.me/api/notify');
+  var responseText = response.getResponseAsString();
+  engine.log(responseText)
+  //check whether sending succeeded
+  if (response.getStatusCode() != 200) {
+    throw "Status Code is not 200." + response.getStatusCode();
+  }
+}
+function messageCheck(messageText){
+  if(messageText == null){
+    throw "Message is empty."
+  }else if(messageText.length() > 1000){
+    throw("Message Length over 1000");
+  }
+}
+]]>
+</script>
+<icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEPElEQVRYR8WXX0xTVxzHP5dCg0oB
+t1mEkcxmGbgENllgBrJ24J8HeYIHH3xRfECNiZEZXowPbg8aE6NDDT4YkzGVxCc3ExPjC5MaTdgD
+1lDdBJxlLGX2AfkzqZTCXc6pt729vbctuLjz0uae35/v+Z3v+f1R+J+Xsiz/XlqAr1HYBBSD/BXL
+B0yhyt+7eLiZrd3MAH6hmFwOo9KBIp1mXipTKHQR5RxNTKVTSA/ASxvwfdaOjZ4EENiLh5+tQFgD
+uEcXcDjzcbOQUOnCwzdmkuYAvPSgsCcL09mLqPTgYa9RIRVAhpO3r2+neW0z6/LWsca2htdLr3kZ
+fYl32supv05lAnQONx16oWQA4s4VfjCzcn3jdbYUbZGOrdbM4gwDswN0/NHBk7kn5mIqrXpOJAAI
+ttt4biRcm7ONExtOUGYvy3S6+L6IyIXgBY7/eTxVRxBzEZf2OhIA7vEtkKSxb/0+zrjOUGAryNq5
+JrigLnA+eJ7O551mut/hlv5IAPDKt1ukSTtsDkZrR3HmOZftXFMIL4XZ9fsubk4a8pKIgoe1CQAi
+wyn8pPd049MbtL7fumLnmqLvlY+ahzVmVyG5EIuACfODXwYptZfK7cB8gFwll3J7OVE1Sv90P5Wr
+K5mITFBXUMfjucdS9tbkLV5EXlDnqKOxqFHqilfiHHAyuzhrBCFfhAbgrszxuhVuCJOfky+/CAcC
+QOWqSiJqhKuhq3gKPRwYPUDvxl6ehZ/hynfRG+qls7wTRXezQn/38G6pY1j9uGnUAASAj/QC0a+i
+2LClBTAZneTBzAMqVlVQU1BD90Q3xbZiah21NBU1xc0dGzvGyfGTRgA+3NRoAFTj7mz9bJz9IgLi
+5CICNsXGtdA1GQFBMvE8tw5t5XbVba6ErnCo7BB5Sh52xS5Nqqjs8O/gztSdVB64USwBDH0xRNXq
+KqkUWgjRN9Un/ze/18zY/Jh0LPhQklfC0/BTyQHfPz6CkaC8js2OzVJe8KTsV4scogOQcgVHPjzC
+addpcsh5q5dw6e9L7B/db2bjEW42WZJQaPRV9yXd5XKR+Of8VA9WW6klkdCy9N7/7D4NhQ3L9c34
+/Djb/NsYDg9b6eqeoUki0mtd/uQyOz/YSaGtMCsgI+ERWn5rsS5IMXbqEpH4YEjFRk8iCYmiVO+o
+p8ReYgpmiSVJ1u3+7emBqkzjibV3aYtROis9FT3scSZ6FlGKL05c5GjgaDZRMilGsXIc0BekdJa6
+P+7mYOlBxKnF82sfaWfw1WBm5+L0i2xILcexa7BsSIyWz7rOypwgko9JlrMGYtmQaCr/ZTOaCiMe
+em3rXTalP+KRbX7SejdtOaScPH0EtN3YKCZa9HinlJllOglBOGhb2WCi2YmNZh1vRrPsgAjHsdGs
+6+1GM+NxYxlTtDracPr5G5FHcjgVQ6oqh1PLUSx7Diwr1isX/hfLVHkwNf/E1QAAAABJRU5ErkJg
+gg==</icon>
+<last-modified>2018-04-20</last-modified>
+</service-task-definition>
