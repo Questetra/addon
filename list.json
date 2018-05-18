@@ -689,6 +689,21 @@
             "en": "https://support.questetra.com/addons/services/corpnumberapi-getinfo/",
             "ja": "https://support.questetra.com/ja/addons/services/corpnumberapi-getinfo/"
         }
+    },
+    {
+        "id": "Line-pushNotify",
+        "file": "https://questetra.github.io/addon/service-task/Line-pushNotify.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Post message through LINE Notify",
+            "ja": "LINE Notifyでメッセージ投稿"
+        },
+        "help":
+        {
+            "en": "https://www.questetra.com/tour/m4/m415/addon-line-push-notify/",
+            "ja": "https://www.questetra.com/ja/tour/m4/m415/addon-line-push-notify/"
+        }
     }],
     "options": [
     {
@@ -810,21 +825,6 @@
         {
             "en": "https://support.questetra.com/addons/pdf/invoice-sample/",
             "ja": "https://support.questetra.com/ja/addons/pdf/invoice-sample/"
-        }
-    },
-    {
-        "id": "Line-pushNotify",
-        "file": "https://questetra.github.io/addon/service-task/Line-pushNotify.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post message through LINE Notify",
-            "ja": "LINE Notifyでメッセージ投稿"
-        },
-        "help":
-        {
-            "en": "https://www.questetra.com/tour/m4/m415/addon-line-push-notify/",
-            "ja": "https://www.questetra.com/ja/tour/m4/m415/addon-line-push-notify/"
         }
     }]
 }
