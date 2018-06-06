@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Converter (TSV to Excel-CSV FILE)</label>
+<label locale="ja">コンバータ (TSV to Excel-CSV FILE)</label>
+
+<last-modified>2016-11-22</last-modified>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>A: Select STRING DATA for TSV Data</label>
+    <label locale="ja">A: TSVデータが格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_ColIds" required="true" form-type="TEXTFIELD">
+    <label>B: Set COL IDs for Extraction (e.g. "0,1,5,3,6")</label>
+    <label locale="ja">B: 抽出データのカラム ID をセットしてください (例 "0,1,5,3,6")</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for File Name</label>
+    <label locale="ja">C: ファイル名が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="FILE">
+    <label>D: Select FILE DATA (update)</label>
+    <label locale="ja">D: ファイル型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Converter from TSV to Excel-CSV (ver. 20161122)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" );
+var colIds = configs.get( "conf_ColIds" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" );
+var dataIdD = configs.get( "conf_DataIdD" );
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var sourceTsv = data.get( dataIdA ) + "";
+var fileName = data.get( dataIdC ) + "";
+
+//// == 演算 / Calculating ==
+var linesArray = sourceTsv.split("\n"); // string[]
+var colIdArray = colIds.split(",");
+var numOfCols = colIdArray.length;
+
+var myTsv = "";
+for (var i=0; i < linesArray.length; i++){
+  var cellsArray = linesArray[i].split("\t"); // string[]
+  for( var j = 0; j < numOfCols; j++ ){
+    myTsv += cellsArray[ parseInt( colIdArray[j] ) ] + "";
+    if( j != numOfCols - 1 ){
+      myTsv += "\t";
+    }
+  }
+  if( i != linesArray.length -1 ){
+    myTsv += "\n";
+  }
+}
+
+var csvFiles = new java.util.ArrayList();
+csvFiles.add(
+  new com.questetra.bpms.core.event.scripttask.NewQfile(
+    fileName,
+    "text/tab-separated-values; charset=x-UTF-16LE-BOM", 
+    myTsv
+  )
+);
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdD, csvFiles );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
