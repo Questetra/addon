@@ -326,8 +326,8 @@
         },
         "help":
         {
-            "en": "https://support.questetra.com/addons/services/box-fileupdate/",
-            "ja": "https://support.questetra.com/ja/addons/services/box-fileupdate/"
+            "en": "https://support.questetra.com/addons/box-fileupdate/",
+            "ja": "https://support.questetra.com/ja/addons/box-fileupdate/"
         }
     },
     {
@@ -342,7 +342,7 @@
         "help":
         {
             "en": "https://support.questetra.com/addons/box-upload/",
-            "ja": "https://support.questetra.com/ja/addons/box-upload/"
+            "ja": "https://support.questetra.com/ja/addons/box-fileupdate/"
         }
     },
     {
