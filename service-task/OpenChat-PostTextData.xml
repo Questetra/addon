@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Post to OpenChat (Questetra's Enterprise Social)</label>
+<label locale="ja">OpenChat 投稿 (Questetra 内の社内SNS機能)</label>
+
+<last-modified>2016-08-30</last-modified>
+
+<configs>
+  <config name="conf_ScopeGroup" required="true" form-type="TEXTFIELD">
+    <label>A: Set Group ID for messaging scope (e.g. g99-&gt;"99")</label>
+    <label locale="ja">A: メッセージターゲットとなる組織IDをセットしてください （例: g99-&gt;"99"）</label>
+  </config>
+  <config name="conf_Message" required="true" el-enabled="true" form-type="TEXTAREA">
+    <label>B: Set Message for post</label>
+    <label locale="ja">B: 投稿メッセージをセットしてください</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var scopeGroupId = parseInt( configs.get("conf_ScopeGroup") );
+var postMessage = configs.get("conf_Message");
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+// no need
+
+//// == 演算 / Calculating ==
+var openChat = feedService.begin();
+var qgroup = qgroupDao.findById( scopeGroupId );
+openChat.setShareQgroup( qgroup );
+openChat.setMessage( postMessage );
+openChat.post();
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADXklEQVRYR8VXzVEbMRR+T9zgAFQQqCCmAjs30DITqACoIKSCmA6cCrAriJlBghtLB04FcSqIc5BP7L7MtyN5tMvauwYy6ISxfj49fT/PTO88+J3Pp0YAWusOEXWZeY+I8HcYEyKaZFn2eH9/P33pRWoBHB4e7imlzpj5koh2mjYXkQkzD4wxo6a51e+fAUiSBId+w8Ei8puIxkqp8dPT0zS+qa9Mh5l7RHSGjUVkqpS6uL29TdsCKQFIkmSIzfzBfWstPjeOXq+3s7m5ecnMAA4gF23XLgAkSYI3/SgiN/P5/DxN01njyZUJviopM2+3BVEA0Fr3PfqRMeZ83YPj+Z4/APFBRA6stbjY0sFYsLGx8Qtln8/nnZfcvLr78fFxT0QeiCg1xnxaCSDcvm3J2lYn8CnLsv1VMmWtNcrVNcY0ekLbwzHv6OjoRCn1Q0SurLX9ZWsBAGSbWGshp8XQWoMLX4joe2A0NvVcuQmbeuJdMzPK/TVsED0t1kPatYOTJBEReawBUFQm/k5rPWbmz9gpVCwiMDnndmMO+b0B9mRVBaaQjTFmt6YC50qpfjAWf9sBEQ1DVTzr8b9pfNNAxPAE8Io6gqMChfk0kWWd94+lnef5KT57PgzzPL+KScmBLG0k0xYEbru1tQVps7V2B9XI83wIb6g6ZTCi8N6tLXQVmMjSSwrwQMCjhVMGAIjZtSx0GYDo8GfExhrPGaTnNp59of3Yx4lo4Jy7WscVveyuiQhy/umc6y1bHz37qGQ+fpMxQomIZs65/SYQvqzoHUKGjJxzl03rvP/8eeZ+kYHUltAzHH0AYhvGhE4JEfwYS7aJsMGB6xqSQpaQz93dHapBPu/RliFk4kP/MvNYRAZNqVcFpLWG/8xKAIJ8/I3g3yAnbrvoBUWkODTP8zEALjOYVRWI0rLMgdhW4w1QXqhEKZXG7Za35m6WZQdtG1NfzQdcqqQCHAgJiQiaUDQR6HQRUksbCgQWM4P5M2Y+beoFo+DqiEgRUq+O4AgEiAjOICduqk8QSQ/zFgn5agBBFfAOpKfnDwgGcqYBTBROpXR8EwBxD6CUQvZDKYXv+5ECTPidEQffmwKoxDmUA3OCiorKhPHmT9BkOvjeOyZMq/iJF5qU/1aBNqAw590B/AMofzh/PPhtOwAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
