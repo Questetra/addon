@@ -3,27 +3,27 @@
 <label>Post to OpenChat (Questetra's Enterprise Social)</label>
 <label locale="ja">OpenChat 投稿 (Questetra 内の社内SNS機能)</label>
 
-<last-modified>2016-08-31</last-modified>
 
 <configs>
   <config name="conf_ScopeGroup" required="true" form-type="TEXTFIELD">
     <label>A: Set Group ID for messaging scope (e.g. g99-&gt;"99")</label>
     <label locale="ja">A: メッセージターゲットとなる組織IDをセットしてください （例: g99-&gt;"99"）</label>
   </config>
-  <config name="conf_Message" required="true" el-enabled="true" form-type="TEXTAREA">
-    <label>B: Set Message for post</label>
-    <label locale="ja">B: 投稿メッセージをセットしてください</label>
+  <config name="conf_TextForPost" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>B: Select TEXT DATA for post</label>
+    <label locale="ja">B: 投稿文が格納されている文字列型データを選択してください</label>
   </config>
 </configs>
 
 
 <script><![CDATA[
 //// == 自動工程コンフィグの参照 / Config Retrieving ==
-var scopeGroupId = parseInt( configs.get("conf_ScopeGroup") );
-var postMessage = configs.get("conf_Message");
+var scopeGroupId = configs.get("conf_ScopeGroup") - 0;
+// Java String -> JavaScript Number
+var dataIdB = configs.get("conf_TextForPost");
 
 //// == ワークフローデータの参照 / Data Retrieving ==
-// no need
+var postMessage = data.get( dataIdB );
 
 //// == 演算 / Calculating ==
 var openChat = feedService.begin();
