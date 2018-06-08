@@ -3,6 +3,8 @@
 <label>Random Number Generator (dynamic)</label>
 <label locale="ja">乱数ジェネレータ (上限変動版)</label>
 
+<last-modified>2017-10-20</last-modified>
+
 <summary>A random number that does not exceed the number in the Data item selected config "A" (e.g.: 0 to 99) will be stored in the Data item selected in the config "B"
 </summary>
 <summary locale="ja">"A"で選択した数値型データに格納されている数を超えないランダムな整数が、"B"で選択した数値型データ項目に格納されます
