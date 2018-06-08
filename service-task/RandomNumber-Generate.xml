@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Random Number Generator</label>
+<label locale="ja">乱数ジェネレータ</label>
+
+<last-modified>2017-10-18</last-modified>
+
+<summary>A random number that does not exceed the config "A" (e.g.: 0 to 99) will be stored in the Data item selected in the config "B"
+</summary>
+<summary locale="ja">"A"でセットした上限値を超えないランダムな整数が、"B"で選択した数値型データ項目に格納されます
+</summary>
+
+<help-page-url>https://www.questetra.com/tour/m4/m415/addon-random-number/</help-page-url>
+<help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-random-number/</help-page-url>
+
+
+<configs>
+  <config name="conf_MaxNum" required="true" form-type="TEXTFIELD">
+    <label>A: Set Max Number (100 returns 0 - 99)</label>
+    <label locale="ja">A: 乱数上限値をセットしてください (100: 0 - 99)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>B: Select NUMERIC DATA for Random Number (update)</label>
+    <label locale="ja">B: 乱数が格納される数値型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Random Number Generator (ver. 20181018)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var maxNum  = configs.get( "conf_MaxNum" ) - 0;
+// convet 'java.lang.String' to 'javascript number'
+var dataIdB = configs.get( "conf_DataIdB" ) + "";
+// convet 'java.lang.String' to 'javascript string'
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+// (none)
+
+//// == Calculating / 演算 ==
+var randNum = Math.floor( Math.random() * maxNum );
+// Math.random(): 0.00 to 0.99
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdB, java.math.BigDecimal( randNum ) );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEFUlEQVRYR8VXQVIbORT9X2bVXgRO
+EDjBhBPE2YFEVcgJEk4w5ASBE4w5QewT4FQhwS7mBIETBE4wnkU3G7p/6mkkl1rT7ZhJqugqqgC1
+paf333v/m+mZH37m8+mXAezt7W0z80tc5OHh4XY+ny+ecqn/DUBr/YmIPjDzdnqgiNwR0biqquk6
+YJ4MQGv9iojO84PzW4vITdM0766urgCo93kSANA9GAy+EdEmdhSRM6XU7OLiYo6/sa6U+kBEx8z8
+gojm1to3vw2A1vobM78SkX+IaOScuxmNRh5MSvfBwcFIRL4GkLt4rw/E2gxorVHvz+mmOLwoCoDa
+rOt6N6XbGCN4l5nfRIa6QDwFwPdQ96m1FjRTBmrmnHuH/6cM1HW9s0oHawGA8JgZtad0w1iSeDMI
+j5lhw1Fg6otz7vCXNaC1PmFm2O7WWgsXEOgfDod/h4Oumfl1ZsfrqqoOf2bFlQzEkGHmcRDfmXPu
+OKe/LMutoiiQB/62YOLy8nK2TiD1AtBaf2ZmX+v4pIIyxkyI6H2y/NFaO17n0NaeXR8Ifv+er1lr
+l4Dz+od3fR4Q0cRaO8UvxhiARNlg33nTNNNUlJ0MGGNA818icu+ca0VtDioVaKYBeH+zKzFF5Ng5
+d+Zt2sWA1nrGzG+RL03TnIS63kfkaQNCmfCDVCSiRThwWRqEFjPPQo/Au75xEZEvWR8AiO7P7EbL
+RNNa5+ut+kcG4Zq6rr0wlVJIzknUDgA553Y6AYSEAwveWriFc85HLp6O+o+bprlOlW+MucHhYC28
+v22t3drf3z9USp1jH2hqpQ0TtK1AiTGbl09ETp1zvmS4BDIgyRBc5A6xDW2IyLVzbrQSgNY6xu+S
+4vQGHfpZlGW5E8Mn757x/bSZ9QJIrSgiq+rfwiEiR6h1sKDPCrgphBT0AHGDiRmsmvoaovMxy8zw
+81aXFRNWugzkZ4SYlomd76qq2i2K4isSNWHilIPgWguZ+pcbpl2u63RQW1XVdlYCH2giAlEfBvrR
+tCDwBaeWAvogkqWP0+5njMGQ4TtdDwAvwijA4JiWZSE+ERlHJwDAf4SGPo/BEqNVUk+fjhk7pygb
+QiumZhjLzp1zu9ENw+FwLCIAjnREZ8Ve0MYXjpbCANnXwdLBA+FCRH9EH4cDsbEf0RKWOptTNsQc
+gQEfu2ihSqmPcXwK2ngd0Ebap3VdnwwGg9io5nVdHyFsgmswsi1LJCKTpmlO47pS6j0zx2j/NwfC
+mD0PU2xfeVvqzhjp+sySpZ4Nb8uyHEGs3oYBBMTSmmrCh6fMPMkHSwRSGFRicwHIe4zleBcJmIzn
+fqvgAHxpGUentIIING5sbPj2+/j4ePezLxURvFJqs2maRdf4jcthHe92TcdrDaW9dfkNC88O4AcI
+zqgZxW8imAAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
