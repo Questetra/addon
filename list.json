@@ -826,5 +826,20 @@
             "en": "https://support.questetra.com/addons/pdf/invoice-sample/",
             "ja": "https://support.questetra.com/ja/addons/pdf/invoice-sample/"
         }
+    },
+    {
+        "id": "RandomNumber-Generate",
+        "file": "https://questetra.github.io/addon/service-task/RandomNumber-Generate.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Random Number Generator",
+            "ja": "乱数ジェネレータ"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/ja/addons/randomnumber-generate/",
+            "ja": "https://support.questetra.com/addons/randomnumber-generate/"
+        }
     }]
 }

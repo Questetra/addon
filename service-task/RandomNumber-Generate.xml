@@ -10,8 +10,8 @@
 <summary locale="ja">"A"でセットした上限値を超えないランダムな整数が、"B"で選択した数値型データ項目に格納されます
 </summary>
 
-<help-page-url>https://www.questetra.com/tour/m4/m415/addon-random-number/</help-page-url>
-<help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-random-number/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/randomnumber-generate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/randomnumber-generate/</help-page-url>
 
 
 <configs>
