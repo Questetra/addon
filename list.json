@@ -871,5 +871,20 @@
             "en": "https://support.questetra.com/addons/openchat-posttextdata/",
             "ja": "https://support.questetra.com/ja/addons/openchat-posttextdata/"
         }
+    },
+    {
+        "id": "OpenChat-PostJoinTextData",
+        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostJoinTextData.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Post to OpenChat (Questetra's Enterprise Social)",
+            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/openchat-postjointextdata/",
+            "ja": "https://support.questetra.com/ja/addons/openchat-postjointextdata/"
+        }
     }]
 }

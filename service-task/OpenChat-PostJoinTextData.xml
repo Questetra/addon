@@ -5,6 +5,8 @@
 
 <last-modified>2016-08-29</last-modified>
 
+<help-page-url>https://support.questetra.com/addons/openchat-postjointextdata/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/openchat-postjointextdata/</help-page-url>
 <configs>
   <config name="conf_MessagingTarget" required="true" form-type="SELECT" select-data-type="QGROUP">
     <label>A: Select MESSAGING TARGET DATA (Group)</label>

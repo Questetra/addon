@@ -3,6 +3,7 @@
 <label>Post to OpenChat (Questetra's Enterprise Social)</label>
 <label locale="ja">OpenChat 投稿 (Questetra 内の社内SNS機能)</label>
 
+<last-modified>2016-11-30</last-modified>
 
 <configs>
   <config name="conf_ScopeGroup" required="true" form-type="TEXTFIELD">
