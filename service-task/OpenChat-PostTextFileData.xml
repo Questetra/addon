@@ -5,6 +5,8 @@
 
 <last-modified>2016-11-30</last-modified>
 
+<help-page-url>https://support.questetra.com/addons/openchat-posttextfiledata/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/openchat-posttextfiledata/</help-page-url>
 <configs>
   <config name="conf_ScopeGroup" required="true" form-type="TEXTFIELD">
     <label>A: Set Group ID for messaging scope (e.g. g99-&gt;"99")</label>
