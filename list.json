@@ -856,5 +856,20 @@
             "en": "https://support.questetra.com/addons/random-number-generator-dynamic/",
             "ja": "https://support.questetra.com/ja/addons/random-number-generator-dynamic/"
         }
+    },
+    {
+        "id": "OpenChat-PostTextData",
+        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Post to OpenChat (Questetra's Enterprise Social)",
+            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/openchat-posttextdata/",
+            "ja": "https://support.questetra.com/ja/addons/openchat-posttextdata/"
+        }
     }]
 }
