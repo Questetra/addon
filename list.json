@@ -704,11 +704,86 @@
             "en": "https://www.questetra.com/tour/m4/m415/addon-line-push-notify/",
             "ja": "https://www.questetra.com/ja/tour/m4/m415/addon-line-push-notify/"
         }
+    },
+    {
+        "id": "RandomNumber-Generate",
+        "file": "https://questetra.github.io/addon/service-task/RandomNumber-Generate.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Random Number Generator",
+            "ja": "乱数ジェネレータ"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/ja/addons/randomnumber-generate/",
+            "ja": "https://support.questetra.com/addons/randomnumber-generate/"
+        }
+    },
+    {
+        "id": "RandomNumber-GenerateDynamic",
+        "file": "https://questetra.github.io/addon/service-task/RandomNumber-GenerateDynamic.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Random Number Generator (dynamic)",
+            "ja": "乱数ジェネレータ (上限変動版)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/random-number-generator-dynamic/",
+            "ja": "https://support.questetra.com/ja/addons/random-number-generator-dynamic/"
+        }
+    },
+    {
+        "id": "OpenChat-PostTextData",
+        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Post to OpenChat (Questetra's Enterprise Social)",
+            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/openchat-posttextdata/",
+            "ja": "https://support.questetra.com/ja/addons/openchat-posttextdata/"
+        }
+    },
+    {
+        "id": "OpenChat-PostJoinTextData",
+        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostJoinTextData.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Post to OpenChat (Questetra's Enterprise Social)",
+            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/openchat-postjointextdata/",
+            "ja": "https://support.questetra.com/ja/addons/openchat-postjointextdata/"
+        }
+    },
+    {
+        "id": "OpenChat-PostTextFileData",
+        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostTextFileData.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Post to OpenChat (Questetra's Enterprise Social)",
+            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/openchat-posttextfiledata/",
+            "ja": "https://support.questetra.com/ja/addons/openchat-posttextfiledata/"
+        }
     }],
     "options": [
     {
         "id": "JapanPrefectureCode",
-        "file": "https://questetra.github.io/addon/options/JapanPrefectureCode-JIS-X-0401-ISO-3166-2-JP.xml",
+        "file": "https://questetra.github.io/addon/options/japanPrefectureCode-JIS-X-0401-ISO-3166-2-JP.xml",
         "last-modified": "2015-10-08",
         "label":
         {
@@ -825,81 +900,6 @@
         {
             "en": "https://support.questetra.com/addons/pdf/invoice-sample/",
             "ja": "https://support.questetra.com/ja/addons/pdf/invoice-sample/"
-        }
-    },
-    {
-        "id": "RandomNumber-Generate",
-        "file": "https://questetra.github.io/addon/service-task/RandomNumber-Generate.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Random Number Generator",
-            "ja": "乱数ジェネレータ"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/ja/addons/randomnumber-generate/",
-            "ja": "https://support.questetra.com/addons/randomnumber-generate/"
-        }
-    },
-    {
-        "id": "RandomNumber-GenerateDynamic",
-        "file": "https://questetra.github.io/addon/service-task/RandomNumber-GenerateDynamic.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Random Number Generator (dynamic)",
-            "ja": "乱数ジェネレータ (上限変動版)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/random-number-generator-dynamic/",
-            "ja": "https://support.questetra.com/ja/addons/random-number-generator-dynamic/"
-        }
-    },
-    {
-        "id": "OpenChat-PostTextData",
-        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post to OpenChat (Questetra's Enterprise Social)",
-            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/openchat-posttextdata/",
-            "ja": "https://support.questetra.com/ja/addons/openchat-posttextdata/"
-        }
-    },
-    {
-        "id": "OpenChat-PostJoinTextData",
-        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostJoinTextData.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post to OpenChat (Questetra's Enterprise Social)",
-            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/openchat-postjointextdata/",
-            "ja": "https://support.questetra.com/ja/addons/openchat-postjointextdata/"
-        }
-    },
-    {
-        "id": "OpenChat-PostTextFileData",
-        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostTextFileData.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post to OpenChat (Questetra's Enterprise Social)",
-            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/openchat-posttextfiledata/",
-            "ja": "https://support.questetra.com/ja/addons/openchat-posttextfiledata/"
         }
     }]
 }

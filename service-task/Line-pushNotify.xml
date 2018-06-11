@@ -4,8 +4,8 @@
 <label locale="ja">LINE Notifyでメッセージ投稿</label>
 <summary>Post message to your LINE Group through LINE Notify. In advance you have to get a personal access token. When get the one, choose where messages are sent. </summary>
 <summary locale="ja">LINE Notifyを通してLINEグループにメッセージを投稿します。事前にパーソナルアクセストークンを取得してください。送信先はトークンを取得するユーザー本人、またはその人の参加しているグループの中からトークン取得時に選択します。</summary>
-<help-page-url>https://www.questetra.com/tour/m4/m415/addon-line-push-notify/</help-page-url>
-<help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-line-push-notify/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/line-pushnotify/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/line-pushnotify/</help-page-url>
 <configs>
   <config name="token" form-type="TEXTFIELD" required="true">
     <label>C1. access token(choose the destination when you get the token)</label>
