@@ -841,5 +841,20 @@
             "en": "https://support.questetra.com/ja/addons/randomnumber-generate/",
             "ja": "https://support.questetra.com/addons/randomnumber-generate/"
         }
+    },
+    {
+        "id": "RandomNumber-GenerateDynamic",
+        "file": "https://questetra.github.io/addon/service-task/RandomNumber-GenerateDynamic.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Random Number Generator (dynamic)",
+            "ja": "乱数ジェネレータ (上限変動版)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/random-number-generator-dynamic/",
+            "ja": "https://support.questetra.com/ja/addons/random-number-generator-dynamic/"
+        }
     }]
 }
