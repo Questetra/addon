@@ -4,8 +4,8 @@
 <label locale="ja">Google Sheets 行追加 (Table)</label>
 
 <last-modified>2016-09-15</last-modified>
-<help-page-url>https://support.questetra.com/addons/services/googlesheets-appendtable/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-appendtable/</help-page-url>
+<help-page-url>https://support.questetra.com/ja/addons/googlesheets-appendtable/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/addons/googlesheets-appendtable/</help-page-url>
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
