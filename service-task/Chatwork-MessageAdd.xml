@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>chatwork Message Add</label>
+<label locale="ja">chatwork メッセージ追加</label>
+<last-modified>2018-03-20</last-modified>
+
+<configs>
+  <config name="conf_ApiToken" required="true" form-type="TEXTFIELD">
+    <label>A: API Token</label>
+  </config>
+  <config name="conf_RoomId" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>B: Select TEXT DATA for Room Id</label>
+    <label locale="ja">B: ルームIDが格納されている文字型データ項目</label>
+  </config>
+  <config name="conf_Message" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select TEXT DATA for Message</label>
+    <label locale="ja">C: メッセージが格納されている文字型データ項目</label>
+  </config>
+  <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select TEXT DATA for Log</label>
+    <label locale="ja">X: ログが格納される文字型データ項目 (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == コンフィグの参照 / Config Retrieving ==
+var apiToken = configs.get("conf_ApiToken") + "";
+
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var roomId = engine.findDataByNumber( configs.get("conf_RoomId") ) + "";
+var message = engine.findDataByNumber( configs.get("conf_Message") ) + "";
+
+
+//// == 演算 / Calculating ==
+var uri = "https://api.chatwork.com/v2/rooms/" + roomId + "/messages";
+
+var response = httpClient.begin()
+  .header( "X-ChatWorkToken", apiToken )
+  .formParam( "body", message )
+  .post( uri );
+
+
+//// == ワークフローデータへの代入 / Data Updating ==
+//ログデータの指定があれば
+var dataNum_Log = configs.get("conf_Log") + "";
+if (dataNum_Log !== "") {
+  var log = "";
+  log += "---PUT request--- " + response.getStatusCode() + "\n";
+  log += response.getResponseAsString() + "\n";
+  engine.setDataByNumber( dataNum_Log, log );
+}
+]]></script>
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFN0lEQVRYR8WXeWxUVRTGf/fNm3ml
+GEopFkQQ0RAgBCmIhBKVtkElrIIJ0QS1EFDZWzQ2BAQUFKpUissfRJBKIHGJYdFgUDItEWdYJCkk
+BFkiFQuRAmYaaOkw8941773OdPYZxOD8MzO55577nXO+75x7Bf/zR9zO+f6iwmeFwhhDUiAQXREU
+WPsl9RLpUwT1Uoo6rdazO1O/aQHIooKut5TsxUjKEHTNyLHEh6DaZbRuFHX1vlR7UgK4VTKqVEpl
+Q8YHx55kApFyplbn3ZUMRFIAt0oKqyVicUYRpzESyGqX21ueyCwhAH9xYQ1CvPxfHB7ho0Zze2bG
++owDcLuRi0GDcUybjjLkEVBVjLOn0b/9GvnrkTj8ArnR5faWRS5EAbBqjrI108jFyFE4l1TAvfnR
+W1puoO/Yhv7VjnhXhpwayYkwAIvtIvt8LOEcz89AGTcBkdcd/G0YRw8T3LIJWlpwVn2MGDAQmn3o
+e3bC9esoE6cg+jwA164SWLsaWX8sGoTE55Kt/ULqCAPwl4xeBayMtFYrlqOMfRoUR5QT+fs59D27
+UOfMBYeCvnkT+s5vLBtR8CjOpW9BbjerFPqmTxIl9G3N7THPIwJAoQ9ETsja8cIMHC/Osuvq/QXj
+YB2i/0Ac48ZDdmfkhQZEr95W9LGROj/fjujbD2PvdwSr1sUDkPi0Wk9uGIDZ4VDEzkhLZ+UGxIiR
+yBPHCZTPCy855pfhmDLN/i8E8mIjweVvIhv/vJ0MQDsXrAwkYr7zg42I4SPiolCeegZ10RuQnQ1/
+X0P/fjfyUqN9eLfuOCZOgft6JedAeyghRVgA2ooL64QQY6Lqv3odyugnkGfPECifDzdbreUoAMnk
+kkoF7XuklAeyar1FNoCSwgaB6BvpT5k8FfWVeZDVCZN0xr4fkE2XrcjVBeWQpYHfD0IBTbPKYfJB
+XrqIccCNcaIeefq35IqW1Gu1nmEWAH/JaJnIUl24BGX8JHC57GUpkefOIHr3sWRokk8pGIYpVStD
+Lg2ysmxbXcc4doRgVSVcvZIQiOb2mLCTA7BS/viTKBMmI7rnIzrfA7m5ljJMAOYBoksOYugwZOMF
+jMNelOGPIXJyIC/Pyo48dpRARcIxQBhAohJElWPSVNSXZkK3vKQplX+cJzBrRoda5sy1WjSBAMFP
+qzH27Y3eKzmu1XoKkpIwZK0Uj0Vd9Dp06QItN5BNTSANe9npQvTsaX3HAjDLpL63HpHfA/3L7eg1
+m6MARJEw1QBSQ2ow9b72HeSpk7bkzI5XsQzye9iOL/9FYPWKjvU0AKJkmKgRheAm62qO0tk2+fxt
+dqvO0jDc+wlWr7cIGW7jLa0EP6rCcP8UXYLIRmQTMboVhwF8tg3x0MNWDYPvv9tR41cX4HhuOlxp
+wjh1EmVMsS1JU5rmx5SmNDD2/0iwck0Md2Sz5vZa17uUw8g0UJetwuSBWX+9Zos1dMwGpS5aYo1h
+45CH4JqVqPMWopQ83SHDtjaMgwfCGYlBED+M7Mtnp4bIgWQhHDQYdekKxP29wdDtCM3ozLRfaSLw
+YSXyyCHbf6dslBEjrZ+GeSFp754x9G92GTcfjBvHplGyC4mpc3X2a4j+A8DptIDIhvPoWzdjeH6O
+CS7N32QXktC2dFcyMWQo8tzZJNGlxRJOfcjy7l1KpfxCq/WWxkK8K9dyIC7ylBkILdr9gZpYYqZN
+dNhANmNQ+q8eJiEf7U+zMpBlmQORzSDMp1n1HT3NYiNtf5wWRTxOh1o2kuPhx6lBXaqIM+ZA5mm+
+M8t/AIpmVT+GQNEVAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
