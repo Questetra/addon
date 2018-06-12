@@ -8,8 +8,8 @@
 2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/spreadsheets
 </summary>
 
-<help-page-url>https://support.questetra.com/addons/services/googlesheets-valueupdate/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-valueupdate/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/googlesheets-valueupdate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-valueupdate/</help-page-url>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
