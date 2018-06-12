@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>File Name Generator</label>
+<label locale="ja">ファイル名ジェネレータ</label>
+<last-modified>2016-08-31</last-modified>
+
+<configs>
+  <config name="conf_PrefixCharacter" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>A: Set Prefix Letters for Filename (e.g. "Quote-")</label>
+    <label locale="ja">A: ファイル名の先頭文字をセットしてください（例： "Quote-"）</label>
+  </config>
+  <config name="conf_PostfixCharacter" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>B: Set Postfix Letters for Filename (e.g. ".pdf")</label>
+    <label locale="ja">B: ファイル名の末尾文字をセットしてください（例： ".pdf"）</label>
+  </config>
+  <config name="conf_FileNameDataId" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select FILE NAME DATA (update)</label>
+    <label locale="ja">C: ファイル名を格納するデータ項目 (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var prefix = configs.get("conf_PrefixCharacter") + "";
+var postfix = configs.get("conf_PostfixCharacter") + "";
+var dataIdC = configs.get("conf_FileNameDataId");
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+// no need
+
+//// == 演算 / Calculating ==
+var pid = processInstance.getProcessInstanceId() + "";
+
+var myToday = new Date(); 
+var yyyy = myToday.getFullYear(); 
+var M = myToday.getMonth() + 1; // Jan: 0 
+var d = myToday.getDate();
+var H = myToday.getHours();
+var m = myToday.getMinutes();
+
+var myFileName = "";
+myFileName += prefix;
+myFileName += ('0000' + pid).slice(-6);
+myFileName += "-";
+myFileName += yyyy;
+myFileName += ('0' + M).slice(-2);
+myFileName += ('0' + d).slice(-2);
+myFileName += ('0' + H).slice(-2);
+myFileName += ('0' + m).slice(-2);
+myFileName += postfix;
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdC, myFileName );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEFUlEQVRYR8VXQVIbORT9X2bVXgROEDjBhBPE2YFEVcgJEk4w5ASBE4w5QewT4FQhwS7mBIETBE4wnkU3G7p/6mkkl1rT7ZhJqugqqgC1paf333v/m+mZH37m8+mXAezt7W0z80tc5OHh4XY+ny+ecqn/DUBr/YmIPjDzdnqgiNwR0biqquk6YJ4MQGv9iojO84PzW4vITdM0766urgCo93kSANA9GAy+EdEmdhSRM6XU7OLiYo6/sa6U+kBEx8z8gojm1to3vw2A1vobM78SkX+IaOScuxmNRh5MSvfBwcFIRL4GkLt4rw/E2gxorVHvz+mmOLwoCoDarOt6N6XbGCN4l5nfRIa6QDwFwPdQ96m1FjRTBmrmnHuH/6cM1HW9s0oHawGA8JgZtad0w1iSeDMIj5lhw1Fg6otz7vCXNaC1PmFm2O7WWgsXEOgfDod/h4Oumfl1ZsfrqqoOf2bFlQzEkGHmcRDfmXPuOKe/LMutoiiQB/62YOLy8nK2TiD1AtBaf2ZmX+v4pIIyxkyI6H2y/NFaO17n0NaeXR8Ifv+er1lrl4Dz+od3fR4Q0cRaO8UvxhiARNlg33nTNNNUlJ0MGGNA818icu+ca0VtDioVaKYBeH+zKzFF5Ng5d+Zt2sWA1nrGzG+RL03TnIS63kfkaQNCmfCDVCSiRThwWRqEFjPPQo/Au75xEZEvWR8AiO7P7EbLRNNa5+ut+kcG4Zq6rr0wlVJIzknUDgA553Y6AYSEAwveWriFc85HLp6O+o+bprlOlW+MucHhYC28v22t3drf3z9USp1jH2hqpQ0TtK1AiTGbl09ETp1zvmS4BDIgyRBc5A6xDW2IyLVzbrQSgNY6xu+S4vQGHfpZlGW5E8Mn757x/bSZ9QJIrSgiq+rfwiEiR6h1sKDPCrgphBT0AHGDiRmsmvoaovMxy8zw81aXFRNWugzkZ4SYlomd76qq2i2K4isSNWHilIPgWguZ+pcbpl2u63RQW1XVdlYCH2giAlEfBvrRtCDwBaeWAvogkqWP0+5njMGQ4TtdDwAvwijA4JiWZSE+ERlHJwDAf4SGPo/BEqNVUk+fjhk7pygbQiumZhjLzp1zu9ENw+FwLCIAjnREZ8Ve0MYXjpbCANnXwdLBA+FCRH9EH4cDsbEf0RKWOptTNsQcgQEfu2ihSqmPcXwK2ngd0Ebap3VdnwwGg9io5nVdHyFsgmswsi1LJCKTpmlO47pS6j0zx2j/NwfCmD0PU2xfeVvqzhjp+sySpZ4Nb8uyHEGs3oYBBMTSmmrCh6fMPMkHSwRSGFRicwHIe4zleBcJmIznfqvgAHxpGUentIIING5sbPj2+/j4ePezLxURvFJqs2maRdf4jcthHe92TcdrDaW9dfkNC88O4AcIzqgZxW8imAAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
