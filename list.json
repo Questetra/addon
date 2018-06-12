@@ -779,6 +779,21 @@
             "en": "https://support.questetra.com/addons/openchat-posttextfiledata/",
             "ja": "https://support.questetra.com/ja/addons/openchat-posttextfiledata/"
         }
+    },
+    {
+        "id": "Converter-TsvToExcelCsvSjis",
+        "file": "https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsvSjis.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Converter (TSV to Excel-CSV) SJIS",
+            "ja": "コンバータ (TSV to Excel-CSV FILE) SJIS"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/converter-tsvtoexcelcsvsjis/",
+            "ja": "https://support.questetra.com/ja/addons/converter-tsvtoexcelcsvsjis/"
+        }
     }],
     "options": [
     {
