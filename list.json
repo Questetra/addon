@@ -166,8 +166,8 @@
         }
     },
     {
-        "id": "GoogleSheets-sumNumbersCom",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml",
+        "id": "GoogleSheets-sumNumbers",
+        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbers.xml",
         "last-modified": "2017-11-19",
         "label":
         {

@@ -4,8 +4,8 @@
 <label locale="ja">Google スプレッドシートのセル合計</label>
 
 <last-modified>2016-09-13</last-modified>
-<help-page-url>https://support.questetra.com/addons/services/googlesheets-sumnumbers/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-sumnumbers/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/googlesheets-sumnumbers/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-sumnumbers/</help-page-url>
 
 
 <configs>
