@@ -8,9 +8,8 @@
 <summary>Creates a copy of a file into the Folder (supports Team Drives)</summary>
 <summary locale="ja">既存ファイルを複製し、指定フォルダに新規保存します (チームドライブ対応)</summary>
 
-<help-page-url>https://support.questetra.com/addons/services/googledrive-filescopy/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googledrive-filescopy/</help-page-url>
-
+<help-page-url>https://support.questetra.com/addons/googledrive-filescopy/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googledrive-filescopy/</help-page-url>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
