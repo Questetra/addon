@@ -4,8 +4,8 @@
 <label locale="ja">Google Sheet 2列データの一括取得</label>
 
 <last-modified>2016-09-21</last-modified>
-<help-page-url>https://support.questetra.com/addons/services/googlesheets-getidslabels/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-sumnumbers/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/googlesheets-getidslabels/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-getidslabels/</help-page-url>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
