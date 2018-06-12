@@ -67,8 +67,8 @@
   <label>Creating Folder on Google Drive</label>
   <label locale="ja">Google Drive フォルダ生成</label>
 
-  <help-page-url>https://www.questetra.com/tour/m4/m415/addon-googledrive-foldercreate/</help-page-url>
-  <help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-googledrive-foldercreate/</help-page-url>
+  <help-page-url>https://support.questetra.com/addons/services/googledrive-foldercreate/</help-page-url>
+  <help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googledrive-foldercreate/</help-page-url>
 
   <last-modified>2018-01-09</last-modified>
 
