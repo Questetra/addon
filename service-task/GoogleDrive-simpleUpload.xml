@@ -7,8 +7,8 @@
 <summary>Upload Files Less than 5 MB, and Update Metadata. File IDs are Comma-separated List if Multiple (supports Team Drives)</summary>
 <summary locale="ja">5MB以下のファイルを簡易アップロードし、メタデータを更新します。ファイルIDは複数時カンマ区切り (チームドライブ対応)</summary>
 
-<help-page-url>https://support.questetra.com/addons/services/googledrive-simpleupload/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googledrive-simpleupload/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/googledrive-simpleupload/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googledrive-simpleupload/</help-page-url>
 
 
 <configs>
