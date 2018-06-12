@@ -7,8 +7,8 @@
 <summary>Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.</summary>
 <summary locale="ja">シート末尾に１行追加し、その各セルにデータを入力します。必要あれば行領域を拡大します。</summary>
 
-<help-page-url>https://support.questetra.com/addons/services/googlesheets-appendcells/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googlesheets-appendcells/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/googlesheets-appendcells/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-appendcells/</help-page-url>
 
 
 <configs>
