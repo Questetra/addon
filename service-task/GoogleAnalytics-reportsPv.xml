@@ -8,8 +8,8 @@
 2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/analytics.readonly
 </summary>
 
-<help-page-url>https://support.questetra.com/addons/services/googleanalytics-reportspv/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googleanalytics-reportspv/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/googleanalytics-reportspv/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googleanalytics-reportspv/</help-page-url>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
