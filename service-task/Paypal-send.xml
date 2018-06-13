@@ -5,8 +5,8 @@
 
 <last-modified>2017-06-02</last-modified>
 
-<help-page-url>https://support.questetra.com/addons/services/paypal-send/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/paypal-send/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/paypal-send/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/paypal-send/</help-page-url>
 
 <configs>
   <config name="conf_ClientId_Secret" required="true" form-type="TEXTAREA">
