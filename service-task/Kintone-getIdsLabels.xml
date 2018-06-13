@@ -4,6 +4,8 @@
 <label locale="ja">Kintone 2列データの一括取得</label>
 <last-modified>2016-09-21</last-modified>
 
+<help-page-url>https://support.questetra.com/addons/kintone-getidslabels/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/kintone-getidslabels/</help-page-url>
 <configs>
   <config name="conf_SubDomain" required="true" form-type="TEXTFIELD">
     <label>A: Set Sub-Domain (https://{subdomain}.kintone.com/)</label>
