@@ -5,8 +5,8 @@
 
 <last-modified>2018-01-29</last-modified>
 
-<help-page-url>https://support.questetra.com/addons/services/paypal-createjpy/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/paypal-createjpy/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/paypal-createjpy/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/paypal-createjpy/</help-page-url>
 
 <configs>
   <config name="conf_ClientId_Secret" required="true" form-type="TEXTAREA">
