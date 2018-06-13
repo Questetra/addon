@@ -8,8 +8,8 @@
 
 <last-modified>2017-11-19</last-modified>
 
-<help-page-url>https://support.questetra.com/addons/services/http-filesget/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/http-filesget/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/http-filesget/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/templates/http-filesget/</help-page-url>
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
