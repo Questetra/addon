@@ -4,8 +4,8 @@
 <label locale="ja">PayPal 請求書 ステータス確認</label>
 
 <last-modified>2017-06-03</last-modified>
-<help-page-url>https://support.questetra.com/addons/services/paypal-status/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/paypal-status/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/paypal-status/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/paypal-status/</help-page-url>
 
 <configs>
   <config name="conf_ClientId_Secret" required="true" form-type="TEXTAREA">
