@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Generate Transfer Slips</label>
+<label locale="ja">振替伝票の生成</label>
+
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>A: Select REMARK STRING DATA</label>
+    <label locale="ja">A: 摘要データが格納されている文字列型データ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>B: Select NUMERIC DATA for Total Amount</label>
+    <label locale="ja">B: 総額が格納されている数値型データ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>C: Select DATE DATA for Service Start Month</label>
+    <label locale="ja">C: サービス開始月が格納されている日付型データ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>D: Select NUMERIC DATA for Terms of Months</label>
+    <label locale="ja">D: 契約月数が格納されている数値型データ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>E: Select TABLE DATA (update)</label>
+    <label locale="ja">E: テーブル型データ項目を選択してください（更新）</label>
+  </config>
+  <config name="conf_debitsTitle" required="false" form-type="TEXTFIELD">
+    <label>F: Set Debits Title (e.g. "Advances")</label>
+    <label locale="ja">F: 借方勘定科目をセットしてください (例 "前受金")</label>
+  </config>
+  <config name="conf_debitsSubTitle" required="false" form-type="TEXTFIELD">
+    <label>G: Set Debits Sub-Title (e.g. "Maintenance Service")</label>
+    <label locale="ja">G: 借方補助勘定科目をセットしてください (例 "保守サービス")</label>
+  </config>
+  <config name="conf_creditsTitle" required="false" form-type="TEXTFIELD">
+    <label>H: Set Credits Title (e.g. "Sales")</label>
+    <label locale="ja">H: 貸方勘定科目をセットしてください (例 "売上高")</label>
+  </config>
+  <config name="conf_creditsSubTitle" required="false" form-type="TEXTFIELD">
+    <label>I: Set Credits Sub-Title (e.g. "Maintenance Service")</label>
+    <label locale="ja">I: 貸方補助勘定科目をセットしてください (例 "保守サービス")</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Transfer Slip Records Generation (ver. 20160908)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" ); // (returns Number)
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
+
+var debitsTitle     = configs.get( "conf_debitsTitle" ) + "";
+var debitsSubTitle  = configs.get( "conf_debitsSubTitle" ) + "";
+var creditsTitle    = configs.get( "conf_creditsTitle" ) + "";
+var creditsSubTitle = configs.get( "conf_creditsSubTitle" ) + "";
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var remarkString = data.get( dataIdA ) + "";
+var totalAmount = data.get( dataIdB );
+var startMonth = data.get( dataIdC ).getFirstDateInMonth();
+//  startMonth: com.questetra.bpms.util.AddableDate()
+var termsMonth = data.get( dataIdD ) - 0;
+
+//// == 演算 / Calculating ==
+var monthlyAmount = Math.floor( totalAmount / termsMonth );
+var startAmount = totalAmount - monthlyAmount * (termsMonth -1);
+
+var myTable = new com.questetra.bpms.core.model.formdata.ListArray();
+for (var i=0; i < termsMonth; i++){
+  var tmpRow = new com.questetra.bpms.core.model.formdata.ListArray.ListRow();
+  tmpRow.addCol( startMonth.addMonths(i) + "" );
+  tmpRow.addCol( debitsTitle );
+  tmpRow.addCol( debitsSubTitle );
+  if( i === 0 ){
+    tmpRow.addCol( startAmount );
+  }else{
+    tmpRow.addCol( monthlyAmount );
+  }
+  tmpRow.addCol( creditsTitle );
+  tmpRow.addCol( creditsSubTitle );
+  if( i === 0 ){
+    tmpRow.addCol( startAmount );
+  }else{
+    tmpRow.addCol( monthlyAmount );
+  }
+  var yyyy_MM = (startMonth.addMonths(i) + "").slice(0,7);
+  tmpRow.addCol( yyyy_MM + "_@_" + remarkString );
+  myTable.addRow( tmpRow );
+}
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdE, myTable );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABv0lEQVRYR+1XPU7DMBj1l0xpJcQFUBkZYe2Cx9bJ0CP0COUElBPAEXqEDo1ToQ6uxA5HgBuwVJ3qD32ortxUKc5PE4HIEiV+iV/e+75nB1jqEEKMAeA+fb+Ka0R8kFKO7XfBP4GfFCDZyshv21nIgjiOD2w6RkgIcU3jUso3OodhiAZ/cgI0udb6CgDOEPF5Pp+/10qg2+126GtbrdbFYrF4aUKBMbVZGIajOI6faidAE1KOaK0nJH8lBBBxLzjydgQA7J4vVIR5JzyG/50EEHGZ9VUAcEtjLpgtLv9acCyITI+7YCohIIRQUkpuFKmNQK/XuwSAjud5SmvNEfHDTjlSwGCs2N3DlFJACDFkjA3J863fEynlxFbAYKx62cOUImBLbvtdmwWGQBRFfDabqVprgDzPakOqCRpzwRS2oPEkdAkZF0xhBVxCxgVTigDn/DwIAp4kybTf7w/W67VSSn3aXUAFqrX+jmY6PM9bUsFWsiMiAu12WyHiKwDcrFYrnkFgV7BUoJUR2G4sRoyxR8bYXXq3c3ILKGZ9359uNpuBOaejOP1HZdb+SizIasVaktAlZFwwhbug8SD68wS+AAh8Lj/CJSvYAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
