@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Line Counter</label>
+<label locale="ja">行数カウンター</label>
+
+<summary>Measure the number of lines in text</summary>
+<summary locale="ja">テキストの行数を計測します</summary>
+
+<help-page-url>https://www.questetra.com/tour/m4/m415/addon-line-counter</help-page-url>
+<help-page-url locale="ja">https://www.questetra.com/ja/tour/m4/m415/addon-line-counter</help-page-url>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>A: Select STRING DATA for calculating lines of text</label>
+    <label locale="ja">A: 行数計測するテキストが格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>B: Select NUMERIC DATA for the number (update)</label>
+    <label locale="ja">B: 行数が格納される数値型データ項目を選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get("conf_DataIdA");
+var dataIdB = configs.get("conf_DataIdB"); // returns key
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var targetText = data.get( dataIdA ) + "";
+
+//// == 演算 / Calculating ==
+var linesArray = targetText.split("\n");
+var numOfLines = linesArray.length;
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdB, java.math.BigDecimal( numOfLines ) );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADXUlEQVRYR61XUVLbMBDVmr+YmcIJmp6g9AR1/kBipukJmp6gcALgBNATFE7QdAaJT8wJSE5QbtB0Bpu/bOe5kisUx7JD9ZdY9j7t2933RKLHklJ+EEKMiWjIzDtEtIfXmXlGRAtmfhBCTI0xP7p+lmIb9/f3h0mSnBDRWAixE9tvnwPMtCzL4zzPF23vrAWQZdnOYDD4QkRHPQKHsQDkwhhztg5EIwAb/Nal2Ht5LoS4JKLZ4+PjzJ0O+7e3t/eYGZRMhBBv/YCgqCzLUVM2VgBIKfeI6NY/NTPfJUlyen19nXeh4PDwMFsul6dE9N7bj2yMjDEz/xvPAOAkaZr+dMGZ+bcQ4sgYc9klcLhHSjkhom8+iKIo3viZqAGEabfBsxBxXyDIqBAiJ6JXrmOMMe/cd2oAUkqk7MRuwslbgx8cHKAd0Zbg96qt2i2t9y4oM58ZY07xuwLQkPrPbWlH8CRJvnvZyLXWo7bsBHQsHBUVAKUUOP5kT39njMnaPubvd/uKotiN9byUElS4wrzSWk8cgF+u8IhoFKt2pRRmw7mX0t/GmOiQQncwMzoMa6G13qUgnXOtdTVe25Yt2ClO07dTlFJow2pOLJfLjxSk81hrfRED8JLnQbF/JZ+XLukPg9uhMzbGgJbo8mnAgAOAezdyuxSSi2BbC3UAXqOF696DuG1tbWHY/VVRpRS7h1rrqDpa/s+JCDO/Wn0A2K6rY/YGgH6G4BARqr4qppcCqKuyDwUhl7HZ0USBEGK+cRFuCmClCDdtw00BrLShP4hQlb5StfXUCwDUXVcNIgSRUi6cXHadBZsACN6pxveKGEG7OygbxjX8omtFuJ1JzA0rpaADTuj+iZHt7QfPNLTKcaBqNVNtc8SXY+hHWZZDqGejIYFSNfk3bwri5MOwRpzJCP+PGhL3gq9UMRDRoW83NJjcZ4q7YkoHg0FNhQVx/L9MqZ96d4BGW+6bSLsRTuYsZlTcR221w1/WzmqdyV17MUnTFHeAlQsG7n7MnD89Pc2dBYPCEdFrIkJAmNXQ1MyLosg6XUx8bjG1cC9w3dGVd08l4a5xNasccNPqJL9pml4wM05WefvYQrqJaFoUxVHMqEYB+MHs2B4zM1JeyzFUjZlxC56Bnpubm2kMpHv+B4f7Zsut/FA0AAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
