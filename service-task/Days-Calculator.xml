@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Days Calculator</label>
+<label locale="ja">日数計算</label>
+
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>A: Select DATE DATA [e.g.2016-09-01]</label>
+    <label locale="ja">A: 日付型データを選択してください [例:2016-09-01]</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>B: Select DATE DATA [e.g.2016-09-03]</label>
+    <label locale="ja">B: 日付型データを選択してください [例:2016-09-03]</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>C: Select NUM OF ELAPSED DAYS DATA [2] (update)</label>
+    <label locale="ja">C: AからBまでの経過日数[2]が格納される数値型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" ); // (returns Number)
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var dayA = data.get( dataIdA );
+var dayB = data.get( dataIdB );
+
+//// == 演算 / Calculating ==
+var msec = dayB.getTime() - dayA.getTime();
+var days = Math.round( msec / 1000 / 3600 / 24 );
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdC, java.math.BigDecimal( days ) );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABv0lEQVRYR+1XPU7DMBj1l0xpJcQFUBkZYe2Cx9bJ0CP0COUElBPAEXqEDo1ToQ6uxA5HgBuwVJ3qD32ortxUKc5PE4HIEiV+iV/e+75nB1jqEEKMAeA+fb+Ka0R8kFKO7XfBP4GfFCDZyshv21nIgjiOD2w6RkgIcU3jUso3OodhiAZ/cgI0udb6CgDOEPF5Pp+/10qg2+126GtbrdbFYrF4aUKBMbVZGIajOI6faidAE1KOaK0nJH8lBBBxLzjydgQA7J4vVIR5JzyG/50EEHGZ9VUAcEtjLpgtLv9acCyITI+7YCohIIRQUkpuFKmNQK/XuwSAjud5SmvNEfHDTjlSwGCs2N3DlFJACDFkjA3J863fEynlxFbAYKx62cOUImBLbvtdmwWGQBRFfDabqVprgDzPakOqCRpzwRS2oPEkdAkZF0xhBVxCxgVTigDn/DwIAp4kybTf7w/W67VSSn3aXUAFqrX+jmY6PM9bUsFWsiMiAu12WyHiKwDcrFYrnkFgV7BUoJUR2G4sRoyxR8bYXXq3c3ILKGZ9359uNpuBOaejOP1HZdb+SizIasVaktAlZFwwhbug8SD68wS+AAh8Lj/CJSvYAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
