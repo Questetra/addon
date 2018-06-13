@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Accumulated Hours Calculator</label>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="DATETIME">
+    <label>A: Select DATETIME DATA for Start</label>
+    <label locale="ja">A: 計測開始時刻が格納されている時刻型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="DATETIME">
+    <label>B: Select DATETIME DATA for End</label>
+    <label locale="ja">B: 計測完了時刻が格納されている時刻型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>C: Select NUMERIC DATA for Elapsed Time (h) (update)</label>
+    <label locale="ja">C: 経過時間(h)が格納されている数値型データを選択してください（更新）</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="DECIMAL">
+    <label>D: Select NUMERIC DATA for Arrival Count (update)</label>
+    <label locale="ja">D: 到達回数が格納されている数値型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Lost Time Calculator (ver. 20170523)
+// (c) 2017, Questetra, Inc. (the MIT License)
+
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" );
+var dataIdB = configs.get( "conf_DataIdB" );
+var dataIdC = configs.get( "conf_DataIdC" );
+var dataIdD = configs.get( "conf_DataIdD" );
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var loopCount = data.get( dataIdD ) - 0; // Java to JavaScript Number
+var lostTime  = data.get( dataIdC ) - 0; // Java to JavaScript Number
+
+var startTime = data.get( dataIdA ); 
+var endTime   = data.get( dataIdB ); 
+// com.questetra.bpms.util.AddableTimestamp
+
+//// == 演算 / Calculating ==
+loopCount = loopCount + 1;
+var intervalMilliSec = endTime.getTime() - startTime.getTime();
+var intervalHour = Math.ceil( intervalMilliSec / 10 / 3600 ) / 100;
+lostTime = lostTime + intervalHour;
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdD, java.math.BigDecimal( loopCount ) );
+retVal.put( dataIdC, java.math.BigDecimal( lostTime ) );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABv0lEQVRYR+1XPU7DMBj1l0xpJcQFUBkZYe2Cx9bJ0CP0COUElBPAEXqEDo1ToQ6uxA5HgBuwVJ3qD32ortxUKc5PE4HIEiV+iV/e+75nB1jqEEKMAeA+fb+Ka0R8kFKO7XfBP4GfFCDZyshv21nIgjiOD2w6RkgIcU3jUso3OodhiAZ/cgI0udb6CgDOEPF5Pp+/10qg2+126GtbrdbFYrF4aUKBMbVZGIajOI6faidAE1KOaK0nJH8lBBBxLzjydgQA7J4vVIR5JzyG/50EEHGZ9VUAcEtjLpgtLv9acCyITI+7YCohIIRQUkpuFKmNQK/XuwSAjud5SmvNEfHDTjlSwGCs2N3DlFJACDFkjA3J863fEynlxFbAYKx62cOUImBLbvtdmwWGQBRFfDabqVprgDzPakOqCRpzwRS2oPEkdAkZF0xhBVxCxgVTigDn/DwIAp4kybTf7w/W67VSSn3aXUAFqrX+jmY6PM9bUsFWsiMiAu12WyHiKwDcrFYrnkFgV7BUoJUR2G4sRoyxR8bYXXq3c3ILKGZ9359uNpuBOaejOP1HZdb+SizIasVaktAlZFwwhbug8SD68wS+AAh8Lj/CJSvYAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
