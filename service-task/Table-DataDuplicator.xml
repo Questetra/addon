@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Data Duplicator (Table)</label>
+<label locale="ja">データ複製 (テーブル)</label>
+
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>A: Select TABLE DATA</label>
+    <label locale="ja">A: テーブル型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>B: Select TABLE DATA (update)</label>
+    <label locale="ja">B: テーブル型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" );
+var dataIdB = configs.get( "conf_DataIdB" );
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var tableOriginal = data.get( dataIdA );
+// com.questetra.bpms.core.model.formdata.ListArray
+
+//// == 演算 / Calculating ==
+//
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdB, tableOriginal );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACR0lEQVRYR92XzW3bQBCF5y10kWAg6iDqIHYFoW7SUgengjgd2BVEriDuIEoFyUFc6Wa6gqgEu4LEgHQT+IIRvApFi+JGJODAvHJ23sf54c5AAh5r7amIfAZwHmDuTVKSV865xaEzqHKo4gBuSQLAG5LXVWf0vcKSpHPu7GgALy4iD1mWjY0x35MkqYRWweFweB5iX+osL75araKTk5NTkrehAKPRKAqx3wtQFE/T9HeoQx/uvL36I6npe5jP5/f5lDwD2CeuB2oCpADeqx+SE+fcJw+xA1AmXgSIoqjbbrffFYsr/4V54MFg0Gu1Wj2S2k1fAPSn02m6KVbvRJ12Op2fAB415xr2vIC19gLAV60B73wPwLVzbnwoYnEca3Ns7bYAXoDkAsCOOMkuAM3jnXMuCmnDspQdAhgD0J9Nv0xguVwuipEpsz0aILTNqqLQCICmRUTeVon598aYO19cTQHciIhWbuijLTY5tgg3NfBfpSD0s/fZNZKCFwew1t4AePbHKwMj+a3RGnjqgl5oJIwxaaNdECr8emvgxSNgrd3e4yEw+VuukTbU+cAY0w0RV5v1en3vJ55GAEKFX0cR+pCRvNShpM7Xb0Yt4FJE+s65nRSWDiR6KI5jvck+1hXX8yQfSV7MZrMfeX8HAdTQD5B1IfwfseinEqB4wFo7zrJsUpznjwX8ZwA9kGXZh2Io6wCIyFWSJDrs/B3Lyxxaa3WT+SUiO7k8EkAXXV1az/zWXLloPq3mei1vNps6jy4uIjL2V7b6+gMMhak/PHHp2QAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
