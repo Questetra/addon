@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Delete Data (Overwrite with Null)</label>
+<label locale="ja">データ削除 (Null の上書き)</label>
+<last-modified>2016-11-22</last-modified>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING|DECIMAL|DATE|DATETIME|SELECT|SELECT_SINGLE|SELECT_CHECKBOX|QUSER|QGROUP|LIST|FILE">
+    <label>A: Select DATA ITEM to be deleted</label>
+    <label locale="ja">A: 削除するデータ項目を選択してください</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" );
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+// 
+
+//// == 演算 / Calculating ==
+// 
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdA, null );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACcklEQVRYR82XXZISMRDHu+cRHlxP4HoC2RM4vEFClXoC9wbCCWRP4HoC1xPoVpHA244nkL0BnkB8GN5IbzXFWJNMMkwYsMwjZNK//PsrjRC5BoPBZZIkD4h4Wf6UiFbGmP5isVjFHIkxm3mvEGKKiB993xHRjdZ6GnNmYwC+OSK+SJKEDaQBI5kxZkpEv5oqEQQQQvQA4DUbQ0Q2eBFzMwBYE1EGAAx1HwKyANI0veh0Op/2Ri0fRxqvbOcYYZjNZjPJsmxdbLAApJRjAGCAc66JUurWC1AXYKcicgO1cRCeCsA9pwLAKgAAncug1vqmfHYFQEp5NuNsWCll2fz/AIQQGSJy/p98EdEPrbVVxHwxYAEQ0R8iukbEsQdssqe0UpcNEdEtIt4h4rPiJscC7KiHw+HbJEm+lWUp/OnGDSL2Z7NZ5qrZFIDJP7jUo9EoJaKHlgCftdZc7P4ubxqWux0RLbXWV8cASCmXAPCqdJlKtzwIUKTOkQBWSvvatQ+AA+6LKzU3qm63+7uJC/I8f84Nx40NY8y7+Xz+vdYFMTcNBeGh4PwnAD7Fiuw4FIQ9RPxpbdqnlStpnQI+Jbfb7Uv3YeLthjV5veJnWQEXAHhUSvXqXFmrAP/ZtLD4AIpi0wpACLEul9BQZYsB4JKuta68K70u8JTQXQFxf68DcF9XvjLMakcBSCnvAOD9gRj4qpS6PguAe2hAgUIta4CJVcD92HtoJIB3agq5wB2/MqVUXwjhdsqrnR9LdYOIdh2vSSMKxoCv97d9Hvn6QBBgPyEty0WnJcBjnudpeSIqzgvOBfsxnCV/08Y4Ed0bY8ah2fAJ3LckP/Cp6rUAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
