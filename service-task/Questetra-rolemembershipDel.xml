@@ -9,8 +9,8 @@
 </summary>
 
 <last-modified>2017-12-11</last-modified>
-<help-page-url>https://support.questetra.com/addons/services/questetra-rolemembershipdel/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/questetra-rolemembershipdel/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/questetra-rolemembershipadd/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/questetra-rolemembershipadd/</help-page-url>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
