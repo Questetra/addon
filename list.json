@@ -809,6 +809,21 @@
             "en": "https://support.questetra.com/addons/openchat-post/",
             "ja": "https://support.questetra.com/ja/addons/openchat-post/"
         }
+    },
+    {
+        "id": "Converter-DateToJpEra",
+        "file": "https://questetra.github.io/addon/service-task/Converter-DateToJpEra.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Converter (Date to Japanese Era String)",
+            "ja": "コンバータ (Date to 和暦テキスト)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/converter-datetojpera/",
+            "ja": "https://support.questetra.com/ja/addons/converter-datetojpera/"
+        }
     }],
     "options": [
     {
