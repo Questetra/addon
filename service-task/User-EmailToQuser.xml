@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Converter (Email to Quser)</label>
+<label locale="ja">コンバータ (Email to Quser)</label>
+
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>A: Select STRING DATA for Email Address</label>
+    <label locale="ja">A: メールアドレス情報が格納されている文字列型データ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="QUSER">
+    <label>B: Select USER DATA (update)</label>
+    <label locale="ja">B: ユーザ型データ項目を選択してください（更新）</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" );
+var dataIdB = configs.get( "conf_DataIdB" );
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var quserEmail = data.get( dataIdA ) + ""; // Email-Address
+
+//// == 演算 / Calculating ==
+var quser = quserDao.findByEmail( quserEmail );
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdB, quser );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
