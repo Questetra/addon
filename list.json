@@ -839,6 +839,21 @@
             "en": "https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/",
             "ja": "https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/"
         }
+    },
+    {
+        "id": "Converter-TsvToTable",
+        "file": "https://questetra.github.io/addon/service-task/Converter-TsvToTable.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Converter (Tsv to Table)",
+            "ja": "コンバータ (Tsv to Table)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/converter-tsvtotable/",
+            "ja": "https://support.questetra.com/ja/addons/converter-tsvtotable/"
+        }
     }],
     "options": [
     {
