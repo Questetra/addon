@@ -854,6 +854,21 @@
             "en": "https://support.questetra.com/addons/converter-tsvtotable/",
             "ja": "https://support.questetra.com/ja/addons/converter-tsvtotable/"
         }
+    },
+    {
+        "id": "Tsv-AddClumn",
+        "file": "https://questetra.github.io/addon/service-task/Tsv-AddClumn.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Add Column to Tsv",
+            "ja": "TSV の列追加"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/tsv-addclumn/",
+            "ja": "https://support.questetra.com/ja/addons/tsv-addclumn/"
+        }
     }],
     "options": [
     {
