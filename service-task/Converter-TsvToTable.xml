@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Converter (Tsv to Table)</label>
+<label locale="ja">コンバータ (Tsv to Table)</label>
+
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>A: Select TSV STRING DATA</label>
+    <label locale="ja">A: TSVデータが格納されている文字列型データ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>B: Select TABLE DATA (update)</label>
+    <label locale="ja">B: テーブル型データ項目を選択してください（更新）</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" ); // (returns Number)
+var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var myTsv = data.get( dataIdA ) + "";
+// "Java String" to "JavaScript String" for Rhino Engine
+
+//// == 演算 / Calculating ==
+var myTable = new com.questetra.bpms.core.model.formdata.ListArray();
+var linesArray = myTsv.split("\n"); // string[]
+
+for (var i=0; i < linesArray.length; i++){
+  var tmpRow = new com.questetra.bpms.core.model.formdata.ListArray.ListRow();
+  var cellsArray = linesArray[i].split("\t");
+
+  for (var j=0; j < cellsArray.length; j++){
+    tmpRow.addCol( cellsArray[j] );
+  }
+  myTable.addRow( tmpRow );
+}
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdB, myTable );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
