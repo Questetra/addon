@@ -824,6 +824,21 @@
             "en": "https://support.questetra.com/addons/converter-datetojpera/",
             "ja": "https://support.questetra.com/ja/addons/converter-datetojpera/"
         }
+    },
+    {
+        "id": "Converter-TsvToExcelCsvSjis",
+        "file": "https://questetra.github.io/addon/service-task/Converter-TableToExcelCsvSjis.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Converter (Table to Excel-CSV FILE sjis)",
+            "ja": "コンバータ (Table to Excel-CSV FILE sjis)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/",
+            "ja": "https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/"
+        }
     }],
     "options": [
     {
