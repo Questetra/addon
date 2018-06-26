@@ -869,6 +869,21 @@
             "en": "https://support.questetra.com/addons/tsv-addclumn/",
             "ja": "https://support.questetra.com/ja/addons/tsv-addclumn/"
         }
+    },
+    {
+        "id": "Converter-TableToExcelCsv",
+        "file": "https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Converter (Table to Excel-CSV FILE)",
+            "ja": "コンバータ (Table to Excel-CSV FILE)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/converter-tabletoexcelcsv/",
+            "ja": "https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/"
+        }
     }],
     "options": [
     {
