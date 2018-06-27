@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Connector for TSV Bulk Start</label>
+<label locale="ja">コネクタ（TSV一括開始）</label>
+
+
+<configs>
+  <config name="conf_applicationRoot" required="true" el-enabled="true" form-type="TEXTFIELD">
+    <label>A: Set WORKFLOW-PLATFORM URL (e.g. "${var[applicationRoot]}")</label>
+    <label locale="ja">A: 接続先のワークフロー環境URLをセットしてください (例 "${var[applicationRoot]}")</label>
+  </config>
+  <config name="conf_key" required="true" el-enabled="true" form-type="TEXTFIELD">
+    <label>B: Set SECURITY KEY (e.g. "${var[key]}")</label>
+    <label locale="ja">B: 接続先のセキュリティキーをセットしてください (例 "${var[key]}")</label>
+  </config>
+  <config name="conf_processModelInfoId" required="true" form-type="TEXTFIELD">
+    <label>C: Set PROCESS MODEL ID to Connect (e.g. "123")</label>
+    <label locale="ja">C: 接続先プロセスモデルのIDをセットしてください (例 "123")</label>
+  </config>
+  <config name="conf_nodeNumber" required="true" form-type="TEXTFIELD">
+    <label>D: Set START EVENT NODE ID to Connect (e.g. "0")</label>
+    <label locale="ja">D: 接続先プロセスモデルの開始イベントIDをセットしてください (例 "0")</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>E: Select TSV STRING DATA</label>
+    <label locale="ja">E: TSV が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_fieldNames" required="true" form-type="TEXTFIELD">
+    <label>F: Set FIELD-NAMEs in Destination (e.g. "q_corp,q_div,q_name")</label>
+    <label locale="ja">F: 接続先におけるフィールド名をセットしてください (例 "q_corp,q_div,q_name")</label>
+  </config>
+  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for Access Log (update)</label>
+    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Connector for TSV Bulk Start by Batch HTTP Throw (ver. 20161221)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == Note ==
+// # of TSV-Columns must be equal to # of Field-Names (v11.0~)
+// Tab-Separated Values Limit: 10 records
+// 
+// ==Sample Format==
+// titleData=foo
+// q_stringData=foo
+// q_numericData=1234.56 // dot as decimal point, no thousands separator
+// q_selectData=true // Choice ID
+// q_dateData=2011-10-27
+// q_datetime=2011-10-27 12:34
+// q_user=sample@example.com // Email address of User
+// q_organization=Sales // Name of Group
+
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var applicationRoot = configs.get( "conf_applicationRoot" ) + "";
+var key = configs.get( "conf_key" ) + "";
+var processModelInfoId = configs.get( "conf_processModelInfoId" ) + "";
+var nodeNumber = configs.get( "conf_nodeNumber" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns ID)
+var fieldNames = configs.get( "conf_fieldNames" ) + "";
+var dataIdX = configs.get( "conf_DataIdX" );
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var myTsv = data.get( dataIdE ) + "";
+
+//// == 演算 / Calculating ==
+var accessLog = "";
+var uri = applicationRoot + "System/Event/MessageStart/start";
+var tsvRecords = myTsv.split("\n");
+var myParams = fieldNames.split(",");
+if( tsvRecords.length < 11 ){
+  for( var i = 0; i < tsvRecords.length; i++ ){
+    var fieldValues = tsvRecords[i].split("\t");
+    var httpRequest = httpClient.begin();
+    httpRequest.queryParam( "processModelInfoId", processModelInfoId );
+    httpRequest.queryParam( "nodeNumber", nodeNumber );
+    httpRequest.queryParam( "key", key );
+    for( var j = 0; j < fieldValues.length; j++ ){
+      httpRequest.queryParam( myParams[j], fieldValues[j] );
+    }
+    try{
+      var httpResponse = httpRequest.post( uri );
+      accessLog += "---POST request--- " + httpResponse.getStatusCode() + "\n";
+      accessLog += httpResponse.getResponseAsString() + "\n";
+    }catch(e){
+      accessLog += e.message + "\n";
+    }
+  }
+} else {
+  accessLog += "ERROR: TSV is limited to 10 records (" + tsvRecords.length + ") \n";
+}
+
+//// == ワークフローデータへの代入 / Data Updating ==
+retVal.put( dataIdX, accessLog );
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABNUlEQVRYR+2VwU3EMBBF/ZNCdqmEHBMnB0qADqACoALoAErgEMU57laCKSTzkVebVbTrOJbQkostRbJiZ+bpz8wP1MoLK+dXCSApkBRICkQr0DRNQXJDcjuaV5Zle7cXkdvxHQArItYYczhbWosAVVXdAXgDcEo8BiX56vYAns8TkbQkn4wxXyGIIIDW+h7Ax1yAEMAE8qHrus+5GLMAZVlu8zz/DtHHALjvh2G46fve+mJBa/2ilOL5IYBCKeWe2RULoJTakdx5Aeq6vki+1DgxPRAbA6sDHEvgAy4AnMbLdyG2BCTdSPpLMCfVvzVhqFarjuEIdjSidwAbj9mEjOiH5OOfjGia0FmxiDg3nFrxoa4iMh1Xm2WZbdvWW/OLcY8dl2vdW/wXXCvxGDcBJAWSAkmBX1xVkZzSn8IHAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
