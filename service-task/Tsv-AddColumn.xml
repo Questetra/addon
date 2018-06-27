@@ -4,8 +4,8 @@
 <label locale="ja">TSV の列追加</label>
 
 <last-modified>2017-07-14</last-modified>
-<help-page-url>https://support.questetra.com/addons/tsv-addclumn/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/tsv-addclumn/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/tsv-addcolumn/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/tsv-addcolumn/</help-page-url>
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
