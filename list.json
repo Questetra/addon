@@ -857,7 +857,7 @@
     },
     {
         "id": "Tsv-AddClumn",
-        "file": "https://questetra.github.io/addon/service-task/Tsv-AddClumn.xml",
+        "file": "https://questetra.github.io/addon/service-task/Tsv-AddColumn.xml",
         "last-modified": "2017-11-19",
         "label":
         {
