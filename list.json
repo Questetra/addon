@@ -903,7 +903,7 @@
     {
         "id": "Hash-CalculateSha256",
         "file": "https://questetra.github.io/addon/service-task/Hash-CalculateSha256.xml",
-        "last-modified": "2016-08-22",
+        "last-modified": "2016-12-22",
         "label":
         {
             "en": "Hash Calculator (SHA256)",
@@ -913,6 +913,21 @@
         {
             "en": "https://support.questetra.com/addons/hash-calculatesha256/",
             "ja": "https://support.questetra.com/ja/addons/hash-calculatesha256/"
+        }
+    },
+    {
+        "id": "Process-BulkStartTsv",
+        "file": "https://questetra.github.io/addon/service-task/Process-BulkStartTsv.xml",
+        "last-modified": "2017-11-19",
+        "label":
+        {
+            "en": "Connector (TSV Bulk Start)",
+            "ja": "コネクタ（TSV一括開始）"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/process-bulkstarttsv/",
+            "ja": "https://support.questetra.com/ja/addons/process-bulkstarttsv/"
         }
     }],
     "options": [

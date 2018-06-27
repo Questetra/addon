@@ -3,6 +3,10 @@
 <label>Connector for TSV Bulk Start</label>
 <label locale="ja">コネクタ（TSV一括開始）</label>
 
+<last-modified>2016-12-22</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/process-bulkstarttsv/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/process-bulkstarttsv/</help-page-url>
 
 <configs>
   <config name="conf_applicationRoot" required="true" el-enabled="true" form-type="TEXTFIELD">
