@@ -3,6 +3,11 @@
 <label>Hash Calculator (MD5)</label>
 <label locale="ja">Hash Calculator (MD5)</label>
 
+<last-modified>2016-08-22</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/hash-calculatemd5/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/hash-calculatemd5/</help-page-url>
+
 <configs>
   <config name="conf_SourceText" required="true" form-type="SELECT" select-data-type="STRING">
     <label>A: Select SOURCE TEXT DATA</label>

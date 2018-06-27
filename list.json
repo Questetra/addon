@@ -884,6 +884,21 @@
             "en": "https://support.questetra.com/addons/converter-tabletoexcelcsv/",
             "ja": "https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/"
         }
+    },
+    {
+        "id": "Hash-CalculateMd5",
+        "file": "https://questetra.github.io/addon/service-task/Hash-CalculateMd5.xml",
+        "last-modified": "2016-08-22",
+        "label":
+        {
+            "en": "Hash Calculator (MD5)",
+            "ja": "Hash Calculator (MD5)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/hash-calculatemd5/",
+            "ja": "https://support.questetra.com/ja/addons/hash-calculatemd5/"
+        }
     }],
     "options": [
     {
