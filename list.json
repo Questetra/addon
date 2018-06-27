@@ -899,6 +899,21 @@
             "en": "https://support.questetra.com/addons/hash-calculatemd5/",
             "ja": "https://support.questetra.com/ja/addons/hash-calculatemd5/"
         }
+    },
+    {
+        "id": "Hash-CalculateSha256",
+        "file": "https://questetra.github.io/addon/service-task/Hash-CalculateSha256.xml",
+        "last-modified": "2016-08-22",
+        "label":
+        {
+            "en": "Hash Calculator (SHA256)",
+            "ja": "Hash Calculator (SHA256)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/hash-calculatesha256/",
+            "ja": "https://support.questetra.com/ja/addons/hash-calculatesha256/"
+        }
     }],
     "options": [
     {
