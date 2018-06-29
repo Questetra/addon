@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Email a Excel-CSV (Table)</label>
+<label locale="ja">Excel-CSV のメール送付 (Table)</label>
+
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>A: Select TABLE DATA</label>
+    <label locale="ja">A: テーブル型データを選択してください</label>
+  </config>
+  <config name="conf_ColIds" required="true" form-type="TEXTFIELD">
+    <label>B: Set THROW COL IDs (e.g. "0,1,5,3,6")</label>
+    <label locale="ja">B: 送出データの項目 ID をセットしてください (例 "0,1,5,3,6")</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for To Address</label>
+    <label locale="ja">C: 宛先アドレスが格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>D: Select STRING DATA for To Name</label>
+    <label locale="ja">D: 宛先名が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>E: Select STRING DATA for Email Subject</label>
+    <label locale="ja">E: メール件名が格納される文字列型データを選択してください</label>
+  </config>
+  <config name="conf_FromAddress" required="true" form-type="TEXTFIELD">
+    <label>F: Set From Address (e.g. "noreply@example.com")</label>
+    <label locale="ja">F: Fromアドレスをセットしてください (例 "noreply@example.com")</label>
+  </config>
+  <config name="conf_FromName" required="true" form-type="TEXTFIELD">
+    <label>G: Set From Name (e.g. "Accounting News")</label>
+    <label locale="ja">G: Fromアドレス名をセットしてください (e.g. "経理ニュース")</label>
+  </config>
+  <config name="conf_ReplyToAddress" required="true" form-type="TEXTFIELD">
+    <label>H: Set ReplyTo Address (e.g. "admin@example.com")</label>
+    <label locale="ja">H: ReplyToアドレスをセットしてください (例 "admin@example.com")</label>
+  </config>
+  <config name="conf_ReplyToName" required="true" form-type="TEXTFIELD">
+    <label>I: Set ReplyTo Name (e.g. "Accounting News admin")</label>
+    <label locale="ja">I: ReplyToアドレス名をセットしてください (e.g. "経理ニュース管理者")</label>
+  </config>
+  <config name="conf_DataIdJ" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>J: Select STRING DATA for Email Body</label>
+    <label locale="ja">J: メール本文が格納される文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdK" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>K: Select STRING DATA for Attachment File Name</label>
+    <label locale="ja">K: 添付ファイル名が格納される文字列型データを選択してください</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Email Table as Excel-CSV (ver. 20160907)
+// (c) 2016, Questetra, Inc. (the MIT License)
+
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var dataIdA = configs.get( "conf_DataIdA" ); // (returns Number)
+var colIds = configs.get( "conf_ColIds" ) + "";
+var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
+var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
+var fromAddress = configs.get( "conf_FromAddress" );
+var fromName = configs.get( "conf_FromName" );
+var replyToAddress = configs.get( "conf_ReplyToAddress" );
+var replyToName = configs.get( "conf_ReplyToName" );
+var dataIdJ = configs.get( "conf_DataIdJ" ); // (returns Number)
+var dataIdK = configs.get( "conf_DataIdK" ); // (returns Number)
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var myTable = data.get( dataIdA );
+// myTable: com.questetra.bpms.core.model.formdata.ListArray
+var toAddress = data.get( dataIdC ) + "";
+var toName = data.get( dataIdD ) + "";
+var subject = data.get( dataIdE ) + "";
+var myBody = data.get( dataIdJ ) + "";
+var myFileName = data.get( dataIdK ) + "";
+
+//// == 演算 / Calculating ==
+if( myTable !== null){
+  var colIdArray = colIds.split(",");
+  var numOfCols = colIdArray.length;
+  var numOfRows = myTable.size() - 0; // 行（Tableの高さ）
+
+  var myTsv = "";
+  for( var i = 0; i < numOfRows; i++ ){
+    for( var j = 0; j < numOfCols; j++ ){
+      if( j != numOfCols - 1 ){
+        myTsv += myTable.get(i, parseInt( colIdArray[j] ) ) + "\t";
+      }else{
+        myTsv += myTable.get(i, parseInt( colIdArray[j] ) ) + "\n";
+      }
+    }
+  }
+
+  emailService.begin()
+    .addTo( toAddress, toName )
+    .setFrom( fromAddress, fromName )
+    .setReplyTo( replyToAddress, replyToName )
+    .setSubject( subject )
+    .setBody( myBody )
+    .addAttachment( myFileName, 'text/tab-separated-values; charset=x-UTF-16LE-BOM', myTsv)
+    .send();
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABiUlEQVRYR+1Wy3WDMBDc8REu6SDpIJTAWVCEXUHSQXAHTgVxEaAzJeAO7A5ygSObJ57FA8xHDhhdzFVid2a0MxLI8gfL/ekJAEKIA4B3S0eRIQgCttS8amsfgBAiAvBlQwVm3lcuEEJ4AI5EtNYsnJh5K6XMWjZcQw3FWkoZacVvcuCBatSsm8etbBg1EenFJdXosm71UDZk5oyIdupMmugWUKOXtapLRD8AvJYNmVmpse864j9qjLJuuO4mBxZQY5J1awaGknBEDRXdH325YcraCIDaNKRGGIZ+WZZHAK/XfZfNZrON4zjtzpA+66GgM4riPjV8339xHKfyc1EUUZqmv53mRglrBGBMjZ6BrSfcJN6NAehiQ7NxjXQj1sYzMMSgOxtNX5uwng2gqUZ1pwN1tq8K4N5mffvvnoElmnYvo7P289LFp+ox80U/SnuTbarA3HVm/oYKFNd1VYKt9RrSuE95nvv1gyQIgk8i8pj5bS6zsf8BnIkoS5LkUDnokc1Maj8BWFfgD/zT6om/vVpbAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
