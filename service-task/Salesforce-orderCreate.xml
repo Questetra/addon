@@ -5,8 +5,8 @@
 
 <last-modified>2017-10-20</last-modified>
 
-<help-page-url>https://support.questetra.com/addons/services/salesforce-ordercreate/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/salesforce-ordercreate/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/salesforce-ordercreate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/salesforce-ordercreate/</help-page-url>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
