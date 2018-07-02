@@ -4,8 +4,8 @@
 <label locale="ja">Stripe カード情報登録</label>
 
 <last-modified>2016-10-06</last-modified>
-<help-page-url>https://support.questetra.com/addons/services/stripe-cardregistrationmmyy/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/stripe-cardregistrationmmyy/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/stripe-cardregistrationmmyy/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/stripe-cardregistrationmmyy/</help-page-url>
 
 <configs>
   <config name="conf_SecretKey" required="true" form-type="TEXTFIELD">
