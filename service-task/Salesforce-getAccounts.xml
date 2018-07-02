@@ -27,8 +27,8 @@
   </config>
 </configs>
 
-<help-page-url>https://support.questetra.com/addons/services/salesforce-getaccounts/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/salesforce-getaccounts/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/salesforce-getaccounts/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/salesforce-getaccounts/</help-page-url>
 
 <script><![CDATA[
 // Batch to Get Accounts from Salesforce via Salesforce REST API (ver. 20161017)
