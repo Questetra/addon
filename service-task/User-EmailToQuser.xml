@@ -3,6 +3,9 @@
 <label>Converter (Email to Quser)</label>
 <label locale="ja">コンバータ (Email to Quser)</label>
 
+<last-modified>2016-12-21</last-modified>
+<help-page-url>https://support.questetra.com/addons/user-emailtoquser/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/user-emailtoquser/</help-page-url>
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">

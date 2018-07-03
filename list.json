@@ -974,6 +974,21 @@
             "en": "",
             "ja": ""
         }
+    },
+    {
+        "id": "User-EmailToQuser",
+        "file": "https://questetra.github.io/addon/service-task/User-EmailToQuser.xml",
+        "last-modified": "2016-12-21",
+        "label":
+        {
+            "en": "Converter (Email to Quser)",
+            "ja": "コンバータ (Email to Quser)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/user-emailtoquser/",
+            "ja": "https://support.questetra.com/ja/addons/user-emailtoquser/"
+        }
     }],
     "options": [
     {
