@@ -584,7 +584,7 @@
             "id": "Stripe-chargeCreate",
             "file":
                 "https://questetra.github.io/addon/service-task/Stripe-chargeCreate.xml",
-            "last-modified": "2017-09-25",
+            "last-modified": "2017-09-09",
             "label": {
                 "en": "Stripe Charge to Customer ID",
                 "ja": "Stripe 課金（Customer ID）"
@@ -593,7 +593,7 @@
                 "en":
                     "https://support.questetra.com/addons/stripe-chargecreate/",
                 "ja":
-                    "https://support.questetra.com/ja/addons/stripe-chargecreate/"
+                    "hhttps://support.questetra.com/ja/addons/stripe-chargecreate/"
             }
         },
         {
