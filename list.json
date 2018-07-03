@@ -1019,6 +1019,21 @@
             "en": "https://support.questetra.com/addons/converter-tabletotsv/",
             "ja": "https://support.questetra.com/ja/addons/converter-tabletotsv/"
         }
+    },
+    {
+        "id": "Converter-TsvToExcelCsv",
+        "file": "https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsv.xml",
+        "last-modified": "2016-11-22",
+        "label":
+        {
+            "en": "Converter (TSV to Excel-CSV FILE)",
+            "ja": "コンバータ (TSV to Excel-CSV FILE)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/converter-tsvtoexcelcsv/",
+            "ja": "https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/"
+        }
     }],
     "options": [
     {
