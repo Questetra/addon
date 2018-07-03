@@ -2,7 +2,10 @@
 
 <label>Converter (Quser to ID, Name, Email)</label>
 <label locale="ja">コンバータ (Quser to ID, Name, Email)</label>
+
 <last-modified>2016-11-15</last-modified>
+<help-page-url>https://support.questetra.com/addons/user-converter/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/user-converter/</help-page-url>
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="QUSER">

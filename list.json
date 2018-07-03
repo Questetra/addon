@@ -989,6 +989,21 @@
             "en": "https://support.questetra.com/addons/user-emailtoquser/",
             "ja": "https://support.questetra.com/ja/addons/user-emailtoquser/"
         }
+    },
+    {
+        "id": "User-Converter",
+        "file": "https://questetra.github.io/addon/service-task/User-Converter.xml",
+        "last-modified": "2016-11-15",
+        "label":
+        {
+            "en": "Converter (Quser to ID, Name, Email)",
+            "ja": "コンバータ (Quser to ID, Name, Email)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/user-converter/",
+            "ja": "https://support.questetra.com/ja/addons/user-converter/"
+        }
     }],
     "options": [
     {
