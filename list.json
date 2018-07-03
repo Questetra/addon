@@ -1004,6 +1004,21 @@
             "en": "https://support.questetra.com/addons/user-converter/",
             "ja": "https://support.questetra.com/ja/addons/user-converter/"
         }
+    },
+    {
+        "id": "Converter-TableToTsv",
+        "file": "https://questetra.github.io/addon/service-task/Converter-TableToTsv.xml",
+        "last-modified": "2016-08-29",
+        "label":
+        {
+            "en": "Converter (Table to TSV)",
+            "ja": "コンバータ (Table to TSV)"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/converter-tabletotsv/",
+            "ja": "https://support.questetra.com/ja/addons/converter-tabletotsv/"
+        }
     }],
     "options": [
     {

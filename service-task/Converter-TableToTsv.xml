@@ -4,6 +4,9 @@
 <label locale="ja">コンバータ (Table to TSV)</label>
 
 <last-modified>2016-08-29</last-modified>
+<help-page-url>https://support.questetra.com/addons/converter-tabletotsv/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/converter-tabletotsv/</help-page-url>
+
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
     <label>A: Select TABLE DATA</label>
