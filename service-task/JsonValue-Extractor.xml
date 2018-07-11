@@ -30,7 +30,6 @@
 <script><![CDATA[
 // JSON Value Extractor (ver. 20180710)
 // (c) 2018, Questetra, Inc. (the MIT License)
-// for Script Engine "Nashorn"
 
 // About JSON Path
 // - see http://jsonpath.com/
