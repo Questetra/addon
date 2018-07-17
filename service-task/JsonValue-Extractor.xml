@@ -6,8 +6,9 @@
 <summary>Obtains the specified values from JSON text data and stores them as workflow data</summary>
 <summary locale="ja">JSON テキストデータから指定した値を取得し、ワークフローデータとして格納します</summary>
 
-<help-page-url>https://support.questetra.com/addons/json-value-jsonpath/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/json-value-jsonpath/</help-page-url>
+<last-modified>2018-07-10</last-modified>
+<help-page-url>https://support.questetra.com/addons/jsonvalue-extractor/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/jsonvalue-extractor/</help-page-url>
 
 <engine-type>0</engine-type>
 
