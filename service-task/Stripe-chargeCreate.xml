@@ -14,7 +14,7 @@
   </config>
   <config name="conf_DataIdB" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
     <label>B: Select STRING DATA for Description (e.g. Corp Name)</label>
-    <label locale="]ja">B: Description情報が格納されている文字列型データを選択してください（例: 法人名）</label>
+    <label locale="ja">B: Description情報が格納されている文字列型データを選択してください（例: 法人名）</label>
   </config>
   <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
     <label>C: Select STRING DATA for CustomerID</label>
