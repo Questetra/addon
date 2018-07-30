@@ -14,8 +14,8 @@
     <label locale="ja">A: 接続先のワークフロー環境URLをセットしてください (例 "${var[applicationRoot]}")</label>
   </config>
   <config name="conf_key" required="true" el-enabled="true" form-type="TEXTFIELD">
-    <label>B: Set SECURITY KEY (e.g. "${var[key]}")</label>
-    <label locale="ja">B: 接続先のセキュリティキーをセットしてください (例 "${var[key]}")</label>
+    <label>B: Set SECURITY KEY</label>
+    <label locale="ja">B: 接続先のセキュリティキーをセットしてください</label>
   </config>
   <config name="conf_processModelInfoId" required="true" form-type="TEXTFIELD">
     <label>C: Set PROCESS MODEL ID to Connect (e.g. "123")</label>
