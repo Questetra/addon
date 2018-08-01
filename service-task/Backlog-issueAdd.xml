@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
 <label>Backlog Add Issue</label>
-<label locale="ja">backlog 課題追加</label>
+<label locale="ja">Backlog 課題追加</label>
 
 <last-modified>2017-10-25</last-modified>
 
