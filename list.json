@@ -1049,6 +1049,21 @@
             "en": "https://support.questetra.com/addons/jsonvalue-extractor/",
             "ja": "https://support.questetra.com/ja/addons/jsonvalue-extractor/"
         }
+    },
+    {
+        "id": "Chatwork-MessageAdd",
+        "file": "https://questetra.github.io/addon/service-task/Chatwork-MessageAdd",
+        "last-modified": "2018-03-20",
+        "label":
+        {
+            "en": "ChatWork Add Message",
+            "ja": "ChatWork メッセージ追加"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/chatwork-messageadd/",
+            "ja": "https://support.questetra.com/ja/addons/chatwork-messageadd/"
+        }
     }],
     "options": [
     {
