@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Hangouts Chat Post Message</label>
+<label locale="ja">Hangouts Chat メッセージ投稿</label>
+
+<last-modified>2018-08-22</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/hangoutschat-messageadd/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/hangoutschat-messageadd/</help-page-url>
+
+<configs>
+  <config name="conf_EndpointUrl" required="true" form-type="TEXTFIELD">
+    <label>A: Endpoint URL</label>
+    <label locale="ja">A: エンドポイント URL</label>
+  </config>
+  <config name="conf_Text" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>B: Select TEXT DATA for Text</label>
+    <label locale="ja">B: 投稿テキストが格納されている文字型データ項目</label>
+  </config>
+  <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select TEXT DATA for Log</label>
+    <label locale="ja">X: ログが格納される文字型データ項目 (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == コンフィグの参照 / Config Retrieving ==
+var endpointUrl = configs.get("conf_EndpointUrl") + "";
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var text = engine.findDataByNumber( configs.get("conf_Text") ) + "";
+
+//// == 演算 / Calculating ==
+var uri = endpointUrl;
+
+var requestObj = {
+  "text": ""
+};
+requestObj.text = text;
+
+var response = httpClient.begin()
+  .body( JSON.stringify( requestObj ), "application/json")
+  .post( uri );
+
+//// == ワークフローデータへの代入 / Data Updating ==
+//ログデータの指定があれば
+var dataNum_Log = configs.get("conf_Log") + "";
+if (dataNum_Log !== "") {
+  var log = "";
+  log += "---POST request--- " + response.getStatusCode() + "\n";
+  log += response.getResponseAsString() + "\n";
+  engine.setDataByNumber( dataNum_Log, log );
+}
+]]></script>
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAE80lEQVRYR8WXa1CUZRTHfy/qasll
+zSkVuQhhKpByyQCFJK3BKMnLGNPIpEx9Ms3LNC3iTCHOojSV6KcuNuJIjY2p6ZhNlqAkpKLjogJR
+KDjiJS+wilOwXJ7meZdd2HXf3SUbOx/fc/ufc/7PeZ5X4X8WZUD5C9fMBZ8ZCGJQhB6UGKu/MCEU
+MwomBEfIMe7zNq5nAJvy9FgsK0BZCei9DGwGUYROt5lVeWZ3Pu4BbMhdgo+yaQCJnXOZoScbw4bv
+tEBoA9iYW4SirPCyYk9mRRiMq1wZuQZQuLYYWOwp6oD0QhSTU5Dt7HM/AA+VpwaHkRUVQ+yoMQz2
+8VHjXWhtYUeNib1/1LrHJMRmcgokl+ziCMA6822uoiQGBrM++QVSQ8LsifvbCQQNrS3kV5RSUlvt
+BkjPvP6c6AOgsr2z0RXhsiKnUJiaRqCvv8eut1k6+LjqGOsqyrRszeiGhNlORx+Awtw8UD5w9poZ
+Ek7xywsI9guwq2S1re3tXL13F/3QYYzx9WOQYh2HFHNHO2uOHuJT00kNEGIdhoI8qewDsDHXjKL0
+Zel13T8/i1ciJqD0mja33SG/okwdw7Njgmhuu8vJa80YElOYNjbEblffcouM3Tv4vfW2KxBmDMYR
+fQCsG26vs+VLYePZlr6AUcN9VZVMvr6yjNVTkxk/YiQd3V0MGzyYux0dbD71K7PGhTN9bKhqa+nu
+pvBEOe8fO6zRBSsXrB3QYP5Hz89mRfw0tdoeIfiiuor40WMZPdyXZT8dYF9DHcviEgn117NwYjTb
+zp3m3akp+Op0athDjQ2k7ZIn2oX0nggrgMLcI6DMcDbbN38RGRGT1M+SXB+e+IXl8UmU1JhICQpV
+wZy+foUfGxtYPXU6W8+eIj38KSJGjFR9am/fIOrLLVo8OIqhILUXwNomwNq7fvJzZjazQp+0A9hU
+VcnSuAR21Jxh4YRogvwC1LHsqj/P0tgEtp8/Q3JQKJEjn/AGgAlDQawNgHAFc2dGJpkTn1ZVf3d1
+qh14IzqWqmvN1N2+yZyIiXx/oZ6r99p4Jz6Jb347y9uxiTz+6HAvAAAGo+IWQH7yLAwJz6EbNEgN
+WHHlEuWXm1gel8TZm9e5YG4hblSgqj9+9TJJgcH29kv7/Q11vLrnK40ROAJwOQK5/b6e8xphAeqJ
+oVv0sLPuHNU3rrE4Oo4Q/wD+6uzkkSFD8NcNdUjU3tVFfmUpG46Xa5CQanKMMW5JKD2NKS+qBJPH
+TYpcQhfNreyur+H8rT8J8vPnrcnPEK5/zCGRhz0gI/UjoYcLaHv6AhZFTXHYdtp9BVm93AF5FaXa
+Zo7H0PUisnn76XR8MjOdrMgYeye0IssOHWioJ2NPiTuMQP9FJE01VnH/KPIqfi8hhelBoUhQtvVs
+s5HJyy41svjgt+qK1hQh7pBToD7vPF5GWkEkgM/S5vL6pMl2bhxuukj2D7vdJ7dau7iM5HXcYWly
+dSFpgdg6ex5vTo5XZ15Sa2J16UHaLBb3rZfVD9WNu/86lm5uHiSuon6eNpf40YHklh9S17F3ovUg
+sXn/t49RJ0x9rbcpHt6jFLZjMC5x7tJDepbfX7n7Dti08qEilOKBENOhQkk4RSz5dz8mtkjWX7OV
+CFZ6DURNjPw1K3qwXzPngVk7kopCDELRozCldwlUowgzAhOKOOKuYu854N2ZemCrfwDPEOowZqLN
+ZQAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
