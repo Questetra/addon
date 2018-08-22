@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Zendesk Support Update Ticket</label>
+<label locale="ja">Zendesk Support チケット更新</label>
+
+<last-modified>2018-08-17</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/services/zendesk-ticketupdate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/services/zendesk-ticketupdate/</help-page-url>
+
+<configs>
+  <config name="conf_SubDomain" required="true" form-type="TEXTFIELD">
+    <label>A: Sub Domain</label>
+  </config>
+  <config name="conf_Email" required="true" form-type="TEXTFIELD">
+    <label>B: email</label>
+  </config>
+  <config name="conf_ApiToken" required="true" form-type="TEXTFIELD">
+    <label>C: API Token</label>
+  </config>
+  <config name="conf_TicketId" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>D: Select TEXT DATA for Ticket Id</label>
+    <label locale="ja">D: チケットIDが格納されている文字型データ項目</label>
+  </config>
+  <config name="conf_TicketStatus" required="true" form-type="SELECT" select-data-type="SELECT_SINGLE">
+    <label>E: Select SELECT DATA for Ticket Status</label>
+    <label locale="ja">E: チケットステータスが格納されている選択型データ項目</label>
+  </config>
+  <config name="conf_TicketComment" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>F: Select TEXT DATA for Ticket Comment</label>
+    <label locale="ja">F: チケットコメントが格納されている文字型データ項目</label>
+  </config>
+  <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select TEXT DATA for Log</label>
+    <label locale="ja">X: ログが格納される文字型データ項目 (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == コンフィグの参照 / Config Retrieving ==
+var subDomain = configs.get("conf_SubDomain") + "";
+var email = configs.get("conf_Email") + "";
+var apiToken = configs.get("conf_ApiToken") + "";
+
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var ticketId = engine.findDataByNumber( configs.get("conf_TicketId") ) + "";
+var ticketStatus = engine.findDataByNumber( configs.get("conf_TicketStatus") ).get(0).getValue() + "";
+
+
+//以下は必須指定でないもの
+var dataNum_TicketComment = configs.get("conf_TicketComment") + "";
+var ticketComment = "";
+if ((dataNum_TicketComment !== "") && (engine.findDataByNumber( dataNum_TicketComment ))) {
+  ticketComment = engine.findDataByNumber( dataNum_TicketComment ) + "";
+}
+
+
+//// == 演算 / Calculating ==
+var uri = "https://" + subDomain + ".zendesk.com/api/v2/tickets/" + ticketId + ".json";
+
+var requestObj = {
+  "ticket": {
+    "status": "",
+    "comment": { "body": "" }
+  }
+};
+requestObj.ticket.status = ticketStatus;
+requestObj.ticket.comment.body = ticketComment;
+
+var response = httpClient.begin()
+  .basic( email + "/token", apiToken )
+  .body( JSON.stringify( requestObj ), "application/json")
+  .put( uri );
+
+
+//// == ワークフローデータへの代入 / Data Updating ==
+//ログデータの指定があれば
+var dataNum_Log = configs.get("conf_Log") + "";
+if (dataNum_Log !== "") {
+  var log = "";
+  log += "---request json--- " + "\n";
+  log += JSON.stringify( requestObj ) + "\n";
+  log += "---PUT request--- " + response.getStatusCode() + "\n";
+  log += response.getResponseAsString() + "\n";
+  engine.setDataByNumber( dataNum_Log, log );
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEIUlEQVRYR8WXbWhbVRjH/0/StE4m
+zUDmtNvaWeoLli0iyV5MXLBuDsbcpoKjomuRWZloq6KTylhKZ0dXWVOQYS223eY6y3RzTmbXOci4
+gWFvHfUFJ4i0gp/6QVMsbs3LfeTe9Kb3Jvfe3FTd7pdAeM7//J5z/s9zziHc5I8Kmt8X2OZgrGew
+B4CbiORfMPMYgBiBxiRGBKPCGbu6+QE8QbejONnITE1EcNsRZkaMiMNSvKgLY5GY1RhrAG+gjoBO
+uxNnTySDMKEeI8LnZhCmAA6vPwyiRjsZ541hhCVReM0ozhDA4Q30g7Azr3AhAYx+SRTqs4fkAPyn
+mefuSZckRpu0f+sBvIE6B6GvkMQKjZWA7VpPzAF4gm5ypcZVw33avh+VZWWm+olkEr1ffIlV91Rh
+TfUDpnHJVAoff3UeXZ+cVGIUYyacK9TqyAA4fP4QQPtUJaHnMNatrDYVnpqexssHD6F+y2bUeB8y
+jGNmXBS/xVN73sH039c0MdwijURD8h8ZAPIGYkQoVaNCL76APc/XotjlMhQfvfozanY34tTBNlOA
+73/5FbV7Q7g6/ptOQ1kFUVg0ByB3OOC0NmrhrQtw8kArNqz2gkhvlck//kTz4W70nT2H4fc7DQF+
+n5xEQ1sHhi5/Y5iA6gVF2cz5MsTbO5/Djo01uL20FPJ+Xv7hR+zvPYK7y+7CgpIS7Nj4WA5A7K9p
+BbD7lEVHZlYqQgEgrz9CROvtOnrT2tXoeqMRJ4YvKj7ReuD6TByHBgax94MeSzlmvsRiNJgG8Pkn
+CFRuB+D+FeUYaA3hvorlaD86oANIpVI4fv4C6lva8krJBxiL0QfTW+ALcN4RAOQt+az9XSVjuQy1
+AOaON1eWRoS0u+wC9O1rxrOPb4DT6UQ8kdABmDneKrEMgJ0taH1pF16vfQa3lBQrmlqAe8uXWTre
+CILB3/FI1GPLhA1PbkXb7ga4b1uY0VIBKu5colTG8aFh7Nq6BZvWrcH1eByR0SvoOXM2qwHNoehM
+aHUAyY7vbn4TSxcv1iWiAoQ+/AhPPOJXqmL5kjsyMbInfhqfwCsdnbh0Rb4wZX3aMoRBI5LDVcev
+rKrMGa8CDF74Gqc7DqBq2VLLjqlvxYCuEaV7gb4Vax2f3Qm1Hih2FSnecBUVGQJcm5lBS08vOo6d
+0KwOplgUlOud6WHU3fwWnn40CKfDYSgcTybQOTCI6spKbH54rWUVHz03hFffC2tiDA4jpI/jCe2B
+ZKc3FBrDjClOOCtyjmNF6KZeSGZT+V+vZJhbenXlbuSl9IgkCnXZW3ZjruUGmVuuQIbSF9hGjP75
+GlMxHKFuXg+TDET6adY0+zTLXNms3C9PPPs0C/+7p1n2LMrjlIMMeEBwE2iVHCIfLJDfg8CYRBSx
+yti2Bwqt7/nG/wMitdkwyCkNeAAAAABJRU5ErkJggg==
+</icon>
+
+
+</service-task-definition>
