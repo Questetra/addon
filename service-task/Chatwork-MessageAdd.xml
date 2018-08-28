@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
-<label>chatwork Message Add</label>
-<label locale="ja">chatwork メッセージ追加</label>
-<last-modified>2018-03-20</last-modified>
+<label>ChatWork Add Message</label>
+<label locale="ja">ChatWork メッセージ追加</label>
+
+<engine-type>1</engine-type>
+<last-modified>2018-08-24</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/chatwork-messageadd/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/chatwork-messageadd/</help-page-url>
 
 <configs>
   <config name="conf_ApiToken" required="true" form-type="TEXTFIELD">
