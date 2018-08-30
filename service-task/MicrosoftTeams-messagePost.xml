@@ -6,6 +6,9 @@
 <engine-type>1</engine-type>
 <last-modified>2018-08-24</last-modified>
 
+<help-page-url>https://support.questetra.com/addons/microsoftteams-messagepost/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/microsoftteams-messagepost/</help-page-url>
+
 <configs>
   <config name="conf_EndpointUrl" required="true" form-type="TEXTFIELD">
     <label>A: Endpoint URL</label>
