@@ -3,7 +3,8 @@
 <label>Hangouts Chat Post Message</label>
 <label locale="ja">Hangouts Chat メッセージ投稿</label>
 
-<last-modified>2018-08-22</last-modified>
+<engine-type>1</engine-type>
+<last-modified>2018-08-24</last-modified>
 
 <help-page-url>https://support.questetra.com/addons/services/hangoutschat-messageadd/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/services/hangoutschat-messageadd/</help-page-url>
