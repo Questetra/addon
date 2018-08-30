@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Microsoft Teams Post Message</label>
+<label locale="ja">Microsoft Teams メッセージ投稿</label>
+
+<engine-type>1</engine-type>
+<last-modified>2018-08-24</last-modified>
+
+<configs>
+  <config name="conf_EndpointUrl" required="true" form-type="TEXTFIELD">
+    <label>A: Endpoint URL</label>
+    <label locale="ja">A: エンドポイント URL</label>
+  </config>
+  <config name="conf_Title" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>B: Select TEXT DATA for Title</label>
+    <label locale="ja">B: 投稿タイトルが格納されている文字型データ項目</label>
+  </config>
+  <config name="conf_Text" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>C: Select TEXT DATA for Text</label>
+    <label locale="ja">C: 投稿テキストが格納されている文字型データ項目</label>
+  </config>
+  <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select TEXT DATA for Log</label>
+    <label locale="ja">X: ログが格納される文字型データ項目 (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == コンフィグの参照 / Config Retrieving ==
+var endpointUrl = configs.get("conf_EndpointUrl") + "";
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var title = engine.findDataByNumber( configs.get("conf_Title") ) + "";
+var text = engine.findDataByNumber( configs.get("conf_Text") ) + "";
+
+//// == 演算 / Calculating ==
+var uri = endpointUrl;
+
+var requestObj = {
+  "title": "",
+  "text": ""
+};
+requestObj.title = title;
+requestObj.text = text;
+
+var response = httpClient.begin()
+  .body( JSON.stringify( requestObj ), "application/json")
+  .post( uri );
+
+//// == ワークフローデータへの代入 / Data Updating ==
+//ログデータの指定があれば
+var dataNum_Log = configs.get("conf_Log") + "";
+if (dataNum_Log !== "") {
+  var log = "";
+  log += "---POST request--- " + response.getStatusCode() + "\n";
+  log += response.getResponseAsString() + "\n";
+  engine.setDataByNumber( dataNum_Log, log );
+}
+]]></script>
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADsklEQVRYR82XW08TQRTH/9NULVWh
+QLkJEY3EqKCAMV6eRP0CLIIWX4T4agQ/gRhvMSQK0QdDTEQfTGsrRV/UGBCjJJooloCIkEhRIQii
+NIgX0B4zW7bulra7W4g6L5vsnJnzm3ObMwz/eDA9+vfucxczhp1gKGAEC/+K6wkeYpjgX4DaXI6S
+W1r3VQUoLnZbjCZUgVDNGCxaNibCBBjqfn5HfXOzMBFtTVSAMpu7ggjntSoOVcRBiFB584bQHAki
+IkDZfncdGKq0nFhNhgh1LodwNJxcWIBSm7uRAQfVNtY53+i0C5Wha+YAaD355sI0rF2bjOyV8fj8
++TsaLnvUeQj1TodQLRdUAHCfA7giF8jLtSInJwk5axKRnr4UyUlxiIszwmD4s7SrewwnTrWrAwDw
++yHIYyK4ixjtSzAgBdyZU0VYvSpBoSiSBj0APDB//sBqKTuCAKU2dw0DjklKztXuQVbWck2n6n45
+ho6OD8jMXI5H7e/Q0/Mx6joCjrvsQg0XCgKU7W+aAGMJsQC87vuEFKsZSUkmDA9/wdnaJ0hNNWPH
+9kwMvvXhzt03CiBuBZdDSAwC8ApnMMAtl9JjATnA+Pg3XLf3oNy2AdbkOExP/4LrZi+ab/crIKRY
+EC0QLvLlAM+ej+DJ06HgBkNDkzhQnouNeSniv1e94zAaDUhNMePe/QGMjk7hUGW+GKxEQEurd26W
+zGZEAMDW1AawnZEs0Nf/CSMjU+C+tlrN2LZ1BRItJsTHLxaXhAahyWTEkcNbkL8pFaNjX3H1Whc8
+nR9C4oIeOu0lRSJAqa3Jy8Cy1VzQ+mBQFNm9SyEKuQv4PJe71PAiegATPE6HUDhrATeFSoeLAa0A
+3GW5G6yiC6IBOe0C+z8AFtoFmixA1Ol0lBRoCkLJPbG4IGIWQBaEammoVg5Dg1CyAM8G76APFy4+
+w/uhSeU28jRcyEI0PePHrdt9cLp6o3IrClGgGMVeinkhmpnxw2hkePT4HVpaA+kacRD5nI4Ssb1b
+kMtIz23IlYa9jPh1vGgJeaULSd5wZGQsEysf92kgcZVDFwCRb+YHWzXnOg6U5LkNiVwVB+Dldf26
+ZGRlxSMtzQxLgkmshCdPz7MhkRRpbcnUMiPcvNz00vxfa0oJuOqyC7zlU4y/05bLOiDNAFxQrA+M
+GuWdki7TE/n8xCpiephIimafZtWMqFozCJGPGONPs7p5Pc1CTxuwCIrAqADi45TlizJEnRAfp8zj
+J7RFO7EuF+gyd4zCvwHBL90wuEQTagAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
