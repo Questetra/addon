@@ -873,7 +873,7 @@
     {
         "id": "Converter-TableToExcelCsv",
         "file": "https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml",
-        "last-modified": "2017-11-19",
+        "last-modified": "2018-08-29",
         "label":
         {
             "en": "Converter (Table to Excel-CSV FILE)",

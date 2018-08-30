@@ -3,7 +3,7 @@
 <label>Converter (Table to Excel-CSV FILE)</label>
 <label locale="ja">コンバータ (Table to Excel-CSV FILE)</label>
 
-<last-modified>2018-07-31</last-modified>
+<last-modified>2018-08-29</last-modified>
 <help-page-url>https://support.questetra.com/addons/converter-tabletoexcelcsv/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/</help-page-url>
 
@@ -29,51 +29,53 @@
 <engine-type>1</engine-type>
 
 <script><![CDATA[
-// Converter from Table to Excel-CSV (ver. 20180731)
+// Converter from Table to Excel-CSV (ver. 20180829)
 // (c) 2018, Questetra, Inc. (the MIT License)
 
-//// == 自動工程コンフィグの参照 / Config Retrieving ==
+//// == Config Retrieving / 工程コンフィグの参照 ==
 const dataIdA = configs.get( "conf_DataIdA" ) + "";
 const colIds  = configs.get( "conf_ColIds" )  + "";
 const dataIdC = configs.get( "conf_DataIdC" ) + "";
 const dataIdD = configs.get( "conf_DataIdD" ) + "";
 
-//// == ワークフローデータの参照 / Data Retrieving ==
+//// == Data Retrieving / ワークフローデータの参照 ==
 const myTable = engine.findDataByNumber( dataIdA );
 // com.questetra.bpms.core.model.formdata.ListArray
 const fileName = engine.findDataByNumber( dataIdC ) + "";
-let   myFiles  = engine.findDataByNumber( dataIdD );
-// java.util.ArrayList
+let   myFiles  = engine.findDataByNumber( dataIdD );// java.util.ArrayList
+if( myFiles === null ){ myFiles = new java.util.ArrayList(); }
 
-//// == 演算 / Calculating ==
-if( myTable !== null){
-  let colIdArray = colIds.split(",");
-  let numOfCols = colIdArray.length;
-  let numOfRows = myTable.size() - 0; // 行（Tableの高さ）
-
-  let myTsv = "";
-  for( let i = 0; i < numOfRows; i++ ){
-    for( let j = 0; j < numOfCols; j++ ){
-      myTsv += myTable.get(i, parseInt( colIdArray[j] ) ) + "";
-      if( j != numOfCols - 1 ){
-        myTsv += "\t";
-      }
-    }
-    if( i != numOfRows - 1 ){
-      myTsv += "\n";
-    }
-  }
-
-  myFiles.add(
-    new com.questetra.bpms.core.event.scripttask.NewQfile(
-      fileName,
-      "text/tab-separated-values; charset=x-UTF-16LE-BOM", 
-      myTsv
-    )
-  );
+if( myTable === null){
+  throw new Error( "Source Table data is NULL" );
 }
 
-//// == ワークフローデータへの代入 / Data Updating ==
+//// == Calculating / 演算 ==
+let colIdArray = colIds.split(",");
+let numOfCols = colIdArray.length;
+let numOfRows = myTable.size() - 0; // 行（Tableの高さ）
+
+let myTsv = "";
+for( let i = 0; i < numOfRows; i++ ){
+  for( let j = 0; j < numOfCols; j++ ){
+    myTsv += myTable.get(i, parseInt( colIdArray[j] ) ) + "";
+    if( j != numOfCols - 1 ){
+      myTsv += "\t";
+    }
+  }
+  if( i != numOfRows - 1 ){
+    myTsv += "\n";
+  }
+}
+
+myFiles.add(
+  new com.questetra.bpms.core.event.scripttask.NewQfile(
+    fileName,
+    "text/tab-separated-values; charset=x-UTF-16LE-BOM", 
+    myTsv
+  )
+);
+
+//// == Data Updating / ワークフローデータへの代入 ==
 engine.setDataByNumber( dataIdD, myFiles );
 ]]></script>
 
