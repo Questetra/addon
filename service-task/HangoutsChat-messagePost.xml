@@ -4,15 +4,14 @@
 <label locale="ja">Hangouts Chat メッセージ投稿</label>
 
 <engine-type>1</engine-type>
-<last-modified>2018-08-24</last-modified>
+<last-modified>2018-08-31</last-modified>
 
 <help-page-url>https://support.questetra.com/addons/services/hangoutschat-messageadd/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/services/hangoutschat-messageadd/</help-page-url>
 
 <configs>
   <config name="conf_EndpointUrl" required="true" form-type="TEXTFIELD">
-    <label>A: Endpoint URL</label>
-    <label locale="ja">A: エンドポイント URL</label>
+    <label>A: Webhook URL</label>
   </config>
   <config name="conf_Text" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
     <label>B: Select TEXT DATA for Text</label>
