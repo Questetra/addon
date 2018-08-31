@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
-<label>Converter (Table to Excel-CSV FILE sjis)</label>
-<label locale="ja">コンバータ (Table to Excel-CSV FILE sjis)</label>
+<label>Converter (Table to Excel-CSV FILE) sjis</label>
+<label locale="ja">コンバータ (Table to Excel-CSV FILE) sjis</label>
 
-<last-modified>2017-11-19</last-modified>
+<last-modified>2018-08-29</last-modified>
 <help-page-url>https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/</help-page-url>
 
@@ -14,69 +14,75 @@
   </config>
   <config name="conf_ColIds" required="true" form-type="TEXTFIELD">
     <label>B: Set COL IDs for Extraction (e.g. "0,1,5,3,6")</label>
-    <label locale="ja">B: 送出データの項目 ID をセットしてください (例 "0,1,5,3,6")</label>
+    <label locale="ja">B: 抽出データのカラム ID をセットしてください (例 "0,1,5,3,6")</label>
   </config>
   <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
     <label>C: Select STRING DATA for File Name</label>
     <label locale="ja">C: ファイル名が格納されている文字列型データを選択してください</label>
   </config>
   <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="FILE">
-    <label>D: Select FILE DATA (update)</label>
-    <label locale="ja">D: ファイル型データを選択してください（更新）</label>
+    <label>D: Select FILE DATA (append)</label>
+    <label locale="ja">D: ファイル型データを選択してください（追加）</label>
   </config>
 </configs>
 
+<engine-type>1</engine-type>
 
 <script><![CDATA[
-// Converter from Table to Excel-CSV (ver. 20161122sjis)
-// (c) 2016, Questetra, Inc. (the MIT License)
+// Converter from Table to Excel-CSV (ver. 20180829)
+// (c) 2018, Questetra, Inc. (the MIT License)
 
-//// == 自動工程コンフィグの参照 / Config Retrieving ==
-var dataIdA = configs.get( "conf_DataIdA" );
-var colIds = configs.get( "conf_ColIds" ) + "";
-var dataIdC = configs.get( "conf_DataIdC" );
-var dataIdD = configs.get( "conf_DataIdD" );
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + "";
+const colIds  = configs.get( "conf_ColIds" )  + "";
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+const dataIdD = configs.get( "conf_DataIdD" ) + "";
 
-//// == ワークフローデータの参照 / Data Retrieving ==
-var myTable = data.get( dataIdA );
-// myTable: com.questetra.bpms.core.model.formdata.ListArray
-var fileName = data.get( dataIdC ) + "";
+//// == Data Retrieving / ワークフローデータの参照 ==
+const myTable = engine.findDataByNumber( dataIdA );
+// com.questetra.bpms.core.model.formdata.ListArray
+const fileName = engine.findDataByNumber( dataIdC ) + "";
+let   myFiles  = engine.findDataByNumber( dataIdD );// java.util.ArrayList
+if( myFiles === null ){ myFiles = new java.util.ArrayList(); }
 
-//// == 演算 / Calculating ==
-if( myTable !== null){
-  var colIdArray = colIds.split(",");
-  var numOfCols = colIdArray.length;
-  var numOfRows = myTable.size() - 0; // 行（Tableの高さ）
-
-  var myTsv = "";
-  for( var i = 0; i < numOfRows; i++ ){
-    for( var j = 0; j < numOfCols; j++ ){
-      myTsv += myTable.get(i, parseInt( colIdArray[j] ) ) + "";
-      if( j != numOfCols - 1 ){
-        myTsv += "\t";
-      }
-    }
-    if( i != numOfRows -1 ){
-      myTsv += "\n";
-    }
-  }
-
-  myTsv = myTsv.replace( /,/g, "" ); // for JA SJIS
-  myTsv = myTsv.replace( /\t/g, "," ); // for JA SJIS
-
-  var csvFiles = new java.util.ArrayList();
-  csvFiles.add(
-    new com.questetra.bpms.core.event.scripttask.NewQfile(
-      fileName,
-//    "text/tab-separated-values; charset=x-UTF-16LE-BOM", 
-      "text/comma-separated-values; charset=Shift_JIS", 
-      myTsv
-    )
-  );
+if( myTable === null){
+  throw new Error( "Source Table data is NULL" );
 }
 
-//// == ワークフローデータへの代入 / Data Updating ==
-retVal.put( dataIdD, csvFiles );
+//// == Calculating / 演算 ==
+let colIdArray = colIds.split(",");
+let numOfCols = colIdArray.length;
+let numOfRows = myTable.size() - 0; // 行（Tableの高さ）
+
+let myTsv = "";
+for( let i = 0; i < numOfRows; i++ ){
+  for( let j = 0; j < numOfCols; j++ ){
+    myTsv += myTable.get(i, parseInt( colIdArray[j] ) ) + "";
+    if( j != numOfCols - 1 ){
+      myTsv += "\t";
+    }
+  }
+  if( i != numOfRows - 1 ){
+    myTsv += "\n";
+  }
+}
+
+// for sjis-csv
+let myCsv = myTsv.replace( /,/g, "" ).replace( /\t/g, "," );
+
+
+myFiles.add(
+  new com.questetra.bpms.core.event.scripttask.NewQfile(
+    fileName,
+//    "text/tab-separated-values; charset=x-UTF-16LE-BOM", 
+    "text/comma-separated-values; charset=Shift_JIS", // for sjis
+//    myTsv
+    myCsv
+  )
+);
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdD, myFiles );
 ]]></script>
 
 
