@@ -3,7 +3,7 @@
 <label>Add Column to Tsv</label>
 <label locale="ja">TSV の列追加</label>
 
-<last-modified>2017-07-14</last-modified>
+<last-modified>2018-08-16</last-modified>
 <help-page-url>https://support.questetra.com/addons/tsv-addcolumn/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/tsv-addcolumn/</help-page-url>
 
@@ -14,7 +14,7 @@
   </config>
   <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
     <label>B: Select STRING DATA for Last Column of Each Line</label>
-    <label locale="ja">B: 行末追加文字列が格納されている文字列型データ項目を選択してください</label>
+    <label locale="ja">B: 各行末に追加する文字列が格納されている文字列型データ項目を選択してください</label>
   </config>
   <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
     <label>C: Select STRING DATA for Generated TSV (update)</label>
@@ -22,28 +22,55 @@
   </config>
 </configs>
 
+<engine-type>1</engine-type>
 
 <script><![CDATA[
-//// == 自動工程コンフィグの参照 / Config Retrieving ==
-var dataIdA = configs.get( "conf_DataIdA" ); // (returns Number)
-var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
-var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
+// (c) 2018, Questetra, Inc. (the MIT License)
 
-//// == ワークフローデータの参照 / Data Retrieving ==
-var myTsv = data.get( dataIdA ) + "";
-// "Java String" to "JavaScript String" for Rhino Engine
-var endCol = data.get( dataIdB ) + "";
 
-//// == 演算 / Calculating ==
-var newTsv = "";
-var linesArray = myTsv.split("\n"); // string[]
+//////// START "main()" ////////
+main();
+function main(){ 
 
-for (var i=0; i < linesArray.length; i++){
-  newTsv += linesArray[i] + "\t" + endCol + "\n";
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + "";
+const dataIdB = configs.get( "conf_DataIdB" ) + "";
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+// https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide#RhinoMigrationGuide-JavaScriptvsJavaStrings
+// https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/api.html#sthref21
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+let   myTsv  = engine.findDataByNumber( dataIdA );
+if( myTsv  !== null ){ myTsv += ""; }else{
+  throw new Error( "Source TSV data is NULL" );
+}
+let   endCol = engine.findDataByNumber( dataIdB );
+if( endCol !== null ){ endCol += "";}else{
+  throw new Error( "String to be added is NULL" );
 }
 
-//// == ワークフローデータへの代入 / Data Updating ==
-retVal.put( dataIdC, newTsv );
+
+//// == Calculating / 演算 ==
+let   newTsv   = "";
+const arrMyTsv = myTsv.split("\n");
+
+for (let i=0; i < arrMyTsv.length; i++){
+  newTsv += arrMyTsv[i] + "\t" + endCol;
+  if( i !== arrMyTsv.length - 1 ){
+    newTsv += "\n";
+  }
+}
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdC, newTsv );
+
+
+} //////// END "main()" ////////
+
 ]]></script>
 
 

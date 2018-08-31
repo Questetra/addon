@@ -858,7 +858,7 @@
     {
         "id": "Tsv-AddClumn",
         "file": "https://questetra.github.io/addon/service-task/Tsv-AddColumn.xml",
-        "last-modified": "2017-11-19",
+        "last-modified": "2018-08-16",
         "label":
         {
             "en": "Add Column to Tsv",
