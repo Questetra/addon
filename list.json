@@ -783,11 +783,11 @@
     {
         "id": "Converter-TsvToExcelCsvSjis",
         "file": "https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsvSjis.xml",
-        "last-modified": "2017-11-19",
+        "last-modified": "2018-08-20",
         "label":
         {
-            "en": "Converter (TSV to Excel-CSV) SJIS",
-            "ja": "コンバータ (TSV to Excel-CSV FILE) SJIS"
+            "en": "Converter (TSV to Excel-CSV FILE) sjis",
+            "ja": "コンバータ (TSV to Excel-CSV FILE) sjis"
         },
         "help":
         {
