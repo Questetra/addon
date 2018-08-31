@@ -3,9 +3,12 @@
 <label>New Record to Google Sheets (TSV)</label>
 <label locale="ja">Google Sheets 行追加 (TSV)</label>
 
-<last-modified>2016-09-15</last-modified>
 <help-page-url>https://support.questetra.com/addons/googlesheets-appendtsv/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-appendtsv/</help-page-url>
+
+<last-modified>2018-08-17</last-modified>
+<engine-type>1</engine-type>
+
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
@@ -25,165 +28,187 @@
     <label locale="ja">D: Spreadsheet ID が格納されている文字列型or選択肢型データを選択してください（存在しない場合、エラー）</label>
   </config>
   <config name="conf_DataIdE" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
-    <label>E: Select STRING/SELECT for Sheet Title (Non-existent Create)</label>
-    <label locale="ja">E: Sheet タイトルが格納されている文字列型or選択肢型データを選択してください（存在しない場合、追加）</label>
-  </config>
-  <config name="conf_DataIdF" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
-    <label>F: Select STRING DATA for Access Log (update)</label>
-    <label locale="ja">F: 通信ログが格納される文字列型データを選択してください (更新)</label>
+    <label>E: Select STRING/SELECT for Sheet Name (Non-existent Create)</label>
+    <label locale="ja">E: Sheet 名が格納されている文字列型or選択肢型データを選択してください（存在しない場合、追加）</label>
   </config>
 </configs>
 
 
 <script><![CDATA[
-// Append TSV Records to Google Sheets (ver. 20160915)
-// (c) 2016, Questetra, Inc. (the MIT License)
+// Append TSV Records to Google Sheets (ver. 20180817)
+// (c) 2018, Questetra, Inc. (the MIT License)
 
-// OAuth2 config
-// Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
-// Token Endpoint URL: https://accounts.google.com/o/oauth2/token
-// Scope: https://www.googleapis.com/auth/spreadsheets
-// Consumer Key: (Get by Google Developers Console)
-// Consumer Secret: (Get by Google Developers Console)
+//// OAuth2 config sample
+//// at Workflow App > Detail > OAuth2 Setting > (Get Refresh Token)
+// - Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// - Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// - Scope: https://www.googleapis.com/auth/spreadsheets
+// - Consumer Key: (Get from Google Developers Console)
+// - Consumer Secret: (Get from Google Developers Console)
+// Ref.
+// - https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get
+// - https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request
 
-//// == 自動工程コンフィグの参照 / Config Retrieving ==
-var dataIdA = configs.get( "conf_DataIdA" ); // (returns Number)
-var colIds = configs.get( "conf_ColIds" ) + "";
-var oauth2 = configs.get( "conf_OAuth2" );
-var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
-var dataIdE = configs.get( "conf_DataIdE" ); // (returns Number)
-var dataIdF = configs.get( "conf_DataIdF" ); // (returns Number)
 
-//// == ワークフローデータの参照 / Data Retrieving ==
-var myTsv = data.get( dataIdA ) + "";
-var docId = "";
-if( data.get( dataIdD ) instanceof java.util.ArrayList ){
-  docId = data.get( dataIdD ).get(0).getValue() + "";
-}else if( data.get( dataIdD ) instanceof java.lang.String ){
-  docId = data.get( dataIdD ) + "";
-}
-var sheet = "";
-if( data.get( dataIdE ) instanceof java.util.ArrayList ){
-  sheet = data.get( dataIdE ).get(0).getValue() + "";
-}else if( data.get( dataIdE ) instanceof java.lang.String ){
-  sheet = data.get( dataIdE ) + "";
-}
+//////// START "main()" ////////
+main();
+function main(){ 
 
-//// == 演算 / Calculating ==
-var accessLog = "";
-var responseJson = "";
-var sheetId = -1;
-var token = httpClient.getOAuth2Token( oauth2 );
 
-try{
-  // check spreadsheet
-  var uri = "https://sheets.googleapis.com/v4/spreadsheets/";
-  uri += docId;
-  uri += "?includeGridData=false";
-  var response = httpClient.begin()
-    .bearer(token)
-    .get( uri ); 
-  accessLog += "---GET request--- " + response.getStatusCode() + "\n";
-  responseJson = response.getResponseAsString();
-  if( response.getStatusCode() == 200 ){
-    var jsonObj = JSON.parse( responseJson );
-    accessLog += " SPREADSHEET TITLE: \"" + jsonObj.properties.title + "\" has";
-    accessLog += jsonObj.sheets.length + " sheets\n";
-    for( var i = 0; i < jsonObj.sheets.length; i++ ){
-      if( jsonObj.sheets[i].properties.title == sheet ){
-        sheetId = parseInt( jsonObj.sheets[i].properties.sheetId, 10 );
-        accessLog += " SHEET TITLE: \"" + sheet + "\" exists (id: " + sheetId + ")\n";
-      }else{
-        accessLog += " SHEET TITLE: \"" + sheet + "\" does not exist\n";
-      }
-    }
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + "";
+const dataIdD = configs.get( "conf_DataIdD" ) + "";
+const dataIdE = configs.get( "conf_DataIdE" ) + "";
+
+const colIds  = configs.get( "conf_ColIds"  ) + "";
+const oauth2  = configs.get( "conf_OAuth2"  ) + "";
+// convert 'java.lang.String' to javascript primitive 'string'
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+let myTsv   = engine.findDataByNumber( dataIdA );
+  if( myTsv === null){ throw new Error( "TSV no data" ); }else{ myTsv += "";}
+let docId   = "";
+  if( engine.findDataDefinitionByNumber( dataIdD ).matchDataType( "SELECT_SINGLE" ) ){
+    docId = engine.findDataByNumber( dataIdD ).get(0).getValue() + "";
   }else{
-    sheetId = -2;
+    docId = engine.findDataByNumber( dataIdD ) + "";
+  }
+let sheetName = "";
+  if( engine.findDataDefinitionByNumber( dataIdE ).matchDataType( "SELECT_SINGLE" ) ){
+    sheetName = engine.findDataByNumber( dataIdE ).get(0).getValue() + "";
+  }else{
+    sheetName = engine.findDataByNumber( dataIdE ) + "";
   }
 
-  // add sheet (not exsist)
-  if( sheetId == -1 ){  
-    var uri2 = "https://sheets.googleapis.com/v4/spreadsheets/";
-    uri2 += docId;
-    uri2 += ":batchUpdate";
 
-    sheetId = processInstance.getProcessInstanceId() - 0;
-    var myObj2 = {};
-    myObj2.requests = []; // Array
-    myObj2.requests[0] = {};
-    myObj2.requests[0].addSheet = {};
-    myObj2.requests[0].addSheet.properties = {};
-    myObj2.requests[0].addSheet.properties.sheetId = sheetId;
-    myObj2.requests[0].addSheet.properties.title = sheet;
+//// == Calculating / 演算 ==
+// obtain OAuth2 Access Token
+const token  = httpClient.getOAuth2Token( oauth2 );
 
-    var response2 = httpClient.begin()
-      .bearer(token)
-      .body( JSON.stringify( myObj2 ), "application/json" )
-      .post( uri2 ); 
-    accessLog += "---POST request--- " + response2.getStatusCode() + "\n";
-    if( response2.getStatusCode() == 200 ){
-      accessLog += " SHEET TITLE: \"" + sheet + "\" created (id: " + sheetId + ")\n";
-    }
-  }
+/// (1) Sheet Exist Check
+// prepare API Request
+let apiRequest = httpClient.begin(); // HttpRequestWrapper
+// - com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+apiRequest     = apiRequest.bearer( token );
+apiRequest     = apiRequest.queryParam( "includeGridData", false );
+// - To retrieve only the specific fields of the spreadsheet
+// - Ref: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get
 
-  // append records
-  if( sheetId >= 0 ){
-    if( myTsv !== ""){
-      var colIdArray = colIds.split(",");
-      var numOfCols = colIdArray.length;
-
-      var tsvRecords = myTsv.split("\n");
-      var numOfRows = tsvRecords.length; // 行（TSVのレコード数）
-
-      var myObj3 = {};
-      myObj3.requests = []; // Array
-      myObj3.requests[0] = {};
-      myObj3.requests[0].appendCells = {};
-      myObj3.requests[0].appendCells.rows = []; // Array
-      myObj3.requests[0].appendCells.sheetId = sheetId;
-      myObj3.requests[0].appendCells.fields = "*";
-
-      for( var i = 0; i < numOfRows; i++ ){
-        myObj3.requests[0].appendCells.rows[i] = {};
-        myObj3.requests[0].appendCells.rows[i].values = []; // Array
-        var cellValues = tsvRecords[i].split("\t");
-
-        for( var j = 0; j < numOfCols; j++ ){
-          if( colIdArray[j].slice(-1) == "n" ){
-            myObj3.requests[0].appendCells.rows[i].values[j]
-            = {"userEnteredValue": {"numberValue" : cellValues[parseInt( colIdArray[j] )] } }; 
-          }else if( colIdArray[j].slice(-1) == "d" ){
-            var dateTimeSerialNumber = new Date( cellValues[parseInt( colIdArray[j] )] )/86400000 + 25569;
-            myObj3.requests[0].appendCells.rows[i].values[j]
-            = {"userEnteredFormat": {"numberFormat": { "type": "DATE_TIME" } },
-               "userEnteredValue": {"numberValue": dateTimeSerialNumber }}; 
-          }else{
-            myObj3.requests[0].appendCells.rows[i].values[j]
-            = {"userEnteredValue": {"stringValue": cellValues[parseInt( colIdArray[j] )] }}; 
-          }
-        }
-      }
-
-      var uri3 = "https://sheets.googleapis.com/v4/spreadsheets/";
-      uri3 += docId;
-      uri3 += ":batchUpdate";
-
-      var response3 = httpClient.begin()
-        .bearer(token)
-        .body( JSON.stringify( myObj3 ), "application/json" )
-        .post( uri3 ); 
-      accessLog += "---POST request--- " + response3.getStatusCode() + "\n";
-      if( response3.getStatusCode() == 200 ){
-        accessLog += " ADDED DATA: " + colIds + " x " + numOfRows + "cells\n";
-      }
-    }
-  }
-}catch(e){
-  accessLog += e.message + "\n";
+// access API (with post(), get(), put(), etc.)
+const response    = apiRequest.get( "https://sheets.googleapis.com/v4/spreadsheets/" + docId );
+// - HttpResponseWrapper
+const httpStatus  = response.getStatusCode() + "";
+const responseStr = response.getResponseAsString() + "";
+const responseObj = JSON.parse( responseStr );
+engine.log( "GET [spreadsheet specific]: " + httpStatus );
+if( httpStatus !== "200" ){
+  let errorMessage = "\n- HTTP STATUS is not 200, Service Task stopped. -\n";
+  errorMessage += responseStr + "\n";
+  throw new Error( errorMessage );
 }
 
-//// == ワークフローデータへの代入 / Data Updating ==
-retVal.put( dataIdF, accessLog );
+// get Sheet ID
+let sheetId = -1; // NotExist
+engine.log( "SPREADSHEET TITLE: " + responseObj.properties.title );
+for( let i = 0; i < responseObj.sheets.length; i++ ){
+  if( responseObj.sheets[i].properties.title === sheetName ){
+    sheetId = parseInt( responseObj.sheets[i].properties.sheetId, 10 );
+    engine.log( " SHEET NAME: " + sheetName + " exists, id=" + sheetId );
+    break;
+  }else{
+    engine.log( " SHEET NAME: " + sheetName + " does not exist" );
+  }
+}
+
+/// (2) Create New Sheet (if NotExist)
+if(sheetId === -1){
+  // prepare API Request2
+  // - define Request2 Object for spreadsheets.batchUpdate request
+  sheetId = processInstance.getProcessInstanceId() - 0;
+  let requestObj2 = {};
+      requestObj2.requests = [];
+      requestObj2.requests[0] = {};
+      requestObj2.requests[0].addSheet = {};
+      requestObj2.requests[0].addSheet.properties = {};
+      requestObj2.requests[0].addSheet.properties.sheetId = sheetId;
+      requestObj2.requests[0].addSheet.properties.title = sheetName;
+      // - Ref: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest
+  let apiRequest2 = httpClient.begin(); // HttpRequestWrapper
+  apiRequest2     = apiRequest2.bearer( token );
+  apiRequest2     = apiRequest2.body( JSON.stringify( requestObj2 ), "application/json" );
+
+  // access API (with post())
+  const response2    = apiRequest2.post( "https://sheets.googleapis.com/v4/spreadsheets/" + docId + ":batchUpdate" );
+  const httpStatus2  = response2.getStatusCode() + "";
+  const responseStr2 = response2.getResponseAsString() + "";
+  engine.log( "POST [AddSheet request]: " + httpStatus2 );
+  if( httpStatus2 !== "200" ){
+    let errorMessage2 = "\n- HTTP STATUS is not 200, Service Task stopped. -\n";
+    errorMessage2 += responseStr2 + "\n";
+    throw new Error( errorMessage2 );
+  }
+}
+
+/// (3) Append Records
+// prepare API Request3
+const arrColIds = colIds.split(",");
+const arrMyTsv  = myTsv.split("\n");
+let requestObj3 = {};
+    requestObj3.requests = []; // Array
+    requestObj3.requests[0] = {};
+    requestObj3.requests[0].appendCells = {};
+    requestObj3.requests[0].appendCells.rows = []; // Array
+    requestObj3.requests[0].appendCells.sheetId = sheetId;
+    requestObj3.requests[0].appendCells.fields = "*";
+for( let i = 0; i < arrMyTsv.length; i++ ){
+  requestObj3.requests[0].appendCells.rows[i] = {};
+  requestObj3.requests[0].appendCells.rows[i].values = [];
+  let arrMyCellValues = arrMyTsv[i].split("\t");
+  for( let j = 0; j < arrColIds.length; j++ ){
+    requestObj3.requests[0].appendCells.rows[i].values[j] = {};
+    if( arrColIds[j].slice(-1) === "n" ){ // Numeric Type
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredValue = {};
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredValue.numberValue = arrMyCellValues[parseInt( arrColIds[j] )];
+    }else if( arrColIds[j].slice(-1) === "d" ){ // Date Type
+      let dateMyCellDate = new Date( arrMyCellValues[parseInt( arrColIds[j] )] );
+      let serialNumber = dateMyCellDate.getTime() / 86400000 + 25569;
+      // - https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption#ENUM_VALUES.SERIAL_NUMBER
+      // 25569 means 1970-01-01 00:00:00, 86400 means the number of seconds per day
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredFormat = {};
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredFormat.numberFormat = {};
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredFormat.numberFormat.type = "DATE";
+//      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredFormat.numberFormat.type = "DATE_TIME";
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredValue = {};
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredValue.numberValue = serialNumber;
+    }else{
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredValue = {};
+      requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredValue.stringValue = arrMyCellValues[parseInt( arrColIds[j] )];
+    }
+  }
+}// - Ref: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#appendcellsrequest
+let apiRequest3 = httpClient.begin(); // HttpRequestWrapper
+apiRequest3     = apiRequest3.bearer( token );
+apiRequest3     = apiRequest3.body( JSON.stringify( requestObj3 ), "application/json" );
+
+// access API (with post())
+const response3    = apiRequest3.post( "https://sheets.googleapis.com/v4/spreadsheets/" + docId + ":batchUpdate" );
+const httpStatus3  = response3.getStatusCode() + "";
+const responseStr3 = response3.getResponseAsString() + "";
+engine.log( "POST [AppendCells request]: " + httpStatus3 );
+if( httpStatus3 !== "200" ){
+  let errorMessage3 = "\n- HTTP STATUS is not 200, Service Task stopped. -\n";
+  errorMessage3 += responseStr3 + "\n";
+  throw new Error( errorMessage3 );
+}
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+// (nothing)
+
+
+} //////// END "main()" ////////
+
 ]]></script>
 
 
