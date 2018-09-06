@@ -6,7 +6,7 @@
 <help-page-url>https://support.questetra.com/addons/googlesheets-appendtsv/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-appendtsv/</help-page-url>
 
-<last-modified>2018-08-17</last-modified>
+<last-modified>2018-09-03</last-modified>
 <engine-type>1</engine-type>
 
 
@@ -35,7 +35,7 @@
 
 
 <script><![CDATA[
-// Append TSV Records to Google Sheets (ver. 20180817)
+// Append TSV Records to Google Sheets
 // (c) 2018, Questetra, Inc. (the MIT License)
 
 //// OAuth2 config sample
@@ -175,6 +175,9 @@ for( let i = 0; i < arrMyTsv.length; i++ ){
       let serialNumber = dateMyCellDate.getTime() / 86400000 + 25569;
       // - https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption#ENUM_VALUES.SERIAL_NUMBER
       // 25569 means 1970-01-01 00:00:00, 86400 means the number of seconds per day
+
+      serialNumber += engine.getTimeZoneOffsetInMinutes() / (60 * 24); // Depends on Your Drive Setting
+
       requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredFormat = {};
       requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredFormat.numberFormat = {};
       requestObj3.requests[0].appendCells.rows[i].values[j].userEnteredFormat.numberFormat.type = "DATE";
