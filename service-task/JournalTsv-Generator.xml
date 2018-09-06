@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Journal Slip TSV from Invoice Data</label>
+<label locale="ja">請求データから仕訳伝票TSVの生成</label>
+
+<summary>Generate transfer slip TSV (tab-separated-values) from sales amount, sales date, due date. The case of sales division is also supported. In order to generate a file for the accounting system, please place a converter such as "TSV to Excel-CSV FILE".</summary>
+<summary locale="ja">売上金額・売上日・決済予定日から、売上金の振替伝票TSV（text/tab-separated-values）を生成します。一括して売上計上するケース、数か月に分けて売上分割するケース、それらが複合するケースに対応します（分割剰余は初月に加算されます）。 会計システムにインポート可能なファイルを生成させるは、下流工程に「TSV to Excel-CSV FILE」などのコンバータを配置して下さい。</summary>
+
+<help-page-url>https://support.questetra.com/addons/journal-tsv-generator/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/journal-tsv-generator/</help-page-url>
+
+<engine-type>1</engine-type>
+<last-modified>2018-09-04</last-modified>
+
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>A: Select STRING DATA for Slip Description</label>
+    <label locale="ja">A: 伝票の摘要名が格納されている文字列型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="false" form-type="SELECT" select-data-type="DECIMAL">
+    <label>B: Select NUMERIC DATA for Sales Amount (Single Record)</label>
+    <label locale="ja">B: 売上高（一括計上分）が格納されている数値型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="false" form-type="SELECT" select-data-type="DATE">
+    <label>C: Select DATE DATA for Sales Record (Single Record)</label>
+    <label locale="ja">C: 売上日（一括計上分）が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="DECIMAL">
+    <label>D: Select NUMERIC DATA for Sales Amount (Multiple Records)</label>
+    <label locale="ja">D: 売上高（分割計上分）が格納されている数値型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdE" required="false" form-type="SELECT" select-data-type="DATE">
+    <label>E: Select DATE DATA for First Sales Record (Next Month 1st Day)</label>
+    <label locale="ja">E: 初回の売上日（分割計上分）が格納されている日付型データを選択してください（次月以降は1日計上）</label>
+  </config>
+  <config name="conf_DataIdF" required="false" form-type="SELECT" select-data-type="DECIMAL">
+    <label>F: Select NUMERIC DATA for Division Number</label>
+    <label locale="ja">F: 分割計上の分割数（月数）が格納されている数値型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdG" required="true" form-type="SELECT" select-data-type="DATE">
+    <label>G: Select DATE DATA for Scheduled Due Date</label>
+    <label locale="ja">G: 決済予定日が格納されている日付型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdX" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select STRING DATA for TSV Data (update)</label>
+    <label locale="ja">X: TSVデータが格納される文字列型データを選択してください（更新）</label>
+  </config>
+  <config name="conf_HeaderRow" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>H: Set Header Row (e.g. "ID,Date,DrAcc,DrCat,Debit,CrAcc,*")</label>
+    <label locale="ja">H: 見出し行をセットしてください（未設定の場合："取引No,取引日,借方勘定科目,借方補助科目,借方税区分,…" ＜計21＞）</label>
+  </config>
+  <config name="conf_ColSlipId" required="false" form-type="TEXTFIELD">
+    <label>I: Set Slip-ID Column Index (e.g. "0" if case ID,[1],[2],*)</label>
+    <label locale="ja">I: 振替伝票IDが挿入される列番号をセットしてください（未設定の場合："0" ← ID,[1],[2],…）</label>
+  </config>
+  <config name="conf_ColDate" required="false" form-type="TEXTFIELD">
+    <label>J: Set Date Column Index (e.g. "1" if [0],Date,[2],*)</label>
+    <label locale="ja">J: 日付が挿入される列番号をセットしてください（未設定の場合："1" ← [0],日付,[2],…）</label>
+  </config>
+  <config name="conf_YmdFormat" required="false" form-type="TEXTFIELD">
+    <label>K: Set Date Format (e.g. "YYYY-MM-DD" "YYYY/MM/DD" "DD/MM/YYYY")</label>
+    <label locale="ja">K: 日付フォーマットをセットしてください（未設定の場合："YYYY/MM/DD"）</label>
+  </config>
+  <config name="conf_ColDrAmt" required="false" form-type="TEXTFIELD">
+    <label>L: Set Dr-Amt Column Indexes (e.g. "6")</label>
+    <label locale="ja">L: 借方金額が挿入される列番号をセットしてください（未設定の場合："6"）</label>
+  </config>
+  <config name="conf_ColCrAmt" required="false" form-type="TEXTFIELD">
+    <label>M: Set Cr-Amt Column Indexes (e.g. "12")</label>
+    <label locale="ja">M: 貸方金額が挿入される列番号をセットしてください（未設定の場合："12"）</label>
+  </config>
+  <config name="conf_DecimalPlaces" required="false" form-type="TEXTFIELD">
+    <label>N: Set Number of Decimal Places for Amount Division ("2" in USD)</label>
+    <label locale="ja">N: 金額を分割計算する際の小数桁数をセットしてください（未設定の場合："0"）</label>
+  </config>
+  <config name="conf_ColSlipDescr" required="false" form-type="TEXTFIELD">
+    <label>O: Set Slip Description Column Indexes (e.g. "14")</label>
+    <label locale="ja">O: 伝票の摘要名が挿入される列番号をセットしてください（未設定の場合："14"）</label>
+  </config>
+  <config name="conf_TplReceivableSales" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>P: Set Record Tpl for Receivable Sales (e.g. ",,AR,,,,,,Sa,*")</label>
+    <label locale="ja">P: 売掛金売上行のテンプレートをセットしてください（未設定の場合：",,売掛金,,対象外,,,,売上高,…"）</label>
+  </config>
+  <config name="conf_TplReceivedSales" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>Q: Set Record Tpl for Received Sales (e.g. ",,Rvd,,,,,,Sa,*")</label>
+    <label locale="ja">Q: 前受金売上行のテンプレートをセットしてください（未設定の場合：",,前受金,,対象外,,,,売上高,…"）</label>
+  </config>
+  <config name="conf_TplPaymentReceivable" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>R: Set Record Tpl for Payment of Receivable (e.g. "Bank,,na")</label>
+    <label locale="ja">R: 売掛金回収行のテンプレートをセットしてください（未設定の場合：",,普通預金,…,売掛金,…未実現,,,"）</label>
+  </config>
+  <config name="conf_TplPaymentReceived" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>S: Set Record Tpl for Payment of Received (e.g. "Bank,,na")</label>
+    <label locale="ja">S: 前受金回収行のテンプレートをセットしてください（未設定の場合：",,普通預金,…,前受金,…未実現,,,"）</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// Generator from Invoice Data to Journal Slip TSV
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+// ◇Money Forward (journal_sample.csv)
+// https://support.biz.moneyforward.com/account/guide/import-books/ib01.html
+// 取引No,取引日,借方勘定科目,借方補助科目,借方税区分,借方部門,借方金額(円),借方税額,貸方勘定科目,貸方補助科目,貸方税区分,貸方部門,貸方金額(円),貸方税額,摘要,仕訳メモ,タグ,MF仕訳タイプ,決算整理仕訳,×作成日時,×最終更新日時
+// ※「取引No」「取引日」「勘定科目」「金額」については入力必須項目
+
+// ◇Freee (仕訳インポートその他(借方金額・貸方金額あり)_for_excel.csv)
+// https://support.freee.co.jp/hc/ja/articles/204847430
+// 日付,伝票番号,決算整理仕訳,借方勘定科目,借方科目コード,借方補助科目,借方補助科目コード,借方部門,借方金額,借方内税/外税,借方税区分,借方税額,貸方勘定科目,貸方科目コード,貸方補助科目,貸方補助科目コード,貸方部門,貸方金額,貸方内税/外税,貸方税区分,貸方税額,摘要
+// ※「日付」「勘定科目」「金額」必須
+
+
+main();
+function main(){ //////// main() start ////////
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + ""; // required
+const dataIdB = configs.get( "conf_DataIdB" ) + "";
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+const dataIdD = configs.get( "conf_DataIdD" ) + "";
+const dataIdE = configs.get( "conf_DataIdE" ) + "";
+const dataIdF = configs.get( "conf_DataIdF" ) + "";
+const dataIdG = configs.get( "conf_DataIdG" ) + ""; // required
+const dataIdX = configs.get( "conf_DataIdX" ) + ""; // required
+
+let   headerRow = configs.get( "conf_HeaderRow" ) + "";
+  if( headerRow === ""){headerRow = "取引No,取引日,借方勘定科目,借方補助科目,借方税区分,借方部門,借方金額(円),借方税額,貸方勘定科目,貸方補助科目,貸方税区分,貸方部門,貸方金額(円),貸方税額,摘要,仕訳メモ,タグ,MF仕訳タイプ,決算整理仕訳,作成日時,最終更新日時";}
+let   colSlipId = configs.get( "conf_ColSlipId" ) + "";
+  if( colSlipId === ""){colSlipId = 0;}else{colSlipId = Number(colSlipId);}
+let   colDate   = configs.get( "conf_ColDate" )   + "";
+  if( colDate   === ""){colDate   = 1;}else{colDate   = Number(colDate);}
+let   ymdFormat = configs.get( "conf_YmdFormat" ) + "";
+  if( ymdFormat === ""){ymdFormat   = "YYYY/MM/DD";}
+let   colDrAmt  = configs.get( "conf_ColDrAmt" )  + "";
+  if( colDrAmt  === ""){colDrAmt = 6 ;}else{colDrAmt  = Number(colDrAmt);}
+let   colCrAmt  = configs.get( "conf_ColCrAmt" )  + "";
+  if( colCrAmt  === ""){colCrAmt = 12;}else{colCrAmt  = Number(colCrAmt);}
+const decimalPlaces  = configs.get( "conf_DecimalPlaces" ) - 0;
+let   colSlipDescr = configs.get( "conf_ColSlipDescr" )  + "";
+  if( colSlipDescr === ""){colSlipDescr = 14;}else{colSlipDescr  = Number(colSlipDescr);}
+
+
+let   tplReceivableSales   = configs.get( "conf_TplReceivableSales" ) + "";
+  if( tplReceivableSales   === ""){tplReceivableSales = ",,売掛金,,対象外,,,0,売上高,,課税売上 8%,,,0,,,,,,,";}
+  const arrTplReceivableSales   = tplReceivableSales.split(",");
+let   tplReceivedSales     = configs.get( "conf_TplReceivedSales" ) + "";
+  if( tplReceivedSales     === ""){tplReceivedSales   = ",,前受金,,対象外,,,0,売上高,,課税売上 8%,,,0,,,,,,,";}
+  const arrTplReceivedSales     = tplReceivedSales.split(",");
+let   tplPaymentReceivable = configs.get( "conf_TplPaymentReceivable" ) + "";
+  if( tplPaymentReceivable === ""){tplPaymentReceivable = ",,普通預金,,対象外,,,0,売掛金,,対象外,,,0,,,,,,,";}
+  const arrTplPaymentReceivable = tplPaymentReceivable.split(",");
+let   tplPaymentReceived   = configs.get( "conf_TplPaymentReceived" ) + "";
+  if( tplPaymentReceived   === ""){tplPaymentReceived     = ",,普通預金,,対象外,,,0,前受金,,対象外,,,0,,,,,,,";}
+  const arrTplPaymentReceived   = tplPaymentReceived.split(",");
+// 'java.lang.String' to javascript primitive 'string' or 'number'
+
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+const slipDescr            = engine.findDataByNumber( dataIdA ) + ""; // required
+let   salesAmtSingle       = engine.findDataByNumber( dataIdB ) - 0;  // null-0 -> 0
+let   salesAmtSingleDate   = engine.findDataByNumber( dataIdC ) + "";
+let   salesAmtMultiple     = engine.findDataByNumber( dataIdD ) - 0;
+let   salesAmtMultipleDate = engine.findDataByNumber( dataIdE ) + "";
+let   salesAmtMultipleNum  = engine.findDataByNumber( dataIdF ) - 0;
+const dueDate              = engine.findDataByNumber( dataIdG ) + ""; // required
+// 'java.lang.String' to javascript primitive 'string' or 'number'
+
+const dateDueDate          = new Date( dueDate );
+const myNumOfCols          = headerRow.split(",").length;
+
+/// Input Errors
+// Number of Columns
+if(       myNumOfCols !== tplReceivableSales.split(",").length ){
+  engine.log( "The number of commas in each Config is not the same. (tplReceivableSales)" );
+  return;
+}else if( myNumOfCols !== tplReceivedSales.split(",").length ){
+  engine.log( "The number of commas in each Config is not the same. (tplReceivedSales)" );
+  return;
+}else if( myNumOfCols !== tplPaymentReceivable.split(",").length ){
+  engine.log( "The number of commas in each Config is not the same. (tplPaymentReceivable)" );
+  return;
+}else if( myNumOfCols !== tplPaymentReceived.split(",").length ){
+  engine.log( "The number of commas in each Config is not the same. (tplPaymentReceived)" );
+  return;
+}
+// Zero Amount
+if(salesAmtSingle === 0 && salesAmtMultiple === 0){ //Case 0: Error exit
+  engine.log( "Total Sales Amount is zero." );
+  return;
+}
+
+
+//// == Calculating / 演算 ==
+const dateToday = new Date();
+const todaySerial = (dateToday.getFullYear() % 100) * 10000 + (dateToday.getMonth()+1) * 100 + dateToday.getDate();
+// e.g. 180131
+
+let tmpSlipId = (todaySerial % 10000) * 1000000 + (processInstance.getProcessInstanceId() % 10000) * 100;
+// e.g. (0)131 123400 (3 or 4digits, 4 digits, 2 digits: for Unsigned Int limit of Money Forward)
+
+/// If the number of assumed slips per day does not exceed 100 , / 想定伝票数が日次100枚以下の場合の改変例
+// let tmpSlipId = todaySerial * 10000 + (processInstance.getProcessInstanceSequenceNumber() % 100) * 100;
+// e.g. 1801319900 (6 digits, 2 digits, 2 digits)
+
+/// If the number of assumed slips per day exceeds 10000, / 想定伝票数が日次10000枚を超える場合の改変例
+// e.g. 1234567 00 (max 7 digits, 2 digits) // No Date Info 日付情報を削除
+// let tmpSlipId = (processInstance.getProcessInstanceId() % 10000000) * 100;
+
+let myTsv    = "";
+myTsv += headerRow.replace(/,/g, "\t") + "\n";
+
+//Case 1: Only Single Sales / 一括売上だけの場合
+if(salesAmtSingle !== 0 && salesAmtMultiple === 0){
+  let dateSalesAmtSingleDate = new Date( salesAmtSingleDate );
+
+  if( dateSalesAmtSingleDate.getTime() <= dateDueDate.getTime() ){
+    tmpSlipId++;
+    let tmpArrSales        = arrTplReceivableSales.concat();
+    tmpArrSales[colSlipId] = tmpSlipId + "";
+    tmpArrSales[colDate]   = funcDateStr( dateSalesAmtSingleDate, ymdFormat );
+    tmpArrSales[colDrAmt]  = salesAmtSingle;
+    tmpArrSales[colCrAmt]  = salesAmtSingle;
+    tmpArrSales[colSlipDescr] = slipDescr;
+    myTsv += tmpArrSales.join("\t");
+    myTsv += "\n";
+
+    tmpSlipId++;
+    let tmpArrPay          = arrTplPaymentReceivable.concat();
+    tmpArrPay[colSlipId]   = tmpSlipId + "";
+    tmpArrPay[colDate]     = funcDateStr( dateDueDate, ymdFormat );
+    tmpArrPay[colDrAmt]    = salesAmtSingle;
+    tmpArrPay[colCrAmt]    = salesAmtSingle;
+    tmpArrPay[colSlipDescr] = slipDescr;
+    myTsv += tmpArrPay.join("\t");
+  }else{
+    tmpSlipId++;
+    let tmpArrSales        = arrTplReceivedSales.concat();
+    tmpArrSales[colSlipId] = tmpSlipId + "";
+    tmpArrSales[colDate]   = funcDateStr( dateSalesAmtSingleDate, ymdFormat );
+    tmpArrSales[colDrAmt]  = salesAmtSingle;
+    tmpArrSales[colCrAmt]  = salesAmtSingle;
+    tmpArrSales[colSlipDescr] = slipDescr;
+    myTsv += tmpArrSales.join("\t");
+    myTsv += "\n";
+
+    tmpSlipId++;
+    let tmpArrPay          = arrTplPaymentReceived.concat();
+    tmpArrPay[colSlipId]   = tmpSlipId + "";
+    tmpArrPay[colDate]     = funcDateStr( dateDueDate, ymdFormat );
+    tmpArrPay[colDrAmt]    = salesAmtSingle;
+    tmpArrPay[colCrAmt]    = salesAmtSingle;
+    tmpArrPay[colSlipDescr] = slipDescr;
+    myTsv += tmpArrPay.join("\t");
+  }
+
+}
+
+//Case 2:  Including Multiple Sales / 分割売上を含む場合
+if(salesAmtMultiple !== 0){
+  if(salesAmtMultipleNum === 0){
+    engine.log( "'0' can not be used for division number." );
+    return;
+  }
+
+  // Subtotal of ReceivableSales and ReceivedSales
+  let myReceivableSales = 0;
+  let myReceivedSales = 0;
+
+
+  //// Single 
+  if(salesAmtSingle !== 0){
+    let dateSalesAmtSingleDate = new Date( salesAmtSingleDate );
+
+    if( dateSalesAmtSingleDate.getTime() <= dateDueDate.getTime() ){
+      tmpSlipId++;
+      let tmpArrSales        = arrTplReceivableSales.concat();
+      tmpArrSales[colSlipId] = tmpSlipId + "";
+      tmpArrSales[colDate]   = funcDateStr( dateSalesAmtSingleDate, ymdFormat );
+      tmpArrSales[colDrAmt]  = salesAmtSingle;
+      tmpArrSales[colCrAmt]  = salesAmtSingle;
+      tmpArrSales[colSlipDescr] = slipDescr;
+      myTsv += tmpArrSales.join("\t");
+      myTsv += "\n";
+      myReceivableSales += salesAmtSingle;
+    }else{
+      tmpSlipId++;
+      let tmpArrSales        = arrTplReceivedSales.concat();
+      tmpArrSales[colSlipId] = tmpSlipId + "";
+      tmpArrSales[colDate]   = funcDateStr( dateSalesAmtSingleDate, ymdFormat );
+      tmpArrSales[colDrAmt]  = salesAmtSingle;
+      tmpArrSales[colCrAmt]  = salesAmtSingle;
+      tmpArrSales[colSlipDescr] = slipDescr;
+      myTsv += tmpArrSales.join("\t");
+      myTsv += "\n";
+      myReceivedSales += salesAmtSingle;
+    }
+  }
+
+
+  //// Multiple
+
+  // Sales for each month
+  // The remainder is added to the first month. / 商の剰余は初月に加算
+  // "101/10" is divided into "10.10" * 10, in the case of two decimal places.
+  // "101/10" is divided into "11" * 1 and "10" * 9, in the case of 0 decimal place.
+  const monthlySalesFollow = Math.floor( salesAmtMultiple / salesAmtMultipleNum * Math.pow(10, decimalPlaces) ) / Math.pow(10, decimalPlaces);
+  const monthlySalesFirst  = salesAmtMultiple - monthlySalesFollow * ( salesAmtMultipleNum - 1 );
+
+  let arrSalesAmtMultipleDate  = new Array( salesAmtMultipleNum );
+
+  // First Month
+  arrSalesAmtMultipleDate[0]   = new Date( salesAmtMultipleDate );
+  if( arrSalesAmtMultipleDate[0].getTime() <= dateDueDate.getTime() ){
+    tmpSlipId++;
+    let tmpArrSales        = arrTplReceivableSales.concat();
+    tmpArrSales[colSlipId] = tmpSlipId + "";
+    tmpArrSales[colDate]   = funcDateStr( arrSalesAmtMultipleDate[0], ymdFormat );
+    tmpArrSales[colDrAmt]  = monthlySalesFirst;
+    tmpArrSales[colCrAmt]  = monthlySalesFirst;
+    tmpArrSales[colSlipDescr] = funcMonthStr( arrSalesAmtMultipleDate[0] ) + " @ " + slipDescr;
+    myTsv += tmpArrSales.join("\t");
+    myTsv += "\n";
+    myReceivableSales += monthlySalesFirst;
+  }else{
+    tmpSlipId++;
+    let tmpArrSales        = arrTplReceivedSales.concat();
+    tmpArrSales[colSlipId] = tmpSlipId + "";
+    tmpArrSales[colDate]   = funcDateStr( arrSalesAmtMultipleDate[0], ymdFormat );
+    tmpArrSales[colDrAmt]  = monthlySalesFirst;
+    tmpArrSales[colCrAmt]  = monthlySalesFirst;
+    tmpArrSales[colSlipDescr] = funcMonthStr( arrSalesAmtMultipleDate[0] ) + " @ " + slipDescr;
+    myTsv += tmpArrSales.join("\t");
+    myTsv += "\n";
+    myReceivedSales += monthlySalesFirst;
+  }
+
+  // Following Months
+  // Record on 1st of each month / 次月以降は1日に売上計上
+  for( let i=1; i < salesAmtMultipleNum; i++){
+    arrSalesAmtMultipleDate[i] = new Date( 
+                                     arrSalesAmtMultipleDate[0].getFullYear(),
+                                     arrSalesAmtMultipleDate[0].getMonth() + i,
+                                     1); // 1st of each month
+    if( arrSalesAmtMultipleDate[i].getTime() <= dateDueDate.getTime() ){
+      tmpSlipId++;
+      let tmpArrSales        = arrTplReceivableSales.concat();
+      tmpArrSales[colSlipId] = tmpSlipId + "";
+      tmpArrSales[colDate]   = funcDateStr( arrSalesAmtMultipleDate[i], ymdFormat );
+      tmpArrSales[colDrAmt]  = monthlySalesFollow;
+      tmpArrSales[colCrAmt]  = monthlySalesFollow;
+      tmpArrSales[colSlipDescr] = funcMonthStr( arrSalesAmtMultipleDate[i] ) + " @ " + slipDescr;
+      myTsv += tmpArrSales.join("\t");
+      myTsv += "\n";
+      myReceivableSales += monthlySalesFollow;
+    }else{
+      tmpSlipId++;
+      let tmpArrSales        = arrTplReceivedSales.concat();
+      tmpArrSales[colSlipId] = tmpSlipId + "";
+      tmpArrSales[colDate]   = funcDateStr( arrSalesAmtMultipleDate[i], ymdFormat );
+      tmpArrSales[colDrAmt]  = monthlySalesFollow;
+      tmpArrSales[colCrAmt]  = monthlySalesFollow;
+      tmpArrSales[colSlipDescr] = slipDescr;
+      myTsv += tmpArrSales.join("\t");
+      myTsv += "\n";
+      myReceivedSales += monthlySalesFollow;
+    }
+  }
+  if(myReceivableSales !== 0 && myReceivedSales !== 0){
+    tmpSlipId++;
+    let tmpArrPay1         = arrTplPaymentReceivable.concat();
+    tmpArrPay1[colSlipId]  = tmpSlipId + "";
+    tmpArrPay1[colDate]    = funcDateStr( dateDueDate, ymdFormat );
+    tmpArrPay1[colDrAmt]   = myReceivableSales + myReceivedSales;
+    tmpArrPay1[colCrAmt]   = myReceivableSales;
+    tmpArrPay1[colSlipDescr] = slipDescr;
+    myTsv += tmpArrPay1.join("\t");
+    myTsv += "\n";
+    let tmpArrPay2         = arrTplPaymentReceived.concat();
+    tmpArrPay2[colSlipId]  = tmpSlipId + "";
+    tmpArrPay2[colDate]    = funcDateStr( dateDueDate, ymdFormat );
+    tmpArrPay2[colDrAmt]   = 0;
+    tmpArrPay2[colCrAmt]   = myReceivedSales;
+    tmpArrPay2[colSlipDescr] = slipDescr;
+    myTsv += tmpArrPay2.join("\t");
+  }else if(myReceivableSales === 0){
+    tmpSlipId++;
+    let tmpArrPay          = arrTplPaymentReceived.concat();
+    tmpArrPay[colSlipId]   = tmpSlipId + "";
+    tmpArrPay[colDate]     = funcDateStr( dateDueDate, ymdFormat );
+    tmpArrPay[colDrAmt]    = myReceivableSales + myReceivedSales;
+    tmpArrPay[colCrAmt]    = myReceivedSales;
+    tmpArrPay[colSlipDescr] = slipDescr;
+    myTsv += tmpArrPay.join("\t");
+  }else if(myReceivedSales === 0){
+    tmpSlipId++;
+    let tmpArrPay          = arrTplPaymentReceivable.concat();
+    tmpArrPay[colSlipId]   = tmpSlipId + "";
+    tmpArrPay[colDate]     = funcDateStr( dateDueDate, ymdFormat );
+    tmpArrPay[colDrAmt]    = myReceivableSales + myReceivedSales;
+    tmpArrPay[colCrAmt]    = myReceivableSales;
+    tmpArrPay[colSlipDescr] = slipDescr;
+    myTsv += tmpArrPay.join("\t");
+  }
+}
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdX, myTsv );
+
+} //////// main() end ////////
+
+
+function funcDateStr( dateObj, formatStr ){
+  formatStr = formatStr.replace(/YYYY/g, dateObj.getFullYear());
+  formatStr = formatStr.replace(/MM/g,   ('00' + (dateObj.getMonth() + 1)).slice(-2));
+  formatStr = formatStr.replace(/DD/g,   ('00' +  dateObj.getDate()).slice(-2));
+  return formatStr;
+}
+
+function funcMonthStr( dateObj ){
+  let myStr = dateObj.getFullYear() + "-" + ("00" + (dateObj.getMonth()+1)).slice(-2);
+  return myStr;
+}
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEFUlEQVRYR8VXQVIbORT9X2bVXgRO
+EDjBhBPE2YFEVcgJEk4w5ASBE4w5QewT4FQhwS7mBIETBE4wnkU3G7p/6mkkl1rT7ZhJqugqqgC1
+paf333v/m+mZH37m8+mXAezt7W0z80tc5OHh4XY+ny+ecqn/DUBr/YmIPjDzdnqgiNwR0biqquk6
+YJ4MQGv9iojO84PzW4vITdM0766urgCo93kSANA9GAy+EdEmdhSRM6XU7OLiYo6/sa6U+kBEx8z8
+gojm1to3vw2A1vobM78SkX+IaOScuxmNRh5MSvfBwcFIRL4GkLt4rw/E2gxorVHvz+mmOLwoCoDa
+rOt6N6XbGCN4l5nfRIa6QDwFwPdQ96m1FjRTBmrmnHuH/6cM1HW9s0oHawGA8JgZtad0w1iSeDMI
+j5lhw1Fg6otz7vCXNaC1PmFm2O7WWgsXEOgfDod/h4Oumfl1ZsfrqqoOf2bFlQzEkGHmcRDfmXPu
+OKe/LMutoiiQB/62YOLy8nK2TiD1AtBaf2ZmX+v4pIIyxkyI6H2y/NFaO17n0NaeXR8Ifv+er1lr
+l4Dz+od3fR4Q0cRaO8UvxhiARNlg33nTNNNUlJ0MGGNA818icu+ca0VtDioVaKYBeH+zKzFF5Ng5
+d+Zt2sWA1nrGzG+RL03TnIS63kfkaQNCmfCDVCSiRThwWRqEFjPPQo/Au75xEZEvWR8AiO7P7EbL
+RNNa5+ut+kcG4Zq6rr0wlVJIzknUDgA553Y6AYSEAwveWriFc85HLp6O+o+bprlOlW+MucHhYC28
+v22t3drf3z9USp1jH2hqpQ0TtK1AiTGbl09ETp1zvmS4BDIgyRBc5A6xDW2IyLVzbrQSgNY6xu+S
+4vQGHfpZlGW5E8Mn757x/bSZ9QJIrSgiq+rfwiEiR6h1sKDPCrgphBT0AHGDiRmsmvoaovMxy8zw
+81aXFRNWugzkZ4SYlomd76qq2i2K4isSNWHilIPgWguZ+pcbpl2u63RQW1XVdlYCH2giAlEfBvrR
+tCDwBaeWAvogkqWP0+5njMGQ4TtdDwAvwijA4JiWZSE+ERlHJwDAf4SGPo/BEqNVUk+fjhk7pygb
+QiumZhjLzp1zu9ENw+FwLCIAjnREZ8Ve0MYXjpbCANnXwdLBA+FCRH9EH4cDsbEf0RKWOptTNsQc
+gQEfu2ihSqmPcXwK2ngd0Ebap3VdnwwGg9io5nVdHyFsgmswsi1LJCKTpmlO47pS6j0zx2j/NwfC
+mD0PU2xfeVvqzhjp+sySpZ4Nb8uyHEGs3oYBBMTSmmrCh6fMPMkHSwRSGFRicwHIe4zleBcJmIzn
+fqvgAHxpGUentIIING5sbPj2+/j4ePezLxURvFJqs2maRdf4jcthHe92TcdrDaW9dfkNC88O4AcI
+zqgZxW8imAAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
