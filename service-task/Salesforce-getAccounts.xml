@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
-<label>Batch to Get Accounts from salesforce</label>
-<label locale="ja">salesforce 取引先の一括取得</label>
+<label>Batch to Get Accounts from Salesforce</label>
+<label locale="ja">Salesforce 取引先の一括取得</label>
 <last-modified>2016-10-17</last-modified>
 
 <configs>
