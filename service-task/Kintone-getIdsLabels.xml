@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
-<label>Batch to Get Two Column Values from Kintone</label>
-<label locale="ja">Kintone 2列データの一括取得</label>
+<label>Batch to Get Two Column Values from kintone</label>
+<label locale="ja">kintone 2列データの一括取得</label>
 <last-modified>2016-09-21</last-modified>
 
 <help-page-url>https://support.questetra.com/addons/kintone-getidslabels/</help-page-url>
