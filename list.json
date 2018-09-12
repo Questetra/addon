@@ -1155,6 +1155,21 @@
             "en": "https://support.questetra.com/addons/data-delete/",
             "ja": "https://support.questetra.com/ja/addons/data-delete/"
         }
+    },
+    {
+        "id": "JournalTsv-Generator",
+        "file": "https://questetra.github.io/addon/service-task/JournalTsv-Generator.xml",
+        "last-modified": "2018-09-04",
+        "label":
+        {
+            "en": "Journal Slip TSV from Invoice Data",
+            "ja": "請求データから仕訳伝票TSVの生成"
+        },
+        "help":
+        {
+            "en": "https://support.questetra.com/addons/journaltsv-generator/",
+            "ja": "https://support.questetra.com/ja/addons/journaltsv-generator/"
+        }
     }],
     "pdf": [
     {
