@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Typetalk Post Message</label>
+<label locale="ja">Typetalk メッセージ投稿</label>
+
+<engine-type>1</engine-type>
+<last-modified>2018-08-28</last-modified>
+
+<help-page-url>https://support.questetra.com/addons/typetalk-messagepost/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/typetalk-messagepost/</help-page-url>
+
+<configs>
+  <config name="conf_TopicId" required="true" form-type="TEXTFIELD">
+    <label>A: Set topic id to post (e.g. "12345")</label>
+  </config>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>B: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">B: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_Message" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>C: Select TEXT DATA for Post Message</label>
+    <label locale="ja">C: 投稿メッセージが格納されている文字列型データ項目</label>
+  </config>
+  <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select TEXT DATA for Log</label>
+    <label locale="ja">X: ログが格納されている文字型データ項目</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 注意 / Note ==
+// Authorization Code Request URL: https://typetalk.in/oauth2/authorize
+// Access Token Request URL: https://typetalk.in/oauth2/access_token
+// Scope: chat:topic.post
+// Client ID: ( from https://typetalk.com/my/develop/applications )
+// Consumer Secret: ( from https://typetalk.com/my/develop/applications )
+
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var topicId = configs.get("conf_TopicId") + "";
+var myOAuthConfig = configs.get("conf_OAuth2") + "";
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var textForPost = engine.findDataByNumber( configs.get("conf_Message") ) + "";
+
+//// == 演算 / Calculating ==
+var token = httpClient.getOAuth2Token( myOAuthConfig );
+var response = httpClient.begin()
+  .bearer( token )
+  .formParam( "message", textForPost )
+  .post( "https://typetalk.com/api/v1/topics/" + topicId );
+
+//// == ワークフローデータへの代入 / Data Updating ==
+var dataNum_Log = configs.get("conf_Log") + "";
+if (dataNum_Log !== "") {
+  var log = "";
+  log += "---POST request--- " + response.getStatusCode() + "\n";
+  log += response.getResponseAsString() + "\n";
+  engine.setDataByNumber( dataNum_Log, log);
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEQklEQVRYR8VXbYhUZRR+zr131tYSZ2krNXFbyVhQcMM/9mtXwtnEPrZdikDN2R0wgnLHH4F/yo2yog8aS+iDZnZFIQjSNQjdi8gsQQhRjYGgf/zI0j5km6l0debe98R7b3Pn3pl779xNqwv313ve533OOc8573kJ//NHsznfSCX6mdFDRN0MjhOoW+5ncIFARWYuEFNeG5s8GBW3KQFO9saF0jLCQBpE8UjAzEUCMooo76LxfDFsTygBY3htEqC3Ix9cfxJzEYQhLatPBJEIJFBJ9WUIGInkcRMjZs7Ecvo2PzNfAkYqMQ7Q5htxuIPBGNdyk0P1mA0EInm+cAmoezVoUYeFxxfOgQvHgIvfh3JmYFcsO5l2G3kIWDknZSwwX8tXQXlkE9CxDFBVr5kQwPnTEPvHwCe+DiHCj7o14RCQajeVljNBgqOHNkDpGwRumhuematXwEcOQkzs8bdjLqqi3FmtDodAZTgxSkQ7fIWydgDKwxuBVtfhzMDVGWD6FyB+K3DzvNrWShms74c4MO5LgplfjOX0UbnoEDBSiSJA8xt2LO2CumU70L7AuzRzGWLfbqA0DSX1HNDW7l2f/hUi9yb45PFGEsxFLae3OQRkhwPogB9dZeOzoJ51ACm1Zen9zz/C/Oh10OJOKANDwLz5ALkkxQI8dQhi37sBKbO1YO0IU776/G6g424viGmAv/0S4v1XYGnjvvuB2xZ4ScodF87B3JkGrs00kKhWhE1gOJEnop4Gq2Ur7PDXh1eW3ldTEB+8CmXbTtDyVf5e/nYJIvuGbxqYeSqW03stAkaq7ywAu6hdH3Wt9M+vUQEf+gTi2FGoIy8Bty+aPQFwIZbV760SYF+EoAhc/gNi7zvWFmXTVm8FuIFCIiDNtOykrRoj1edPAICvBi6eh/nyVlBiAMr6J4BKxa6n+h7xwxmYo08HiNBLwDcFloeDw9ZBULUakBTXC0+B1jxodUY+8Y3VmjGn1VUp4VXAzMdjOb07XIQSbuESqM/sAO64swb+e9FKgawEyD7x5AiwuNPr6aWfYH74GnD6pG8EPCJsdgFRz3oog0PA3FtqYEYFkL8Ws3/3d+VPiE/HwFOfB4bfU4ZhjaiKQA88BmXd48GCqxo2acOuHNUakS3EgFbs9mFpF5T+zaB7VjR6Le3K18BfHIb4+L1Az+0FLmlZ3RrvIl1GDWht7Vb7pdVrat1P6uKzveB8cNirOL6XkXUdqy1nfS8kH3+cDmia4FPf2ddvgOC827mkmuW7Gq5jKw1NBhIHaE4r1O1vAVJsRybsaoj8BQwkjoZu4DBaz8kdekfcfsT/laEUvEfL6sn68/6rsdyZgCIT+Ls0+wHIEb1xUoqUcy4BSP6jh4lTMsneuKG0pImQjk6ES8zIaKKcua6nWb2T1uMU1Atm+SiNE9FKq60wy8GvCKICgfNhHs8qBZGifJ1GfwGRDdIwz1z8TgAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
