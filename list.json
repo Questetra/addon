@@ -1,1220 +1,1300 @@
 {
     "services": [
-    {
-        "id": "GoogleCalendar-eventsList",
-        "file": "https://questetra.github.io/addon/service-task/GoogleCalendar-eventsList.xml",
-        "last-modified": "2017-08-01",
-        "label":
-        {
-            "en": "Google Calendar events list",
-            "ja": "Google Calendar イベントリスト"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/googlecalendar-eventslist/",
-            "ja": "https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/"
-        }
-    },
-    {
-        "id": "GoogleCalendar-insertEvent",
-        "file": "https://questetra.github.io/addon/service-task/GoogleCalendar-insertEvent.xml",
-        "last-modified": "2016-10-25",
-        "label":
-        {
-            "en": "Insert event to Google Calendar",
-            "ja": "Google Calendar 予定追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/googlecalendar-insertevent/",
-            "ja": "https://support.questetra.com/ja/addons/services/googlecalendar-insertevent/"
-        }
-    },
-    {
-        "id": "GoogleDrive-simpleUpload",
-        "file": "https://questetra.github.io/addon/service-task/GoogleDrive-simpleUpload.xml",
-        "last-modified": "2016-10-25",
-        "label":
-        {
-            "en": "Google Drive Simple Uploads",
-            "ja": "Google Drive アップロード"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googledrive-simpleupload/",
-            "ja": "https://support.questetra.com/ja/addons/googledrive-simpleupload/"
-        }
-    },
-    {
-        "id": "GoogleDrive-filesGet",
-        "file": "https://questetra.github.io/addon/service-task/GoogleDrive-filesGet.xml",
-        "last-modified": "2017-11-20",
-        "label":
-        {
-            "en": "Google Drive Files Retrieve",
-            "ja": "Google Drive ファイル取得"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/googledrive-filesget/",
-            "ja": "https://support.questetra.com/ja/addons/services/googledrive-filesget/"
-        }
-    },
-    {
-        "id": "GoogleDrive-filesCopy",
-        "file": "https://questetra.github.io/addon/service-task/GoogleDrive-filesCopy.xml",
-        "last-modified": "2017-11-26",
-        "label":
-        {
-            "en": "Google Drive Files Copy",
-            "ja": "Google Drive ファイルコピー"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googledrive-filescopy/",
-            "ja": "https://support.questetra.com/ja/addons/googledrive-filescopy/"
-        }
-    },
-    {
-        "id": "GoogleDrive-folderCreate",
-        "file": "https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml",
-        "last-modified": "2018-01-09",
-        "label":
-        {
-            "en": "Creating Folder on Google Drive",
-            "ja": "Google Drive フォルダ生成"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/googledrive-foldercreate/",
-            "ja": "https://support.questetra.com/ja/addons/services/googledrive-filescopy/"
-        }
-    },
-    {
-        "id": "GoogleSheets-appendCells",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-appendCells.xml",
-        "last-modified": "2017-10-31",
-        "label":
-        {
-            "en": "Google Sheets Append Cells",
-            "ja": "Google Sheets 行追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlesheets-appendcells/",
-            "ja": "https://support.questetra.com/ja/addons/googlesheets-appendcells/"
-        }
-    },
-    {
-        "id": "GoogleSheets-appendTable",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-appendTable.xml",
-        "last-modified": "2016-09-15",
-        "label":
-        {
-            "en": "New Record to Google Sheets (Table)",
-            "ja": "Google Sheets 行追加 (Table)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlesheets-appendtable/",
-            "ja": "https://support.questetra.com/ja/addons/googlesheets-appendtable/"
-        }
-    },
-    {
-        "id": "GoogleSheets-appendTsv",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-appendTsv.xml",
-        "last-modified": "2018-08-17",
-        "label":
-        {
-            "en": "New Record to Google Sheets (TSV)",
-            "ja": "Google Sheets 行追加 (TSV)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlesheets-appendtsv/",
-            "ja": "https://support.questetra.com/ja/addons/googlesheets-appendtsv/"
-        }
-    },
-    {
-        "id": "GoogleSheets-valueUpdate",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-valueUpdate.xml",
-        "last-modified": "2017-08-28",
-        "label":
-        {
-            "en": "Google Spreadsheets value update",
-            "ja": "Google Spreadsheets セル値の更新"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlesheets-valueupdate/",
-            "ja": "https://support.questetra.com/ja/addons/googlesheets-valueupdate/"
-        }
-    },
-    {
-        "id": "GoogleSheets-sumNumbersCom",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml",
-        "last-modified": "2016-09-13",
-        "label":
-        {
-            "en": "Sum of cells in a Google Spreadsheet",
-            "ja": "Google スプレッドシートのセル合計"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlesheets-sumnumberscom/",
-            "ja": "https://support.questetra.com/ja/addons/googlesheets-sumnumberscom/"
-        }
-    },
-    {
-        "id": "GoogleSheets-sumNumbers",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbers.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Google Sheets Cells Sum",
-            "ja": "Google スプレッドシートのセル合計"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlesheets-sumnumbers/",
-            "ja": "https://support.questetra.com/ja/addons/googlesheets-sumnumbers/"
-        }
-    },
-    {
-        "id": "GoogleSheets-getIdsLabels",
-        "file": "https://questetra.github.io/addon/service-task/GoogleSheets-getIdsLabels.xml",
-        "last-modified": "2016-09-21",
-        "label":
-        {
-            "en": "Batch to Get Two Column Values from Google Sheet",
-            "ja": "Google Sheet 2列データの一括取得"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlesheets-getidslabels/",
-            "ja": "https://support.questetra.com/ja/addons/googlesheets-getidslabels/"
-        }
-    },
-    {
-        "id": "GoogleGroup-memberAdd",
-        "file": "https://questetra.github.io/addon/service-task/GoogleGroup-memberAdd.xml",
-        "last-modified": "2017-07-03",
-        "label":
-        {
-            "en": "Google Group member add",
-            "ja": "Google Group メンバー追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlegroup-memberadd/",
-            "ja": "https://support.questetra.com/ja/addons/googlegroup-memberadd/"
-        }
-    },
-    {
-        "id": "GoogleGroup-memberDelete",
-        "file": "https://questetra.github.io/addon/service-task/GoogleGroup-memberDelete.xml",
-        "last-modified": "2017-07-04",
-        "label":
-        {
-            "en": "Google Group member delete",
-            "ja": "Google Group メンバー削除"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlegroup-memberdelete/",
-            "ja": "https://support.questetra.com/ja/addons/googlegroup-memberdelete/"
-        }
-    },
-    {
-        "id": "GoogleGroup-membersRetrieve",
-        "file": "https://questetra.github.io/addon/service-task/GoogleGroup-membersRetrieve.xml",
-        "last-modified": "2017-07-04",
-        "label":
-        {
-            "en": "Google Group members retrieve",
-            "ja": "Google Group メンバーリスト参照"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlegroup-membersretrieve/",
-            "ja": "https://support.questetra.com/ja/addons/googlegroup-membersretrieve/"
-        }
-    },
-    {
-        "id": "GoogleAnalytics-reportsDomain",
-        "file": "https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsDomain.xml",
-        "last-modified": "2017-07-24",
-        "label":
-        {
-            "en": "Google Analytics reports (Domain ranking)",
-            "ja": "Google Analytics レポート (Domain ranking)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/googleanalytics-reportsdomain/",
-            "ja": "https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/"
-        }
-    },
-    {
-        "id": "GoogleAnalytics-reportsPv",
-        "file": "https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsPv.xml",
-        "last-modified": "2017-07-24",
-        "label":
-        {
-            "en": "Google Analytics reports (PV ranking)",
-            "ja": "Google Analytics レポート (PV ranking)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googleanalytics-reportspv/",
-            "ja": "https://support.questetra.com/ja/addons/googleanalytics-reportspv/"
-        }
-    },
-    {
-        "id": "GoogleAnalytics-reportsRef",
-        "file": "https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsRef.xml",
-        "last-modified": "2017-07-24",
-        "label":
-        {
-            "en": "Google Analytics reports (Referrer ranking)",
-            "ja": "Google Analytics レポート (Referrer ranking)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googleanalytics-reportsref/",
-            "ja": "https://support.questetra.com/ja/addons/googleanalytics-reportsref/"
-        }
-    },
-    {
-        "id": "GoogleCloudPrint-print",
-        "file": "https://questetra.github.io/addon/service-task/GoogleCloudPrint-print.xml",
-        "last-modified": "2016-11-07",
-        "label":
-        {
-            "en": "Submit Print Job via GCP Service",
-            "ja": "Google Cloud Print ジョブ送信"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/googlecloudprint-print/",
-            "ja": "https://support.questetra.com/ja/addons/googlecloudprint-print/"
-        }
-    },
-    {
-        "id": "GoogleCloudPrint-printSingle",
-        "file": "https://questetra.github.io/addon/service-task/GoogleCloudPrint-printSingle.xml",
-        "last-modified": "2016-11-07",
-        "label":
-        {
-            "en": "Submit Print Job via GCP Service",
-            "ja": "Google Cloud Print ジョブ送信"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/googlecloudprint-printsingle/",
-            "ja": "https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/"
-        }
-    },
-    {
-        "id": "Box-fileUpdate",
-        "file": "https://questetra.github.io/addon/service-task/Box-fileUpdate.xml",
-        "last-modified": "2017-10-10",
-        "label":
-        {
-            "en": "[box] upload file and set Password/ Expiration",
-            "ja": "Box ファイルアップロード（パスワード、期限）"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/box-fileupdate/",
-            "ja": "https://support.questetra.com/ja/addons/box-fileupdate/"
-        }
-    },
-    {
-        "id": "Box-upload",
-        "file": "https://questetra.github.io/addon/service-task/Box-upload.xml",
-        "last-modified": "2016-10-18",
-        "label":
-        {
-            "en": "Upload to box",
-            "ja": "box アップロード"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/box-upload/",
-            "ja": "https://support.questetra.com/ja/addons/box-fileupdate/"
-        }
-    },
-    {
-        "id": "Dropbox-upload",
-        "file": "https://questetra.github.io/addon/service-task/Dropbox-upload.xml",
-        "last-modified": "2016-10-05",
-        "label":
-        {
-            "en": "Upload to Dropbox",
-            "ja": "Dropbox アップロード"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/dropbox-upload/",
-            "ja": "https://support.questetra.com/ja/addons/dropbox-upload/"
-        }
-    },
-    {
-        "id": "Kintone-getIdsLabels",
-        "file": "https://questetra.github.io/addon/service-task/Kintone-getIdsLabels.xml",
-        "last-modified": "2016-09-21",
-        "label":
-        {
-            "en": "Batch to Get Two Column Values from Kintone",
-            "ja": "Kintone 2列データの一括取得"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/kintone-getidslabels/",
-            "ja": "https://support.questetra.com/ja/addons/kintone-getidslabels/"
-        }
-    },
-    {
-        "id": "Slack-post",
-        "file": "https://questetra.github.io/addon/service-task/Slack-post.xml",
-        "last-modified": "2016-08-29",
-        "label":
-        {
-            "en": "Post to Slack",
-            "ja": "Slack 投稿"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/slack-post/",
-            "ja": "https://support.questetra.com/ja/addons/slack-post/"
-        }
-    },
-    {
-        "id": "Slack-postFixedPhrase",
-        "file": "https://questetra.github.io/addon/service-task/Slack-postFixedPhrase.xml",
-        "last-modified": "2016-08-31",
-        "label":
-        {
-            "en": "Post to Slack (Fixed phrase)",
-            "ja": "Slack 投稿 (定型文)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/slack-postfixedphrase/",
-            "ja": "https://support.questetra.com/ja/addons/slack-postfixedphrase/"
-        }
-    },
-    {
-        "id": "Salesforce-getAccounts",
-        "file": "https://questetra.github.io/addon/service-task/Salesforce-getAccounts.xml",
-        "last-modified": "2016-10-17",
-        "label":
-        {
-            "en": "Batch to Get Accounts from salesforce",
-            "ja": "salesforce 取引先の一括取得"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/salesforce-getaccounts/",
-            "ja": "https://support.questetra.com/ja/addons/salesforce-getaccounts/"
-        }
-    },
-    {
-        "id": "Salesforce-orderCreate",
-        "file": "https://questetra.github.io/addon/service-task/Salesforce-orderCreate.xml",
-        "last-modified": "2017-10-20",
-        "label":
-        {
-            "en": "Salesforce Order Create",
-            "ja": "Salesforce 注文追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/salesforce-ordercreate/",
-            "ja": "https://support.questetra.com/ja/addons/salesforce-ordercreate/"
-        }
-    },
-    {
-        "id": "Backlog-issueAdd",
-        "file": "https://questetra.github.io/addon/service-task/Backlog-issueAdd.xml",
-        "last-modified": "2017-10-25",
-        "label":
-        {
-            "en": "Backlog Add Issue",
-            "ja": "Backlog 課題追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/backlog-issueadd/",
-            "ja": "https://support.questetra.com/ja/addons/backlog-issueadd/"
-        }
-    },
-    {
-        "id": "Paypal-createUsd",
-        "file": "https://questetra.github.io/addon/service-task/Paypal-createUsd.xml",
-        "last-modified": "2018-01-29",
-        "label":
-        {
-            "en": "PayPal Invoicing Create (USD)",
-            "ja": "PayPal 請求書 生成 (USD)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/paypal-createusd/",
-            "ja": "https://support.questetra.com/ja/addons/services/paypal-createusd/"
-        }
-    },
-    {
-        "id": "Paypal-createJpy",
-        "file": "https://questetra.github.io/addon/service-task/Paypal-createJpy.xml",
-        "last-modified": "2018-01-29",
-        "label":
-        {
-            "en": "PayPal Invoicing Create (JPY)",
-            "ja": "PayPal 請求書 生成 (JPY)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/paypal-createjpy/",
-            "ja": "https://support.questetra.com/ja/addons/paypal-createjpy/"
-        }
-    },
-    {
-        "id": "Paypal-send",
-        "file": "https://questetra.github.io/addon/service-task/Paypal-send.xml",
-        "last-modified": "2017-06-02",
-        "label":
-        {
-            "en": "PayPal Invoicing Send",
-            "ja": "PayPal 請求書 送信指示"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/paypal-send/",
-            "ja": "https://support.questetra.com/ja/addons/paypal-send/"
-        }
-    },
-    {
-        "id": "Paypal-status",
-        "file": "https://questetra.github.io/addon/service-task/Paypal-status.xml",
-        "last-modified": "2017-06-03",
-        "label":
-        {
-            "en": "PayPal Invoicing Status",
-            "ja": "PayPal 請求書 ステータス確認"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/paypal-status/",
-            "ja": "https://support.questetra.com/ja/addons/paypal-status/"
-        }
-    },
-    {
-        "id": "Stripe-cardRegistration",
-        "file": "https://questetra.github.io/addon/service-task/Stripe-cardRegistration.xml",
-        "last-modified": "2016-10-06",
-        "label":
-        {
-            "en": "Card Info to Stripe",
-            "ja": "Stripe カード情報登録"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/stripe-cardregistration/",
-            "ja": "https://support.questetra.com/ja/addons/stripe-cardregistration/"
-        }
-    },
-    {
-        "id": "Stripe-cardRegistrationMmyy",
-        "file": "https://questetra.github.io/addon/service-task/Stripe-cardRegistrationMmyy.xml",
-        "last-modified": "2016-10-06",
-        "label":
-        {
-            "en": "Card Info to Stripe",
-            "ja": "Stripe カード情報登録"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/stripe-cardregistrationmmyy/",
-            "ja": "https://support.questetra.com/ja/addons/stripe-cardregistrationmmyy/"
-        }
-    },
-    {
-        "id": "Stripe-customerCreate",
-        "file": "https://questetra.github.io/addon/service-task/Stripe-customerCreate.xml",
-        "last-modified": "2017-09-01",
-        "label":
-        {
-            "en": "Stripe Customer ID Create from Token",
-            "ja": "Stripe Customer ID 生成（Token ID より）"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/stripe-customercreate/",
-            "ja": "https://support.questetra.com/ja/addons/services/stripe-customercreate/"
-        }
-    },
-    {
-        "id": "Stripe-chargeCreate",
-        "file": "https://questetra.github.io/addon/service-task/Stripe-chargeCreate.xml",
-        "last-modified": "2017-09-09",
-        "label":
-        {
-            "en": "Stripe Charge to Customer ID",
-            "ja": "Stripe 課金（Customer ID）"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/stripe-chargecreate/",
-            "ja": "hhttps://support.questetra.com/ja/addons/stripe-chargecreate/"
-        }
-    },
-    {
-        "id": "Nhk-programSearch",
-        "file": "https://questetra.github.io/addon/service-task/Nhk-programSearch.xml",
-        "last-modified": "2017-04-13",
-        "label":
-        {
-            "en": "NHK Program Search",
-            "ja": "NHK Program Search"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/nhk-programsearch/",
-            "ja": "https://support.questetra.com/ja/addons/nhk-programsearch/"
-        }
-    },
-    {
-        "id": "Questetra-membershipAdd",
-        "file": "https://questetra.github.io/addon/service-task/Questetra-membershipAdd.xml",
-        "last-modified": "2017-12-04",
-        "label":
-        {
-            "en": "Questetra Org Add Membership",
-            "ja": "Questetra 組織メンバー追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/questetra-membershipadd/",
-            "ja": "https://support.questetra.com/ja/addons/questetra-membershipadd/"
-        }
-    },
-    {
-        "id": "Questetra-membershipDelete",
-        "file": "https://questetra.github.io/addon/service-task/Questetra-membershipDelete.xml",
-        "last-modified": "2017-12-04",
-        "label":
-        {
-            "en": "Questetra Org Delete Membership",
-            "ja": "Questetra 組織メンバー削除"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/questetra-membershipdelete/",
-            "ja": "https://support.questetra.com/ja/addons/questetra-membershipdelete/"
-        }
-    },
-    {
-        "id": "Questetra-rolemembershipAdd",
-        "file": "https://questetra.github.io/addon/service-task/Questetra-rolemembershipAdd.xml",
-        "last-modified": "2017-12-11",
-        "label":
-        {
-            "en": "Questetra Role Add Membership",
-            "ja": "Questetra ロールメンバー追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/questetra-rolemembershipadd/",
-            "ja": "https://support.questetra.com/ja/addons/questetra-rolemembershipadd/"
-        }
-    },
-    {
-        "id": "Questetra-rolemembershipDel",
-        "file": "https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml",
-        "last-modified": "2017-12-11",
-        "label":
-        {
-            "en": "Questetra Role Delete Membership",
-            "ja": "Questetra ロールメンバー削除"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/questetra-rolemembershipdel/",
-            "ja": "https://support.questetra.com/ja/addons/questetra-rolemembershipdel/"
-        }
-    },
-    {
-        "id": "Questetra-userOrgPosition",
-        "file": "https://questetra.github.io/addon/service-task/Questetra-userOrgPosition.xml",
-        "last-modified": "2018-03-30",
-        "label":
-        {
-            "en": "Check The User Is In The Organization",
-            "ja": "ユーザの指定組織への所属を判定"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/questetra-userorgposition/",
-            "ja": "https://support.questetra.com/ja/addons/services/questetra-userorgposition/"
-        }
-    },
-    {
-        "id": "Http-filesGet",
-        "file": "https://questetra.github.io/addon/service-task/Http-filesGet.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Download via HTTP and Add to file-type data",
-            "ja": "HTTPでファイルをダウンロードし、ファイル型データ項目に追加します"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/http-filesget/",
-            "ja": "https://support.questetra.com/ja/addons/services/http-filesget/"
-        }
-    },
-    {
-        "id": "CorpNumberAPI-getInfo",
-        "file": "https://questetra.github.io/addon/service-task/CorpNumberAPI-getInfo.xml",
-        "last-modified": "2016-11-02",
-        "label":
-        {
-            "en": "Get Info via Corporate Number API",
-            "ja": "法人番号 API 企業情報の取得"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/services/corpnumberapi-getinfo/",
-            "ja": "https://support.questetra.com/ja/addons/services/corpnumberapi-getinfo/"
-        }
-    },
-    {
-        "id": "Line-pushNotify",
-        "file": "https://questetra.github.io/addon/service-task/Line-pushNotify.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post message through LINE Notify",
-            "ja": "LINE Notifyでメッセージ投稿"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/line-pushnotify/",
-            "ja": "https://support.questetra.com/ja/addons/line-pushnotify/"
-        }
-    },
-    {
-        "id": "RandomNumber-Generate",
-        "file": "https://questetra.github.io/addon/service-task/RandomNumber-Generate.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Random Number Generator",
-            "ja": "乱数ジェネレータ"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/ja/addons/randomnumber-generate/",
-            "ja": "https://support.questetra.com/addons/randomnumber-generate/"
-        }
-    },
-    {
-        "id": "RandomNumber-GenerateDynamic",
-        "file": "https://questetra.github.io/addon/service-task/RandomNumber-GenerateDynamic.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Random Number Generator (dynamic)",
-            "ja": "乱数ジェネレータ (上限変動版)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/random-number-generator-dynamic/",
-            "ja": "https://support.questetra.com/ja/addons/random-number-generator-dynamic/"
-        }
-    },
-    {
-        "id": "OpenChat-PostTextData",
-        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post to OpenChat (Questetra's Enterprise Social)",
-            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/openchat-posttextdata/",
-            "ja": "https://support.questetra.com/ja/addons/openchat-posttextdata/"
-        }
-    },
-    {
-        "id": "OpenChat-PostJoinTextData",
-        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostJoinTextData.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post to OpenChat (Questetra's Enterprise Social)",
-            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/openchat-postjointextdata/",
-            "ja": "https://support.questetra.com/ja/addons/openchat-postjointextdata/"
-        }
-    },
-    {
-        "id": "OpenChat-PostTextFileData",
-        "file": "https://questetra.github.io/addon/service-task/OpenChat-PostTextFileData.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post to OpenChat (Questetra's Enterprise Social)",
-            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/openchat-posttextfiledata/",
-            "ja": "https://support.questetra.com/ja/addons/openchat-posttextfiledata/"
-        }
-    },
-    {
-        "id": "Converter-TsvToExcelCsvSjis",
-        "file": "https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsvSjis.xml",
-        "last-modified": "2018-08-20",
-        "label":
-        {
-            "en": "Converter (TSV to Excel-CSV FILE) sjis",
-            "ja": "コンバータ (TSV to Excel-CSV FILE) sjis"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/converter-tsvtoexcelcsvsjis/",
-            "ja": "https://support.questetra.com/ja/addons/converter-tsvtoexcelcsvsjis/"
-        }
-    },
-    {
-        "id": "OpenChat-Post",
-        "file": "https://questetra.github.io/addon/service-task/OpenChat-Post.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Post to OpenChat (Questetra's Enterprise Social)",
-            "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/openchat-post/",
-            "ja": "https://support.questetra.com/ja/addons/openchat-post/"
-        }
-    },
-    {
-        "id": "Converter-DateToJpEra",
-        "file": "https://questetra.github.io/addon/service-task/Converter-DateToJpEra.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Converter (Date to Japanese Era String)",
-            "ja": "コンバータ (Date to 和暦テキスト)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/converter-datetojpera/",
-            "ja": "https://support.questetra.com/ja/addons/converter-datetojpera/"
-        }
-    },
-    {
-        "id": "Converter-TsvToExcelCsvSjis",
-        "file": "https://questetra.github.io/addon/service-task/Converter-TableToExcelCsvSjis.xml",
-        "last-modified": "2018-08-29",
-        "label":
-        {
-            "en": "Converter (Table to Excel-CSV FILE) sjis",
-            "ja": "コンバータ (Table to Excel-CSV FILE) sjis"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/",
-            "ja": "https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/"
-        }
-    },
-    {
-        "id": "Converter-TsvToTable",
-        "file": "https://questetra.github.io/addon/service-task/Converter-TsvToTable.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Converter (Tsv to Table)",
-            "ja": "コンバータ (Tsv to Table)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/converter-tsvtotable/",
-            "ja": "https://support.questetra.com/ja/addons/converter-tsvtotable/"
-        }
-    },
-    {
-        "id": "Tsv-AddClumn",
-        "file": "https://questetra.github.io/addon/service-task/Tsv-AddColumn.xml",
-        "last-modified": "2018-08-16",
-        "label":
-        {
-            "en": "Add Column to Tsv",
-            "ja": "TSV の列追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/tsv-addclumn/",
-            "ja": "https://support.questetra.com/ja/addons/tsv-addclumn/"
-        }
-    },
-    {
-        "id": "Converter-TableToExcelCsv",
-        "file": "https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml",
-        "last-modified": "2018-08-29",
-        "label":
-        {
-            "en": "Converter (Table to Excel-CSV FILE)",
-            "ja": "コンバータ (Table to Excel-CSV FILE)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/converter-tabletoexcelcsv/",
-            "ja": "https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/"
-        }
-    },
-    {
-        "id": "Hash-CalculateMd5",
-        "file": "https://questetra.github.io/addon/service-task/Hash-CalculateMd5.xml",
-        "last-modified": "2016-08-22",
-        "label":
-        {
-            "en": "Hash Calculator (MD5)",
-            "ja": "Hash Calculator (MD5)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/hash-calculatemd5/",
-            "ja": "https://support.questetra.com/ja/addons/hash-calculatemd5/"
-        }
-    },
-    {
-        "id": "Hash-CalculateSha256",
-        "file": "https://questetra.github.io/addon/service-task/Hash-CalculateSha256.xml",
-        "last-modified": "2016-12-22",
-        "label":
-        {
-            "en": "Hash Calculator (SHA256)",
-            "ja": "Hash Calculator (SHA256)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/hash-calculatesha256/",
-            "ja": "https://support.questetra.com/ja/addons/hash-calculatesha256/"
-        }
-    },
-    {
-        "id": "Process-BulkStartTsv",
-        "file": "https://questetra.github.io/addon/service-task/Process-BulkStartTsv.xml",
-        "last-modified": "2017-11-19",
-        "label":
-        {
-            "en": "Connector (TSV Bulk Start)",
-            "ja": "コネクタ（TSV一括開始）"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/process-bulkstarttsv/",
-            "ja": "https://support.questetra.com/ja/addons/process-bulkstarttsv/"
-        }
-    },
-    {
-        "id": "Email-SendExcelCsvSjis",
-        "file": "https://questetra.github.io/addon/service-task/Email-SendExcelCsvSjis.xml",
-        "last-modified": "2017-01-12",
-        "label":
-        {
-            "en": "Email a Excel-CSV (Table) sjis",
-            "ja": "Excel-CSV のメール送付 (Table) sjis"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/email-sendexcelcsvsjis/",
-            "ja": "https://support.questetra.com/ja/addons/email-sendexcelcsvsjis/"
-        }
-    },
-    {
-        "id": "Email-SendExcelCsv",
-        "file": "https://questetra.github.io/addon/service-task/Email-SendExcelCsv.xml",
-        "last-modified": "2017-01-12",
-        "label":
-        {
-            "en": "Email a Excel-CSV (Table)",
-            "ja": "Excel-CSV のメール送付 (Table)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/email-sendexcelcsv/",
-            "ja": "https://support.questetra.com/ja/addons/email-sendexcelcsv/"
-        }
-    },
-    {
-        "id": "Twilio-faxSend",
-        "file": "https://questetra.github.io/addon/service-task/Twilio-faxSend.xml",
-        "last-modified": "2017-12-14",
-        "label":
-        {
-            "en": "Twilio FAX Send",
-            "ja": "Twilio FAX送信"
-        },
-        "help":
-        {
-            "en": "",
-            "ja": ""
-        }
-    },
-    {
-        "id": "User-EmailToQuser",
-        "file": "https://questetra.github.io/addon/service-task/User-EmailToQuser.xml",
-        "last-modified": "2016-12-21",
-        "label":
-        {
-            "en": "Converter (Email to Quser)",
-            "ja": "コンバータ (Email to Quser)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/user-emailtoquser/",
-            "ja": "https://support.questetra.com/ja/addons/user-emailtoquser/"
-        }
-    },
-    {
-        "id": "User-Converter",
-        "file": "https://questetra.github.io/addon/service-task/User-Converter.xml",
-        "last-modified": "2016-11-15",
-        "label":
-        {
-            "en": "Converter (Quser to ID, Name, Email)",
-            "ja": "コンバータ (Quser to ID, Name, Email)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/user-converter/",
-            "ja": "https://support.questetra.com/ja/addons/user-converter/"
-        }
-    },
-    {
-        "id": "Converter-TableToTsv",
-        "file": "https://questetra.github.io/addon/service-task/Converter-TableToTsv.xml",
-        "last-modified": "2016-08-29",
-        "label":
-        {
-            "en": "Converter (Table to TSV)",
-            "ja": "コンバータ (Table to TSV)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/converter-tabletotsv/",
-            "ja": "https://support.questetra.com/ja/addons/converter-tabletotsv/"
-        }
-    },
-    {
-        "id": "Converter-TsvToExcelCsv",
-        "file": "https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsv.xml",
-        "last-modified": "2018-08-19",
-        "label":
-        {
-            "en": "Converter (TSV to Excel-CSV FILE)",
-            "ja": "コンバータ (TSV to Excel-CSV FILE)"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/converter-tsvtoexcelcsv/",
-            "ja": "https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/"
-        }
-    },
-    {
-        "id": "JsonValue-Extractor",
-        "file": "https://questetra.github.io/addon/service-task/JsonValue-Extractor.xml",
-        "last-modified": "2018-07-10",
-        "label":
-        {
-            "en": "Single Value from a JSON object using JSONPath",
-            "ja": "JSONPath による JSON Value の取得"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/jsonvalue-extractor/",
-            "ja": "https://support.questetra.com/ja/addons/jsonvalue-extractor/"
-        }
-    },
-    {
-        "id": "Chatwork-MessageAdd",
-        "file": "https://questetra.github.io/addon/service-task/Chatwork-MessageAdd",
-        "last-modified": "2018-03-20",
-        "label":
-        {
-            "en": "ChatWork Add Message",
-            "ja": "ChatWork メッセージ追加"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/chatwork-messageadd/",
-            "ja": "https://support.questetra.com/ja/addons/chatwork-messageadd/"
-        }
-    }],
+        {
+            "id": "GoogleCalendar-eventsList",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleCalendar-eventsList.xml",
+            "last-modified": "2017-08-01",
+            "label": {
+                "en": "Google Calendar events list",
+                "ja": "Google Calendar イベントリスト"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/googlecalendar-eventslist/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/"
+            }
+        },
+        {
+            "id": "GoogleCalendar-insertEvent",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleCalendar-insertEvent.xml",
+            "last-modified": "2016-10-25",
+            "label": {
+                "en": "Insert event to Google Calendar",
+                "ja": "Google Calendar 予定追加"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/googlecalendar-insertevent/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/googlecalendar-insertevent/"
+            }
+        },
+        {
+            "id": "GoogleDrive-simpleUpload",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleDrive-simpleUpload.xml",
+            "last-modified": "2016-10-25",
+            "label": {
+                "en": "Google Drive Simple Uploads",
+                "ja": "Google Drive アップロード"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googledrive-simpleupload/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googledrive-simpleupload/"
+            }
+        },
+        {
+            "id": "GoogleDrive-filesGet",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleDrive-filesGet.xml",
+            "last-modified": "2017-11-20",
+            "label": {
+                "en": "Google Drive Files Retrieve",
+                "ja": "Google Drive ファイル取得"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/googledrive-filesget/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/googledrive-filesget/"
+            }
+        },
+        {
+            "id": "GoogleDrive-filesCopy",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleDrive-filesCopy.xml",
+            "last-modified": "2017-11-26",
+            "label": {
+                "en": "Google Drive Files Copy",
+                "ja": "Google Drive ファイルコピー"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googledrive-filescopy/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googledrive-filescopy/"
+            }
+        },
+        {
+            "id": "GoogleDrive-folderCreate",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml",
+            "last-modified": "2018-01-09",
+            "label": {
+                "en": "Creating Folder on Google Drive",
+                "ja": "Google Drive フォルダ生成"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/googledrive-foldercreate/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/googledrive-filescopy/"
+            }
+        },
+        {
+            "id": "GoogleSheets-appendCells",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-appendCells.xml",
+            "last-modified": "2017-10-31",
+            "label": {
+                "en": "Google Sheets Append Cells",
+                "ja": "Google Sheets 行追加"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-appendcells/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-appendcells/"
+            }
+        },
+        {
+            "id": "GoogleSheets-appendTable",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-appendTable.xml",
+            "last-modified": "2016-09-15",
+            "label": {
+                "en": "New Record to Google Sheets (Table)",
+                "ja": "Google Sheets 行追加 (Table)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-appendtable/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-appendtable/"
+            }
+        },
+        {
+            "id": "GoogleSheets-appendTsv",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-appendTsv.xml",
+            "last-modified": "2018-08-17",
+            "label": {
+                "en": "New Record to Google Sheets (TSV)",
+                "ja": "Google Sheets 行追加 (TSV)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-appendtsv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-appendtsv/"
+            }
+        },
+        {
+            "id": "GoogleSheets-valueUpdate",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-valueUpdate.xml",
+            "last-modified": "2017-08-28",
+            "label": {
+                "en": "Google Spreadsheets value update",
+                "ja": "Google Spreadsheets セル値の更新"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-valueupdate/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-valueupdate/"
+            }
+        },
+        {
+            "id": "GoogleSheets-sumNumbersCom",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml",
+            "last-modified": "2016-09-13",
+            "label": {
+                "en": "Sum of cells in a Google Spreadsheet",
+                "ja": "Google スプレッドシートのセル合計"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-sumnumberscom/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-sumnumberscom/"
+            }
+        },
+        {
+            "id": "GoogleSheets-sumNumbers",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbers.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Google Sheets Cells Sum",
+                "ja": "Google スプレッドシートのセル合計"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-sumnumbers/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-sumnumbers/"
+            }
+        },
+        {
+            "id": "GoogleSheets-getIdsLabels",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-getIdsLabels.xml",
+            "last-modified": "2016-09-21",
+            "label": {
+                "en": "Batch to Get Two Column Values from Google Sheet",
+                "ja": "Google Sheet 2列データの一括取得"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-getidslabels/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-getidslabels/"
+            }
+        },
+        {
+            "id": "GoogleGroup-memberAdd",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleGroup-memberAdd.xml",
+            "last-modified": "2017-07-03",
+            "label": {
+                "en": "Google Group member add",
+                "ja": "Google Group メンバー追加"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlegroup-memberadd/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlegroup-memberadd/"
+            }
+        },
+        {
+            "id": "GoogleGroup-memberDelete",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleGroup-memberDelete.xml",
+            "last-modified": "2017-07-04",
+            "label": {
+                "en": "Google Group member delete",
+                "ja": "Google Group メンバー削除"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlegroup-memberdelete/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlegroup-memberdelete/"
+            }
+        },
+        {
+            "id": "GoogleGroup-membersRetrieve",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleGroup-membersRetrieve.xml",
+            "last-modified": "2017-07-04",
+            "label": {
+                "en": "Google Group members retrieve",
+                "ja": "Google Group メンバーリスト参照"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlegroup-membersretrieve/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlegroup-membersretrieve/"
+            }
+        },
+        {
+            "id": "GoogleAnalytics-reportsDomain",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsDomain.xml",
+            "last-modified": "2017-07-24",
+            "label": {
+                "en": "Google Analytics reports (Domain ranking)",
+                "ja": "Google Analytics レポート (Domain ranking)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/googleanalytics-reportsdomain/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/"
+            }
+        },
+        {
+            "id": "GoogleAnalytics-reportsPv",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsPv.xml",
+            "last-modified": "2017-07-24",
+            "label": {
+                "en": "Google Analytics reports (PV ranking)",
+                "ja": "Google Analytics レポート (PV ranking)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googleanalytics-reportspv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googleanalytics-reportspv/"
+            }
+        },
+        {
+            "id": "GoogleAnalytics-reportsRef",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsRef.xml",
+            "last-modified": "2017-07-24",
+            "label": {
+                "en": "Google Analytics reports (Referrer ranking)",
+                "ja": "Google Analytics レポート (Referrer ranking)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googleanalytics-reportsref/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googleanalytics-reportsref/"
+            }
+        },
+        {
+            "id": "GoogleCloudPrint-print",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleCloudPrint-print.xml",
+            "last-modified": "2016-11-07",
+            "label": {
+                "en": "Submit Print Job via GCP Service",
+                "ja": "Google Cloud Print ジョブ送信"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlecloudprint-print/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlecloudprint-print/"
+            }
+        },
+        {
+            "id": "GoogleCloudPrint-printSingle",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleCloudPrint-printSingle.xml",
+            "last-modified": "2016-11-07",
+            "label": {
+                "en": "Submit Print Job via GCP Service",
+                "ja": "Google Cloud Print ジョブ送信"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/googlecloudprint-printsingle/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/"
+            }
+        },
+        {
+            "id": "Box-fileUpdate",
+            "file":
+                "https://questetra.github.io/addon/service-task/Box-fileUpdate.xml",
+            "last-modified": "2017-10-10",
+            "label": {
+                "en": "[box] upload file and set Password/ Expiration",
+                "ja": "Box ファイルアップロード（パスワード、期限）"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/box-fileupdate/",
+                "ja": "https://support.questetra.com/ja/addons/box-fileupdate/"
+            }
+        },
+        {
+            "id": "Box-upload",
+            "file":
+                "https://questetra.github.io/addon/service-task/Box-upload.xml",
+            "last-modified": "2016-10-18",
+            "label": {
+                "en": "Upload to box",
+                "ja": "box アップロード"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/box-upload/",
+                "ja": "https://support.questetra.com/ja/addons/box-fileupdate/"
+            }
+        },
+        {
+            "id": "Dropbox-upload",
+            "file":
+                "https://questetra.github.io/addon/service-task/Dropbox-upload.xml",
+            "last-modified": "2016-10-05",
+            "label": {
+                "en": "Upload to Dropbox",
+                "ja": "Dropbox アップロード"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/dropbox-upload/",
+                "ja": "https://support.questetra.com/ja/addons/dropbox-upload/"
+            }
+        },
+        {
+            "id": "Kintone-getIdsLabels",
+            "file":
+                "https://questetra.github.io/addon/service-task/Kintone-getIdsLabels.xml",
+            "last-modified": "2016-09-21",
+            "label": {
+                "en": "Batch to Get Two Column Values from Kintone",
+                "ja": "Kintone 2列データの一括取得"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/kintone-getidslabels/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/kintone-getidslabels/"
+            }
+        },
+        {
+            "id": "Slack-post",
+            "file":
+                "https://questetra.github.io/addon/service-task/Slack-post.xml",
+            "last-modified": "2016-08-29",
+            "label": {
+                "en": "Post to Slack",
+                "ja": "Slack 投稿"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/slack-post/",
+                "ja": "https://support.questetra.com/ja/addons/slack-post/"
+            }
+        },
+        {
+            "id": "Slack-postFixedPhrase",
+            "file":
+                "https://questetra.github.io/addon/service-task/Slack-postFixedPhrase.xml",
+            "last-modified": "2016-08-31",
+            "label": {
+                "en": "Post to Slack (Fixed phrase)",
+                "ja": "Slack 投稿 (定型文)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/slack-postfixedphrase/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/slack-postfixedphrase/"
+            }
+        },
+        {
+            "id": "Salesforce-getAccounts",
+            "file":
+                "https://questetra.github.io/addon/service-task/Salesforce-getAccounts.xml",
+            "last-modified": "2016-10-17",
+            "label": {
+                "en": "Batch to Get Accounts from salesforce",
+                "ja": "salesforce 取引先の一括取得"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/salesforce-getaccounts/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/salesforce-getaccounts/"
+            }
+        },
+        {
+            "id": "Salesforce-orderCreate",
+            "file":
+                "https://questetra.github.io/addon/service-task/Salesforce-orderCreate.xml",
+            "last-modified": "2017-10-20",
+            "label": {
+                "en": "Salesforce Order Create",
+                "ja": "Salesforce 注文追加"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/salesforce-ordercreate/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/salesforce-ordercreate/"
+            }
+        },
+        {
+            "id": "Backlog-issueAdd",
+            "file":
+                "https://questetra.github.io/addon/service-task/Backlog-issueAdd.xml",
+            "last-modified": "2017-10-25",
+            "label": {
+                "en": "Backlog Add Issue",
+                "ja": "Backlog 課題追加"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/backlog-issueadd/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/backlog-issueadd/"
+            }
+        },
+        {
+            "id": "Paypal-createUsd",
+            "file":
+                "https://questetra.github.io/addon/service-task/Paypal-createUsd.xml",
+            "last-modified": "2018-01-29",
+            "label": {
+                "en": "PayPal Invoicing Create (USD)",
+                "ja": "PayPal 請求書 生成 (USD)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/paypal-createusd/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/paypal-createusd/"
+            }
+        },
+        {
+            "id": "Paypal-createJpy",
+            "file":
+                "https://questetra.github.io/addon/service-task/Paypal-createJpy.xml",
+            "last-modified": "2018-01-29",
+            "label": {
+                "en": "PayPal Invoicing Create (JPY)",
+                "ja": "PayPal 請求書 生成 (JPY)"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/paypal-createjpy/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/paypal-createjpy/"
+            }
+        },
+        {
+            "id": "Paypal-send",
+            "file":
+                "https://questetra.github.io/addon/service-task/Paypal-send.xml",
+            "last-modified": "2017-06-02",
+            "label": {
+                "en": "PayPal Invoicing Send",
+                "ja": "PayPal 請求書 送信指示"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/paypal-send/",
+                "ja": "https://support.questetra.com/ja/addons/paypal-send/"
+            }
+        },
+        {
+            "id": "Paypal-status",
+            "file":
+                "https://questetra.github.io/addon/service-task/Paypal-status.xml",
+            "last-modified": "2017-06-03",
+            "label": {
+                "en": "PayPal Invoicing Status",
+                "ja": "PayPal 請求書 ステータス確認"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/paypal-status/",
+                "ja": "https://support.questetra.com/ja/addons/paypal-status/"
+            }
+        },
+        {
+            "id": "Stripe-cardRegistration",
+            "file":
+                "https://questetra.github.io/addon/service-task/Stripe-cardRegistration.xml",
+            "last-modified": "2016-10-06",
+            "label": {
+                "en": "Card Info to Stripe",
+                "ja": "Stripe カード情報登録"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/stripe-cardregistration/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/stripe-cardregistration/"
+            }
+        },
+        {
+            "id": "Stripe-cardRegistrationMmyy",
+            "file":
+                "https://questetra.github.io/addon/service-task/Stripe-cardRegistrationMmyy.xml",
+            "last-modified": "2016-10-06",
+            "label": {
+                "en": "Card Info to Stripe",
+                "ja": "Stripe カード情報登録"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/stripe-cardregistrationmmyy/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/stripe-cardregistrationmmyy/"
+            }
+        },
+        {
+            "id": "Stripe-customerCreate",
+            "file":
+                "https://questetra.github.io/addon/service-task/Stripe-customerCreate.xml",
+            "last-modified": "2017-09-01",
+            "label": {
+                "en": "Stripe Customer ID Create from Token",
+                "ja": "Stripe Customer ID 生成（Token ID より）"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/stripe-customercreate/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/stripe-customercreate/"
+            }
+        },
+        {
+            "id": "Stripe-chargeCreate",
+            "file":
+                "https://questetra.github.io/addon/service-task/Stripe-chargeCreate.xml",
+            "last-modified": "2017-09-09",
+            "label": {
+                "en": "Stripe Charge to Customer ID",
+                "ja": "Stripe 課金（Customer ID）"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/stripe-chargecreate/",
+                "ja":
+                    "hhttps://support.questetra.com/ja/addons/stripe-chargecreate/"
+            }
+        },
+        {
+            "id": "Nhk-programSearch",
+            "file":
+                "https://questetra.github.io/addon/service-task/Nhk-programSearch.xml",
+            "last-modified": "2017-04-13",
+            "label": {
+                "en": "NHK Program Search",
+                "ja": "NHK Program Search"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/nhk-programsearch/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/nhk-programsearch/"
+            }
+        },
+        {
+            "id": "Questetra-membershipAdd",
+            "file":
+                "https://questetra.github.io/addon/service-task/Questetra-membershipAdd.xml",
+            "last-modified": "2017-12-04",
+            "label": {
+                "en": "Questetra Org Add Membership",
+                "ja": "Questetra 組織メンバー追加"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/questetra-membershipadd/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/questetra-membershipadd/"
+            }
+        },
+        {
+            "id": "Questetra-membershipDelete",
+            "file":
+                "https://questetra.github.io/addon/service-task/Questetra-membershipDelete.xml",
+            "last-modified": "2017-12-04",
+            "label": {
+                "en": "Questetra Org Delete Membership",
+                "ja": "Questetra 組織メンバー削除"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/questetra-membershipdelete/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/questetra-membershipdelete/"
+            }
+        },
+        {
+            "id": "Questetra-rolemembershipAdd",
+            "file":
+                "https://questetra.github.io/addon/service-task/Questetra-rolemembershipAdd.xml",
+            "last-modified": "2017-12-11",
+            "label": {
+                "en": "Questetra Role Add Membership",
+                "ja": "Questetra ロールメンバー追加"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/questetra-rolemembershipadd/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/questetra-rolemembershipadd/"
+            }
+        },
+        {
+            "id": "Questetra-rolemembershipDel",
+            "file":
+                "https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml",
+            "last-modified": "2017-12-11",
+            "label": {
+                "en": "Questetra Role Delete Membership",
+                "ja": "Questetra ロールメンバー削除"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/questetra-rolemembershipdel/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/questetra-rolemembershipdel/"
+            }
+        },
+        {
+            "id": "Questetra-userOrgPosition",
+            "file":
+                "https://questetra.github.io/addon/service-task/Questetra-userOrgPosition.xml",
+            "last-modified": "2018-03-30",
+            "label": {
+                "en": "Check The User Is In The Organization",
+                "ja": "ユーザの指定組織への所属を判定"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/questetra-userorgposition/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/questetra-userorgposition/"
+            }
+        },
+        {
+            "id": "Http-filesGet",
+            "file":
+                "https://questetra.github.io/addon/service-task/Http-filesGet.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Download via HTTP and Add to file-type data",
+                "ja":
+                    "HTTPでファイルをダウンロードし、ファイル型データ項目に追加します"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/http-filesget/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/http-filesget/"
+            }
+        },
+        {
+            "id": "CorpNumberAPI-getInfo",
+            "file":
+                "https://questetra.github.io/addon/service-task/CorpNumberAPI-getInfo.xml",
+            "last-modified": "2016-11-02",
+            "label": {
+                "en": "Get Info via Corporate Number API",
+                "ja": "法人番号 API 企業情報の取得"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/services/corpnumberapi-getinfo/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/services/corpnumberapi-getinfo/"
+            }
+        },
+        {
+            "id": "Line-pushNotify",
+            "file":
+                "https://questetra.github.io/addon/service-task/Line-pushNotify.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Post message through LINE Notify",
+                "ja": "LINE Notifyでメッセージ投稿"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/line-pushnotify/",
+                "ja": "https://support.questetra.com/ja/addons/line-pushnotify/"
+            }
+        },
+        {
+            "id": "RandomNumber-Generate",
+            "file":
+                "https://questetra.github.io/addon/service-task/RandomNumber-Generate.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Random Number Generator",
+                "ja": "乱数ジェネレータ"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/ja/addons/randomnumber-generate/",
+                "ja":
+                    "https://support.questetra.com/addons/randomnumber-generate/"
+            }
+        },
+        {
+            "id": "RandomNumber-GenerateDynamic",
+            "file":
+                "https://questetra.github.io/addon/service-task/RandomNumber-GenerateDynamic.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Random Number Generator (dynamic)",
+                "ja": "乱数ジェネレータ (上限変動版)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/random-number-generator-dynamic/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/random-number-generator-dynamic/"
+            }
+        },
+        {
+            "id": "OpenChat-PostTextData",
+            "file":
+                "https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Post to OpenChat (Questetra's Enterprise Social)",
+                "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/openchat-posttextdata/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/openchat-posttextdata/"
+            }
+        },
+        {
+            "id": "OpenChat-PostJoinTextData",
+            "file":
+                "https://questetra.github.io/addon/service-task/OpenChat-PostJoinTextData.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Post to OpenChat (Questetra's Enterprise Social)",
+                "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/openchat-postjointextdata/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/openchat-postjointextdata/"
+            }
+        },
+        {
+            "id": "OpenChat-PostTextFileData",
+            "file":
+                "https://questetra.github.io/addon/service-task/OpenChat-PostTextFileData.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Post to OpenChat (Questetra's Enterprise Social)",
+                "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/openchat-posttextfiledata/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/openchat-posttextfiledata/"
+            }
+        },
+        {
+            "id": "Converter-TsvToExcelCsvSjis",
+            "file":
+                "https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsvSjis.xml",
+            "last-modified": "2018-08-20",
+            "label": {
+                "en": "Converter (TSV to Excel-CSV FILE) sjis",
+                "ja": "コンバータ (TSV to Excel-CSV FILE) sjis"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/converter-tsvtoexcelcsvsjis/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/converter-tsvtoexcelcsvsjis/"
+            }
+        },
+        {
+            "id": "OpenChat-Post",
+            "file":
+                "https://questetra.github.io/addon/service-task/OpenChat-Post.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Post to OpenChat (Questetra's Enterprise Social)",
+                "ja": "OpenChat 投稿 (Questetra 内の社内SNS機能)"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/openchat-post/",
+                "ja": "https://support.questetra.com/ja/addons/openchat-post/"
+            }
+        },
+        {
+            "id": "Converter-DateToJpEra",
+            "file":
+                "https://questetra.github.io/addon/service-task/Converter-DateToJpEra.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Converter (Date to Japanese Era String)",
+                "ja": "コンバータ (Date to 和暦テキスト)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/converter-datetojpera/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/converter-datetojpera/"
+            }
+        },
+        {
+            "id": "Converter-TsvToExcelCsvSjis",
+            "file":
+                "https://questetra.github.io/addon/service-task/Converter-TableToExcelCsvSjis.xml",
+            "last-modified": "2018-08-29",
+            "label": {
+                "en": "Converter (Table to Excel-CSV FILE) sjis",
+                "ja": "コンバータ (Table to Excel-CSV FILE) sjis"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/"
+            }
+        },
+        {
+            "id": "Converter-TsvToTable",
+            "file":
+                "https://questetra.github.io/addon/service-task/Converter-TsvToTable.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Converter (Tsv to Table)",
+                "ja": "コンバータ (Tsv to Table)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/converter-tsvtotable/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/converter-tsvtotable/"
+            }
+        },
+        {
+            "id": "Tsv-AddClumn",
+            "file":
+                "https://questetra.github.io/addon/service-task/Tsv-AddColumn.xml",
+            "last-modified": "2018-08-16",
+            "label": {
+                "en": "Add Column to Tsv",
+                "ja": "TSV の列追加"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/tsv-addclumn/",
+                "ja": "https://support.questetra.com/ja/addons/tsv-addclumn/"
+            }
+        },
+        {
+            "id": "Converter-TableToExcelCsv",
+            "file":
+                "https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml",
+            "last-modified": "2018-08-29",
+            "label": {
+                "en": "Converter (Table to Excel-CSV FILE)",
+                "ja": "コンバータ (Table to Excel-CSV FILE)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/converter-tabletoexcelcsv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/"
+            }
+        },
+        {
+            "id": "Hash-CalculateMd5",
+            "file":
+                "https://questetra.github.io/addon/service-task/Hash-CalculateMd5.xml",
+            "last-modified": "2016-08-22",
+            "label": {
+                "en": "Hash Calculator (MD5)",
+                "ja": "Hash Calculator (MD5)"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/hash-calculatemd5/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/hash-calculatemd5/"
+            }
+        },
+        {
+            "id": "Hash-CalculateSha256",
+            "file":
+                "https://questetra.github.io/addon/service-task/Hash-CalculateSha256.xml",
+            "last-modified": "2016-12-22",
+            "label": {
+                "en": "Hash Calculator (SHA256)",
+                "ja": "Hash Calculator (SHA256)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/hash-calculatesha256/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/hash-calculatesha256/"
+            }
+        },
+        {
+            "id": "Process-BulkStartTsv",
+            "file":
+                "https://questetra.github.io/addon/service-task/Process-BulkStartTsv.xml",
+            "last-modified": "2017-11-19",
+            "label": {
+                "en": "Connector (TSV Bulk Start)",
+                "ja": "コネクタ（TSV一括開始）"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/process-bulkstarttsv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/process-bulkstarttsv/"
+            }
+        },
+        {
+            "id": "Email-SendExcelCsvSjis",
+            "file":
+                "https://questetra.github.io/addon/service-task/Email-SendExcelCsvSjis.xml",
+            "last-modified": "2017-01-12",
+            "label": {
+                "en": "Email a Excel-CSV (Table) sjis",
+                "ja": "Excel-CSV のメール送付 (Table) sjis"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/email-sendexcelcsvsjis/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/email-sendexcelcsvsjis/"
+            }
+        },
+        {
+            "id": "Email-SendExcelCsv",
+            "file":
+                "https://questetra.github.io/addon/service-task/Email-SendExcelCsv.xml",
+            "last-modified": "2017-01-12",
+            "label": {
+                "en": "Email a Excel-CSV (Table)",
+                "ja": "Excel-CSV のメール送付 (Table)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/email-sendexcelcsv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/email-sendexcelcsv/"
+            }
+        },
+        {
+            "id": "Twilio-faxSend",
+            "file":
+                "https://questetra.github.io/addon/service-task/Twilio-faxSend.xml",
+            "last-modified": "2017-12-14",
+            "label": {
+                "en": "Twilio FAX Send",
+                "ja": "Twilio FAX送信"
+            },
+            "help": {
+                "en": "",
+                "ja": ""
+            }
+        },
+        {
+            "id": "User-EmailToQuser",
+            "file":
+                "https://questetra.github.io/addon/service-task/User-EmailToQuser.xml",
+            "last-modified": "2016-12-21",
+            "label": {
+                "en": "Converter (Email to Quser)",
+                "ja": "コンバータ (Email to Quser)"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/user-emailtoquser/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/user-emailtoquser/"
+            }
+        },
+        {
+            "id": "User-Converter",
+            "file":
+                "https://questetra.github.io/addon/service-task/User-Converter.xml",
+            "last-modified": "2016-11-15",
+            "label": {
+                "en": "Converter (Quser to ID, Name, Email)",
+                "ja": "コンバータ (Quser to ID, Name, Email)"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/user-converter/",
+                "ja": "https://support.questetra.com/ja/addons/user-converter/"
+            }
+        },
+        {
+            "id": "Converter-TableToTsv",
+            "file":
+                "https://questetra.github.io/addon/service-task/Converter-TableToTsv.xml",
+            "last-modified": "2016-08-29",
+            "label": {
+                "en": "Converter (Table to TSV)",
+                "ja": "コンバータ (Table to TSV)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/converter-tabletotsv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/converter-tabletotsv/"
+            }
+        },
+        {
+            "id": "Converter-TsvToExcelCsv",
+            "file":
+                "https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsv.xml",
+            "last-modified": "2018-08-19",
+            "label": {
+                "en": "Converter (TSV to Excel-CSV FILE)",
+                "ja": "コンバータ (TSV to Excel-CSV FILE)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/converter-tsvtoexcelcsv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/"
+            }
+        },
+        {
+            "id": "JsonValue-Extractor",
+            "file":
+                "https://questetra.github.io/addon/service-task/JsonValue-Extractor.xml",
+            "last-modified": "2018-07-10",
+            "label": {
+                "en": "Single Value from a JSON object using JSONPath",
+                "ja": "JSONPath による JSON Value の取得"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/jsonvalue-extractor/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/jsonvalue-extractor/"
+            }
+        },
+        {
+            "id": "Chatwork-MessageAdd",
+            "file":
+                "https://questetra.github.io/addon/service-task/Chatwork-MessageAdd",
+            "last-modified": "2018-03-20",
+            "label": {
+                "en": "ChatWork Add Message",
+                "ja": "ChatWork メッセージ追加"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/chatwork-messageadd/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/chatwork-messageadd/"
+            }
+        }
+    ],
     "options": [
-    {
-        "id": "JapanPrefectureCode",
-        "file": "https://questetra.github.io/addon/options/japanPrefectureCode-JIS-X-0401-ISO-3166-2-JP.xml",
-        "last-modified": "2015-10-08",
-        "label":
         {
-            "en": "Get Info via Corporate Number API",
-            "ja": "JIS X 0401: 北東から南西へ「01」から「47」まで (2桁コード/都道府県名)"
+            "id": "JapanPrefectureCode",
+            "file":
+                "https://questetra.github.io/addon/options/japanPrefectureCode-JIS-X-0401-ISO-3166-2-JP.xml",
+            "last-modified": "2015-10-08",
+            "label": {
+                "en": "Get Info via Corporate Number API",
+                "ja":
+                    "JIS X 0401: 北東から南西へ「01」から「47」まで (2桁コード/都道府県名)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/options/japan-prefecture-code/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/options/japan-prefecture-code/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/options/japan-prefecture-code/",
-            "ja": "https://support.questetra.com/ja/addons/options/japan-prefecture-code/"
-        }
-    },
-    {
-        "id": "Japan-CityCode",
-        "file": "https://questetra.github.io/addon/options/JapanCityCode-jis-x-0402.xml",
-        "last-modified": "2015-10-08",
-        "label":
-        {
-            "en": "JIS X 0402: Identification code for cities, towns and villages (5 digit code/cities, towns and villages name)",
-            "ja": " JIS X 0402: 市区町村コード(5桁コード/都道府県・市町村・特別区名)"
+            "id": "Japan-CityCode",
+            "file":
+                "https://questetra.github.io/addon/options/JapanCityCode-jis-x-0402.xml",
+            "last-modified": "2015-10-08",
+            "label": {
+                "en":
+                    "JIS X 0402: Identification code for cities, towns and villages (5 digit code/cities, towns and villages name)",
+                "ja":
+                    " JIS X 0402: 市区町村コード(5桁コード/都道府県・市町村・特別区名)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/options/japan-citycode/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/options/japan-citycode/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/options/japan-citycode/",
-            "ja": "https://support.questetra.com/ja/addons/options/japan-citycode/"
-        }
-    },
-    {
-        "id": "Japan-CityCode-localGovernment",
-        "file": "https://questetra.github.io/addon/options/JapanCityCode-localGovernment.xml",
-        "last-modified": "2015-10-08",
-        "label":
-        {
-            "en": "MIC: Japanese Local Goverment Code(6 digit/prefecture, cities, towns and villages)",
-            "ja": "総務省: 全国地方公共団体コード(6桁コード/都道府県・市町村・特別区名)"
+            "id": "Japan-CityCode-localGovernment",
+            "file":
+                "https://questetra.github.io/addon/options/JapanCityCode-localGovernment.xml",
+            "last-modified": "2015-10-08",
+            "label": {
+                "en":
+                    "MIC: Japanese Local Goverment Code(6 digit/prefecture, cities, towns and villages)",
+                "ja":
+                    "総務省: 全国地方公共団体コード(6桁コード/都道府県・市町村・特別区名)"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/options/japan-citycode-localgovernment/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/options/japan-citycode-localgovernment/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/options/japan-citycode-localgovernment/",
-            "ja": "https://support.questetra.com/ja/addons/options/japan-citycode-localgovernment/"
-        }
-    },
-    {
-        "id": "Japan-ZipCode",
-        "file": "https://questetra.github.io/addon/options/JapanZipCode.zip",
-        "last-modified": "2015-10-08",
-        "label":
-        {
-            "en": "Postal code (in Japanese)",
-            "ja": "郵便番号（日本）"
+            "id": "Japan-ZipCode",
+            "file":
+                "https://questetra.github.io/addon/options/JapanZipCode.zip",
+            "last-modified": "2015-10-08",
+            "label": {
+                "en": "Postal code (in Japanese)",
+                "ja": "郵便番号（日本）"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/options/japan-zipcode/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/options/japan-zipcode/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/options/japan-zipcode/",
-            "ja": "https://support.questetra.com/ja/addons/options/japan-zipcode/"
-        }
-    },
-    {
-        "id": "Japan-ZipCodeBusiness",
-        "file": "https://questetra.github.io/addon/options/JapanZipCode-business.zip",
-        "last-modified": "2015-10-08",
-        "label":
-        {
-            "en": "Postal code (in Japanese)",
-            "ja": "郵便番号（日本）"
+            "id": "Japan-ZipCodeBusiness",
+            "file":
+                "https://questetra.github.io/addon/options/JapanZipCode-business.zip",
+            "last-modified": "2015-10-08",
+            "label": {
+                "en": "Postal code (in Japanese)",
+                "ja": "郵便番号（日本）"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/options/japan-zipcodebusiness/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/options/japan-zipcodebusiness/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/options/japan-zipcodebusiness/",
-            "ja": "https://support.questetra.com/ja/addons/options/japan-zipcodebusiness/"
-        }
-    },
-    {
-        "id": "Data-Delete",
-        "file": "https://questetra.github.io/addon/service-task/Data-Delete.xml",
-        "last-modified": "2016-11-22",
-        "label":
-        {
-            "en": "Delete Data (Overwrite with Null)",
-            "ja": "データ削除 (Null の上書き)"
+            "id": "Data-Delete",
+            "file":
+                "https://questetra.github.io/addon/service-task/Data-Delete.xml",
+            "last-modified": "2016-11-22",
+            "label": {
+                "en": "Delete Data (Overwrite with Null)",
+                "ja": "データ削除 (Null の上書き)"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/data-delete/",
+                "ja": "https://support.questetra.com/ja/addons/data-delete/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/data-delete/",
-            "ja": "https://support.questetra.com/ja/addons/data-delete/"
-        }
-    },
-    {
-        "id": "JournalTsv-Generator",
-        "file": "https://questetra.github.io/addon/service-task/JournalTsv-Generator.xml",
-        "last-modified": "2018-09-04",
-        "label":
-        {
-            "en": "Journal Slip TSV from Invoice Data",
-            "ja": "請求データから仕訳伝票TSVの生成"
+            "id": "JournalTsv-Generator",
+            "file":
+                "https://questetra.github.io/addon/service-task/JournalTsv-Generator.xml",
+            "last-modified": "2018-09-04",
+            "label": {
+                "en": "Journal Slip TSV from Invoice Data",
+                "ja": "請求データから仕訳伝票TSVの生成"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/journaltsv-generator/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/journaltsv-generator/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/journaltsv-generator/",
-            "ja": "https://support.questetra.com/ja/addons/journaltsv-generator/"
+            "id": "HangoutsChat-messagePost",
+            "file":
+                "https://questetra.github.io/addon/service-task/HangoutsChat-messagePost.xml",
+            "last-modified": "2018-08-22",
+            "label": {
+                "en": "Hangouts Chat Post Message",
+                "ja": "Hangouts Chat メッセージ投稿"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/hangoutschat-messagepost/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/hangoutschat-messagepost/"
+            }
         }
-    }],
+    ],
     "pdf": [
-    {
-        "id": "year-end-adjustment-a",
-        "file": "https://questetra.github.io/addon/pdf/adjustment-withheld-tax-h00-family.base_.pdf",
-        "last-modified": "2015-10-08",
-        "label":
         {
-            "en": "Year-end-tax-adjustment Form : Application for (Change in) Exemption for Dependents of Employment Income Earner for 20XX",
-            "ja": "年末調整書類 : 平成X年分 給与所得者の扶養控除等（異動）申請書"
+            "id": "year-end-adjustment-a",
+            "file":
+                "https://questetra.github.io/addon/pdf/adjustment-withheld-tax-h00-family.base_.pdf",
+            "last-modified": "2015-10-08",
+            "label": {
+                "en":
+                    "Year-end-tax-adjustment Form : Application for (Change in) Exemption for Dependents of Employment Income Earner for 20XX",
+                "ja":
+                    "年末調整書類 : 平成X年分 給与所得者の扶養控除等（異動）申請書"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/pdf/year-end-adjustment/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/pdf/year-end-adjustment/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/pdf/year-end-adjustment/",
-            "ja": "https://support.questetra.com/ja/addons/pdf/year-end-adjustment/"
-        }
-    },
-    {
-        "id": "year-end-adjustment-b",
-        "file": "https://questetra.github.io/addon/pdf/adjustment-withheld-tax-insurance-201512-base.pdf",
-        "last-modified": "2015-10-08",
-        "label":
-        {
-            "en": "Year-end-tax-adjustment Form : Application for Deduction for Insurance Premiums for Employment Income Earner and Application for Special Exemption for Spouse of Employment Income Earner for 20XX",
-            "ja": "年末調整書類 : 平成X年分 給与所得者の保険料控除申請書 兼 給与所得者の配偶者特別控除申請書"
+            "id": "year-end-adjustment-b",
+            "file":
+                "https://questetra.github.io/addon/pdf/adjustment-withheld-tax-insurance-201512-base.pdf",
+            "last-modified": "2015-10-08",
+            "label": {
+                "en":
+                    "Year-end-tax-adjustment Form : Application for Deduction for Insurance Premiums for Employment Income Earner and Application for Special Exemption for Spouse of Employment Income Earner for 20XX",
+                "ja":
+                    "年末調整書類 : 平成X年分 給与所得者の保険料控除申請書 兼 給与所得者の配偶者特別控除申請書"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/pdf/year-end-adjustment/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/pdf/year-end-adjustment/"
+            }
         },
-        "help":
         {
-            "en": "https://support.questetra.com/addons/pdf/year-end-adjustment/",
-            "ja": "https://support.questetra.com/ja/addons/pdf/year-end-adjustment/"
+            "id": "Invoice-Sample",
+            "file": "https://questetra.github.io/addon/pdf/Invoice-Sample.pdf",
+            "last-modified": "2014-11-08",
+            "label": {
+                "en": "Invoice",
+                "ja": "見積書"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/pdf/invoice-sample/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/pdf/invoice-sample/"
+            }
         }
-    },
-    {
-        "id": "Invoice-Sample",
-        "file": "https://questetra.github.io/addon/pdf/Invoice-Sample.pdf",
-        "last-modified": "2014-11-08",
-        "label":
-        {
-            "en": "Invoice",
-            "ja": "見積書"
-        },
-        "help":
-        {
-            "en": "https://support.questetra.com/addons/pdf/invoice-sample/",
-            "ja": "https://support.questetra.com/ja/addons/pdf/invoice-sample/"
-        }
-    }]
+    ]
 }
