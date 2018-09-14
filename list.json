@@ -1171,6 +1171,22 @@
                 "ja":
                     "https://support.questetra.com/ja/addons/tsv-filteringbynumber/"
             }
+        },
+        {
+            "id": "Tsv-FilteringByDate",
+            "file":
+                "https://questetra.github.io/addon/service-task/Tsv-FilteringByDate.xml",
+            "last-modified": "2018-08-18",
+            "label": {
+                "en": "TSV Filtering by Date",
+                "ja": "日付によるTSVフィルタ"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/tsv-filteringbydate/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/tsv-filteringbydate/"
+            }
         }
     ],
     "options": [
