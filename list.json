@@ -1109,6 +1109,22 @@
                 "ja":
                     "https://support.questetra.com/ja/addons/chatwork-messageadd/"
             }
+        },
+        {
+            "id": "ZendeskSupport-ticketUpdateAPItoken",
+            "file":
+                "https://questetra.github.io/addon/service-task/ZendeskSupport-ticketUpdateAPItoken.xml",
+            "last-modified": "2018-08-24",
+            "label": {
+                "en": "Zendesk Ticket Update",
+                "ja": "Zendesk Support チケット更新"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/zendesksupport-ticketupdateapitoken/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/zendesksupport-ticketupdateapitoken/"
+            }
         }
     ],
     "options": [
