@@ -1290,6 +1290,20 @@
                 "ja":
                     "https://support.questetra.com/ja/addons/microsoftteams-messagepost/"
             }
+        },
+        {
+            "id": "Tsv-ChangeOrder",
+            "file":
+                "https://questetra.github.io/addon/service-task/Tsv-ChangeOrder.xml",
+            "last-modified": "2018-08-17",
+            "label": {
+                "en": "Change Order of Tsv",
+                "ja": "TSV の並び替え"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/tsv-changeorder/",
+                "ja": "https://support.questetra.com/ja/addons/tsv-changeorder/"
+            }
         }
     ],
     "pdf": [
