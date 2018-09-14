@@ -1274,6 +1274,22 @@
                 "ja":
                     "https://support.questetra.com/ja/addons/questetra-openchatpost/"
             }
+        },
+        {
+            "id": "MicrosoftTeams-messagePost",
+            "file":
+                "https://questetra.github.io/addon/service-task/MicrosoftTeams-messagePost.xml",
+            "last-modified": "2018-08-24",
+            "label": {
+                "en": "Microsoft Teams Post Message",
+                "ja": "Microsoft Teams メッセージ投稿"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/microsoftteams-messagepost/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/microsoftteams-messagepost/"
+            }
         }
     ],
     "pdf": [
