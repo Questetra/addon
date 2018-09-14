@@ -1155,6 +1155,22 @@
                 "ja":
                     "https://support.questetra.com/ja/addons/typetalk-messagepost/"
             }
+        },
+        {
+            "id": "Tsv-FilteringByNumber",
+            "file":
+                "https://questetra.github.io/addon/service-task/Tsv-FilteringByNumber.xml",
+            "last-modified": "2018-08-18",
+            "label": {
+                "en": "TSV Filtering by Number",
+                "ja": "数値によるTSVフィルタ"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/tsv-filteringbynumber/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/tsv-filteringbynumber/"
+            }
         }
     ],
     "options": [
