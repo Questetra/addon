@@ -1139,6 +1139,22 @@
                 "en": "https://support.questetra.com/addons/tsv-deleterows/",
                 "ja": "https://support.questetra.com/ja/addons/tsv-deleterows/"
             }
+        },
+        {
+            "id": "Typetalk-messagePost",
+            "file":
+                "https://questetra.github.io/addon/service-task/Typetalk-messagePost.xml",
+            "last-modified": "2018-08-28",
+            "label": {
+                "en": "Typetalk Post Message",
+                "ja": "Typetalk メッセージ投稿"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/typetalk-messagepost/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/typetalk-messagepost/"
+            }
         }
     ],
     "options": [
