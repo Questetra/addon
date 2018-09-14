@@ -1125,6 +1125,20 @@
                 "ja":
                     "https://support.questetra.com/ja/addons/zendesksupport-ticketupdateapitoken/"
             }
+        },
+        {
+            "id": "Tsv-DeleteRows",
+            "file":
+                "https://questetra.github.io/addon/service-task/Tsv-DeleteRows.xml",
+            "last-modified": "2018-08-16",
+            "label": {
+                "en": "Delete Rows of Tsv",
+                "ja": "TSV の行削除"
+            },
+            "help": {
+                "en": "https://support.questetra.com/addons/tsv-deleterows/",
+                "ja": "https://support.questetra.com/ja/addons/tsv-deleterows/"
+            }
         }
     ],
     "options": [
