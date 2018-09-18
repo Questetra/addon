@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Get Google Sheets Values as TSV</label>
+<label locale="ja">Google Sheets の値のTSV取得</label>
+
+<help-page-url>https://support.questetra.com/addons/googlesheets-getvaluesastsv/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-getvaluesastsv/</help-page-url>
+
+<last-modified>2018-08-19</last-modified>
+<engine-type>1</engine-type>
+
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for Spreadsheet ID (Non-existent Error)</label>
+    <label locale="ja">B: Spreadsheet ID が格納されている文字列型or選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>C: Select STRING/SELECT for Sheet Name (Non-existent Error)</label>
+    <label locale="ja">C: Sheet 名が格納されている文字列型or選択肢型データを選択してください（存在しない場合、エラー）</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>D: Select TSV STRING DATA (update)</label>
+    <label locale="ja">D: TSV が格納される文字列型データを選択してください （更新）</label>
+  </config>
+  <config name="conf_NumCols" required="false" form-type="TEXTFIELD">
+    <label>E: Set Num of Columns to Retrieve (e.g. "5") (#of Header Cols)</label>
+    <label locale="ja">E: 参照する列の数 (例 "5") (無指定の場合、先頭行の列数)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//// OAuth2 config sample
+//// at Workflow App > Detail > OAuth2 Setting > (Get Refresh Token)
+// - Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// - Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// - Scope: https://www.googleapis.com/auth/spreadsheets
+// - Consumer Key: (Get from Google Developers Console)
+// - Consumer Secret: (Get from Google Developers Console)
+// Ref.
+// - https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdB = configs.get( "conf_DataIdB" ) + "";
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+const dataIdD = configs.get( "conf_DataIdD" ) + "";
+
+const oauth2  = configs.get( "conf_OAuth2"  ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+// https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide#RhinoMigrationGuide-JavaScriptvsJavaStrings
+// https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/api.html#sthref21
+let   numCols  = configs.get( "conf_NumCols"  ) - "";
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+let docId   = "";
+  if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType( "SELECT_SINGLE" ) ){
+    docId = engine.findDataByNumber( dataIdB ).get(0).getValue() + "";
+  }else{
+    docId = engine.findDataByNumber( dataIdB ) + "";
+  }
+let sheetName = "";
+  if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType( "SELECT_SINGLE" ) ){
+    sheetName = engine.findDataByNumber( dataIdC ).get(0).getValue() + "";
+  }else{
+    sheetName = engine.findDataByNumber( dataIdC ) + "";
+  }
+
+
+//// == Calculating / 演算 ==
+// obtain OAuth2 Access Token
+const token  = httpClient.getOAuth2Token( oauth2 );
+
+/// (1) Get Values as JSON
+// prepare API Request
+let apiRequest = httpClient.begin(); // HttpRequestWrapper
+  // - com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+apiRequest     = apiRequest.bearer( token );
+apiRequest     = apiRequest.queryParam( "valueRenderOption", "UNFORMATTED_VALUE" );
+  // https://developers.google.com/sheets/api/reference/rest/v4/ValueRenderOption
+apiRequest     = apiRequest.queryParam( "dateTimeRenderOption", "FORMATTED_STRING" );
+  // https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption
+
+// access API (with get())
+const response    = apiRequest.get( "https://sheets.googleapis.com/v4/spreadsheets/" + docId + "/values/" + sheetName );
+// - GET https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{range}
+// - https://developers.google.com/sheets/api/guides/concepts#a1_notation
+const httpStatus  = response.getStatusCode() + ""; // HttpResponseWrapper
+const responseStr = response.getResponseAsString() + "";
+const responseObj = JSON.parse( responseStr );
+engine.log( "GET [spreadsheet values]: " + httpStatus );
+// engine.log( " responseStr: \n" + responseStr ); // for debug
+if( httpStatus !== "200" ){
+  let errorMessage = "\n- HTTP STATUS is not 200, Service Task stopped. -\n";
+  errorMessage += responseStr + "\n";
+  throw new Error( errorMessage );
+}
+
+/// (2) JSON to TSV
+if( numCols === 0 ){ // including NULL case
+  numCols = responseObj.values[0].length;
+}
+let myTsv = "";
+for( let i=0; i < responseObj.values.length; i++ ){
+  for( let j=0; j < numCols; j++ ){
+    if( j < responseObj.values[i].length ){
+      myTsv += responseObj.values[i][j];
+    }
+    if( j !== numCols - 1 ){ myTsv += "\t"; }
+  }
+  if( i !== responseObj.values.length - 1 ){ myTsv += "\n"; }
+}
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdD, myTsv );
+
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACuUlEQVRYR82X0VHbQBCGd8UT8BA6iFMBTgXxIwjP4A4SKoBUEFNBTAU4HTgz6PCjqCCkgpAOnBf5Sfdnfs3JcxKSLBmUyc34wZLu9t/d2+/2VFqMk5OTwd7e3gcRGfIHYKCqA38qgCdVfRKRR/7SNH1YLpf83zi06W0Yhp9E5FJVabjzAPCoqrMoir7VTa4UMB6PR9ba27KXnRW4CYxOEAQXd3d3cXmNZwLotare7mqsaR6AC2PM3P+mIMDl+lcfxvM10zR95++NgoCzs7MrEfnapwAR+RxF0Sy3URDQZ/hzg+U0FASMRqOjg4MDltObPqIA4E+SJIM4jleVEeBDV3qz1xZB40EQTMqVUFmGYRiy7imC8HnxAPAgIlfGGEKqMBpBdHp6OlFVluX5LioAfAcwv7+/X7QCEasAAIwxN/4E7o39/f2RIyKjc8T3eYSch3zE3D6SgOv1OvZz7dI7VdVVUxXwgy+O69MmhLaNCMUfHh6eA7iiAwCujTHTujLMBHiLrwAwfAtr7c82h4vzdKiqxwAYtUkeMb7rKqDK0YznALJwu1SMvA83Kaqa/BoC2ka/7rtGEjJ0P15qoWk+gPd+OVadhqz/yz5EALgxxvC82Yw6EL26iCrj2f6p89TRkFWxE4TydQkjEZlWUfCZAJKvDBD2CEEQcJeznLhH3m7J8W9XHYskSRY+jLgWWeCTsXwc0+NLALMkSW7KJMsNMzpBEGQ0zIe1dlXnpTtl2VuStNwHrUC0gZAxhmHsPFxv+dGH0a4cyKGTtdzW2sp2W1VJPkaGMPLhtBG/q4DO3tdN+L8F/IumtLEndCXH20xvPaG1dljbljNvfXbGWy8m+cZx5TPfBp22OxMA4TTp3BO6aPDwOG5rzP/OtWrz8nVs62FUNubhOLueiwiRWkCy83JzPbfWxm06qL/sgpkwsGVshgAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
