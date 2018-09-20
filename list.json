@@ -1187,6 +1187,22 @@
                 "ja":
                     "https://support.questetra.com/ja/addons/tsv-filteringbydate/"
             }
+        },
+        {
+            "id": "GoogleSheets-GetValuesAsTsv",
+            "file":
+                "https://questetra.github.io/addon/service-task/GoogleSheets-GetValuesAsTsv.xml",
+            "last-modified": "2018-08-19",
+            "label": {
+                "en": "Get Google Sheets Values as TSV",
+                "ja": "Google Sheets の値のTSV取得"
+            },
+            "help": {
+                "en":
+                    "https://support.questetra.com/addons/googlesheets-getvaluesastsv/",
+                "ja":
+                    "https://support.questetra.com/ja/addons/googlesheets-getvaluesastsv/"
+            }
         }
     ],
     "options": [
