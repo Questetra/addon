@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<service-task-definition>
+  <label>Parse service task definition file (XML) file-data</label>
+  <label locale="ja">サービスタスク定義ファイル(XML)をパースする ファイル型データ項目</label>
+  <summary>Parse the service task definition file (XML) and store each value. Detects missing settings.</summary>
+  <summary locale="ja">サービスタスク定義ファイル(XML)をパースして、各値を格納します。設定が不足している事項を検出します。</summary>
+  <last-modified>2018-09-28</last-modified>
+  <help-page-ur>https://github.com/yambal/Parse-service-task-definition-file-XML-file-data</help-page-ur>
+  <help-page-url locale="ja">https://github.com/yambal/Parse-service-task-definition-file-XML-file-data</help-page-url>
+  <configs>
+    <config name="xmlFile" required="true" form-type="SELECT" select-data-type="FILE">
+      <label>ServiceTask XML File</label>
+      <label locale="ja">ServiceTask XML File</label>
+    </config>
+    <config name="labelServiceTask_Ja" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+      <label>name of the service task definition (Ja)</label>
+      <label locale="ja">サービスタスク定義の名前を格納する文字型データ項目 (日)</label>
+    </config>
+    <config name="labelServiceTask_En" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+      <label>name of the service task definition (En)</label>
+      <label locale="ja">サービスタスク定義の名前を格納する文字型データ項目 (英)</label>
+    </config>
+    <config name="Summary_Ja" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>summary of the service task definition (Ja)</label>
+      <label locale="ja">サービスタスク定義の概要を格納する文字型データ項目 (日)</label>
+    </config>
+    <config name="Summary_En" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>summary of the service task definition (En)</label>
+      <label locale="ja">サービスタスク定義の概要を格納する文字型データ項目 (英)</label>
+    </config>
+    <config name="LastModified" form-type="SELECT" select-data-type="DATE">
+      <label>Date type data item that stores the last update date</label>
+      <label locale="ja">最終更新日を格納する日付型データ項目</label>
+    </config>
+    <config name="HelpPageUrl_Ja" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+      <label>Help Page URL (Ja)</label>
+      <label locale="ja">ヘルプページのURL (日)</label>
+    </config>
+    <config name="HelpPageUrl_En" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+      <label>Help Page URL (En)</label>
+      <label locale="ja">ヘルプページのURL (英)</label>
+    </config>
+    <config name="ConfList" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>Analysis result of Config</label>
+      <label locale="ja">Config の解析結果</label>
+    </config>
+    <config name="Icon" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>Icon Data</label>
+      <label locale="ja">Icon データ</label>
+    </config>
+    <config name="Warning" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>Warning</label>
+      <label locale="ja">注意</label>
+    </config>
+    <config name="JSON" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>Perth result JSON</label>
+      <label locale="ja">パース結果のJSON</label>
+    </config>
+    <config name="XML" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+      <label>Imported XML</label>
+      <label locale="ja">読み込んだ XML</label>
+    </config>
+  </configs>
+  <script>
+    <![CDATA[
+    /**
+     * Service-Task-Xml-Parser : https://github.com/yambal/Service-Task-Xml-Parser
+     * Script-Task-Utility : https://github.com/yambal/Script-Task-Utility
+     **/
+    !function s(i,l,o){function u(t,e){if(!l[t]){if(!i[t]){var n="function"==typeof require&&require;if(!e&&n)return n(t,!0);if(c)return c(t,!0);var a=new Error("Cannot find module '"+t+"'");throw a.code="MODULE_NOT_FOUND",a}var r=l[t]={exports:{}};i[t][0].call(r.exports,function(e){return u(i[t][1][e]||e)},r,r.exports,s,i,l,o)}return l[t].exports}for(var c="function"==typeof require&&require,e=0;e<o.length;e++)u(o[e]);return u}({1:[function(e,t,n){var a=e("./lib/DomParser");t.exports=a},{"./lib/DomParser":3}],2:[function(e,t,n){var N=/(<\/?[a-z][a-z0-9]*(?::[a-z][a-z0-9]*)?\s*(?:\s+[a-z0-9-_]+=(?:(?:'[\s\S]*?')|(?:"[\s\S]*?")))*\s*\/?>)|([^<]|<(?![a-z\/]))*/gi,T=/\s[a-z0-9-_]+\b(\s*=\s*('|")[\s\S]*?\2)?/gi,D=/(\s[a-z0-9-_]+\b\s*)(?:=(\s*('|")[\s\S]*?\3))?/gi,E=/^<[a-z]/,x=/\/>$/,_=/^<\//,L=/<\/?([a-z][a-z0-9]*)(?::([a-z][a-z0-9]*))?/i,j=/^('|")|('|")$/g,C=/^(?:area|base|br|col|command|embed|hr|img|input|link|meta|param|source)/i,B=e("./Node");function a(e,t,n){for(var a,r,s,i,l,o,u,c,f=[],p=0,g=e.match(N),m=!1,d=null,h=0,y=g.length;h<y;h++)if(r=(c=g[h]).match(L),(a=t.test(c))&&!m&&(m=!0),m){if(E.test(c)){s=x.test(c)||C.test(r[1]),i=[];for(var b=0,v=(o=c.match(T)||[]).length;b<v;b++)D.lastIndex=0,l=D.exec(o[b]),i.push({name:l[1].trim(),value:(l[2]||"").trim().replace(j,"")});(d&&d.childNodes||f).push(u=new B({nodeType:1,nodeName:r[1],namespace:r[2],attributes:i,childNodes:[],parentNode:d,startTag:c,selfCloseTag:s})),p++,!n&&a&&d&&f.push(u),s?p--:d=u}else _.test(c)?d.nodeName==r[1]&&(d=d.parentNode,p--):d.childNodes.push(new B({nodeType:3,text:c,parentNode:d}));if(0==p&&(m=!1,d=null,n))break}return n?f[0]||null:f}function r(e){this.rawHTML=e}r.prototype.getElementsByClassName=function(e){var t=new RegExp("class=('|\")(.*?\\s)?"+e+"(\\s.*?)?\\1");return a(this.rawHTML,t)},r.prototype.getElementsByTagName=function(e){var t=new RegExp("^<"+e,"i");return a(this.rawHTML,t)},r.prototype.getElementById=function(e){var t=new RegExp("id=('|\")"+e+"\\1");return a(this.rawHTML,t,!0)},r.prototype.getElementsByName=function(e){var t=new RegExp("name=('|\")"+e+"\\1");return a(this.rawHTML,t)},t.exports=r},{"./Node":4}],3:[function(e,t,n){var a=e("./Dom");function r(){}r.prototype.parseFromString=function(e){return new a(e)},t.exports=r},{"./Dom":2}],4:[function(e,t,n){function a(e){this.namespace=e.namespace||null,this.text=e.text,this._selfCloseTag=e.selfCloseTag,Object.defineProperties(this,{nodeType:{value:e.nodeType},nodeName:{value:1==e.nodeType?e.nodeName:"#text"},childNodes:{value:e.childNodes},firstChild:{get:function(){return this.childNodes[0]||null}},lastChild:{get:function(){return this.childNodes[this.childNodes.length-1]||null}},parentNode:{value:e.parentNode||null},attributes:{value:e.attributes||[]},innerHTML:{get:function(){for(var e,t="",n=0,a=this.childNodes.length;n<a;n++)t+=3===(e=this.childNodes[n]).nodeType?e.text:e.outerHTML;return t}},outerHTML:{get:function(){if(3!=this.nodeType){var e,t=(this.attributes.map(function(e){return e.name+(e.value?'="'+e.value+'"':"")})||[]).join(" ");e="<"+this.nodeName+(t?" "+t:"")+(this._selfCloseTag?"/":"")+">",this._selfCloseTag||(e+=(this._selfCloseTag?"":this.childNodes.map(function(e){return e.outerHTML})||[]).join(""),e+="</"+this.nodeName+">")}else e=this.textContent;return e}},textContent:{get:function(){return this.nodeType==a.TEXT_NODE?this.text:this.childNodes.map(function(e){return e.textContent}).join("").replace(/\x20+/g," ")}}})}function i(e,t,n){var a=[];if(n=!!n,3!==e.nodeType)for(var r=0,s=e.childNodes.length;r<s&&(3===e.childNodes[r].nodeType||!t(e.childNodes[r])||(a.push(e.childNodes[r]),!n));r++)a=a.concat(i(e.childNodes[r],t));return n?a[0]:a}a.prototype.getAttribute=function(e){for(var t=0,n=this.attributes.length;t<n;t++)if(this.attributes[t].name==e)return this.attributes[t].value;return null},a.prototype.getElementsByTagName=function(t){return i(this,function(e){return e.nodeName==t})},a.prototype.getElementsByClassName=function(e){var t=new RegExp("^(.*?\\s)?"+e+"(\\s.*?)?$");return i(this,function(e){return e.attributes.length&&t.test(e.getAttribute("class"))})},a.prototype.getElementById=function(t){return i(this,function(e){return e.attributes.length&&e.getAttribute("id")==t},!0)},a.prototype.getElementsByName=function(t){return i(this,function(e){return e.attributes.length&&e.getAttribute("name")==t})},a.ELEMENT_NODE=1,a.TEXT_NODE=3,t.exports=a},{}],5:[function(e,t,n){var s=function(e){if(e){var t=parseInt(configs.get(e),10);if(!isNaN(t)&&"number"==typeof t)return t}return null},a=function(e,t){var n=String(t),a=s(e);"number"==typeof a&&engine.setDataByNumber(a,n)};t.exports={conf:{getData:{string:function(e,t){var n=s(e);if("number"!=typeof n)return t;var a=engine.findDataByNumber(n);return a?String(a):t},file:function(e,t){var n=s(e);if("number"==typeof n){var a=engine.findDataByNumber(n).get(t);if(a){var r="";return fileRepository.readFile(a,"UTF-8",function(e){r+=e+"\n"}),r}}return null}},setData:{string:{multiLine:a,singleLine:function(e,t){var n=String(t);n=n.replace(/\r?\n/g,""),a(e,n)}},date:{yyyymmdd:function(e,t){var n=String(t),a=java.sql.Date.valueOf(n),r=s(e);"number"==typeof r&&a&&engine.setDataByNumber(r,a)}}},clearData:function(e){var t=s(e);"number"==typeof t&&engine.setDataByNumber(t,null)}}}},{}],6:[function(e,t,n){var _=e("dom-parser"),L=function(e,a,t){if(!e)return t;var n=e.attributes;return n?0<(n=n.filter(function(e,t,n){if(e.name.toLowerCase()==a)return!0})).length&&n[0].value?n[0].value:t:void 0};t.exports=function(e){if(e){e=(e=(e=e.replace(/<script>(.|\s)*?<\/script>/gi,"<script><\/script>")).replace(/last-modified/gi,"lastmodified")).replace(/help-page-url/gi,"helppageurl");for(var t=(new _).parseFromString(e,"text/xml"),n=[],a={},r=t.getElementsByTagName("configs"),s=0;s<r[0].childNodes.length;s++){var i=r[0].childNodes[s];if("config"==i.nodeName.toLowerCase()){var l=L(i,"name",null);a[l]||(a[l]={}),a[l].required="true"==L(i,"required","false"),a[l].elEnabled="true"==L(i,"el-enabled","false"),a[l].formType=L(i,"form-type",null),a[l].selectDataTypes=L(i,"select-data-type","").split("|");for(var o=i.getElementsByTagName("label"),u=0;u<o.length;u++){var c=L(o[u],"locale","en"),f=o[u].textContent;a[l].labels||(a[l].labels={}),a[l].labels[c]=f,n.push(f)}}}var p={},g=t.getElementsByTagName("label");for(s=0;s<g.length;s++)f=g[s].textContent,-1==n.indexOf(f)&&(p[c=L(g[s],"locale","en")]=f);var m,d,h={},y=t.getElementsByTagName("summary");for(s=0;s<y.length;s++)h[c=L(y[s],"locale","en")]=y[s].textContent;var b,v=t.getElementsByTagName("lastmodified");v&&(d=v[0].textContent,m=Date.parse(v[0].textContent));var N,T={},D=t.getElementsByTagName("helppageurl");for(s=0;s<D.length;s++)T[c=L(D[s],"locale","en")]=D[s].textContent;t.getElementsByTagName("script")&&(N="Script is exists.");var E=t.getElementsByTagName("icon");E&&(b=E[0].textContent);var x={labels:p,summaries:h,helpPageUrls:T,configs:a,lastModified:d,lastModifiedDate:m,script:N,iconBase64:b};return x.warning=function(e,t){var n=[];e.labels?(e.labels.ja||n.push('サービスタスクの名前 <label locale="ja">(日本語) が指定されていません'),e.labels.en||n.push("サービスタスクの名前 <label>(英語) が指定されていません")):n.push("サービスタスクの名前 <label>(日英) が指定されていません"),e.summaries?(e.summaries.ja||n.push('概要説明 <summary locale="ja">(日本語) が指定されていません'),e.summaries.en||n.push("概要説明 <summary>(英語) が指定されていません")):n.push("概要説明 <summary>(日英) が指定されていません"),!0===t&&(e.helpPageUrls.ja||n.push('ヘルプのURL <summary locale="ja">(日本語) が指定されていません'),e.helpPageUrls.en||n.push("ヘルプのURL <summary>(英語) が指定されていません"));for(var a=Object.keys(e.configs),r=0;r<a.length;r++){var s=e.configs[a[r]];s.labels.ja||n.push("config ["+a[r]+'] の名前 <label locale="ja">(日本語) が指定されていません'),s.labels.en||n.push("config ["+a[r]+"] の名前 <label>(英語) が指定されていません")}e.script||n.push("スクリプト <script> が指定されていません"),e.iconBase64||n.push("アイコン <icon> が指定されていません");var i=!1;return 0<n.length&&(i=!0),{warning:n,hasWarning:i}}(x),x}return null}},{"dom-parser":1}],7:[function(e,t,n){var a=e("service_task_xml_parser"),r=e("npm_script_task_utility"),s=r.conf.getData.file("xmlFile",0);if(s){r.conf.setData.string.multiLine("XML",s);var i=a(s);if(engine.log(JSON.stringify(i,null,2)),r.conf.clearData("labelServiceTask_Ja"),i.labels&&i.labels.ja&&r.conf.setData.string.singleLine("labelServiceTask_Ja",i.labels.ja),r.conf.clearData("labelServiceTask_En"),i.labels&&i.labels.en&&r.conf.setData.string.singleLine("labelServiceTask_En",i.labels.en),r.conf.clearData("Summary_Ja"),i.summaries&&i.summaries.ja&&r.conf.setData.string.multiLine("Summary_Ja",i.summaries.ja),r.conf.clearData("Summary_En"),i.summaries&&i.summaries.en&&r.conf.setData.string.multiLine("Summary_En",i.summaries.en),r.conf.clearData("LastModified"),i.lastModified&&r.conf.setData.date.yyyymmdd("LastModified",i.lastModified),r.conf.clearData("HelpPageUrl_Ja"),i.helpPageUrls&&i.helpPageUrls.ja&&r.conf.setData.string.singleLine("HelpPageUrl_Ja",i.helpPageUrls.ja),r.conf.clearData("HelpPageUrl_En"),i.helpPageUrls&&i.helpPageUrls.en&&r.conf.setData.string.singleLine("HelpPageUrl_En",i.helpPageUrls.en),r.conf.clearData("ConfList"),i.configs){for(var l=[],o=Object.keys(i.configs),u=0;u<o.length;u++){var c=i.configs[o[u]];l.push("["+o[u]+"] - - - - - - -"),c.labels&&c.labels.ja&&l.push("  label(ja) : "+c.labels.ja),c.labels&&c.labels.en&&l.push("  label(en) : "+c.labels.en),void 0!==c.required&&l.push("  required : "+c.required),void 0!==c.elEnabled&&l.push("  el-enabled : "+c.elEnabled),c.formType&&(l.push("  form-type : "+c.formType),"SELECT"==c.formType&&c.selectDataTypes&&l.push("    select-data-types : "+c.selectDataTypes.join(", ")))}r.conf.setData.string.multiLine("ConfList",l.join("\n"))}if(r.conf.clearData("Icon"),i.iconBase64&&r.conf.setData.string.multiLine("Icon",i.iconBase64),r.conf.clearData("Warning"),i.warning&&i.warning.hasWarning){var f="- "+i.warning.warning.join("\n- ");r.conf.setData.string.multiLine("Warning",f)}r.conf.clearData("JSON"),i&&r.conf.setData.string.multiLine("JSON",JSON.stringify(i,null,2))}},{npm_script_task_utility:5,service_task_xml_parser:6}]},{},[7]);
+    ]]>
+  </script>
+  <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEAklEQVRYR8WXb0iUdxzAP4+3HREL
+bWMMxnDVZr1wzjNbC1zlwtGoN7N2YBDspOgRpKbVC/unzijyjbv+4V0YqRURB9uClsX2QseGypw4
+m250ONfWm+ZiZxou/z3j93vuOc/z7p7ncdG+cNzB/Z7v9/P9+/s+Cv+zKLbs+/kAWI+GC4U0wBV+
+vgeNEAriu5USrlnVaw5wgTTG+RgoA2nUioQAL05OUoz4nVCSA9TjIYVPbRiONSSMF6PyRSKCxAA+
+vCjS8ychXlTK4ymKD+CnEfjoSViO6NBopITiWJ1zAcKeH845zNZlW0lRUkw5HvzzgNqeWm7du5X8
+rMZJSmQtRWQ2gJ7zC+LfPncfy1OXMzY1llCpQ3GwwLGAaW2a0clRqrqqOPXTKTPgwuiamAHQq33Q
+KDgBICQzkJlQYc2qGsqyyrg6cJVN6ZtY+MxCKxAhnCw1umMGwE81UGVYswPgve3lzvAdat+utQrx
+Caq0RzSAaJnU+QJUdlWyPWN7BOJA5wF8P/sSRS+EyuIZAH3CfR592moEyrPKuRi8SPv9dj1lizMp
+zSyl889OCr4sSFYPshb0CMTpeSsA+97ch6gDkftY6f+7P2n9EO4IHcBPq5zxUWIGcP3962SkZnC0
++yhKVCaFiiMrjzAxPZEcANpQyTcAfgNeTQaw6NlFnF9/no77HdTdrpNtKmZEwy8NZL+QTem3pYxM
+jEgVZvBhOz2o5BgAWmwIY5U05TdR9HoRl4KXuBy8TPO7zbLyh8aG2LJ0C83BZna07bADACqKJYAK
+VwWVKysJPgyy7ett5L6Yy9l3znLj9xvU/FDDlYIrpD+XjlH5FiMwCyBhCnZ/t5vG/EYcKQ52tu2k
+5Y8WWXiiAOv769nfsZ/CJYX41vp4PPUYT6uH03mnTYcYGj9Sgsu0CN1fued42LCuQaajorOCM31n
+2PPGHo6vPs7AwwEZocB7AXOAWUVo0oZFrxXJkD+aeCQ9PJhzkKzns2REJrVJzq07Jw3u+maXjJCl
+FMS0oekgOvbWMcTQuXnvJitSV+B0ONncshn/Wj9rXlpDXW8dh74/ZKcIowaRPgtMR7Ho78GRQU6s
+PsHd0bvkXctj4ysb5fQTrWljjA+j6uud7ctow8sbqF5VTddQF3vb98YdtRZSEOcy0q9j0Q3yQrKg
+JOGcN3l2GCdL5l7HQl3UQtL7Ya8stPlK91/d5H6WG+/xBAuJcTTcESK37mVuWWx2ZXxqnMCvgXgr
+WiT0hs6nt5RCEyqeWGee1lo+x/PkETD+1RcVsaJHNiWb6RgGPPN7MTEs6d0hVmnxsQoiDItXM+9/
+ezWLdVdERCMfBRcaaShkyyPiYlEIodGDQmsyj63XgM1Yz/f4v2CErjDcyEdBAAAAAElFTkSuQmCC
+  </icon>
+</service-task-definition>
