@@ -9,7 +9,7 @@
 <summary>Messages that all users can search and view will be posted to OpenChat. Since posted on the workflow engine's standpoint, there is no concept of followers. It is displayed in the timeline of the participants as "#p1234".</summary>
 <summary locale="ja">全ユーザが検索閲覧可能なメッセージが OpenChat に投稿されます。ワークフローエンジンの立場で投稿されるためフォロワーの概念はありません。"#p1234" の書式付投稿のため案件に関与するユーザのタイムラインに表示されます。組織IDがセットされている場合には、組織メンバーのタイムラインにも表示されます。</summary>
 
-<last-modified>2018-08-31</last-modified>
+<last-modified>2018-10-01</last-modified>
 
 <configs>
   <config name="conf_DataIdA" required="true"  form-type="SELECT" select-data-type="STRING">
@@ -54,8 +54,10 @@ if(   myMessage   === null){
   myMessage         = "";  //NULL to ''
 }else{ myMessage   += "";} //'java.lang.String' to 'string'
 
-const myFiles       = engine.findDataByNumber( dataIdB );
-
+let   myFiles       = "";
+if( dataIdB !== "" ){
+  myFiles = engine.findDataByNumber( dataIdB );
+}
 
 //// == Calculating / 演算 ==
 // prepare OpenChat Message
@@ -63,7 +65,8 @@ const myFiles       = engine.findDataByNumber( dataIdB );
 let myPost = feedService.begin();
 myPost     = myPost.setMessage( myMessage );
 
-if( myFiles === null){
+if( myFiles === ""  ){
+}else if( myFiles === null ){
   engine.log( "Files data: NULL" );
 }else{
   for( let i=0; i < myFiles.size(); i++ ){
