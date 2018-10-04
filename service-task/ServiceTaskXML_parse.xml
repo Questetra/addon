@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <service-task-definition>
-  <label>Parse service task definition file (XML) file-data</label>
-  <label locale="ja">サービスタスク定義ファイル(XML)をパースする ファイル型データ項目</label>
+  <label>Parse service task definition file (XML)</label>
+  <label locale="ja">サービスタスク定義ファイル(XML)をパースする</label>
   <summary>Parse the service task definition file (XML) and store each value. Detects missing settings.</summary>
   <summary locale="ja">サービスタスク定義ファイル(XML)をパースして、各値を格納します。設定が不足している事項を検出します。</summary>
   <last-modified>2018-09-28</last-modified>
