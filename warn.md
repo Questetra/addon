@@ -1,3 +1,7 @@
+# 修正候補 2018-10-04 16:05:07
+
+data.get, retVal.put, instanceof, last-modified の検索
+
 ## [AccumulatedHours-Calculator.xml](https://github.com/Questetra/addon/blob/master/service-task/AccumulatedHours-Calculator.xml)
 - data.get : 4箇所
 - retVal.put : 2箇所
@@ -142,8 +146,6 @@
 ## [Process-BulkStartTsv.xml](https://github.com/Questetra/addon/blob/master/service-task/Process-BulkStartTsv.xml)
 - data.get : 1箇所
 - retVal.put : 1箇所
-## [QBPMS Capture.sublime-workspace](https://github.com/Questetra/addon/blob/master/service-task/QBPMS Capture.sublime-workspace)
-- last-modified : なし
 ## [QuestetraManual_getLinkList.xml](https://github.com/Questetra/addon/blob/master/service-task/QuestetraManual_getLinkList.xml)
 - data.get : 1箇所
 - retVal.put : 2箇所
