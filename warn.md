@@ -1,4 +1,4 @@
-# 修正候補 (81ファイル) 2018-10-04 16:27:49
+# 修正候補 (79ファイル) 2018-10-04 16:32:31
 
 data.get, retVal.put, instanceof, last-modified, engine-type の検索
 
@@ -8,8 +8,6 @@ data.get, retVal.put, instanceof, last-modified, engine-type の検索
 - last-modified : なし
 - engine-type : なし
 ## [Backlog-issueAdd.xml](https://github.com/Questetra/addon/blob/master/service-task/Backlog-issueAdd.xml)
-- engine-type : なし
-## [Beebotte-publish.xml](https://github.com/Questetra/addon/blob/master/service-task/Beebotte-publish.xml)
 - engine-type : なし
 ## [Box-fileUpdate.xml](https://github.com/Questetra/addon/blob/master/service-task/Box-fileUpdate.xml)
 - instanceof : 2箇所
@@ -225,10 +223,6 @@ data.get, retVal.put, instanceof, last-modified, engine-type の検索
 ## [Questetra-rolemembershipDel.xml](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipDel.xml)
 - engine-type : なし
 ## [Questetra-userOrgPosition.xml](https://github.com/Questetra/addon/blob/master/service-task/Questetra-userOrgPosition.xml)
-- engine-type : なし
-## [QuestetraManual_getLinkList.xml](https://github.com/Questetra/addon/blob/master/service-task/QuestetraManual_getLinkList.xml)
-- data.get : 1箇所
-- retVal.put : 2箇所
 - engine-type : なし
 ## [RandomNumber-Generate.xml](https://github.com/Questetra/addon/blob/master/service-task/RandomNumber-Generate.xml)
 - engine-type : なし
