@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-05 12:20:53
+# サービスタスク定義ファイルリスト B 2018-10-05 12:25:40
 
 ## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
 
