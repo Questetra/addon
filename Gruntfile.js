@@ -73,6 +73,7 @@ module.exports = function(grunt) {
                             mdRow += "    - " + escapeHtml(warn[i]) + "\n";
                         }
                     }
+                    mdRow += "\n";
 
                     warnCount++;
                     md +=
