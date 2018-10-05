@@ -19,6 +19,6 @@
   "devDependencies": {
     "grunt": "^1.0.3",
     "grunt-browserify": "^5.3.0",
-    "service_task_xml_parser": "0.0.9"
+    "service_task_xml_parser": "0.1.0"
   }
 }
