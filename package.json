@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Questetra/addon#readme",
   "devDependencies": {
     "grunt": "^1.0.3",
-    "service_task_xml_parser": "0.0.6"
+    "grunt-browserify": "^5.3.0",
+    "service_task_xml_parser": "0.0.9"
   }
 }
