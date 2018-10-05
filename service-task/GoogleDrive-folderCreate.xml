@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-  <script><![CDATA[
-(function(){
+<last-modified>2018-06-25</last-modified>
+<engine-type>1</engine-type>
+<label>Creating Folder on Google Drive</label>
+<label locale="ja">Google Drive フォルダ生成</label>
+<summary>Create a new folder in the specified folder on Google Drive</summary>
+<summary locale="ja">Google Drive の指定フォルダ内に新しいフォルダを作成します</summary>
+<help-page-url>https://support.questetra.com/addons/googledrive-foldercreate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googledrive-foldercreate/</help-page-url>
+<configs>
+  <config name="Email" required="true">
+    <label>C1. User's email who connect to Google Drive</label>
+    <label locale="ja">C1. Google Drive に接続するユーザのメールアドレス</label>
+  </config>
+  <config name="ParentFolderId" required="true" el-enabled="true">
+    <label>I1. Parent Folder ID to create Folder</label>
+    <label locale="ja">I1. 生成するフォルダの親フォルダのID</label>
+  </config>
+  <config name="FolderName" required="true" el-enabled="true">
+    <label>I2. Folder Name to create</label>
+    <label locale="ja">I2. 生成するフォルダの名称</label>
+  </config>
+  <config name="FolderIdItem" form-type="SELECT" select-data-type="STRING">
+    <label>O1. Data Item that will save Folder ID</label>
+    <label locale="ja">O1. 生成したフォルダのIDを保存するデータ項目</label>
+  </config>
+  <config name="WebViewUrlItem" form-type="SELECT" select-data-type="STRING">
+    <label>O2. Data Item that will save web view url of Folder</label>
+    <label locale="ja">O2. 生成したフォルダの表示URLを保存するデータ項目</label>
+  </config>
+</configs>
+
+<script><![CDATA[
+main();
+function main(){
   var parentFolderId = configs.get("ParentFolderId");
-  if (parentFolderId == "") {
+  if (parentFolderId == "" || parentFolderId == null) {
     throw "Parent Folder ID is blank";
   }
   var folderName = configs.get("FolderName");
-  if (folderName == "") {
+  if (folderName == "" ||folderName == null) {
     throw "Folder Name is blank";
   }
   
@@ -24,81 +56,46 @@
 
   setData("FolderIdItem", json, "id");
   setData("WebViewUrlItem", json, "webViewLink");
-  
+}
   //save Data to process data
-  function setData(configName, json, property) {
-    var item = configs.get(configName);
-    if (item == null) {
-      return;
-    }
-    var data = json[property];
-    engine.setDataByNumber(item, data);
+function setData(configName, json, property) {
+  var item = configs.get(configName);
+  if (item == null || item == "") {
+    return;
   }
-  
+  var data = json[property];
+  engine.setDataByNumber(item, data);
+}
   //create folder on google drive
-  function createFolder(token, parentFolderId, name) {
-    var json = {};
-    //mime type of google drive folder
-    json["mimeType"] = "application/vnd.google-apps.folder";
-    json["parents"] = [ parentFolderId + '' ];
-    json["name"] = name + '';
-    
-    var url = 'https://www.googleapis.com/drive/v3/files/';
-    var response = httpClient.begin()
-      .bearer(token)
-      .queryParam("fields", "id, webViewLink")
-      .body(JSON.stringify(json), "application/json; charset=UTF-8")
-      .post(url);
-    var status = response.getStatusCode();
-    var responseTxt = response.getResponseAsString();
-    engine.log("status:" + status);
-    engine.log(responseTxt);
-    if (status >= 300) {
-      var error = "Failed to delete:" + fileId + "\n" + status + "\n" + responseTxt;
-      throw error;
-    }
-    json = JSON.parse(responseTxt);
-    return json;
-  }
-})();
-
-  ]]></script>
-
-  <label>Creating Folder on Google Drive</label>
-  <label locale="ja">Google Drive フォルダ生成</label>
-
-  <help-page-url>https://support.questetra.com/addons/services/googledrive-foldercreate/</help-page-url>
-  <help-page-url locale="ja">https://support.questetra.com/ja/addons/services/googledrive-foldercreate/</help-page-url>
-
-  <last-modified>2018-01-09</last-modified>
-
-  <configs>
-    <config name="Email" required="true">
-      <label>C1. User's email who connect to Google Drive</label>
-      <label locale="ja">C1. Google Drive に接続するユーザのメールアドレス</label>
-    </config>
-    <config name="ParentFolderId" required="true" el-enabled="true">
-      <label>I1. Parent Folder ID to create Folder</label>
-      <label locale="ja">I1. 生成するフォルダの親フォルダのID</label>
-    </config>
-    <config name="FolderName" required="true" el-enabled="true">
-      <label>I2. Folder Name to create</label>
-      <label locale="ja">I2. 生成するフォルダの名称</label>
-    </config>
-    <config name="FolderIdItem" form-type="SELECT" select-data-type="STRING" required="true">
-      <label>O1. Data Item that will save Folder ID (update)</label>
-      <label locale="ja">O1. 生成したフォルダのIDを保存するデータ項目 (更新)</label>
-    </config>
-    <config name="WebViewUrlItem" form-type="SELECT" select-data-type="STRING">
-      <label>O2. Data Item that will save web view url of Folder (update)</label>
-      <label locale="ja">O2. 生成したフォルダの表示URLを保存するデータ項目 (更新)</label>
-    </config>
-  </configs>
+function createFolder(token, parentFolderId, name) {
+  var json = {};
+  //mime type of google drive folder
+  json["mimeType"] = "application/vnd.google-apps.folder";
+  json["parents"] = [ parentFolderId + '' ];
+  json["name"] = name + '';
   
-  <summary>Create a new folder in the specified folder on Google Drive</summary>
-  <summary locale="ja">Google Drive の指定フォルダ内に新しいフォルダを作成します</summary>
-    
-  <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAECElEQVRYR8VXbYhUZRR+zr0z986d
+  var url = 'https://www.googleapis.com/drive/v3/files/';
+  var response = httpClient.begin()
+    .bearer(token)
+    .queryParam("fields", "id, webViewLink")
+    .queryParam("supportsTeamDrives","true")
+    .body(JSON.stringify(json), "application/json; charset=UTF-8")
+    .post(url);
+  var status = response.getStatusCode();
+  var responseTxt = response.getResponseAsString();
+  engine.log("status:" + status);
+  engine.log(responseTxt);
+  if (status >= 300) {
+    var error = "Failed to create:" + fileId + "\n" + status + "\n" + responseTxt;
+    throw error;
+  }
+  json = JSON.parse(responseTxt);
+  return json;
+}
+
+]]></script>
+
+<icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAECElEQVRYR8VXbYhUZRR+zr0z986d
 VttFF6NCWyJQI1wTIhSZzR/rgJFJJhKk6w//BOFKgXeIyj5wViJ2JPoV0UZBwRK5kjSzP3TECPsh
 rYiyGKRGrabFzrrivfN1T7x3nJ3Z+zV32rD3zx3mfc85zznvcz5ewv+8qB37/YeLzxNXEwTqZXCn
 +Ap5Bk8QqCC+gJzP6epYWL0tAfQNc2esZO5j5kECdYZRzOACEWVMJXYkv58KQTKBAJJpY4CJh8Ma
