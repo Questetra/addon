@@ -1,3 +1,4 @@
+var stxParser = require("service_task_xml_parser")
 
 module.exports = function(grunt) {
     grunt.registerTask('default', 'My "default" task description.', function() {
@@ -38,12 +39,20 @@ module.exports = function(grunt) {
             }
 
             if(mdRow.length > 0){
+                var servicetask = stxParser(String(xml));
+                if(servicetask.warning.hasWarning){
+                    mdRow +="- Warning (ついでに修正しよう)\n"
+                    var warn = servicetask.warning.warning
+                    for (var i = 0; i < warn.length; i++) {
+                        mdRow +="    - " + warn[i] + "\n"
+                    }
+                }
+
                 warnCount++
                 md += "## [" + filename + "](https://github.com/Questetra/addon/blob/master/service-task/" + filename + ")\n" + mdRow
             }else{
                 oks.push('[' + filename + '](https://github.com/Questetra/addon/blob/master/service-task/' + filename + ')')
             }
-            
         })
 
         md = "data.get, retVal.put, instanceof, last-modified, engine-type の検索\n\n" + md
@@ -54,5 +63,4 @@ module.exports = function(grunt) {
         grunt.file.write('./warn.md', md);
 
     });
-
 };
