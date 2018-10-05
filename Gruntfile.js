@@ -1,5 +1,14 @@
 var stxParser = require("service_task_xml_parser")
 
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+
 module.exports = function(grunt) {
     grunt.registerTask('default', 'My "default" task description.', function() {
         grunt.log.writeln('現在、"default"タスクを実行中…');
@@ -44,7 +53,7 @@ module.exports = function(grunt) {
                     mdRow +="- Warning (ついでに修正しよう)\n"
                     var warn = servicetask.warning.warning
                     for (var i = 0; i < warn.length; i++) {
-                        mdRow +="    - " + warn[i] + "\n"
+                        mdRow +="    - " + escapeHtml(warn[i]) + "\n"
                     }
                 }
 
