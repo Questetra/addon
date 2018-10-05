@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Diff (Table and Table)</label>
+<label locale="ja">差分確認 (Table and Table)</label>
+
+<last-modified>2018-10-01</last-modified>
+<help-page-url>https://support.questetra.com/addons/tables-diff/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/tables-diff/</help-page-url>
+
+<summary>Confirm difference information of two table type data items line by line</summary>
+<summary locale="ja">２つのテーブル型データ項目を行単位で差分確認します</summary>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>A: Select TABLE DATA for Original</label>
+    <label locale="ja">A: オリジナル情報が格納されているテーブル型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>B: Select TABLE DATA for New</label>
+    <label locale="ja">B: 更新後情報が格納されているテーブル型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>C: Select STRING DATA for Difference (update)</label>
+    <label locale="ja">C: 差分に関する情報が格納される文字列型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+<engine-type>1</engine-type>
+
+<script><![CDATA[
+// Confirm the difference between A-table and B-table
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + "";
+const dataIdB = configs.get( "conf_DataIdB" ) + "";
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+const myAtable = engine.findDataByNumber( dataIdA );
+const myBtable = engine.findDataByNumber( dataIdB );
+// com.questetra.bpms.core.model.formdata.ListArray (BPMS Table)
+if( myAtable === null){
+  throw new Error( "Source Table data A is NULL" );
+}
+if( myBtable === null){
+  throw new Error( "Source Table data B is NULL" );
+}
+const myAtableSize = myAtable.size() - 0;
+const myBtableSize = myBtable.size() - 0;
+engine.log( "Original A: " + myAtableSize );
+engine.log( "New Data B: " + myBtableSize );
+
+
+//// == Calculating / 演算 ==
+let myAarr = [];
+for (let i=0; i < myAtableSize; i++){
+  let tmpRow = "";
+  for (let j=0; j < myAtable.getRow(i).size(); j++){
+  // com.questetra.bpms.core.model.formdata.ListArray.ListRow
+    tmpRow += myAtable.get(i, j);
+    if( j !== myAtable.getRow(i).size() - 1 ){ tmpRow += "\t"; }
+  }
+  myAarr.push( tmpRow );
+}
+
+let myBarr = [];
+for (let i=0; i < myBtableSize; i++){
+  let tmpRow = "";
+  for (let j=0; j < myBtable.getRow(i).size(); j++){
+  // com.questetra.bpms.core.model.formdata.ListArray.ListRow
+    tmpRow += myBtable.get(i, j);
+    if( j !== myBtable.getRow(i).size() - 1 ){ tmpRow += "\t"; }
+  }
+  myBarr.push( tmpRow );
+}
+
+let tmpAdd = "";
+for (let i=0; i < myBarr.length; i++){
+  let existFlag = false;
+  for (let j=0; j < myAarr.length; j++){
+    if( myBarr[i] === myAarr[j] ){
+      existFlag = true;
+      break;
+    }
+  }
+  if( existFlag === false ){
+    tmpAdd += "+" + i + " " + myBarr[i] + "\n";
+  }
+}
+
+let tmpDel = "";
+for (let i=0; i < myAarr.length; i++){
+  let existFlag = false;
+  for (let j=0; j < myBarr.length; j++){
+    if( myAarr[i] === myBarr[j] ){
+      existFlag = true;
+      break;
+    }
+  }
+  if( existFlag === false ){
+    tmpDel += "-" + i + " " + myAarr[i] + "\n";
+  }
+}
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdC, tmpAdd + tmpDel );
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADXUlEQVRYR61XUVLbMBDVmr+YmcIJ
+mp6g9AR1/kBipukJmp6gcALgBNATFE7QdAaJT8wJSE5QbtB0Bpu/bOe5kisUx7JD9ZdY9j7t2933
+RKLHklJ+EEKMiWjIzDtEtIfXmXlGRAtmfhBCTI0xP7p+lmIb9/f3h0mSnBDRWAixE9tvnwPMtCzL
+4zzPF23vrAWQZdnOYDD4QkRHPQKHsQDkwhhztg5EIwAb/Nal2Ht5LoS4JKLZ4+PjzJ0O+7e3t/eY
+GZRMhBBv/YCgqCzLUVM2VgBIKfeI6NY/NTPfJUlyen19nXeh4PDwMFsul6dE9N7bj2yMjDEz/xvP
+AOAkaZr+dMGZ+bcQ4sgYc9klcLhHSjkhom8+iKIo3viZqAGEabfBsxBxXyDIqBAiJ6JXrmOMMe/c
+d2oAUkqk7MRuwslbgx8cHKAd0Zbg96qt2i2t9y4oM58ZY07xuwLQkPrPbWlH8CRJvnvZyLXWo7bs
+BHQsHBUVAKUUOP5kT39njMnaPubvd/uKotiN9byUElS4wrzSWk8cgF+u8IhoFKt2pRRmw7mX0t/G
+mOiQQncwMzoMa6G13qUgnXOtdTVe25Yt2ClO07dTlFJow2pOLJfLjxSk81hrfRED8JLnQbF/JZ+X
+LukPg9uhMzbGgJbo8mnAgAOAezdyuxSSi2BbC3UAXqOF696DuG1tbWHY/VVRpRS7h1rrqDpa/s+J
+CDO/Wn0A2K6rY/YGgH6G4BARqr4qppcCqKuyDwUhl7HZ0USBEGK+cRFuCmClCDdtw00BrLShP4hQ
+lb5StfXUCwDUXVcNIgSRUi6cXHadBZsACN6pxveKGEG7OygbxjX8omtFuJ1JzA0rpaADTuj+iZHt
+7QfPNLTKcaBqNVNtc8SXY+hHWZZDqGejIYFSNfk3bwri5MOwRpzJCP+PGhL3gq9UMRDRoW83NJjc
+Z4q7YkoHg0FNhQVx/L9MqZ96d4BGW+6bSLsRTuYsZlTcR221w1/WzmqdyV17MUnTFHeAlQsG7n7M
+nD89Pc2dBYPCEdFrIkJAmNXQ1MyLosg6XUx8bjG1cC9w3dGVd08l4a5xNasccNPqJL9pml4wM05W
+efvYQrqJaFoUxVHMqEYB+MHs2B4zM1JeyzFUjZlxC56Bnpubm2kMpHv+B4f7Zsut/FA0AAAAAElF
+TkSuQmCC
+</icon>
+
+</service-task-definition>
