@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-05 14:11:33
+# サービスタスク定義ファイルリスト B 2018-10-05 14:17:15
 
 ## 差分確認 (Table and Table) <small>en:Diff (Table and Table)</small>
 
@@ -344,6 +344,23 @@ last-modified:2018-07-10, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/jsonvalue-extractor/](https://support.questetra.com/ja/addons/jsonvalue-extractor/)
     - [EN : https://support.questetra.com/addons/jsonvalue-extractor/](https://support.questetra.com/addons/jsonvalue-extractor/)
 
+## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
+
+last-modified:2018-06-25, engine-type : 1
+
+### Summary
+
+> Google Drive の指定フォルダ内に新しいフォルダを作成します
+>> Create a new folder in the specified folder on Google Drive
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/googledrive-foldercreate/](https://support.questetra.com/ja/addons/googledrive-foldercreate/)
+    - [EN : https://support.questetra.com/addons/googledrive-foldercreate/](https://support.questetra.com/addons/googledrive-foldercreate/)
+
 ## LINE Notifyでメッセージ投稿 <small>en:Post message through LINE Notify</small>
 
 last-modified:2018-04-20, engine-type : <font color="Red">undefined</font>
@@ -409,23 +426,6 @@ last-modified:2018-01-29, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/paypal-createjpy/](https://support.questetra.com/ja/addons/paypal-createjpy/)
     - [EN : https://support.questetra.com/addons/paypal-createjpy/](https://support.questetra.com/addons/paypal-createjpy/)
-
-## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
-
-last-modified:2018-01-09, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> Google Drive の指定フォルダ内に新しいフォルダを作成します
->> Create a new folder in the specified folder on Google Drive
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/services/googledrive-foldercreate/](https://support.questetra.com/ja/addons/services/googledrive-foldercreate/)
-    - [EN : https://support.questetra.com/addons/services/googledrive-foldercreate/](https://support.questetra.com/addons/services/googledrive-foldercreate/)
 
 ## Deleting File on Google Drive
 
@@ -499,26 +499,6 @@ last-modified:2017-12-11, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
 
-## Questetra 組織メンバー削除 <small>en:Questetra Org Delete Membership</small>
-
-last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> JA : <font color="Red">なし</font>
->> System Administrator Authority and User Manager Authority required
-1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
-2. Config [OAuth 2.0 Setting]
-
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipDelete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-membershipDelete.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/questetra-membershipdelete/](https://support.questetra.com/ja/addons/questetra-membershipdelete/)
-    - [EN : https://support.questetra.com/addons/questetra-membershipdelete/](https://support.questetra.com/addons/questetra-membershipdelete/)
-
 ## Questetra 組織メンバー追加 <small>en:Questetra Org Add Membership</small>
 
 last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
@@ -538,6 +518,26 @@ last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/questetra-membershipadd/](https://support.questetra.com/ja/addons/questetra-membershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-membershipadd/](https://support.questetra.com/addons/questetra-membershipadd/)
+
+## Questetra 組織メンバー削除 <small>en:Questetra Org Delete Membership</small>
+
+last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> JA : <font color="Red">なし</font>
+>> System Administrator Authority and User Manager Authority required
+1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
+2. Config [OAuth 2.0 Setting]
+
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipDelete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-membershipDelete.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/questetra-membershipdelete/](https://support.questetra.com/ja/addons/questetra-membershipdelete/)
+    - [EN : https://support.questetra.com/addons/questetra-membershipdelete/](https://support.questetra.com/addons/questetra-membershipdelete/)
 
 ## Google Drive アップロード <small>en:Google Drive Simple Uploads</small>
 
