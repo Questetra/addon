@@ -117,20 +117,7 @@ module.exports = function(grunt) {
         // ================================
         let listMdMin = "# サービスタスク定義ファイルリスト A " +grunt.template.today("yyyy-mm-dd HH:MM:ss") + "\n\n"
         let listMd = "# サービスタスク定義ファイルリスト B " +grunt.template.today("yyyy-mm-dd HH:MM:ss") + "\n\n"
-
-        for (var i = lists.length - 1; i >= 0; i--) {
-            listMdMin += '|' + lists[i].meta.labels.ja || '?'
-            listMdMin += '|' + lists[i].meta.lastModified || '?'
-            listMdMin += '|' + '[GitHub](https://github.com/Questetra/addon/blob/master/service-task/' + lists[i].filename + ')' || '?'
-            listMdMin += '|' + '[XML](https://questetra.github.io/addon/service-task/' + lists[i].filename + ')' || '?'
-            listMdMin += '|' + '[Ja](' + lists[i].meta.helpPageUrls.ja + ')' || '?'
-            listMdMin += '|' + '[En](' + lists[i].meta.helpPageUrls.en + ')' || '?'
-            listMdMin += "|\n"
-        }
-        grunt.log.writeln(listMdMin);
-        grunt.file.write("./list.md", listMdMin);
-
-
+        
         lists.sort(function(a, b){
             let aLM = 0;
             let bLM = 0;
@@ -149,6 +136,23 @@ module.exports = function(grunt) {
             }
             return 0
         })
+
+        listMdMin += '|label|last modified|src|dl|help|help|\n'
+        listMdMin += '|:---|:---|:---|:---|:---|:---|\n'
+        for (var i = lists.length - 1; i >= 0; i--) {
+            listMdMin += '|' + lists[i].meta.labels.ja || '?'
+            listMdMin += '|' + lists[i].meta.lastModified || '?'
+            listMdMin += '|' + '[GitHub](https://github.com/Questetra/addon/blob/master/service-task/' + lists[i].filename + ')' || '?'
+            listMdMin += '|' + '[XML](https://questetra.github.io/addon/service-task/' + lists[i].filename + ')' || '?'
+            listMdMin += '|' + '[Ja](' + lists[i].meta.helpPageUrls.ja + ')' || '?'
+            listMdMin += '|' + '[En](' + lists[i].meta.helpPageUrls.en + ')' || '?'
+            listMdMin += "|\n"
+        }
+        grunt.log.writeln(listMdMin);
+        grunt.file.write("./list.md", listMdMin);
+
+
+
 
         for (var i = lists.length - 1; i >= 0; i--) {
 
