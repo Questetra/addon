@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Converter (Options to Table)</label>
+<label locale="ja">コンバータ (Options to Table)</label>
+
+<last-modified>2018-09-26</last-modified>
+<help-page-url>https://support.questetra.com/addons/converter-options-table/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/converter-options-table/</help-page-url>
+
+<summary>Convert IDs-Labels (values-displays) defined in Options XML (M319) to Table type data item (2 columns).</summary>
+<summary locale="ja">選択肢XML（M319）に定義されたID(value)-Label(display)を、テーブル型データ項目（２列）に展開します。</summary>
+
+<configs>
+  <config name="conf_OptionsFile" required="true" form-type="TEXTFIELD">
+    <label>A: Set Options-XML File Name on Platform (e.g. "example.xml")</label>
+    <label locale="ja">A: ワークフロー基盤に登録された選択肢XMLのファイル名をセットしてください (例 "example.xml")</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>B: Select TABLE DATA (update)</label>
+    <label locale="ja">B: テーブル型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+<engine-type>1</engine-type>
+
+<script><![CDATA[
+// Converter from Options-XML to Table
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const optionsFile  = configs.get( "conf_OptionsFile" )  + "";
+const dataIdB      = configs.get( "conf_DataIdB" ) + "";
+
+//// == Platform-Data Retrieving / 基盤データの参照 ==
+const optionsList  = itemDao.findAll( optionsFile, true);
+// java.util.ArrayList <ItemView>
+// R2300: com.questetra.bpms.core.event.scripttask.ItemDaoWrapper
+const optionsSize  = optionsList.size() - 0;
+if( optionsSize === 0 ){
+  throw new Error( "XML File is empty" );
+}
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+// (nothing)
+
+//// == Calculating / 演算 ==
+let tmpTable = new com.questetra.bpms.core.model.formdata.ListArray(); // BPMS Table
+for (let i=0; i < optionsSize; i++){
+  let tmpRow = new com.questetra.bpms.core.model.formdata.ListArray.ListRow();
+  tmpRow.addCol( optionsList.get(i).getValue() );
+  tmpRow.addCol( optionsList.get(i).getDisplay() );
+  tmpTable.addRow( tmpRow ); // 行追加
+}
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdB, tmpTable );
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
