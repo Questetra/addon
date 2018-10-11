@@ -7,9 +7,11 @@
 <help-page-url>https://support.questetra.com/addons/tsv-filteringbydate/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/tsv-filteringbydate/</help-page-url>
 
-<summary>dateString should be in a format recognized by the Date.parse() method.
+<summary>Filter a row in a tab-delimited text (TSV) stored in a String type Data Items by date range and save.
+dateString should be in a format recognized by the Date.parse() method.
 Date-only strings (e.g. "1970-01-01") are treated as UTC, not local.</summary>
-<summary locale="ja">日付を表す文字列値は Date.parse() メソッドによる認識可能な形式でなければなりません。
+<summary locale="ja">文字型データ項目に格納されたタブ区切りテキスト（TSV）の行を、日付の範囲でフィルターして保存します
+日付を表す文字列値は Date.parse() メソッドによる認識可能な形式でなければなりません。
 日付のみの文字列 (例: "1970-01-01") は、地方時ではなくUTCとして扱われます。</summary>
 
 <configs>
