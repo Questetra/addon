@@ -4,14 +4,15 @@
 <label locale="ja">Typetalk メッセージ投稿</label>
 
 <engine-type>1</engine-type>
-<last-modified>2018-08-28</last-modified>
+<last-modified>2018-10-11</last-modified>
 
 <help-page-url>https://support.questetra.com/addons/typetalk-messagepost/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/typetalk-messagepost/</help-page-url>
 
 <configs>
   <config name="conf_TopicId" required="true" form-type="TEXTFIELD">
-    <label>A: Set topic id to post (e.g. "12345")</label>
+    <label>A: Set topic id to post (e.g. 12345)</label>
+    <label locale="ja">A: トピックID (例 12345)</label>
   </config>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
     <label>B: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
@@ -62,7 +63,20 @@ if (dataNum_Log !== "") {
 
 
 <icon>
-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
+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
 </icon>
 
 </service-task-definition>
