@@ -4,7 +4,7 @@
 <label locale="ja">Typetalk メッセージ投稿</label>
 
 <engine-type>1</engine-type>
-<last-modified>2018-10-11</last-modified>
+<last-modified>2018-10-15</last-modified>
 
 <help-page-url>https://support.questetra.com/addons/typetalk-messagepost/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/typetalk-messagepost/</help-page-url>
@@ -24,7 +24,7 @@
   </config>
   <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
     <label>X: Select TEXT DATA for Log</label>
-    <label locale="ja">X: ログが格納されている文字型データ項目</label>
+    <label locale="ja">X: ログが格納される文字型データ項目 (更新)</label>
   </config>
 </configs>
 
