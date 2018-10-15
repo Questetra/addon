@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Converter (Table to Options)</label>
+<label locale="ja">コンバータ (Table to Options)</label>
+
+<last-modified>2018-09-26</last-modified>
+<help-page-url>https://support.questetra.com/ja/addons/converter-table-options/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/addons/converter-table-options/</help-page-url>
+
+<summary>Convert IDs-Labels defined in Table data to two String type data items. (In order to base registration as Options XML, refer to two String type data from Select type data. Then, refer to the Select type data from [Service Task (Choices Update)].)</summary>
+<summary locale="ja">テーブル型データ項目（1列目2列目）に格納されたID(value)-Label(display)を、２つの複数行文字列型に格納します。（選択肢XMLとして基盤登録するには、選択肢型データで２つの文字列型データを参照します。その後、［サービスタスク（選択肢マスタ更新）］から当該選択肢型データを参照します）</summary>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>A: Select TABLE DATA for IDs and Labels (Options)</label>
+    <label locale="ja">A: IDおよびラベル情報（選択肢情報）が格納されているテーブル型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>B: Select STRING DATA for IDs (update)</label>
+    <label locale="ja">B: ID情報が格納される文字列型データを選択してください（更新）</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>C: Select STRING DATA for LABELs (update)</label>
+    <label locale="ja">C: LABEL情報が格納される文字列型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+<engine-type>1</engine-type>
+
+<script><![CDATA[
+// Converter from Table to IDs String and Labels String for Options-XML
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + "";
+const dataIdB = configs.get( "conf_DataIdB" ) + "";
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+const myTable = engine.findDataByNumber( dataIdA );
+// com.questetra.bpms.core.model.formdata.ListArray (BPMS Table)
+if( myTable === null){
+  throw new Error( "Source Table data is NULL" );
+}
+const myTableSize = myTable.size() - 0;
+
+//// == Calculating / 演算 ==
+let tmpIds = "";
+let tmpLabels = "";
+for (let i=0; i < myTableSize; i++){
+  tmpIds    += myTable.get(i, 0) + "";
+  tmpLabels += myTable.get(i, 1) + "";
+  if( i !== myTableSize - 1 ){
+    tmpIds    += "\n";
+    tmpLabels += "\n";
+  }
+}
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdB, tmpIds );
+engine.setDataByNumber( dataIdC, tmpLabels );
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
