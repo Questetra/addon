@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<last-modified>2018-10-03</last-modified>
+<engine-type>1</engine-type>
+<label>Analyze Box Webhook JSON</label>
+<label locale="ja">BoxのWebhookのJSONを解析</label>
+<summary>Analyze the JSON object sent by a webhook on Box.</summary>
+<summary locale="ja">BoxのWebhookにより送られてきたJSONオブジェクトを解析します。</summary>
+<help-page-url>https://support.questetra.com/addons/box_webhook_json_analyze/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/box_webhook_json_analyze/</help-page-url>
+<configs>
+  <config name="Json" form-type="SELECT" select-data-type="STRING_TEXTAREA" required="true">
+    <label>I1.Webhook JSON Object(Data Type:Multiple-lines string)</label>
+    <label locale="ja">I1.Webhookで送られてきたJSONオブジェクト(指定:複数行文字型データ)</label>
+  </config>
+  <config name="Time" form-type="SELECT" select-data-type="DATETIME">
+    <label>O1.Event happened time(Data Type:Date Time)</label>
+    <label locale="ja">O1.イベント発生時刻(指定:日時型データ)</label>
+  </config>
+  <config name="UserName" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>O2.User who happens Event (Data Type:Single-line string)</label>
+    <label locale="ja">O2.イベントを起こしたユーザ(指定:単一行文字型データ)</label>
+  </config>
+  <config name="Trigger" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>O3.Webhook Trigger(Data Type:Single-line string)</label>
+    <label locale="ja">O3.トリガー(指定:単一行文字型データ)</label>
+  </config>
+  <config name="ObjectID" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>O4.Target Object ID(Data Type:Single-line string)</label>
+    <label locale="ja">O4.対象となるオブジェクトのID(指定:単一行文字型データ)</label>
+  </config>
+  <config name="ObjectName" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>O5.Target File or Folder Name(Data Type:Single-line string)</label>
+    <label locale="ja">O5.対象となるファイル・フォルダの名前(指定:単一行文字型データ)</label>
+  </config>
+  <config name="PathinfoID" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>O6.All Parent Folders ID(Data Type:Multiple-lines string)</label>
+    <label locale="ja">O6.全ての親フォルダのID(指定:複数行文字型データ)</label>
+  </config>
+  <config name="PathinfoName" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>O7.All Parent Folders Name(Data Type:Multiple-lines string)</label>
+    <label locale="ja">O7.全ての親フォルダの名前(指定:複数行文字型データ)</label>
+  </config>
+</configs>
+<script><![CDATA[
+main();
+function main(){
+  try {
+  var json = JSON.parse(engine.findDataByNumber(configs.get("Json")));
+  } catch (e){
+    throw "I1 is not JSON";
+  }
+  if (json == null){
+    throw "No JSON";
+  }
+  var objectName = configs.get("ObjectName");
+  var objectId = configs.get("ObjectID");
+  var time = configs.get("Time");
+  var userName = configs.get("UserName");
+  var pathId = configs.get("PathinfoID");
+  var pathName = configs.get("PathinfoName");
+  var trigger = configs.get("Trigger");
+  timeToJava(json,time);
+  UserNm(json,userName);
+  triggerSet(json,trigger)
+  objectIN(json,objectName,objectId);
+  pathinfo(json,pathId,pathName);
+
+}
+
+function objectIN(json,objectName,objectId){
+  var id = "";
+  var name = "";
+  if (json.source == null){
+    return;
+  }
+  if (json.source.item != null){
+    if (json.source.item.id != null){
+      id = json.source.item.id;
+      if (Object.prototype.toString.call(id).slice(8, -1) != "String"){
+          throw "source.item.id is not string";
+      }
+      if (id == ""){
+        throw "source.item.id is blank string";
+      }
+      if (objectId != ""){
+        engine.setDataByNumber(objectId,id);
+      }
+    }
+    if (json.source.item.name != null){
+      name = json.source.item.name;
+      if (Object.prototype.toString.call(name).slice(8, -1) != "String"){
+        throw "source.item.name is not string";
+      }
+      if (name == ""){
+        throw "source.item.name is blank string";
+      }
+      if (objectName != ""){
+        engine.setDataByNumber(objectName,name);
+      }
+    }
+  }else{
+    if(json.source.id != null){
+      id = json.source.id;
+      if (Object.prototype.toString.call(id).slice(8, -1) != "String"){
+        throw "source.id is not string";
+      }
+      if (id == ""){
+        throw "source.id is blank string";
+      }
+      if (objectId != ""){
+        engine.setDataByNumber(objectId,id);
+      }
+    }
+    if (json.source.name != null){
+      name = json.source.name;
+      if (Object.prototype.toString.call(name).slice(8, -1) != "String"){
+        throw "source.name is not string";
+      }
+      if (name == ""){
+        throw "source.item.name is blank string";
+      }
+      if (objectName != ""){
+        engine.setDataByNumber(objectName,name);
+      }
+    }
+  }
+}
+
+function UserNm(json,userName){
+  var name = "";
+  if (json.created_by == null){
+    return;
+  }
+  if(json.created_by.name == null){
+    return;
+  }
+  name = json.created_by.name;
+  if (typeof name != "string"){
+    throw "created_by.name is not string";
+  }
+  if (name == ""){
+    throw "created_by.name is blank string";
+  }    
+  if (userName != ""){
+    engine.setDataByNumber(userName,name);
+  }
+}
+
+function triggerSet(json,trigger){
+  var triggerName = "";
+  if (json.trigger == null){
+    return;
+  }
+  triggerName = json.trigger;
+  if (Object.prototype.toString.call(triggerName).slice(8, -1) != "String"){
+    throw "trigger is not string";
+  }
+  if (triggerName == ""){
+    throw "trigger is blank string";
+  }
+  if (trigger != ""){
+    engine.setDataByNumber(trigger,triggerName);
+  }
+}
+
+function timeToJava(json,createdTime){
+  if (json.created_at == null){
+    return;
+  }
+  var createdAt_tmp = json.created_at;
+  if (createdAt_tmp == ""){
+    throw "created_at is blank string"; 
+  }
+  var dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+  try {
+    var datetime = dateFormat.parse(createdAt_tmp);
+  } catch(e) {
+    throw "created_at must be 'YYYY-MM-DDThh:mm:ss-07:00'";
+  }
+  if (createdTime != ""){
+    engine.setDataByNumber(createdTime,new java.sql.Timestamp(datetime.getTime()));
+  }
+}
+
+function pathinfo(json,pathId,pathName){
+  if (json.source.path_collection == null){
+    return;
+  }
+  if (json.source.path_collection.entries == null){
+    return;
+  }
+  var roots = json.source.path_collection.entries;
+  if(!Array.isArray(roots)){
+    throw "source.path_collection.entries must be array";
+  }
+  if(roots.length == 0){
+    throw "source.path_collection.entries is empty";
+  } 
+  var foldersName = "";
+  var foldersID = "";
+  for (var i = 0; i < roots.length;i++){
+    if (Object.prototype.toString.call(roots[i]).slice(8, -1) != "Object"){
+      throw "Only Javascript Object can be in source.path_collection.entries";
+    }
+    if (roots[i].name == null){
+      throw "Javascript Object without name property is in source.path_collection.entries";
+    }
+    if (Object.prototype.toString.call(roots[i].name).slice(8, -1) != "String"){
+      throw "Javascript Object with no-string name property is in source.path_collection.entries";
+    }
+    foldersName += roots[i].name + "\n";
+    if (roots[i].id == null){
+      throw "Javascript Object without id property is in source.path_collection.entries";
+    }
+    if (Object.prototype.toString.call(roots[i].id).slice(8, -1) != "String"){
+      throw "Javascript Object with no-string id property is in source.path_collection.entries";
+    }
+    foldersID += roots[i].id + "\n";
+  }
+  if (pathId != ""){
+    engine.setDataByNumber(pathId,foldersID.trim());
+  }
+  if (pathName != ""){
+    engine.setDataByNumber(pathName,foldersName.trim());
+  }
+}
+]]>
+</script>
+<icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD/UlEQVRYR82XbWibVRTHf/fJ2jXJ
+2qSd65x11aC0YgJWZUwEWZ0D/SJaHYKKmgykbL70Bf2k4IYwZOKWOhFRMM9QZxHUjSEo+7AOlA1E
+7WSRThzdqq1tWWxjm7Zrk1y5N+SlydM2XdvN50sebs5z7u+e8z/n3iu4xo9Y1Pz+3x6F5BagAYQb
+oX4BSTfIUaAbIboIeY8W63dhAH+vGyZaQLYihLsox1LBiCA4OjA9CmzOZ34Af9gP8kDRE+dPo0GM
+AObtR+YimBvAfzaIEC1FrXghIymDmL42KzNrgMBZE8RzC/ld1P8SE9MbyP+mEGA5V16Ykg5MX2vu
+8GwAlXNBaFErW6yxFE25msgCaLXHeq9YcMWCaGE6PenqyAEI70bwRrF+lmQn2YPp3a18ZAECYVWv
+rrTj0I4bqHLaeOTgn0uay/JjFQXTV5kFUB1OyK9zjYeC9ThKBeW7epYfQHfPlBZSEbBQ/nBHCmDN
+zpUCkLoiUgCBcBegenzmUQDO1QaHT0dpqC3T4yd7YrzyxZB+33V/Jds3VbBmtUH/SJzmQwN07ryR
+7r4p2jtTNh88uwHPdaU8uP+iVRRPEvI2pgEuADflA6wrtxV8+GPvJBcuzfDY3RXYjBzgfxNU2A0M
+AW2fD1Jht/FmUzWx6STuFyyiqDYw03tnGkDmz6QioADUZO98F8HtMHh521o9lpQwNSMxvx/l9PkJ
+XtpWxSaPnZFYArfDRmQ8oeFcDhvvHv+Hts5Bax2FvGJeAFUFW97q5Yc/JrWDVx9ay74n1uv3Iz+P
+0fRetkIiB+uxlxj80jfFvbfatc2Jnhhb91mGPwWUA1CQgoH9dawrX0VN+zmGxxLa/qnNLj5rrtHv
+ShtPf9ifWdnfB+p02X7z6zhNd5Xr8U9PRXnmo6zN7DDIM4R8DXOK8NRrHu65xY7K+QNvX2SDaxXH
+Wmqpu75U+1FhVsL78qcxDjfX8ORml05BeZmN6YTUDUalQenh/RMjC4jQogwb6x189eJGKp02YpeT
+2AxBWYmgLzLDwGhcw8UTaJG57AaT0xIlJGXTcTyi09HcWMml8QTVLecKAWRuGVo0IvXF1tuc7N1e
+rUspnpSE+y+z4+N+/hqJ88nzNdxX58BRajAYjbPn6DB7H1/P70PTPNzRpyf8tr2WjVUleF8/bwGQ
+24jU33mt2Fq2yzYaJeTVx7v/0WaktmMxoaohsyEt23pnO4oiHTcXbsfK6JoeSNKUK3oky54D0tNd
+vUMp8hAhnz8/rVfpWF648vkjkEmHPqiYSxBmFCn8V3YxyUDoq1krAnWcLrZCokjU1Sy4tKtZfsJS
+l9NGhGgA6QZxR8pEngExipTdYHTNt+LiNbBCTSDf7X8FbX8wYecpbwAAAABJRU5ErkJggg==</icon>
+</service-task-definition>
