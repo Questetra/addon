@@ -4,7 +4,7 @@
 <label locale="ja">Typetalk メッセージ投稿（APIトークン方式）</label>
 
 <engine-type>1</engine-type>
-<last-modified>2018-10-12</last-modified>
+<last-modified>2018-10-15</last-modified>
 
 <summary>Post a message as a bot to the topic specified by URL</summary>
 <summary locale="ja">URL で指定されたトピックにボットとして投稿します</summary>
@@ -15,7 +15,7 @@
 <configs>
   <config name="conf_url" required="true" form-type="TEXTFIELD">
     <label>A: URL (included Typetalk token)</label>
-    <label locale="ja">A: A: 投稿 URL（含む Typetalk トークン）</label>
+    <label locale="ja">A: 投稿 URL（含む Typetalk トークン）</label>
   </config>
   <config name="conf_Message" required="true" form-type="SELECT" select-data-type="STRING">
     <label>B: Select TEXT DATA for Post Message</label>
@@ -23,7 +23,7 @@
   </config>
   <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
     <label>X: Select TEXT DATA for Log</label>
-    <label locale="ja">X: ログが格納されている文字型データ項目</label>
+    <label locale="ja">X: ログが格納される文字型データ項目 (更新)</label>
   </config>
 </configs>
 
