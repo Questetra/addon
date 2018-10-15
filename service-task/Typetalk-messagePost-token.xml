@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Typetalk Post Message (use API token)</label>
+<label locale="ja">Typetalk メッセージ投稿（APIトークン方式）</label>
+
+<engine-type>1</engine-type>
+<last-modified>2018-10-12</last-modified>
+
+<summary>Post a message as a bot to the topic specified by URL</summary>
+<summary locale="ja">URL で指定されたトピックにボットとして投稿します</summary>
+
+<help-page-url>https://support.questetra.com/addons/typetalk-messagepost-token/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/typetalk-messagepost-token/</help-page-url>
+
+<configs>
+  <config name="conf_url" required="true" form-type="TEXTFIELD">
+    <label>A: URL (included Typetalk token)</label>
+    <label locale="ja">A: A: 投稿 URL（含む Typetalk トークン）</label>
+  </config>
+  <config name="conf_Message" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>B: Select TEXT DATA for Post Message</label>
+    <label locale="ja">B: 投稿メッセージが格納されている文字列型データ項目</label>
+  </config>
+  <config name="conf_Log" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
+    <label>X: Select TEXT DATA for Log</label>
+    <label locale="ja">X: ログが格納されている文字型データ項目</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+//// == 自動工程コンフィグの参照 / Config Retrieving ==
+var url = configs.get("conf_url") + "";
+
+//// == ワークフローデータの参照 / Data Retrieving ==
+var textForPost = engine.findDataByNumber( configs.get("conf_Message") ) + "";
+
+//// == 演算 / Calculating ==
+var response = httpClient.begin()
+  .formParam( "message", textForPost )
+  .post( url );
+
+//// == ワークフローデータへの代入 / Data Updating ==
+var dataNum_Log = configs.get("conf_Log") + "";
+if (dataNum_Log !== "") {
+  var log = "";
+  log += "---POST request--- " + response.getStatusCode() + "\n";
+  log += response.getResponseAsString() + "\n";
+  engine.setDataByNumber( dataNum_Log, log);
+}
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC4klEQVRYR82XO2wTQRCG/zmfzaMA
+RwKJhxCGAkGFQwcFcROHpAIjIjocW4IGKUY0oSEBIVEhHBpEcY4RJRKPDp8oTEOLUyHRxASSCFFw
+bp3zDbo7n993t8aWiTvf7s5+M/vPzizhP/+on/31dPwyMyaIKMrgMIGi5noGlwikMXOJmIrySuG9
+qF1fAE7GwoYUmmcgA6KwkGFmjYCsZFSXKV/UvNZ4AuipySRAT4U37tyJWQNhTlbUd24QrgDb6aks
+AfNCHvtMYuZsMKfe6TWtJ4CejucBujGMzRs2GHk5V5jrtNkFIOI5XboGOhpp2t4ogz+89uVlYDmo
+FDKtE9sArDMnacXPknT3MejMeBPg6xcYT+75LauP85VWTTQATLXXpNCam+CkRBIYO2gZocgp4PCx
+5oZbP8Dlb/b/P79hvMm7wzBrAaN6wsmOBsB2Kr5ERItuKwMPXwBHjvt7ufkdtfu3POcx84NgTl2y
+nHFm6um4BtD+UQCAWZNz6lgDwLzhAHrrhT3MCNj72FqwIiCi/KFpwJFiPSNsgFS8SEQT/gdszxgs
+C+r+M38K5tSYBaCnp8oABBQ2RABwKaio4w4Ai3o/rAiYdmSlQDsGYPRHwLwazKnRnSFCkTRs1Yh0
+exEUPd/89HMNteePgF8bwlJyClNdA/4XURvA1RQongACspNTwNY6jM8fhapi10Vkp6L3Vdzm2snT
+CNxcAA4cavvMwlWRK7KiWu2dcDHqjC3NXIc0Mwvs3tsYEgXoWYyschwIlb0KUhfEZALS9Cywz+5V
+xQC4EqhVI13l2DoGwYakDWTXHtDFaUjnLoA312G8euYjRJeGxFnVb0YIy96MUEsf4KwbXVMKfikr
+arLrGN08GGYkennuGQFn0G5UYLborp2S9xFwBUDynx4mjmEzO3QplCFCRhyEK8zIykY1O9DTrNM7
+63EKioHZfJSGieislX7MqwA0EJUIXPTyWFgD/ah7kLl/AeimbTBnJAAUAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
