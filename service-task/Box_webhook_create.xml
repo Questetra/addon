@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<last-modified>2018-10-19</last-modified>
+<engine-type>1</engine-type>
+<label>Create Box Webhook(folder)</label>
+<label locale="ja">BoxのWebhookを作成(フォルダの監視)</label>
+<summary>Create a Box webhook to check events on the folder. In advance,you have to configure the OAuth2.</summary>
+<summary locale="ja">フォルダ単位での監視を行うBoxのWebhookを作成します。事前にOAuth2の設定が必要です。</summary>
+<help-page-url>https://support.questetra.com/addons/box_webhook_create/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/box_webhook_create/</help-page-url>
+<configs>
+  <config name="Oauth" form-type="TEXTFIELD" required="true">
+    <label>C1.OAuth Setting Name</label>
+    <label locale="ja">C1.OAuth設定名</label>
+  </config>
+  <config name="Id" form-type="TEXTFIELD" required="true">
+    <label>C2.Folder ID(Number)</label>
+    <label locale="ja">C2.フォルダID(数字)</label>
+  </config>
+  <config name="Url" form-type="TEXTFIELD" required="true">
+    <label>C3.Webhook URL(https)</label>
+    <label locale="ja">C3.Webhook URL(https)</label>
+  </config>
+  <config name="Trigger" form-type="TEXTAREA" required="true">
+    <label>C4.Webhook Trigger(only one on each line)</label>
+    <label locale="ja">C4.Webhookのトリガー(1行につき１つ)</label>
+  </config>
+    <config name="Result" form-type="SELECT" select-data-type="STRING_TEXTFIELD" required="true">
+    <label>O1.Webhook ID Output(Data Type:Single-line string)</label>
+    <label locale="ja">O1.Webhook IDの出力先(指定:単一行文字型データ)</label>
+  </config>
+</configs>
+<script><![CDATA[
+main();
+function main(){
+  var OAuthName = String(configs.get("Oauth"))
+  var id = String(configs.get("Id"));
+  var url = String(configs.get("Url"));
+  var trigger = String(configs.get("Trigger"));
+  var triggerArray = trigger.split("\n");
+  var resultData = configs.get("Result")
+  check(id,url);
+  //send post request
+  sendRequest(id,url,OAuthName,triggerArray,resultData);
+}
+
+function check(id,url){
+  if (id.search(/^[-]?[0-9]+$/) != 0){
+   throw "non-numeric character existing in ID";
+  }
+  if(url.substr(0,8) != "https://"){
+  throw "URL must begin with 'https://'.";
+  }
+}
+
+function sendRequest (id,url,OAuthName,triggerArray,resultData){
+  var json = JSON.stringify({"target": {"id": id, "type": "folder"}, "address": url, "triggers": triggerArray});
+  var token;
+  try{
+    token = httpClient.getOAuth2Token(OAuthName)
+  }catch(e){
+    throw "Error has occurred with OAuth2 Setting named '" + OAuthName + "'.\n" + e;
+  }
+  var request = httpClient.begin()
+    .bearer(token)
+    .body(json,"application/json")
+    .post("https://api.box.com/2.0/webhooks")
+  //output log
+  var text = request.getResponseAsString();
+  engine.log(text);
+  //check whether creating webhook completed
+  if (request.getStatusCode() != 201){
+    throw "Error Code:" + request.getStatusCode();
+  }
+  var result = JSON.parse(text);
+  engine.setDataByNumber(resultData,result.id)
+}
+
+]]>
+</script>
+<icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD/UlEQVRYR82XbWibVRTHf/fJ2jXJ
+2qSd65x11aC0YgJWZUwEWZ0D/SJaHYKKmgykbL70Bf2k4IYwZOKWOhFRMM9QZxHUjSEo+7AOlA1E
+7WSRThzdqq1tWWxjm7Zrk1y5N+SlydM2XdvN50sebs5z7u+e8z/n3iu4xo9Y1Pz+3x6F5BagAYQb
+oX4BSTfIUaAbIboIeY8W63dhAH+vGyZaQLYihLsox1LBiCA4OjA9CmzOZ34Af9gP8kDRE+dPo0GM
+AObtR+YimBvAfzaIEC1FrXghIymDmL42KzNrgMBZE8RzC/ld1P8SE9MbyP+mEGA5V16Ykg5MX2vu
+8GwAlXNBaFErW6yxFE25msgCaLXHeq9YcMWCaGE6PenqyAEI70bwRrF+lmQn2YPp3a18ZAECYVWv
+rrTj0I4bqHLaeOTgn0uay/JjFQXTV5kFUB1OyK9zjYeC9ThKBeW7epYfQHfPlBZSEbBQ/nBHCmDN
+zpUCkLoiUgCBcBegenzmUQDO1QaHT0dpqC3T4yd7YrzyxZB+33V/Jds3VbBmtUH/SJzmQwN07ryR
+7r4p2jtTNh88uwHPdaU8uP+iVRRPEvI2pgEuADflA6wrtxV8+GPvJBcuzfDY3RXYjBzgfxNU2A0M
+AW2fD1Jht/FmUzWx6STuFyyiqDYw03tnGkDmz6QioADUZO98F8HtMHh521o9lpQwNSMxvx/l9PkJ
+XtpWxSaPnZFYArfDRmQ8oeFcDhvvHv+Hts5Bax2FvGJeAFUFW97q5Yc/JrWDVx9ay74n1uv3Iz+P
+0fRetkIiB+uxlxj80jfFvbfatc2Jnhhb91mGPwWUA1CQgoH9dawrX0VN+zmGxxLa/qnNLj5rrtHv
+ShtPf9ifWdnfB+p02X7z6zhNd5Xr8U9PRXnmo6zN7DDIM4R8DXOK8NRrHu65xY7K+QNvX2SDaxXH
+Wmqpu75U+1FhVsL78qcxDjfX8ORml05BeZmN6YTUDUalQenh/RMjC4jQogwb6x189eJGKp02YpeT
+2AxBWYmgLzLDwGhcw8UTaJG57AaT0xIlJGXTcTyi09HcWMml8QTVLecKAWRuGVo0IvXF1tuc7N1e
+rUspnpSE+y+z4+N+/hqJ88nzNdxX58BRajAYjbPn6DB7H1/P70PTPNzRpyf8tr2WjVUleF8/bwGQ
+24jU33mt2Fq2yzYaJeTVx7v/0WaktmMxoaohsyEt23pnO4oiHTcXbsfK6JoeSNKUK3oky54D0tNd
+vUMp8hAhnz8/rVfpWF648vkjkEmHPqiYSxBmFCn8V3YxyUDoq1krAnWcLrZCokjU1Sy4tKtZfsJS
+l9NGhGgA6QZxR8pEngExipTdYHTNt+LiNbBCTSDf7X8FbX8wYecpbwAAAABJRU5ErkJggg==</icon>
+</service-task-definition>
