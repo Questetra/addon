@@ -1,9 +1,9 @@
-# サービスタスク定義ファイルリスト A 2018-10-22 15:59:05
+# サービスタスク定義ファイルリスト A 2018-10-22 16:05:46
 
 |label|last modified|src|dl|help|help|
 |:---|:---|:---|:---|:---|:---|
-|BoxのWebhookを作成(フォルダの監視)|2018-10-19|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box_webhook_create.xml)|[XML](https://questetra.github.io/addon/service-task/Box_webhook_create.xml)|[Ja](https://support.questetra.com/ja/addons/box_webhook_create/)|[En](https://support.questetra.com/addons/box_webhook_create/)|
-|BoxのWebhookを削除|2018-10-19|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box_webhook_delete.xml)|[XML](https://questetra.github.io/addon/service-task/Box_webhook_delete.xml)|[Ja](https://support.questetra.com/ja/addons/box_webhook_delete/)|[En](https://support.questetra.com/addons/box_webhook_delete/)|
+|BoxのWebhookを作成(フォルダの監視)|2018-10-19|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)|[Ja](https://support.questetra.com/ja/addons/box_webhook_create/)|[En](https://support.questetra.com/addons/box_webhook_create/)|
+|BoxのWebhookを削除|2018-10-19|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-delete.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-delete.xml)|[Ja](https://support.questetra.com/ja/addons/box_webhook_delete/)|[En](https://support.questetra.com/addons/box_webhook_delete/)|
 |Typetalk メッセージ投稿|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost.xml)|[XML](https://questetra.github.io/addon/service-task/Typetalk-messagePost.xml)|[Ja](https://support.questetra.com/ja/addons/typetalk-messagepost/)|[En](https://support.questetra.com/addons/typetalk-messagepost/)|
 |Typetalk メッセージ投稿（APIトークン方式）|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost-token.xml)|[XML](https://questetra.github.io/addon/service-task/Typetalk-messagePost-token.xml)|[Ja](https://support.questetra.com/ja/addons/typetalk-messagepost-token/)|[En](https://support.questetra.com/addons/typetalk-messagepost-token/)|
 |BoxのWebhookのJSONを解析|2018-10-03|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-json-analyze.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-json-analyze.xml)|[Ja](https://support.questetra.com/ja/addons/box_webhook_json_analyze/)|[En](https://support.questetra.com/addons/box_webhook_json_analyze/)|

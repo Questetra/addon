@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-22 15:59:05
+# サービスタスク定義ファイルリスト B 2018-10-22 16:05:46
 
 ## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
 
@@ -11,8 +11,8 @@ last-modified:2018-10-19, engine-type : 1
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box_webhook_create.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box_webhook_create.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/box_webhook_create/](https://support.questetra.com/ja/addons/box_webhook_create/)
     - [EN : https://support.questetra.com/addons/box_webhook_create/](https://support.questetra.com/addons/box_webhook_create/)
@@ -28,8 +28,8 @@ last-modified:2018-10-19, engine-type : 1
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box_webhook_delete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box_webhook_delete.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-delete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-delete.xml)
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/box_webhook_delete/](https://support.questetra.com/ja/addons/box_webhook_delete/)
     - [EN : https://support.questetra.com/addons/box_webhook_delete/](https://support.questetra.com/addons/box_webhook_delete/)
