@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<last-modified>2018-10-19</last-modified>
+<engine-type>1</engine-type>
+<label>Delete Box Webhook</label>
+<label locale="ja">BoxのWebhookを削除</label>
+<summary>Delete the Box webhook. In advance,you have to configure the OAuth2.</summary>
+<summary locale="ja">BoxのWebhookを削除します。事前にOAuth2の設定が必要です。</summary>
+<help-page-url>https://support.questetra.com/addons/box_webhook_delete/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/box_webhook_delete/</help-page-url>
+<configs>
+  <config name="Oauth" form-type="TEXTFIELD" required="true">
+    <label>C1.OAuth Setting Name</label>
+    <label locale="ja">C1.OAuth設定名</label>
+  </config>
+  <config name="Id" form-type="SELECT" select-data-type="STRING_TEXTFIELD" required="true">
+    <label>I1.Webhook ID(Data Type:Single-line string)</label>
+    <label locale="ja">I1.Webhook ID(指定:単一行文字型データ)</label>
+  </config>
+</configs>
+<script><![CDATA[
+main();
+function main(){
+  var OAuthName = String(configs.get("Oauth"))
+  var id = engine.findDataByNumber(configs.get("Id"));
+  check(id);
+  var url = "https://api.box.com/2.0/webhooks/" + id;
+  //send delete request
+  send(OAuthName,url)
+}
+function check(id){
+  if(id == null){
+    throw "ID is empty.";
+    }
+  if (id.search(/^[-]?[0-9]+$/) != 0){
+   throw "non-numeric character existing in ID";
+  }
+}
+function send(OAuthName,url){
+  var token;
+  try{
+    token = httpClient.getOAuth2Token(OAuthName);
+  }catch(e){
+    throw "Error has occurred with OAuth2 Setting named '" + OAuthName + "'.\n" + e;
+  }
+  var request = httpClient.begin()
+    .bearer(token)
+    .delete(url)
+
+  //output log
+  var text = request.getResponseAsString();
+  if(request.getStatusCode() == 204){
+    engine.log("delete successful");
+  }else{
+    engine.log(text);
+    throw "ErrorCode:" +request.getStatusCode();
+  }
+}
+]]>
+</script>
+<icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD/UlEQVRYR82XbWibVRTHf/fJ2jXJ
+2qSd65x11aC0YgJWZUwEWZ0D/SJaHYKKmgykbL70Bf2k4IYwZOKWOhFRMM9QZxHUjSEo+7AOlA1E
+7WSRThzdqq1tWWxjm7Zrk1y5N+SlydM2XdvN50sebs5z7u+e8z/n3iu4xo9Y1Pz+3x6F5BagAYQb
+oX4BSTfIUaAbIboIeY8W63dhAH+vGyZaQLYihLsox1LBiCA4OjA9CmzOZ34Af9gP8kDRE+dPo0GM
+AObtR+YimBvAfzaIEC1FrXghIymDmL42KzNrgMBZE8RzC/ld1P8SE9MbyP+mEGA5V16Ykg5MX2vu
+8GwAlXNBaFErW6yxFE25msgCaLXHeq9YcMWCaGE6PenqyAEI70bwRrF+lmQn2YPp3a18ZAECYVWv
+rrTj0I4bqHLaeOTgn0uay/JjFQXTV5kFUB1OyK9zjYeC9ThKBeW7epYfQHfPlBZSEbBQ/nBHCmDN
+zpUCkLoiUgCBcBegenzmUQDO1QaHT0dpqC3T4yd7YrzyxZB+33V/Jds3VbBmtUH/SJzmQwN07ryR
+7r4p2jtTNh88uwHPdaU8uP+iVRRPEvI2pgEuADflA6wrtxV8+GPvJBcuzfDY3RXYjBzgfxNU2A0M
+AW2fD1Jht/FmUzWx6STuFyyiqDYw03tnGkDmz6QioADUZO98F8HtMHh521o9lpQwNSMxvx/l9PkJ
+XtpWxSaPnZFYArfDRmQ8oeFcDhvvHv+Hts5Bax2FvGJeAFUFW97q5Yc/JrWDVx9ay74n1uv3Iz+P
+0fRetkIiB+uxlxj80jfFvbfatc2Jnhhb91mGPwWUA1CQgoH9dawrX0VN+zmGxxLa/qnNLj5rrtHv
+ShtPf9ifWdnfB+p02X7z6zhNd5Xr8U9PRXnmo6zN7DDIM4R8DXOK8NRrHu65xY7K+QNvX2SDaxXH
+Wmqpu75U+1FhVsL78qcxDjfX8ORml05BeZmN6YTUDUalQenh/RMjC4jQogwb6x189eJGKp02YpeT
+2AxBWYmgLzLDwGhcw8UTaJG57AaT0xIlJGXTcTyi09HcWMml8QTVLecKAWRuGVo0IvXF1tuc7N1e
+rUspnpSE+y+z4+N+/hqJ88nzNdxX58BRajAYjbPn6DB7H1/P70PTPNzRpyf8tr2WjVUleF8/bwGQ
+24jU33mt2Fq2yzYaJeTVx7v/0WaktmMxoaohsyEt23pnO4oiHTcXbsfK6JoeSNKUK3oky54D0tNd
+vUMp8hAhnz8/rVfpWF648vkjkEmHPqiYSxBmFCn8V3YxyUDoq1krAnWcLrZCokjU1Sy4tKtZfsJS
+l9NGhGgA6QZxR8pEngExipTdYHTNt+LiNbBCTSDf7X8FbX8wYecpbwAAAABJRU5ErkJggg==</icon>
+</service-task-definition>
