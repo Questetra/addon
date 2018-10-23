@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Converter (Email-Str to Quser)</label>
+<label locale="ja">コンバータ (Email-Str to Quser)</label>
+
+<help-page-url>https://support.questetra.com/addons/converter-emailstr-quser/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/converter-emailstr-quser/</help-page-url>
+
+<summary>Judging the Questetra User by the email address string stored in the string type data item and update the User type data item.</summary>
+<summary locale="ja">文字型データ項目に格納されているメールアドレス文字列からQuestetraユーザを判定し、ユーザ型データ項目を更新します。</summary>
+
+<last-modified>2018-10-10</last-modified>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>A: Select STRING DATA for Email Address</label>
+    <label locale="ja">A: メールアドレス情報が格納されている文字列型データ項目を選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="QUSER">
+    <label>B: Select USER DATA (update)</label>
+    <label locale="ja">B: ユーザ型データ項目を選択してください（更新）</label>
+  </config>
+</configs>
+
+<engine-type>1</engine-type>
+
+<script><![CDATA[
+// (c) 2018, Questetra, Inc. (the MIT License)
+// (for Nashorn ECMA Engine)
+
+//////// START "main()" ////////
+main();
+function main(){
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + "";
+const dataIdB = configs.get( "conf_DataIdB" ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+const strEmail = engine.findDataByNumber( dataIdA ) + "";
+
+//// == Calculating / 演算 ==
+const quser = quserDao.findByEmail( strEmail );
+// 'com.questetra.bpms.core.event.scripttask.QuserView'
+// set NULL if not found
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdB, quser );
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK
+1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS
+3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnm
+YRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0oh
+u45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohSc
+EtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8
+MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXml
+QBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lX
+AseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS
+6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+</icon>
+
+</service-task-definition>
