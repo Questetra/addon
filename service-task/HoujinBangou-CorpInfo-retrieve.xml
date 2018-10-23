@@ -3,8 +3,8 @@
 <label>Houjin-Bango Corporate Info Retrieve</label>
 <label locale="ja">法人番号 企業情報 参照</label>
 
-<help-page-url>https://support.questetra.com/addons/houjinbango-corporation-get/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/houjinbango-corporation-get/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/</help-page-url>
 
 <summary>Access the National Tax Agency corporate number Web-API v3 and obtain the business name, address and reading data corresponding to the corporate number (13 digit number). "Application ID" from the National Tax Agency (free) needed</summary>
 <summary locale="ja">国税庁 法人番号 Web-API v3 にアクセスし、法人番号（13桁数字）に対応する正式商号・登記住所・フリガナ・最終更新日等の各データを取得します。事前に、国税庁から「アプリケーションID」の発行（無料）を受けておく必要があります</summary>
@@ -54,7 +54,7 @@
 
 //////// START "main()" ////////
 main();
-function main(){ 
+function main(){
 
 //// == Config Retrieving / 工程コンフィグの参照 ==
 var appId   = configs.get( "conf_AppId" )   + ""; // required
@@ -96,7 +96,7 @@ if( httpStatus !== "200" ){
 }
 
 // parse XML (ECMAScript for XML (E4X))
-responseStr = responseStr.replace(/^<\?xml\s+version\s*=\s*(["'])[^\1]+\1[^?]*\?>/, ""); 
+responseStr = responseStr.replace(/^<\?xml\s+version\s*=\s*(["'])[^\1]+\1[^?]*\?>/, "");
 // E4X bug 336551
 var xmlObj = new XML( responseStr );
 var strCorpName     = xmlObj.corporation[0].name + "";

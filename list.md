@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト A 2018-10-23 16:53:42
+# サービスタスク定義ファイルリスト A 2018-10-23 17:08:27
 
 |label|last modified|src|dl|help|help|
 |:---|:---|:---|:---|:---|:---|
@@ -6,7 +6,7 @@
 |BoxのWebhookを削除|2018-10-19|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-delete.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-delete.xml)|[Ja](https://support.questetra.com/ja/addons/box_webhook_delete/)|[En](https://support.questetra.com/addons/box_webhook_delete/)|
 |Typetalk メッセージ投稿|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost.xml)|[XML](https://questetra.github.io/addon/service-task/Typetalk-messagePost.xml)|[Ja](https://support.questetra.com/ja/addons/typetalk-messagepost/)|[En](https://support.questetra.com/addons/typetalk-messagepost/)|
 |Typetalk メッセージ投稿（APIトークン方式）|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost-token.xml)|[XML](https://questetra.github.io/addon/service-task/Typetalk-messagePost-token.xml)|[Ja](https://support.questetra.com/ja/addons/typetalk-messagepost-token/)|[En](https://support.questetra.com/addons/typetalk-messagepost-token/)|
-|法人番号 企業情報 参照|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/HoujinBangou-CorpInfo-retrieve.xml)|[XML](https://questetra.github.io/addon/service-task/HoujinBangou-CorpInfo-retrieve.xml)|[Ja](https://support.questetra.com/ja/addons/houjinbango-corporation-get/)|[En](https://support.questetra.com/addons/houjinbango-corporation-get/)|
+|法人番号 企業情報 参照|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/HoujinBangou-CorpInfo-retrieve.xml)|[XML](https://questetra.github.io/addon/service-task/HoujinBangou-CorpInfo-retrieve.xml)|[Ja](https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/)|[En](https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/)|
 |BoxのWebhookのJSONを解析|2018-10-03|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-json-analyze.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-json-analyze.xml)|[Ja](https://support.questetra.com/ja/addons/box_webhook_json_analyze/)|[En](https://support.questetra.com/addons/box_webhook_json_analyze/)|
 |差分確認 (Table and Table)|2018-10-01|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Tables-Diff.xml)|[XML](https://questetra.github.io/addon/service-task/Tables-Diff.xml)|[Ja](https://support.questetra.com/ja/addons/tables-diff/)|[En](https://support.questetra.com/addons/tables-diff/)|
 |OpenChat 投稿 (Questetra 内の社内SNS機能)|2018-10-01|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-OpenchatPost.xml)|[XML](https://questetra.github.io/addon/service-task/Questetra-OpenchatPost.xml)|[Ja](https://support.questetra.com/ja/addons/questetra-openchatpost/)|[En](https://support.questetra.com/addons/questetra-openchatpost/)|

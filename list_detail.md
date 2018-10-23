@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-23 16:53:42
+# サービスタスク定義ファイルリスト B 2018-10-23 17:08:27
 
 ## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
 
@@ -81,8 +81,8 @@ last-modified:2018-10-15, engine-type : <font color="Red">undefined</font>
 - [GitHub](https://github.com/Questetra/addon/blob/master/service-task/HoujinBangou-CorpInfo-retrieve.xml)
 - [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/HoujinBangou-CorpInfo-retrieve.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/houjinbango-corporation-get/](https://support.questetra.com/ja/addons/houjinbango-corporation-get/)
-    - [EN : https://support.questetra.com/addons/houjinbango-corporation-get/](https://support.questetra.com/addons/houjinbango-corporation-get/)
+    - [JA : https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/)
+    - [EN : https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/)
 
 ## BoxのWebhookのJSONを解析 <small>en:Analyze Box Webhook JSON</small>
 
