@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Houjin-Bango Corporate Info Retrieve</label>
+<label locale="ja">法人番号 企業情報 参照</label>
+
+<help-page-url>https://support.questetra.com/addons/houjinbango-corporation-get/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/houjinbango-corporation-get/</help-page-url>
+
+<summary>Access the National Tax Agency corporate number Web-API v3 and obtain the business name, address and reading data corresponding to the corporate number (13 digit number). "Application ID" from the National Tax Agency (free) needed</summary>
+<summary locale="ja">国税庁 法人番号 Web-API v3 にアクセスし、法人番号（13桁数字）に対応する正式商号・登記住所・フリガナ・最終更新日等の各データを取得します。事前に、国税庁から「アプリケーションID」の発行（無料）を受けておく必要があります</summary>
+
+<last-modified>2018-10-15</last-modified>
+
+
+<configs>
+  <config name="conf_AppId" required="true" form-type="TEXTFIELD">
+    <label>A: Set Application Id (Access Key) for Houjin Web-API</label>
+    <label locale="ja">A: 法人番号 Web-API のアプリケーションID (Access Key) をセットしてください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
+    <label>B: Select STRING/SELECT for a Corporate Number</label>
+    <label locale="ja">B: 法人番号が格納されている文字列型or選択肢型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdC" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>C: Select STRING DATA for Corporate Name (update)</label>
+    <label locale="ja">C: 法人の商号または名称が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>D: Select STRING DATA for Corporate PostCode (update)</label>
+    <label locale="ja">D: 法人の郵便番号が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdE" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>E: Select STRING DATA for Corporate Address (update)</label>
+    <label locale="ja">E: 法人の登記住所が格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdF" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
+    <label>F: Select STRING DATA for Corporate Furigana (update)</label>
+    <label locale="ja">F: 法人の商号フリガナが格納される文字列型データを選択してください (更新)</label>
+  </config>
+  <config name="conf_DataIdG" required="false" form-type="SELECT" select-data-type="DATE">
+    <label>G: Select DATE DATA for Last Update Date (update)</label>
+    <label locale="ja">G: 法人情報の最終更新日が格納される日付型データを選択してください (更新)</label>
+  </config>
+</configs>
+
+<engine-type>0</engine-type>
+
+<script><![CDATA[
+// (c) 2018, Questetra, Inc. (the MIT License)
+// 「このサービスは、国税庁法人番号システムのWeb-API機能を利用して取得した情報をもとに作成しているが、サービスの内容は国税庁によって保証されたものではない」
+// https://www.houjin-bangou.nta.go.jp/webapi/
+
+// Rhino engine (engine type: 0) to use E4X
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+var appId   = configs.get( "conf_AppId" )   + ""; // required
+var dataIdB = configs.get( "conf_DataIdB" ) + ""; // required
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
+var dataIdD = configs.get( "conf_DataIdD" ) + "";
+var dataIdE = configs.get( "conf_DataIdE" ) + "";
+var dataIdF = configs.get( "conf_DataIdF" ) + "";
+var dataIdG = configs.get( "conf_DataIdG" ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+var strCorpNum = "";
+  if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType( "SELECT_SINGLE" ) ){
+    strCorpNum = engine.findDataByNumber( dataIdB ).get(0).getValue() + "";
+  }else{
+    strCorpNum = engine.findDataByNumber( dataIdB ) + "";
+  }
+
+//// == Calculating / 演算 ==
+// prepare API Request
+var apiRequest = httpClient.begin(); // HttpRequestWrapper
+  // - com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+apiRequest     = apiRequest.queryParam( "id", appId );
+apiRequest     = apiRequest.queryParam( "number", strCorpNum );
+apiRequest     = apiRequest.queryParam( "type", 12 ); // Response Format: XML
+apiRequest     = apiRequest.queryParam( "history", 0 );
+
+// access API (with get())
+var response    = apiRequest.get( "https://api.houjin-bangou.nta.go.jp/3/num" );
+var httpStatus  = response.getStatusCode() + ""; // HttpResponseWrapper
+var responseStr = response.getResponseAsString() + "";
+engine.log( "GET [Corp Info]: " + httpStatus );
+engine.log( " responseStr: \n" + responseStr ); // for debug
+if( httpStatus !== "200" ){
+  var errorMessage = "\n- HTTP STATUS is not 200, Service Task stopped. -\n";
+  errorMessage += responseStr + "\n";
+  throw new Error( errorMessage );
+}
+
+// parse XML (ECMAScript for XML (E4X))
+responseStr = responseStr.replace(/^<\?xml\s+version\s*=\s*(["'])[^\1]+\1[^?]*\?>/, ""); 
+// E4X bug 336551
+var xmlObj = new XML( responseStr );
+var strCorpName     = xmlObj.corporation[0].name + "";
+var strCorpPostCode = xmlObj.corporation[0].postCode + "";
+var strCorpAddress  = xmlObj.corporation[0].prefectureName + "";
+    strCorpAddress += xmlObj.corporation[0].cityName + "";
+    strCorpAddress += xmlObj.corporation[0].streetNumber + "";
+var strCorpFurigana = xmlObj.corporation[0].furigana + "";
+var strCorpUpdate   = xmlObj.corporation[0].updateDate + "";
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if( dataIdC !== "" ){
+  engine.setDataByNumber( dataIdC, strCorpName );
+}
+if( dataIdD !== "" ){
+  engine.setDataByNumber( dataIdD, strCorpPostCode );
+}
+if( dataIdE !== "" ){
+  engine.setDataByNumber( dataIdE, strCorpAddress );
+}
+if( dataIdF !== "" ){
+  engine.setDataByNumber( dataIdF, strCorpFurigana );
+}
+if( dataIdG !== "" ){
+  engine.setDataByNumber( dataIdG, java.sql.Date.valueOf(strCorpUpdate) );
+}
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVRYR+1WS24aQRCtghUfKdwg
+voG5QSY76EEKOUHICeKcwM4JQm6ATxAsMQ27jG8AN3Bu4Eh8Vsyz3qgHDQMMg0y8oiQEdFdXv/q9
+apUcMcY0ReS9iPC7qaoNAA1V5f8dATBV1WcAzyIydZ+/1lr+3iuaXW23211V/SQinqpe5QEsugfg
+SURCERlaax/S5zYAjDE9EbnNXgrgkYfpmarGnszn82kYhvRyI57nNer1ehwZAE1GyjnxIa1HMKp6
+FwTBPddjAL7vD0TkS0rxPoqi4Xg8Hhb1Mk+PUS2VSt30HQAG1tqv6jZ/OwOz9XrdnUwmDNnZpdVq
+XZXLZTp1TeNRFH1WY8ydqt4mC+fy+hD6tMMAfmwBSMJydtdTBtPp3gHg9EIA/Wy1vhaU8/wbCzOx
+dQhAss9+HqpqGEXR02q1mmUr/xAodkSlUrl2fEH+YAGyK7YkBtDpdDwAf4p6mJDNPv08ktqnr6of
+4zY0xrA3yXhvKbMgCJoJABIIyebdWyAA8I+1QIreMCHzVqvVSJdxj/5HmS0WCy+pp51ZYIzpqyqr
+9ewC4Je19iZteAeAqwnOBQI5S0pcyG+staT8LdkLwIFg+/DAa1MyA9A7NJIPAiAI1kW1Wh248Xxy
+SgA8LJfLXh5/5AJIbvR9n3n7eSKC70EQ9I+dKQSARkhYHNHH6oL55ugdjUbsqKNSGECSkiOtutVi
+R29PHiRFFNM6vu/zZZQtzpjZTrV1UgQS48YYsmb2qfVord1MuqJALgAuEbhE4BKBSwReALxRW/c7
+i890AAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
