@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-10-19</last-modified>
+<last-modified>2018-10-24</last-modified>
 <engine-type>1</engine-type>
 <label>Delete Box Webhook</label>
 <label locale="ja">BoxのWebhookを削除</label>
 <summary>Delete the Box webhook. In advance,you have to configure the OAuth2.</summary>
 <summary locale="ja">BoxのWebhookを削除します。事前にOAuth2の設定が必要です。</summary>
-<help-page-url>https://support.questetra.com/addons/box_webhook_delete/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/box_webhook_delete/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/box-webhook-delete/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/box-webhook-delete/</help-page-url>
 <configs>
   <config name="Oauth" form-type="TEXTFIELD" required="true">
     <label>C1.OAuth Setting Name</label>

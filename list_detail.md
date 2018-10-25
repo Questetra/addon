@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-25 11:29:47
+# サービスタスク定義ファイルリスト B 2018-10-25 11:37:05
 
 ## BoxのWebhookのJSONを解析 <small>en:Parse Box Webhook JSON</small>
 
@@ -11,8 +11,8 @@ last-modified:2018-10-24, engine-type : 1
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box_webhook_json_parse.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box_webhook_json_parse.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-json-parse.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-json-parse.xml)
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/box-webhook-json-parse/](https://support.questetra.com/ja/addons/box-webhook-json-parse/)
     - [EN : https://support.questetra.com/addons/box-webhook-json-parse/](https://support.questetra.com/addons/box-webhook-json-parse/)
@@ -34,6 +34,23 @@ last-modified:2018-10-24, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
     - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
 
+## BoxのWebhookを削除 <small>en:Delete Box Webhook</small>
+
+last-modified:2018-10-24, engine-type : 1
+
+### Summary
+
+> BoxのWebhookを削除します。事前にOAuth2の設定が必要です。
+>> Delete the Box webhook. In advance,you have to configure the OAuth2.
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-delete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-delete.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/box-webhook-delete/](https://support.questetra.com/ja/addons/box-webhook-delete/)
+    - [EN : https://support.questetra.com/addons/box-webhook-delete/](https://support.questetra.com/addons/box-webhook-delete/)
+
 ## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
 
 last-modified:2018-10-19, engine-type : 1
@@ -50,23 +67,6 @@ last-modified:2018-10-19, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/box_webhook_create/](https://support.questetra.com/ja/addons/box_webhook_create/)
     - [EN : https://support.questetra.com/addons/box_webhook_create/](https://support.questetra.com/addons/box_webhook_create/)
-
-## BoxのWebhookを削除 <small>en:Delete Box Webhook</small>
-
-last-modified:2018-10-19, engine-type : 1
-
-### Summary
-
-> BoxのWebhookを削除します。事前にOAuth2の設定が必要です。
->> Delete the Box webhook. In advance,you have to configure the OAuth2.
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-delete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-delete.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/box_webhook_delete/](https://support.questetra.com/ja/addons/box_webhook_delete/)
-    - [EN : https://support.questetra.com/addons/box_webhook_delete/](https://support.questetra.com/addons/box_webhook_delete/)
 
 ## Typetalk メッセージ投稿 <small>en:Typetalk Post Message</small>
 
