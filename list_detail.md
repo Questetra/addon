@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-25 11:38:19
+# サービスタスク定義ファイルリスト B 2018-10-25 11:54:50
 
 ## BoxのWebhookのJSONを解析 <small>en:Parse Box Webhook JSON</small>
 
@@ -17,22 +17,22 @@ last-modified:2018-10-24, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box-webhook-json-parse/](https://support.questetra.com/ja/addons/box-webhook-json-parse/)
     - [EN : https://support.questetra.com/addons/box-webhook-json-parse/](https://support.questetra.com/addons/box-webhook-json-parse/)
 
-## Googleドライブ上のファイルを削除する <small>en:Deleting File on Google Drive</small>
+## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
 
 last-modified:2018-10-24, engine-type : 1
 
 ### Summary
 
-> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
->> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
+> フォルダ単位での監視を行うBoxのWebhookを作成します。事前にOAuth2の設定が必要です。
+>> Create a Box webhook to check events on the folder. In advance,you have to configure the OAuth2.
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
-    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
+    - [JA : https://support.questetra.com/ja/addons/box-webhook-create/](https://support.questetra.com/ja/addons/box-webhook-create/)
+    - [EN : https://support.questetra.com/addons/box-webhook-create/](https://support.questetra.com/addons/box-webhook-create/)
 
 ## BoxのWebhookを削除 <small>en:Delete Box Webhook</small>
 
@@ -51,22 +51,22 @@ last-modified:2018-10-24, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box-webhook-delete/](https://support.questetra.com/ja/addons/box-webhook-delete/)
     - [EN : https://support.questetra.com/addons/box-webhook-delete/](https://support.questetra.com/addons/box-webhook-delete/)
 
-## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
+## Googleドライブ上のファイルを削除する <small>en:Deleting File on Google Drive</small>
 
-last-modified:2018-10-19, engine-type : 1
+last-modified:2018-10-24, engine-type : 1
 
 ### Summary
 
-> フォルダ単位での監視を行うBoxのWebhookを作成します。事前にOAuth2の設定が必要です。
->> Create a Box webhook to check events on the folder. In advance,you have to configure the OAuth2.
+> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
+>> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/box_webhook_create/](https://support.questetra.com/ja/addons/box_webhook_create/)
-    - [EN : https://support.questetra.com/addons/box_webhook_create/](https://support.questetra.com/addons/box_webhook_create/)
+    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
+    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
 
 ## Typetalk メッセージ投稿 <small>en:Typetalk Post Message</small>
 
