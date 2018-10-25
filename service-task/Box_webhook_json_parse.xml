@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-10-03</last-modified>
+<last-modified>2018-10-24</last-modified>
 <engine-type>1</engine-type>
-<label>Analyze Box Webhook JSON</label>
+<label>Parse Box Webhook JSON</label>
 <label locale="ja">BoxのWebhookのJSONを解析</label>
-<summary>Analyze the JSON object sent by a webhook on Box.</summary>
+<summary>Parse the JSON object sent by a webhook on Box.</summary>
 <summary locale="ja">BoxのWebhookにより送られてきたJSONオブジェクトを解析します。</summary>
-<help-page-url>https://support.questetra.com/addons/box_webhook_json_analyze/</help-page-url>
-<help-page-url locale="ja">https://support.questetra.com/ja/addons/box_webhook_json_analyze/</help-page-url>
+<help-page-url>https://support.questetra.com/addons/box-webhook-json-parse/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/box-webhook-json-parse/</help-page-url>
 <configs>
   <config name="Json" form-type="SELECT" select-data-type="STRING_TEXTAREA" required="true">
     <label>I1.Webhook JSON Object(Data Type:Multiple-lines string)</label>
@@ -45,8 +45,9 @@
 <script><![CDATA[
 main();
 function main(){
+  var json;
   try {
-  var json = JSON.parse(engine.findDataByNumber(configs.get("Json")));
+  json = JSON.parse(engine.findDataByNumber(configs.get("Json")));
   } catch (e){
     throw "I1 is not JSON";
   }
