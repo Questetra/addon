@@ -1,4 +1,21 @@
-# サービスタスク定義ファイルリスト B 2018-10-23 17:13:22
+# サービスタスク定義ファイルリスト B 2018-10-25 11:24:22
+
+## Googleドライブ上のファイルを削除する <small>en:Deleting File on Google Drive</small>
+
+last-modified:2018-10-24, engine-type : 1
+
+### Summary
+
+> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
+>> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
+    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
 
 ## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
 
@@ -118,23 +135,6 @@ last-modified:2018-10-03, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box_webhook_json_analyze/](https://support.questetra.com/ja/addons/box_webhook_json_analyze/)
     - [EN : https://support.questetra.com/addons/box_webhook_json_analyze/](https://support.questetra.com/addons/box_webhook_json_analyze/)
 
-## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
-
-last-modified:2018-10-01, engine-type : 1
-
-### Summary
-
-> 全ユーザが検索閲覧可能なメッセージが OpenChat に投稿されます。ワークフローエンジンの立場で投稿されるためフォロワーの概念はありません。"#p1234" の書式付投稿のため案件に関与するユーザのタイムラインに表示されます。組織IDがセットされている場合には、組織メンバーのタイムラインにも表示されます。
->> Messages that all users can search and view will be posted to OpenChat. Since posted on the workflow engine's standpoint, there is no concept of followers. It is displayed in the timeline of the participants as "#p1234".
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-OpenchatPost.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-OpenchatPost.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/questetra-openchatpost/](https://support.questetra.com/ja/addons/questetra-openchatpost/)
-    - [EN : https://support.questetra.com/addons/questetra-openchatpost/](https://support.questetra.com/addons/questetra-openchatpost/)
-
 ## 差分確認 (Table and Table) <small>en:Diff (Table and Table)</small>
 
 last-modified:2018-10-01, engine-type : 1
@@ -151,6 +151,23 @@ last-modified:2018-10-01, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/tables-diff/](https://support.questetra.com/ja/addons/tables-diff/)
     - [EN : https://support.questetra.com/addons/tables-diff/](https://support.questetra.com/addons/tables-diff/)
+
+## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
+
+last-modified:2018-10-01, engine-type : 1
+
+### Summary
+
+> 全ユーザが検索閲覧可能なメッセージが OpenChat に投稿されます。ワークフローエンジンの立場で投稿されるためフォロワーの概念はありません。"#p1234" の書式付投稿のため案件に関与するユーザのタイムラインに表示されます。組織IDがセットされている場合には、組織メンバーのタイムラインにも表示されます。
+>> Messages that all users can search and view will be posted to OpenChat. Since posted on the workflow engine's standpoint, there is no concept of followers. It is displayed in the timeline of the participants as "#p1234".
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-OpenchatPost.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-OpenchatPost.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/questetra-openchatpost/](https://support.questetra.com/ja/addons/questetra-openchatpost/)
+    - [EN : https://support.questetra.com/addons/questetra-openchatpost/](https://support.questetra.com/addons/questetra-openchatpost/)
 
 ## サービスタスク定義ファイル(XML)をパースする <small>en:Parse service task definition file (XML)</small>
 
@@ -284,22 +301,6 @@ last-modified:2018-08-29, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/)
     - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsv/](https://support.questetra.com/addons/converter-tabletoexcelcsv/)
 
-## ChatWork メッセージ追加 <small>en:ChatWork Add Message</small>
-
-last-modified:2018-08-24, engine-type : 1
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Chatwork-MessageAdd.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Chatwork-MessageAdd.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/chatwork-messageadd/](https://support.questetra.com/ja/addons/chatwork-messageadd/)
-    - [EN : https://support.questetra.com/addons/chatwork-messageadd/](https://support.questetra.com/addons/chatwork-messageadd/)
-
 ## Microsoft Teams メッセージ投稿 <small>en:Microsoft Teams Post Message</small>
 
 last-modified:2018-08-24, engine-type : 1
@@ -315,6 +316,22 @@ last-modified:2018-08-24, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/microsoftteams-messagepost/](https://support.questetra.com/ja/addons/microsoftteams-messagepost/)
     - [EN : https://support.questetra.com/addons/microsoftteams-messagepost/](https://support.questetra.com/addons/microsoftteams-messagepost/)
+
+## ChatWork メッセージ追加 <small>en:ChatWork Add Message</small>
+
+last-modified:2018-08-24, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Chatwork-MessageAdd.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Chatwork-MessageAdd.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/chatwork-messageadd/](https://support.questetra.com/ja/addons/chatwork-messageadd/)
+    - [EN : https://support.questetra.com/addons/chatwork-messageadd/](https://support.questetra.com/addons/chatwork-messageadd/)
 
 ## Zendesk Support チケット更新 <small>en:Zendesk Support Update Ticket</small>
 
@@ -533,22 +550,6 @@ last-modified:2018-04-20, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/line-pushnotify/](https://support.questetra.com/ja/addons/line-pushnotify/)
     - [EN : https://support.questetra.com/addons/line-pushnotify/](https://support.questetra.com/addons/line-pushnotify/)
 
-## PayPal 請求書 生成 (JPY) <small>en:PayPal Invoicing Create (JPY)</small>
-
-last-modified:2018-01-29, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Paypal-createJpy.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Paypal-createJpy.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/paypal-createjpy/](https://support.questetra.com/ja/addons/paypal-createjpy/)
-    - [EN : https://support.questetra.com/addons/paypal-createjpy/](https://support.questetra.com/addons/paypal-createjpy/)
-
 ## PayPal 請求書 生成 (USD) <small>en:PayPal Invoicing Create (USD)</small>
 
 last-modified:2018-01-29, engine-type : <font color="Red">undefined</font>
@@ -564,6 +565,22 @@ last-modified:2018-01-29, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/services/paypal-createusd/](https://support.questetra.com/ja/addons/services/paypal-createusd/)
     - [EN : https://support.questetra.com/addons/services/paypal-createusd/](https://support.questetra.com/addons/services/paypal-createusd/)
+
+## PayPal 請求書 生成 (JPY) <small>en:PayPal Invoicing Create (JPY)</small>
+
+last-modified:2018-01-29, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Paypal-createJpy.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Paypal-createJpy.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/paypal-createjpy/](https://support.questetra.com/ja/addons/paypal-createjpy/)
+    - [EN : https://support.questetra.com/addons/paypal-createjpy/](https://support.questetra.com/addons/paypal-createjpy/)
 
 ## Deleting File on Google Drive
 
@@ -597,26 +614,6 @@ last-modified:2017-12-14, engine-type : <font color="Red">undefined</font>
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
 
-## Questetra ロールメンバー削除 <small>en:Questetra Role Delete Membership</small>
-
-last-modified:2017-12-11, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> JA : <font color="Red">なし</font>
->> System Administrator Authority and User Manager Authority required
-1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
-2. Config [OAuth 2.0 Setting]
-
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipDel.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
-    - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
-
 ## Questetra ロールメンバー追加 <small>en:Questetra Role Add Membership</small>
 
 last-modified:2017-12-11, engine-type : <font color="Red">undefined</font>
@@ -637,9 +634,9 @@ last-modified:2017-12-11, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
 
-## Questetra 組織メンバー追加 <small>en:Questetra Org Add Membership</small>
+## Questetra ロールメンバー削除 <small>en:Questetra Role Delete Membership</small>
 
-last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
+last-modified:2017-12-11, engine-type : <font color="Red">undefined</font>
 
 ### Summary
 
@@ -651,11 +648,11 @@ last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipAdd.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-membershipAdd.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipDel.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/questetra-membershipadd/](https://support.questetra.com/ja/addons/questetra-membershipadd/)
-    - [EN : https://support.questetra.com/addons/questetra-membershipadd/](https://support.questetra.com/addons/questetra-membershipadd/)
+    - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
+    - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
 
 ## Questetra 組織メンバー削除 <small>en:Questetra Org Delete Membership</small>
 
@@ -676,6 +673,26 @@ last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/questetra-membershipdelete/](https://support.questetra.com/ja/addons/questetra-membershipdelete/)
     - [EN : https://support.questetra.com/addons/questetra-membershipdelete/](https://support.questetra.com/addons/questetra-membershipdelete/)
+
+## Questetra 組織メンバー追加 <small>en:Questetra Org Add Membership</small>
+
+last-modified:2017-12-04, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> JA : <font color="Red">なし</font>
+>> System Administrator Authority and User Manager Authority required
+1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
+2. Config [OAuth 2.0 Setting]
+
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipAdd.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-membershipAdd.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/questetra-membershipadd/](https://support.questetra.com/ja/addons/questetra-membershipadd/)
+    - [EN : https://support.questetra.com/addons/questetra-membershipadd/](https://support.questetra.com/addons/questetra-membershipadd/)
 
 ## Google Drive アップロード <small>en:Google Drive Simple Uploads</small>
 
@@ -794,22 +811,6 @@ last-modified:2017-10-25, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/services/backlog-issueadd/](https://support.questetra.com/ja/addons/services/backlog-issueadd/)
     - [EN : https://support.questetra.com/addons/services/backlog-issueadd/](https://support.questetra.com/addons/services/backlog-issueadd/)
 
-## Salesforce 注文追加 <small>en:Salesforce Order Create</small>
-
-last-modified:2017-10-20, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Salesforce-orderCreate.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Salesforce-orderCreate.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/salesforce-ordercreate/](https://support.questetra.com/ja/addons/salesforce-ordercreate/)
-    - [EN : https://support.questetra.com/addons/salesforce-ordercreate/](https://support.questetra.com/addons/salesforce-ordercreate/)
-
 ## 乱数ジェネレータ (上限変動版) <small>en:Random Number Generator (dynamic)</small>
 
 last-modified:2017-10-20, engine-type : <font color="Red">undefined</font>
@@ -828,6 +829,22 @@ last-modified:2017-10-20, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/random-number-generator-dynamic/](https://support.questetra.com/ja/addons/random-number-generator-dynamic/)
     - [EN : https://support.questetra.com/addons/random-number-generator-dynamic/](https://support.questetra.com/addons/random-number-generator-dynamic/)
+
+## Salesforce 注文追加 <small>en:Salesforce Order Create</small>
+
+last-modified:2017-10-20, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Salesforce-orderCreate.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Salesforce-orderCreate.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/salesforce-ordercreate/](https://support.questetra.com/ja/addons/salesforce-ordercreate/)
+    - [EN : https://support.questetra.com/addons/salesforce-ordercreate/](https://support.questetra.com/addons/salesforce-ordercreate/)
 
 ## 乱数ジェネレータ <small>en:Random Number Generator</small>
 
@@ -935,25 +952,6 @@ last-modified:2017-08-01, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/](https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/)
     - [EN : https://support.questetra.com/addons/services/googlecalendar-eventslist/](https://support.questetra.com/addons/services/googlecalendar-eventslist/)
 
-## Google Analytics レポート (Domain ranking) <small>en:Google Analytics reports (Domain ranking)</small>
-
-last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> JA : <font color="Red">なし</font>
->> 1. Get Secret: https://console.developers.google.com/apis/dashboard
-2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/analytics.readonly
-
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleAnalytics-reportsDomain.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsDomain.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/)
-    - [EN : https://support.questetra.com/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/addons/services/googleanalytics-reportsdomain/)
-
 ## Google Analytics レポート (PV ranking) <small>en:Google Analytics reports (PV ranking)</small>
 
 last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
@@ -991,6 +989,25 @@ last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/googleanalytics-reportsref/](https://support.questetra.com/ja/addons/googleanalytics-reportsref/)
     - [EN : https://support.questetra.com/addons/googleanalytics-reportsref/](https://support.questetra.com/addons/googleanalytics-reportsref/)
+
+## Google Analytics レポート (Domain ranking) <small>en:Google Analytics reports (Domain ranking)</small>
+
+last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> JA : <font color="Red">なし</font>
+>> 1. Get Secret: https://console.developers.google.com/apis/dashboard
+2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/analytics.readonly
+
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleAnalytics-reportsDomain.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsDomain.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/)
+    - [EN : https://support.questetra.com/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/addons/services/googleanalytics-reportsdomain/)
 
 ## 指定行抽出 <small>en:Specific Line Reader</small>
 
@@ -1207,11 +1224,11 @@ last-modified:2016-11-07, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleCloudPrint-print.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleCloudPrint-print.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleCloudPrint-printSingle.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleCloudPrint-printSingle.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googlecloudprint-print/](https://support.questetra.com/ja/addons/googlecloudprint-print/)
-    - [EN : https://support.questetra.com/addons/googlecloudprint-print/](https://support.questetra.com/addons/googlecloudprint-print/)
+    - [JA : https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/](https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/)
+    - [EN : https://support.questetra.com/addons/services/googlecloudprint-printsingle/](https://support.questetra.com/addons/services/googlecloudprint-printsingle/)
 
 ## Google Cloud Print ジョブ送信 <small>en:Submit Print Job via GCP Service</small>
 
@@ -1223,11 +1240,11 @@ last-modified:2016-11-07, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleCloudPrint-printSingle.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleCloudPrint-printSingle.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleCloudPrint-print.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleCloudPrint-print.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/](https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/)
-    - [EN : https://support.questetra.com/addons/services/googlecloudprint-printsingle/](https://support.questetra.com/addons/services/googlecloudprint-printsingle/)
+    - [JA : https://support.questetra.com/ja/addons/googlecloudprint-print/](https://support.questetra.com/ja/addons/googlecloudprint-print/)
+    - [EN : https://support.questetra.com/addons/googlecloudprint-print/](https://support.questetra.com/addons/googlecloudprint-print/)
 
 ## 法人番号 API 企業情報の取得 <small>en:Get Info via Corporate Number API</small>
 
@@ -1303,11 +1320,11 @@ last-modified:2016-10-06, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Stripe-cardRegistrationMmyy.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Stripe-cardRegistrationMmyy.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Stripe-cardRegistration.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Stripe-cardRegistration.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/stripe-cardregistrationmmyy/](https://support.questetra.com/ja/addons/stripe-cardregistrationmmyy/)
-    - [EN : https://support.questetra.com/addons/stripe-cardregistrationmmyy/](https://support.questetra.com/addons/stripe-cardregistrationmmyy/)
+    - [JA : https://support.questetra.com/ja/addons/stripe-cardregistration/](https://support.questetra.com/ja/addons/stripe-cardregistration/)
+    - [EN : https://support.questetra.com/addons/stripe-cardregistration/](https://support.questetra.com/addons/stripe-cardregistration/)
 
 ## Stripe カード情報登録 <small>en:Card Info to Stripe</small>
 
@@ -1319,11 +1336,11 @@ last-modified:2016-10-06, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Stripe-cardRegistration.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Stripe-cardRegistration.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Stripe-cardRegistrationMmyy.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Stripe-cardRegistrationMmyy.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/stripe-cardregistration/](https://support.questetra.com/ja/addons/stripe-cardregistration/)
-    - [EN : https://support.questetra.com/addons/stripe-cardregistration/](https://support.questetra.com/addons/stripe-cardregistration/)
+    - [JA : https://support.questetra.com/ja/addons/stripe-cardregistrationmmyy/](https://support.questetra.com/ja/addons/stripe-cardregistrationmmyy/)
+    - [EN : https://support.questetra.com/addons/stripe-cardregistrationmmyy/](https://support.questetra.com/addons/stripe-cardregistrationmmyy/)
 
 ## Dropbox アップロード <small>en:Upload to Dropbox</small>
 
@@ -1399,11 +1416,11 @@ last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbersCom.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbers.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbers.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/)
-    - [EN : https://support.questetra.com/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/addons/services/googlesheets-sumnumberscom/)
+    - [JA : https://support.questetra.com/ja/addons/googlesheets-sumnumbers/](https://support.questetra.com/ja/addons/googlesheets-sumnumbers/)
+    - [EN : https://support.questetra.com/addons/googlesheets-sumnumbers/](https://support.questetra.com/addons/googlesheets-sumnumbers/)
 
 ## Google スプレッドシートのセル合計 <small>en:Sum of cells in a Google Spreadsheet</small>
 
@@ -1415,11 +1432,11 @@ last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbers.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbers.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbersCom.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googlesheets-sumnumbers/](https://support.questetra.com/ja/addons/googlesheets-sumnumbers/)
-    - [EN : https://support.questetra.com/addons/googlesheets-sumnumbers/](https://support.questetra.com/addons/googlesheets-sumnumbers/)
+    - [JA : https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/)
+    - [EN : https://support.questetra.com/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/addons/services/googlesheets-sumnumberscom/)
 
 ## パスワード・ジェネレータ <small>en:Random Password Generator</small>
 
@@ -1453,7 +1470,7 @@ last-modified:2016-09-09, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/converter-datetojpera/](https://support.questetra.com/ja/addons/converter-datetojpera/)
     - [EN : https://support.questetra.com/addons/converter-datetojpera/](https://support.questetra.com/addons/converter-datetojpera/)
 
-## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
+## Slack 投稿 (定型文) <small>en:Post to Slack (Fixed phrase)</small>
 
 last-modified:2016-08-31, engine-type : <font color="Red">undefined</font>
 
@@ -1463,11 +1480,11 @@ last-modified:2016-08-31, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/OpenChat-PostTextData.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Slack-postFixedPhrase.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Slack-postFixedPhrase.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/openchat-posttextdata/](https://support.questetra.com/ja/addons/openchat-posttextdata/)
-    - [EN : https://support.questetra.com/addons/openchat-posttextdata/](https://support.questetra.com/addons/openchat-posttextdata/)
+    - [JA : https://support.questetra.com/ja/addons/slack-postfixedphrase/](https://support.questetra.com/ja/addons/slack-postfixedphrase/)
+    - [EN : https://support.questetra.com/addons/slack-postfixedphrase/](https://support.questetra.com/addons/slack-postfixedphrase/)
 
 ## ファイル名ジェネレータ <small>en:File Name Generator</small>
 
@@ -1485,7 +1502,7 @@ last-modified:2016-08-31, engine-type : <font color="Red">undefined</font>
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
 
-## Slack 投稿 (定型文) <small>en:Post to Slack (Fixed phrase)</small>
+## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
 
 last-modified:2016-08-31, engine-type : <font color="Red">undefined</font>
 
@@ -1495,11 +1512,11 @@ last-modified:2016-08-31, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Slack-postFixedPhrase.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Slack-postFixedPhrase.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/OpenChat-PostTextData.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/slack-postfixedphrase/](https://support.questetra.com/ja/addons/slack-postfixedphrase/)
-    - [EN : https://support.questetra.com/addons/slack-postfixedphrase/](https://support.questetra.com/addons/slack-postfixedphrase/)
+    - [JA : https://support.questetra.com/ja/addons/openchat-posttextdata/](https://support.questetra.com/ja/addons/openchat-posttextdata/)
+    - [EN : https://support.questetra.com/addons/openchat-posttextdata/](https://support.questetra.com/addons/openchat-posttextdata/)
 
 ## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
 
@@ -1517,22 +1534,6 @@ last-modified:2016-08-30, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/openchat-post/](https://support.questetra.com/ja/addons/openchat-post/)
     - [EN : https://support.questetra.com/addons/openchat-post/](https://support.questetra.com/addons/openchat-post/)
 
-## 文字数カウンター <small>en:Character (Letter) Counter</small>
-
-last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Character-Counter.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Character-Counter.xml)
-- ヘルプページURL
-    - JA : <font color="Red">なし</font>
-    - EN : <font color="Red">なし</font>
-
 ## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
 
 last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
@@ -1549,7 +1550,7 @@ last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/openchat-postjointextdata/](https://support.questetra.com/ja/addons/openchat-postjointextdata/)
     - [EN : https://support.questetra.com/addons/openchat-postjointextdata/](https://support.questetra.com/addons/openchat-postjointextdata/)
 
-## Slack 投稿 <small>en:Post to Slack</small>
+## 文字数カウンター <small>en:Character (Letter) Counter</small>
 
 last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
 
@@ -1559,11 +1560,11 @@ last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Slack-post.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Slack-post.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Character-Counter.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Character-Counter.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/slack-post/](https://support.questetra.com/ja/addons/slack-post/)
-    - [EN : https://support.questetra.com/addons/slack-post/](https://support.questetra.com/addons/slack-post/)
+    - JA : <font color="Red">なし</font>
+    - EN : <font color="Red">なし</font>
 
 ## コンバータ (Table to TSV) <small>en:Converter (Table to TSV)</small>
 
@@ -1581,9 +1582,9 @@ last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/converter-tabletotsv/](https://support.questetra.com/ja/addons/converter-tabletotsv/)
     - [EN : https://support.questetra.com/addons/converter-tabletotsv/](https://support.questetra.com/addons/converter-tabletotsv/)
 
-## Hash Calculator (SHA256)
+## Slack 投稿 <small>en:Post to Slack</small>
 
-last-modified:2016-08-22, engine-type : <font color="Red">undefined</font>
+last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
 
 ### Summary
 
@@ -1591,11 +1592,11 @@ last-modified:2016-08-22, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Hash-CalculateSha256.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Hash-CalculateSha256.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Slack-post.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Slack-post.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/hash-calculatesha256/](https://support.questetra.com/ja/addons/hash-calculatesha256/)
-    - [EN : https://support.questetra.com/addons/hash-calculatesha256/](https://support.questetra.com/addons/hash-calculatesha256/)
+    - [JA : https://support.questetra.com/ja/addons/slack-post/](https://support.questetra.com/ja/addons/slack-post/)
+    - [EN : https://support.questetra.com/addons/slack-post/](https://support.questetra.com/addons/slack-post/)
 
 ## Hash Calculator (MD5) <small>en:Hash Calculator (MD5)</small>
 
@@ -1613,6 +1614,22 @@ last-modified:2016-08-22, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/hash-calculatemd5/](https://support.questetra.com/ja/addons/hash-calculatemd5/)
     - [EN : https://support.questetra.com/addons/hash-calculatemd5/](https://support.questetra.com/addons/hash-calculatemd5/)
 
+## Hash Calculator (SHA256)
+
+last-modified:2016-08-22, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Hash-CalculateSha256.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Hash-CalculateSha256.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/hash-calculatesha256/](https://support.questetra.com/ja/addons/hash-calculatesha256/)
+    - [EN : https://support.questetra.com/addons/hash-calculatesha256/](https://support.questetra.com/addons/hash-calculatesha256/)
+
 ## データ複製 (テーブル) <small>en:Data Duplicator (Table)</small>
 
 last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
@@ -1625,6 +1642,22 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 - [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Table-DataDuplicator.xml)
 - [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Table-DataDuplicator.xml)
+- ヘルプページURL
+    - JA : <font color="Red">なし</font>
+    - EN : <font color="Red">なし</font>
+
+## 振替伝票の生成 <small>en:Generate Transfer Slips</small>
+
+last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Generate-TransferSlips.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Generate-TransferSlips.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
@@ -1662,7 +1695,7 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
 
-## 日数計算 <small>en:Days Calculator</small>
+## データ複製 (Files) <small>en:Data Duplicator (Files)</small>
 
 last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
 
@@ -1672,24 +1705,8 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Days-Calculator.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Days-Calculator.xml)
-- ヘルプページURL
-    - JA : <font color="Red">なし</font>
-    - EN : <font color="Red">なし</font>
-
-## Excel-CSV のメール送付 (Table) <small>en:Email a Excel-CSV (Table)</small>
-
-last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Email-SendExcelCsv.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Email-SendExcelCsv.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/File-Duplicator.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/File-Duplicator.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
@@ -1710,7 +1727,7 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
 
-## データ複製 (Files) <small>en:Data Duplicator (Files)</small>
+## Excel-CSV のメール送付 (Table) <small>en:Email a Excel-CSV (Table)</small>
 
 last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
 
@@ -1720,13 +1737,13 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/File-Duplicator.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/File-Duplicator.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Email-SendExcelCsv.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Email-SendExcelCsv.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
 
-## 振替伝票の生成 <small>en:Generate Transfer Slips</small>
+## 日数計算 <small>en:Days Calculator</small>
 
 last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
 
@@ -1736,8 +1753,8 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Generate-TransferSlips.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Generate-TransferSlips.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Days-Calculator.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Days-Calculator.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>

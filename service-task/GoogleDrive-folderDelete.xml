@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<last-modified>2018-10-24</last-modified>
+<engine-type>1</engine-type>
+<label>Deleting File on Google Drive</label>
+<label locale="ja">Googleドライブ上のファイルを削除する</label>
+<summary>Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.</summary>
+<summary locale="ja">Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。</summary>
+<help-page-url>https://support.questetra.com/addons/googledrive-folderdelete/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googledrive-folderdelete/</help-page-url>
+<configs>
+  <config name="UserID" form-type="QUSER" required="true">
+    <label>C1.User who connect to Google Drive</label>
+    <label locale="ja">C1. Google Drive に接続するユーザ</label>
+  </config>
+  <config name="FileIdsItem" form-type="SELECT" select-data-type="STRING" required="true">
+    <label>I1.Data Item with File/ Folder IDs to delete</label>
+    <label locale="ja">I1. 削除するファイル・フォルダ ID が保存されている文字型データ項目</label>
+  </config>
+</configs>
+
+<script><![CDATA[
+main();
+function main(){
+  var fileIds = engine.findDataByNumber(configs.get("FileIdsItem"));
+  if (fileIds == null) {
+    throw "IDs aren't set.";
+  }
+  
+  var userId = configs.get("UserID");
+  var quser = quserDao.findById(parseInt(userId));
+  if (quser == null) {
+    throw "User not found:" + userId;
+  }
+  var token;
+  try{
+    token = httpClient.getGoogleOAuth2Token(quser, "Drive");
+  }catch(e){
+    throw "This User isn't connected with Google Drive."
+  }
+  fileIds += '';
+  fileIds.split("\n").forEach(function(fileId) {
+    deleteFile(token, fileId);
+  });
+}
+function deleteFile(token, fileId) {
+  var url = 'https://www.googleapis.com/drive/v3/files/' + fileId;
+  var response = httpClient.begin()
+    .bearer(token)
+    .queryParam("supportsTeamDrives","true")
+    .delete(url);
+  var status = response.getStatusCode();
+  if (status >= 300) {
+    var error = "Failed to delete:" + fileId + "\n" + status + "\n" + response.getResponseAsString();
+    throw error;
+  }
+}
+
+]]></script>
+  
+  <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAECElEQVRYR8VXbYhUZRR+zr0z986d
+VttFF6NCWyJQI1wTIhSZzR/rgJFJJhKk6w//BOFKgXeIyj5wViJ2JPoV0UZBwRK5kjSzP3TECPsh
+rYiyGKRGrabFzrrivfN1T7x3nJ3Z+zV32rD3zx3mfc85zznvcz5ewv+8qB37/YeLzxNXEwTqZXCn
++Ap5Bk8QqCC+gJzP6epYWL0tAfQNc2esZO5j5kECdYZRzOACEWVMJXYkv58KQTKBAJJpY4CJh8Ma
+dhoSQJjkPeMH1KN+IHwBbB66kyHQvjAetzrD4ExOj+/3OucJIJk2RkDY3Upxm/sjWV3b45RxAfgv
+Pfe4kiM5PT7Y/P88AOLOQfgsyLPtT0WQWC1DdkAvV4HjP1cwfr4aGBiLpG3NnJhTI9iuFo3LQYRL
+rJKxa2MEmkLous9t59J1hv5VEUbJH4MgZlHVeurZMQcgmTYOgvB2EPz0TgW9KyRcKzCWLiJE5fmn
+RRRGz1TwxQ+VYHow3smmtIPi0ByAzUNGgYD7/SR3PB3BSxsiUCOAWQZmDUb3YjeHr88wDh8rYXKK
+fUGIKOT0eNccAFHhJLa+9ZN4qIvwxjYFPd0Ng3/NAnEViCvzpSwGTlyo4sPj5VBcsDW2Yv7eTRE8
+ty6CiNTQWbGAm7cYD4iC7DBVuAN8lC3hx1+soCjYGWHLJtNGHoSE1+k1yyW8/qyCpYvcu5NTFroX
+S1jS4d6buGoh9XUgG09lU1pfHcAVEFZ4AUhtjWLjStnl5awJfDxexuMPS9iyVobkCIPgycipMsbO
+eqelaFw5Pb62BmDI8GRM/xMy9m6KoiPmvuf8xSo++K6M5UsIb72gQPDEuX69wTh0tIQ/pr0JmdU1
+8gWgKcB7Lyq2h87lZHpzhjSfFTw5draCT054p2UDQNpwXUE7StsBWwfI4HM5Pd7rS8LhlxWsfNDt
+/dQ047YJVxGSJUCNArWYNlbVAr6fqGL0J0cUGA0SeqXh1nUyBhJRxKINZUEFyC/fxP2/+00Jv/09
+nwcMbqShXyF6f4eCJ3skOwOE+LXpWvVzlmA/46UKbM+/9CjN9aYUWIrXPybh1aSCzjjssAtSid9h
+14XfLbw5WnI1JwZmcrpmj3ctm9FrW6J4ZrWMP2dqVc+Z735gbheBT0+WkT3nUQe8mlGtHZtXnA1J
+5Pkr/VE8ukxChxrOd3FdpyerSI+5+4HwvqjGHnG147slueVAEg6C/ynfgaQu0qoxLQhAU+jreu7d
+UMr4PJvSBpwO3JOxHB6eB0agvll7ilkjQZNS0JUIwjFJA//qYVJXbD/NTHOQCWJ48B3ZmoEIw8TI
+mLFYZkFPM6d3dx+nfcTUy2Q/TteIM6KxEFOBiSeY5HyQx6E5sCC2tyH8Dy7zwTCeL47AAAAAAElF
+TkSuQmCC</icon>
+</service-task-definition>
