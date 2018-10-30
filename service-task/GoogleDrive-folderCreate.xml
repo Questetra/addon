@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-06-25</last-modified>
+<last-modified>2018-10-12</last-modified>
 <engine-type>1</engine-type>
 <label>Creating Folder on Google Drive</label>
 <label locale="ja">Google Drive フォルダ生成</label>
@@ -9,9 +9,9 @@
 <help-page-url>https://support.questetra.com/addons/googledrive-foldercreate/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/googledrive-foldercreate/</help-page-url>
 <configs>
-  <config name="Email" required="true">
-    <label>C1. User's email who connect to Google Drive</label>
-    <label locale="ja">C1. Google Drive に接続するユーザのメールアドレス</label>
+  <config name="UserID" required="true" form-type="QUSER">
+    <label>C1.User who connect to Google Drive</label>
+    <label locale="ja">C1. Google Drive に接続するユーザ</label>
   </config>
   <config name="ParentFolderId" required="true" el-enabled="true">
     <label>I1. Parent Folder ID to create Folder</label>
@@ -43,15 +43,19 @@ function main(){
     throw "Folder Name is blank";
   }
   
-  var email = configs.get("Email");
-  var quser = quserDao.findByEmail(email);
+  var userId = configs.get("UserID");
+  var quser = quserDao.findById(parseInt(userId));
   if (quser == null) {
-    throw "User not found:" + email;
+    throw "User not found:" + userId;
   }
   
   // get OAuth token
-  var token = httpClient.getGoogleOAuth2Token(quser, "Drive");
-  
+  var token;
+  try{
+    token = httpClient.getGoogleOAuth2Token(quser, "Drive");
+  }catch(e){
+    throw "This User isn't connected with Google Drive."
+  }
   var json = createFolder(token, parentFolderId, folderName);
 
   setData("FolderIdItem", json, "id");
