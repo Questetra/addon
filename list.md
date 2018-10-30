@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト A 2018-10-30 10:29:25
+# サービスタスク定義ファイルリスト A 2018-10-30 11:10:53
 
 |label|last modified|src|dl|help|help|
 |:---|:---|:---|:---|:---|:---|
@@ -86,7 +86,7 @@
 |Google Sheet 2列データの一括取得|2016-09-21|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-getIdsLabels.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleSheets-getIdsLabels.xml)|[Ja](https://support.questetra.com/ja/addons/googlesheets-getidslabels/)|[En](https://support.questetra.com/addons/googlesheets-getidslabels/)|
 |Google Sheets 行追加 (Table)|2016-09-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-appendTable.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleSheets-appendTable.xml)|[Ja](https://support.questetra.com/addons/googlesheets-appendtable/)|[En](https://support.questetra.com/ja/addons/googlesheets-appendtable/)|
 |Google スプレッドシートのセル合計|2016-09-13|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbers.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbers.xml)|[Ja](https://support.questetra.com/ja/addons/googlesheets-sumnumbers/)|[En](https://support.questetra.com/addons/googlesheets-sumnumbers/)|
-|Google スプレッドシートのセル合計|2016-09-13|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbersCom.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml)|[Ja](https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/)|[En](https://support.questetra.com/addons/services/googlesheets-sumnumberscom/)|
+|Google スプレッドシートのセル合計(カンマ除去版)|2016-09-13|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbersCom.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml)|[Ja](https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/)|[En](https://support.questetra.com/addons/services/googlesheets-sumnumberscom/)|
 |パスワード・ジェネレータ|2016-09-09|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Generate-Password.xml)|[XML](https://questetra.github.io/addon/service-task/Generate-Password.xml)|[Ja](undefined)|[En](undefined)|
 |コンバータ (Date to 和暦テキスト)|2016-09-09|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-DateToJpEra.xml)|[XML](https://questetra.github.io/addon/service-task/Converter-DateToJpEra.xml)|[Ja](https://support.questetra.com/ja/addons/converter-datetojpera/)|[En](https://support.questetra.com/addons/converter-datetojpera/)|
 |OpenChat 投稿 (Questetra 内の社内SNS機能)|2016-08-31|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/OpenChat-PostTextData.xml)|[XML](https://questetra.github.io/addon/service-task/OpenChat-PostTextData.xml)|[Ja](https://support.questetra.com/ja/addons/openchat-posttextdata/)|[En](https://support.questetra.com/addons/openchat-posttextdata/)|
