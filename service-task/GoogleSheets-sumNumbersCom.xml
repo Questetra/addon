@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
 <label>Sum of cells in a Google Spreadsheet</label>
-<label locale="ja">Google スプレッドシートのセル合計(カンマ除去版)</label>
+<label locale="ja">Google Sheets のセル合計（カンマ除去版）</label>
 
 <last-modified>2016-09-13</last-modified>
 <help-page-url>https://support.questetra.com/addons/services/googlesheets-sumnumberscom/</help-page-url>

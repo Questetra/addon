@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-30 11:10:53
+# サービスタスク定義ファイルリスト B 2018-10-30 11:19:51
 
 ## BoxのWebhookのJSONを解析 <small>en:Parse Box Webhook JSON</small>
 
@@ -1422,7 +1422,7 @@ last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/googlesheets-sumnumbers/](https://support.questetra.com/ja/addons/googlesheets-sumnumbers/)
     - [EN : https://support.questetra.com/addons/googlesheets-sumnumbers/](https://support.questetra.com/addons/googlesheets-sumnumbers/)
 
-## Google スプレッドシートのセル合計(カンマ除去版) <small>en:Sum of cells in a Google Spreadsheet</small>
+## Google Sheets のセル合計（カンマ除去版） <small>en:Sum of cells in a Google Spreadsheet</small>
 
 last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
 
