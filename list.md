@@ -1,8 +1,8 @@
-# サービスタスク定義ファイルリスト A 2018-10-25 11:54:50
+# サービスタスク定義ファイルリスト A 2018-10-30 10:27:43
 
 |label|last modified|src|dl|help|help|
 |:---|:---|:---|:---|:---|:---|
-|BoxのWebhookのJSONを解析|2018-10-24|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-json-parse.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-json-parse.xml)|[Ja](https://support.questetra.com/ja/addons/box-webhook-json-parse/)|[En](https://support.questetra.com/addons/box-webhook-json-parse/)|
+|BoxのWebhookのJSONを解析|2018-10-26|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-json-parse.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-json-parse.xml)|[Ja](https://support.questetra.com/ja/addons/box-webhook-json-parse/)|[En](https://support.questetra.com/addons/box-webhook-json-parse/)|
 |BoxのWebhookを作成(フォルダの監視)|2018-10-24|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)|[Ja](https://support.questetra.com/ja/addons/box-webhook-create/)|[En](https://support.questetra.com/addons/box-webhook-create/)|
 |BoxのWebhookを削除|2018-10-24|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-delete.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-delete.xml)|[Ja](https://support.questetra.com/ja/addons/box-webhook-delete/)|[En](https://support.questetra.com/addons/box-webhook-delete/)|
 |Googleドライブ上のファイルを削除する|2018-10-24|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)|[Ja](https://support.questetra.com/ja/addons/googledrive-folderdelete/)|[En](https://support.questetra.com/addons/googledrive-folderdelete/)|

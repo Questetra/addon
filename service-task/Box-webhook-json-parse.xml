@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-10-24</last-modified>
+<last-modified>2018-10-26</last-modified>
 <engine-type>1</engine-type>
 <label>Parse Box Webhook JSON</label>
 <label locale="ja">BoxのWebhookのJSONを解析</label>
@@ -26,20 +26,20 @@
     <label locale="ja">O3.トリガー(指定:単一行文字型データ)</label>
   </config>
   <config name="ObjectID" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
-    <label>O4.Target Object ID(Data Type:Single-line string)</label>
-    <label locale="ja">O4.対象となるオブジェクトのID(指定:単一行文字型データ)</label>
+    <label>O4.Target File or Folder ID(Data Type:Single-line string)</label>
+    <label locale="ja">O4.対象となるファイル・フォルダのID(指定:単一行文字型データ)</label>
   </config>
   <config name="ObjectName" form-type="SELECT" select-data-type="STRING_TEXTFIELD">
     <label>O5.Target File or Folder Name(Data Type:Single-line string)</label>
     <label locale="ja">O5.対象となるファイル・フォルダの名前(指定:単一行文字型データ)</label>
   </config>
   <config name="PathinfoID" form-type="SELECT" select-data-type="STRING_TEXTAREA">
-    <label>O6.All Parent Folders ID(Data Type:Multiple-lines string)</label>
-    <label locale="ja">O6.全ての親フォルダのID(指定:複数行文字型データ)</label>
+    <label>O6.All Upper Folders ID(Data Type:Multiple-lines string)</label>
+    <label locale="ja">O6.全ての上位フォルダのID(指定:複数行文字型データ)</label>
   </config>
   <config name="PathinfoName" form-type="SELECT" select-data-type="STRING_TEXTAREA">
-    <label>O7.All Parent Folders Name(Data Type:Multiple-lines string)</label>
-    <label locale="ja">O7.全ての親フォルダの名前(指定:複数行文字型データ)</label>
+    <label>O7.All Upper Folders Name(Data Type:Multiple-lines string)</label>
+    <label locale="ja">O7.全ての上位フォルダの名前(指定:複数行文字型データ)</label>
   </config>
 </configs>
 <script><![CDATA[
