@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
 <label>Sum of cells in a Google Spreadsheet</label>
-<label locale="ja">Google スプレッドシートのセル合計</label>
+<label locale="ja">Google Sheets のセル合計</label>
 
 <last-modified>2016-09-13</last-modified>
 <help-page-url>https://support.questetra.com/addons/googlesheets-sumnumbers/</help-page-url>
@@ -91,7 +91,7 @@ try{
 
   var response = httpClient.begin()
     .bearer(token)
-    .get( uri ); 
+    .get( uri );
   accessLog += "---GET request--- " + response.getStatusCode() + "\n";
   responseJson = response.getResponseAsString();
   if( response.getStatusCode() == 200 ){

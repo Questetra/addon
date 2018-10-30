@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-30 11:19:51
+# サービスタスク定義ファイルリスト B 2018-10-30 11:28:19
 
 ## BoxのWebhookのJSONを解析 <small>en:Parse Box Webhook JSON</small>
 
@@ -1406,7 +1406,7 @@ last-modified:2016-09-15, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/addons/googlesheets-appendtable/](https://support.questetra.com/addons/googlesheets-appendtable/)
     - [EN : https://support.questetra.com/ja/addons/googlesheets-appendtable/](https://support.questetra.com/ja/addons/googlesheets-appendtable/)
 
-## Google スプレッドシートのセル合計 <small>en:Sum of cells in a Google Spreadsheet</small>
+## Google Sheets のセル合計 <small>en:Sum of cells in a Google Spreadsheet</small>
 
 last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
 
