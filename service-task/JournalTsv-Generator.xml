@@ -10,7 +10,7 @@
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/journal-tsv-generator/</help-page-url>
 
 <engine-type>1</engine-type>
-<last-modified>2018-09-04</last-modified>
+<last-modified>2018-10-02</last-modified>
 
 
 <configs>
@@ -362,7 +362,7 @@ if(salesAmtMultiple !== 0){
       tmpArrSales[colDate]   = funcDateStr( arrSalesAmtMultipleDate[i], ymdFormat );
       tmpArrSales[colDrAmt]  = monthlySalesFollow;
       tmpArrSales[colCrAmt]  = monthlySalesFollow;
-      tmpArrSales[colSlipDescr] = slipDescr;
+      tmpArrSales[colSlipDescr] = funcMonthStr( arrSalesAmtMultipleDate[i] ) + " @ " + slipDescr;
       myTsv += tmpArrSales.join("\t");
       myTsv += "\n";
       myReceivedSales += monthlySalesFollow;

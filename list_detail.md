@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-10-30 11:28:19
+# サービスタスク定義ファイルリスト B 2018-10-31 19:03:13
 
 ## BoxのWebhookのJSONを解析 <small>en:Parse Box Webhook JSON</small>
 
@@ -152,22 +152,22 @@ last-modified:2018-10-10, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/converter-emailstr-quser/](https://support.questetra.com/ja/addons/converter-emailstr-quser/)
     - [EN : https://support.questetra.com/addons/converter-emailstr-quser/](https://support.questetra.com/addons/converter-emailstr-quser/)
 
-## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
+## 請求データから仕訳伝票TSVの生成 <small>en:Journal Slip TSV from Invoice Data</small>
 
-last-modified:2018-10-01, engine-type : 1
+last-modified:2018-10-02, engine-type : 1
 
 ### Summary
 
-> 全ユーザが検索閲覧可能なメッセージが OpenChat に投稿されます。ワークフローエンジンの立場で投稿されるためフォロワーの概念はありません。"#p1234" の書式付投稿のため案件に関与するユーザのタイムラインに表示されます。組織IDがセットされている場合には、組織メンバーのタイムラインにも表示されます。
->> Messages that all users can search and view will be posted to OpenChat. Since posted on the workflow engine's standpoint, there is no concept of followers. It is displayed in the timeline of the participants as "#p1234".
+> 売上金額・売上日・決済予定日から、売上金の振替伝票TSV（text/tab-separated-values）を生成します。一括して売上計上するケース、数か月に分けて売上分割するケース、それらが複合するケースに対応します（分割剰余は初月に加算されます）。 会計システムにインポート可能なファイルを生成させるは、下流工程に「TSV to Excel-CSV FILE」などのコンバータを配置して下さい。
+>> Generate transfer slip TSV (tab-separated-values) from sales amount, sales date, due date. The case of sales division is also supported. In order to generate a file for the accounting system, please place a converter such as "TSV to Excel-CSV FILE".
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-OpenchatPost.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-OpenchatPost.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/JournalTsv-Generator.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/JournalTsv-Generator.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/questetra-openchatpost/](https://support.questetra.com/ja/addons/questetra-openchatpost/)
-    - [EN : https://support.questetra.com/addons/questetra-openchatpost/](https://support.questetra.com/addons/questetra-openchatpost/)
+    - [JA : https://support.questetra.com/ja/addons/journal-tsv-generator/](https://support.questetra.com/ja/addons/journal-tsv-generator/)
+    - [EN : https://support.questetra.com/addons/journal-tsv-generator/](https://support.questetra.com/addons/journal-tsv-generator/)
 
 ## 差分確認 (Table and Table) <small>en:Diff (Table and Table)</small>
 
@@ -185,6 +185,23 @@ last-modified:2018-10-01, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/tables-diff/](https://support.questetra.com/ja/addons/tables-diff/)
     - [EN : https://support.questetra.com/addons/tables-diff/](https://support.questetra.com/addons/tables-diff/)
+
+## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
+
+last-modified:2018-10-01, engine-type : 1
+
+### Summary
+
+> 全ユーザが検索閲覧可能なメッセージが OpenChat に投稿されます。ワークフローエンジンの立場で投稿されるためフォロワーの概念はありません。"#p1234" の書式付投稿のため案件に関与するユーザのタイムラインに表示されます。組織IDがセットされている場合には、組織メンバーのタイムラインにも表示されます。
+>> Messages that all users can search and view will be posted to OpenChat. Since posted on the workflow engine's standpoint, there is no concept of followers. It is displayed in the timeline of the participants as "#p1234".
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-OpenchatPost.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-OpenchatPost.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/questetra-openchatpost/](https://support.questetra.com/ja/addons/questetra-openchatpost/)
+    - [EN : https://support.questetra.com/addons/questetra-openchatpost/](https://support.questetra.com/addons/questetra-openchatpost/)
 
 ## サービスタスク定義ファイル(XML)をパースする <small>en:Parse service task definition file (XML)</small>
 
@@ -236,23 +253,6 @@ last-modified:2018-09-26, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/converter-options-table/](https://support.questetra.com/ja/addons/converter-options-table/)
     - [EN : https://support.questetra.com/addons/converter-options-table/](https://support.questetra.com/addons/converter-options-table/)
-
-## 請求データから仕訳伝票TSVの生成 <small>en:Journal Slip TSV from Invoice Data</small>
-
-last-modified:2018-09-04, engine-type : 1
-
-### Summary
-
-> 売上金額・売上日・決済予定日から、売上金の振替伝票TSV（text/tab-separated-values）を生成します。一括して売上計上するケース、数か月に分けて売上分割するケース、それらが複合するケースに対応します（分割剰余は初月に加算されます）。 会計システムにインポート可能なファイルを生成させるは、下流工程に「TSV to Excel-CSV FILE」などのコンバータを配置して下さい。
->> Generate transfer slip TSV (tab-separated-values) from sales amount, sales date, due date. The case of sales division is also supported. In order to generate a file for the accounting system, please place a converter such as "TSV to Excel-CSV FILE".
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/JournalTsv-Generator.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/JournalTsv-Generator.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/journal-tsv-generator/](https://support.questetra.com/ja/addons/journal-tsv-generator/)
-    - [EN : https://support.questetra.com/addons/journal-tsv-generator/](https://support.questetra.com/addons/journal-tsv-generator/)
 
 ## Google Sheets 行追加 (TSV) <small>en:New Record to Google Sheets (TSV)</small>
 
