@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-task-definition>
+<last-modified>2018-10-19</last-modified>
+<engine-type>1</engine-type>
+<label>Creating Permissions on Google Drive</label>
+<label locale="ja">Google Drive 共有設定</label>
+<summary>Create Permissions in the specified files on Google Drive</summary>
+<summary locale="ja">Google Drive の指定ファイルを共有します</summary>
+<configs>
+  <config name="UserID" required="true" form-type="QUSER">
+    <label>C1.User who connect to Google Drive</label>
+    <label locale="ja">C1. Google Drive に接続するユーザ</label>
+  </config>
+  <config name="FileIdItem" form-type="SELECT" select-data-type="STRING" required="true">
+    <label>I1. File / Folder Ids to share</label>
+    <label locale="ja">I1.共有するファイル・フォルダのID</label>
+  </config>
+<!--
+  <config name="SharedRange" required="true">
+    <label>C1. Shared range (public or domain)</label>
+  </config>
+-->
+  <config name="AllowFileDiscovery" required="true">
+    <label>C2. Can find or not (true or false)</label>
+    <label locale="ja">C2.検索可能にするかどうか(true or false)</label>
+  </config>
+  <config name="Editable" required="true">
+    <label>C3. Can edit or not (true or false)</label>
+    <label locale="ja">C3.編集可能にするかどうか(true or false)</label>
+  </config>
+</configs>
+<help-page-url>https://support.questetra.com/addons/googledrive-permissioncreate/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/googledrive-permissioncreate/</help-page-url>
+  <script><![CDATA[
+main();
+
+function main() {
+  var fileIds = engine.findDataByNumber(configs.get("FileIdItem"));
+  if (fileIds == null) {
+    throw "ID isn't set.";
+  }
+  fileIds += "";
+
+  var userId = configs.get("UserID");
+  var quser = quserDao.findById(parseInt(userId));
+  if (quser == null) {
+    throw "User not found:" + userId;
+  }
+
+  //var sharedRange = readChoicesFromConfig("SharedRange", ["public", "domain"]);
+  var sharedRange = "public";
+  var allowFileDiscovery = readChoicesFromConfig("AllowFileDiscovery", ["true", "false"]);
+  var editable = readChoicesFromConfig("Editable", ["true", "false"]);
+
+  // get OAuth token
+  var token;
+  try{
+    token = httpClient.getGoogleOAuth2Token(quser, "Drive");
+  }catch(e){
+    throw "This User isn't connected with Google Drive."
+  }
+
+  fileIds.split("\n").forEach(function(fileId){
+    createPermission(token, fileId, sharedRange, allowFileDiscovery, editable);
+  });
+}
+
+// read config. throw error when config value is not available value.
+function readChoicesFromConfig(configName, choices) {
+  var value = configs.get(configName);
+  for (var i=0; i<choices.length; i++) {
+    if (choices[i] == value) {
+      return value;
+    }
+  }
+  throw "Config " + configName + " is invalid: " + value;
+}
+
+// create permission on Google Drive
+function createPermission(token, fileId, shareRange, allowFileDiscovery, editable) {
+  var json = {};
+  json["role"] = editable == "true" ? "writer" : "reader";
+  json["type"] = shareRange == "public" ? "anyone" : "domain";
+  json["allowFileDiscovery"] = allowFileDiscovery + '';
+
+  var url = 'https://www.googleapis.com/drive/v3/files/' + fileId + '/permissions';
+  var response = httpClient.begin()
+    .bearer(token)
+    .queryParam("supportsTeamDrives","true")
+    .body(JSON.stringify(json), "application/json; charset=UTF-8")
+    .post(url);
+  var status = response.getStatusCode();
+  if (status >= 300) {
+    var error = "Failed to create permission:" + fileId + "\n" + status + "\n" + response.getResponseAsString();
+    throw error;
+  }
+}
+  ]]></script>
+
+  <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAECElEQVRYR8VXbYhUZRR+zr0z986d
+VttFF6NCWyJQI1wTIhSZzR/rgJFJJhKk6w//BOFKgXeIyj5wViJ2JPoV0UZBwRK5kjSzP3TECPsh
+rYiyGKRGrabFzrrivfN1T7x3nJ3Z+zV32rD3zx3mfc85zznvcz5ewv+8qB37/YeLzxNXEwTqZXCn
++Ap5Bk8QqCC+gJzP6epYWL0tAfQNc2esZO5j5kECdYZRzOACEWVMJXYkv58KQTKBAJJpY4CJh8Ma
+dhoSQJjkPeMH1KN+IHwBbB66kyHQvjAetzrD4ExOj+/3OucJIJk2RkDY3Upxm/sjWV3b45RxAfgv
+Pfe4kiM5PT7Y/P88AOLOQfgsyLPtT0WQWC1DdkAvV4HjP1cwfr4aGBiLpG3NnJhTI9iuFo3LQYRL
+rJKxa2MEmkLous9t59J1hv5VEUbJH4MgZlHVeurZMQcgmTYOgvB2EPz0TgW9KyRcKzCWLiJE5fmn
+RRRGz1TwxQ+VYHow3smmtIPi0ByAzUNGgYD7/SR3PB3BSxsiUCOAWQZmDUb3YjeHr88wDh8rYXKK
+fUGIKOT0eNccAFHhJLa+9ZN4qIvwxjYFPd0Ng3/NAnEViCvzpSwGTlyo4sPj5VBcsDW2Yv7eTRE8
+ty6CiNTQWbGAm7cYD4iC7DBVuAN8lC3hx1+soCjYGWHLJtNGHoSE1+k1yyW8/qyCpYvcu5NTFroX
+S1jS4d6buGoh9XUgG09lU1pfHcAVEFZ4AUhtjWLjStnl5awJfDxexuMPS9iyVobkCIPgycipMsbO
+eqelaFw5Pb62BmDI8GRM/xMy9m6KoiPmvuf8xSo++K6M5UsIb72gQPDEuX69wTh0tIQ/pr0JmdU1
+8gWgKcB7Lyq2h87lZHpzhjSfFTw5draCT054p2UDQNpwXUE7StsBWwfI4HM5Pd7rS8LhlxWsfNDt
+/dQ047YJVxGSJUCNArWYNlbVAr6fqGL0J0cUGA0SeqXh1nUyBhJRxKINZUEFyC/fxP2/+00Jv/09
+nwcMbqShXyF6f4eCJ3skOwOE+LXpWvVzlmA/46UKbM+/9CjN9aYUWIrXPybh1aSCzjjssAtSid9h
+14XfLbw5WnI1JwZmcrpmj3ctm9FrW6J4ZrWMP2dqVc+Z735gbheBT0+WkT3nUQe8mlGtHZtXnA1J
+5Pkr/VE8ukxChxrOd3FdpyerSI+5+4HwvqjGHnG147slueVAEg6C/ynfgaQu0qoxLQhAU+jreu7d
+UMr4PJvSBpwO3JOxHB6eB0agvll7ilkjQZNS0JUIwjFJA//qYVJXbD/NTHOQCWJ48B3ZmoEIw8TI
+mLFYZkFPM6d3dx+nfcTUy2Q/TteIM6KxEFOBiSeY5HyQx6E5sCC2tyH8Dy7zwTCeL47AAAAAAElF
+TkSuQmCC</icon>
+</service-task-definition>
