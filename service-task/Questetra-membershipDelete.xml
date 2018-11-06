@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
-<label>Questetra Org Delete Membership</label>
+<label>Questetra Org Membership Delete</label>
 <label locale="ja">Questetra 組織メンバー削除</label>
 
 <summary>System Administrator Authority and User Manager Authority required
@@ -8,7 +8,7 @@
 2. Config [OAuth 2.0 Setting]
 </summary>
 
-<last-modified>2017-12-04</last-modified>
+<last-modified>2018-11-06</last-modified>
 <help-page-url>https://support.questetra.com/addons/questetra-membershipdelete/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/questetra-membershipdelete/</help-page-url>
 
@@ -68,7 +68,7 @@ if( engine.findDataDefinitionByNumber( dataIdB ).matchDataType("SELECT_CHECKBOX"
 var userId = "";
 if( engine.findDataDefinitionByNumber( dataIdC ).matchDataType("QUSER") ){
   userId = engine.findDataByNumber( dataIdC ).getId() + "";
-  // com.questetra.bpms.core.event.scripttask.QuserView	
+  // com.questetra.bpms.core.event.scripttask.QuserView
 }else{
   var userEmail = engine.findDataByNumber( dataIdC ) + "";
   userId = quserDao.findByEmail( userEmail ).getId() + "";

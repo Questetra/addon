@@ -1,5 +1,4 @@
 var stxParser = require("service_task_xml_parser");
-
 function escapeHtml(unsafe) {
     return unsafe
         .replace(/&/g, "&amp;")
@@ -118,7 +117,7 @@ module.exports = function(grunt) {
         // ================================
         let listMdMin = "# サービスタスク定義ファイルリスト A " +grunt.template.today("yyyy-mm-dd HH:MM:ss") + "\n\n"
         let listMd = "# サービスタスク定義ファイルリスト B " +grunt.template.today("yyyy-mm-dd HH:MM:ss") + "\n\n"
-        
+
         lists.sort(function(a, b){
             let aLM = 0;
             let bLM = 0;
@@ -197,7 +196,7 @@ module.exports = function(grunt) {
                 listMd += '> <font color="Red">なし</font>\n'
             }
             listMd += '\n'
-            
+
             listMd += "### URLs\n\n"
             listMd += '- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/' + lists[i].filename + ')\n'
             listMd += '- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/' + lists[i].filename + ')\n'
