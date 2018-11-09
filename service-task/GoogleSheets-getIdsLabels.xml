@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
 <label>Batch to Get Two Column Values from Google Sheet</label>
-<label locale="ja">Google Sheet 2列データの一括取得</label>
+<label locale="ja">Google Sheets 2列データの一括取得</label>
 
-<last-modified>2016-09-21</last-modified>
+<last-modified>2018-11-09</last-modified>
 <help-page-url>https://support.questetra.com/addons/googlesheets-getidslabels/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/googlesheets-getidslabels/</help-page-url>
 
@@ -110,7 +110,7 @@ try{
     .queryParam( "ranges", sheet + "!" + rangeL )
     .queryParam( "valueRenderOption", "UNFORMATTED_VALUE" )
     .queryParam( "majorDimension", "COLUMNS" )
-    .get( uri ); 
+    .get( uri );
   accessLog += "---GET request--- " + response.getStatusCode() + "\n";
   responseJson = response.getResponseAsString();
   if( response.getStatusCode() == 200 ){
