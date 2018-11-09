@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
 <label>Google Spreadsheets value update</label>
-<label locale="ja">Google Spreadsheets セル値の更新</label>
-<last-modified>2017-08-28</last-modified>
+<label locale="ja">Google Sheets セル値の更新</label>
+<last-modified>2018-11-09</last-modified>
 
 <summary>1. Get Secret: https://console.developers.google.com/apis/dashboard
 2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/spreadsheets
@@ -47,7 +47,7 @@
 var oauth2  = configs.get( "conf_OAuth2" ) + "";
 // Convert from 'java.lang.String' to 'JavaScript string' by '+""'
 var dataIdB = configs.get( "conf_DataIdB" ) + ""; // Data Identification Number (e.g. "9")
-var dataIdC = configs.get( "conf_DataIdC" ) + ""; 
+var dataIdC = configs.get( "conf_DataIdC" ) + "";
 var dataIdD = configs.get( "conf_DataIdD" ) + "";
 var dataIdE = configs.get( "conf_DataIdE" ) + "";
 var dataIdX = configs.get( "conf_DataIdX" ) + "";
