@@ -3,6 +3,7 @@
 <label>Data Duplicator (Table)</label>
 <label locale="ja">データ複製 (テーブル)</label>
 
+<summary locale="ja">最新版をご利用ください（https://support.questetra.com/addons/duplicator-table/）</summary>
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
@@ -14,7 +15,6 @@
     <label locale="ja">B: テーブル型データを選択してください（更新）</label>
   </config>
 </configs>
-
 
 <script><![CDATA[
 //// == 自動工程コンフィグの参照 / Config Retrieving ==

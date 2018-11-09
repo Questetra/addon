@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Data Duplicator (Table)</label>
+<label locale="ja">データ複製 (テーブル)</label>
+
+<help-page-url>https://support.questetra.com/addons/duplicator-table/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/duplicator-table/</help-page-url>
+
+<summary>Duplicates all data stored in table type data items to other table type data.</summary>
+<summary locale="ja">テーブル型データ項目に格納されている全データを、他のテーブル型データに複製します。</summary>
+
+<last-modified>2018-11-01</last-modified>
+
+<configs>
+  <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>A: Select TABLE DATA</label>
+    <label locale="ja">A: テーブル型データを選択してください</label>
+  </config>
+  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="LIST">
+    <label>B: Select TABLE DATA (update)</label>
+    <label locale="ja">B: テーブル型データを選択してください（更新）</label>
+  </config>
+</configs>
+
+<engine-type>1</engine-type>
+
+<script><![CDATA[
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdA = configs.get( "conf_DataIdA" ) + "";
+const dataIdB = configs.get( "conf_DataIdB" ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+const tableOriginal = engine.findDataByNumber( dataIdA );
+// com.questetra.bpms.core.model.formdata.ListArray
+
+//// == Calculating / 演算 ==
+//
+
+//// == Data Updating / ワークフローデータへの代入 ==
+engine.setDataByNumber( dataIdB, tableOriginal );
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACR0lEQVRYR92XzW3bQBCF5y10
+kWAg6iDqIHYFoW7SUgengjgd2BVEriDuIEoFyUFc6Wa6gqgEu4LEgHQT+IIRvApFi+JGJODA
+vHJ23sf54c5AAh5r7amIfAZwHmDuTVKSV865xaEzqHKo4gBuSQLAG5LXVWf0vcKSpHPu7GgA
+Ly4iD1mWjY0x35MkqYRWweFweB5iX+osL75araKTk5NTkrehAKPRKAqx3wtQFE/T9HeoQx/u
+vL36I6npe5jP5/f5lDwD2CeuB2oCpADeqx+SE+fcJw+xA1AmXgSIoqjbbrffFYsr/4V54MFg
+0Gu1Wj2S2k1fAPSn02m6KVbvRJ12Op2fAB415xr2vIC19gLAV60B73wPwLVzbnwoYnEca3Ns
+7bYAXoDkAsCOOMkuAM3jnXMuCmnDspQdAhgD0J9Nv0xguVwuipEpsz0aILTNqqLQCICmRUTe
+Von598aYO19cTQHciIhWbuijLTY5tgg3NfBfpSD0s/fZNZKCFwew1t4AePbHKwMj+a3RGnjq
+gl5oJIwxaaNdECr8emvgxSNgrd3e4yEw+VuukTbU+cAY0w0RV5v1en3vJ55GAEKFX0cR+pCR
+vNShpM7Xb0Yt4FJE+s65nRSWDiR6KI5jvck+1hXX8yQfSV7MZrMfeX8HAdTQD5B1Ifwfsein
+EqB4wFo7zrJsUpznjwX8ZwA9kGXZh2Io6wCIyFWSJDrs/B3Lyxxaa3WT+SUiO7k8EkAXXV1a
+z/zWXLloPq3mei1vNps6jy4uIjL2V7b6+gMMhak/PHHp2QAAAABJRU5ErkJggg==
+</icon>
+
+</service-task-definition>
