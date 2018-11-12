@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-11-12 17:53:16
+# サービスタスク定義ファイルリスト B 2018-11-12 17:57:26
 
 ## Google Sheets セル値の更新 <small>en:Google Spreadsheets value update</small>
 
@@ -52,7 +52,24 @@ last-modified:2018-11-07, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
     - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
 
-## Questetra ロールメンバー削除 <small>en:Questetra Role Membership Delete</small>
+## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
+
+last-modified:2018-11-07, engine-type : 1
+
+### Summary
+
+> Google Drive の指定フォルダ内に新しいフォルダを作成します
+>> Create a new folder in the specified folder on Google Drive
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/googledrive-foldercreate/](https://support.questetra.com/ja/addons/googledrive-foldercreate/)
+    - [EN : https://support.questetra.com/addons/googledrive-foldercreate/](https://support.questetra.com/addons/googledrive-foldercreate/)
+
+## Questetra ロールメンバー追加 <small>en:Questetra Role Membership Add</small>
 
 last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
 
@@ -66,8 +83,8 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipDel.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipAdd.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-rolemembershipAdd.xml)
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
@@ -92,26 +109,6 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/questetra-membershipadd/](https://support.questetra.com/ja/addons/questetra-membershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-membershipadd/](https://support.questetra.com/addons/questetra-membershipadd/)
 
-## Questetra ロールメンバー追加 <small>en:Questetra Role Membership Add</small>
-
-last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> JA : <font color="Red">なし</font>
->> System Administrator Authority and User Manager Authority required
-1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
-2. Config [OAuth 2.0 Setting]
-
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipAdd.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-rolemembershipAdd.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
-    - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
-
 ## Questetra 組織メンバー削除 <small>en:Questetra Org Membership Delete</small>
 
 last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
@@ -131,6 +128,26 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/questetra-membershipdelete/](https://support.questetra.com/ja/addons/questetra-membershipdelete/)
     - [EN : https://support.questetra.com/addons/questetra-membershipdelete/](https://support.questetra.com/addons/questetra-membershipdelete/)
+
+## Questetra ロールメンバー削除 <small>en:Questetra Role Membership Delete</small>
+
+last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> JA : <font color="Red">なし</font>
+>> System Administrator Authority and User Manager Authority required
+1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
+2. Config [OAuth 2.0 Setting]
+
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipDel.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
+    - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
 
 ## データ複製 (テーブル) <small>en:Data Duplicator (Table)</small>
 
@@ -166,23 +183,6 @@ last-modified:2018-10-26, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box-webhook-json-parse/](https://support.questetra.com/ja/addons/box-webhook-json-parse/)
     - [EN : https://support.questetra.com/addons/box-webhook-json-parse/](https://support.questetra.com/addons/box-webhook-json-parse/)
 
-## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
-
-last-modified:2018-10-24, engine-type : 1
-
-### Summary
-
-> フォルダ単位での監視を行うBoxのWebhookを作成します。事前にOAuth2の設定が必要です。
->> Create a Box webhook to check events on the folder. In advance,you have to configure the OAuth2.
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/box-webhook-create/](https://support.questetra.com/ja/addons/box-webhook-create/)
-    - [EN : https://support.questetra.com/addons/box-webhook-create/](https://support.questetra.com/addons/box-webhook-create/)
-
 ## BoxのWebhookを削除 <small>en:Delete Box Webhook</small>
 
 last-modified:2018-10-24, engine-type : 1
@@ -199,6 +199,23 @@ last-modified:2018-10-24, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/box-webhook-delete/](https://support.questetra.com/ja/addons/box-webhook-delete/)
     - [EN : https://support.questetra.com/addons/box-webhook-delete/](https://support.questetra.com/addons/box-webhook-delete/)
+
+## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
+
+last-modified:2018-10-24, engine-type : 1
+
+### Summary
+
+> フォルダ単位での監視を行うBoxのWebhookを作成します。事前にOAuth2の設定が必要です。
+>> Create a Box webhook to check events on the folder. In advance,you have to configure the OAuth2.
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/box-webhook-create/](https://support.questetra.com/ja/addons/box-webhook-create/)
+    - [EN : https://support.questetra.com/addons/box-webhook-create/](https://support.questetra.com/addons/box-webhook-create/)
 
 ## Google Drive 共有設定 <small>en:Creating Permissions on Google Drive</small>
 
@@ -233,23 +250,6 @@ last-modified:2018-10-15, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/typetalk-messagepost/](https://support.questetra.com/ja/addons/typetalk-messagepost/)
     - [EN : https://support.questetra.com/addons/typetalk-messagepost/](https://support.questetra.com/addons/typetalk-messagepost/)
 
-## Typetalk メッセージ投稿（APIトークン方式） <small>en:Typetalk Post Message (use API token)</small>
-
-last-modified:2018-10-15, engine-type : 1
-
-### Summary
-
-> URL で指定されたトピックにボットとして投稿します
->> Post a message as a bot to the topic specified by URL
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost-token.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Typetalk-messagePost-token.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/typetalk-messagepost-token/](https://support.questetra.com/ja/addons/typetalk-messagepost-token/)
-    - [EN : https://support.questetra.com/addons/typetalk-messagepost-token/](https://support.questetra.com/addons/typetalk-messagepost-token/)
-
 ## 法人番号 企業情報 参照 <small>en:Houjin-Bango Corporate Info Retrieve</small>
 
 last-modified:2018-10-15, engine-type : <font color="Red">undefined</font>
@@ -267,22 +267,22 @@ last-modified:2018-10-15, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/)
     - [EN : https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/)
 
-## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
+## Typetalk メッセージ投稿（APIトークン方式） <small>en:Typetalk Post Message (use API token)</small>
 
-last-modified:2018-10-12, engine-type : 1
+last-modified:2018-10-15, engine-type : 1
 
 ### Summary
 
-> Google Drive の指定フォルダ内に新しいフォルダを作成します
->> Create a new folder in the specified folder on Google Drive
+> URL で指定されたトピックにボットとして投稿します
+>> Post a message as a bot to the topic specified by URL
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost-token.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Typetalk-messagePost-token.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googledrive-foldercreate/](https://support.questetra.com/ja/addons/googledrive-foldercreate/)
-    - [EN : https://support.questetra.com/addons/googledrive-foldercreate/](https://support.questetra.com/addons/googledrive-foldercreate/)
+    - [JA : https://support.questetra.com/ja/addons/typetalk-messagepost-token/](https://support.questetra.com/ja/addons/typetalk-messagepost-token/)
+    - [EN : https://support.questetra.com/addons/typetalk-messagepost-token/](https://support.questetra.com/addons/typetalk-messagepost-token/)
 
 ## コンバータ (Email-Str to Quser) <small>en:Converter (Email-Str to Quser)</small>
 
@@ -318,23 +318,6 @@ last-modified:2018-10-02, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/journal-tsv-generator/](https://support.questetra.com/ja/addons/journal-tsv-generator/)
     - [EN : https://support.questetra.com/addons/journal-tsv-generator/](https://support.questetra.com/addons/journal-tsv-generator/)
 
-## 差分確認 (Table and Table) <small>en:Diff (Table and Table)</small>
-
-last-modified:2018-10-01, engine-type : 1
-
-### Summary
-
-> ２つのテーブル型データ項目を行単位で差分確認します
->> Confirm difference information of two table type data items line by line
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Tables-Diff.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Tables-Diff.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/tables-diff/](https://support.questetra.com/ja/addons/tables-diff/)
-    - [EN : https://support.questetra.com/addons/tables-diff/](https://support.questetra.com/addons/tables-diff/)
-
 ## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
 
 last-modified:2018-10-01, engine-type : 1
@@ -351,6 +334,23 @@ last-modified:2018-10-01, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/questetra-openchatpost/](https://support.questetra.com/ja/addons/questetra-openchatpost/)
     - [EN : https://support.questetra.com/addons/questetra-openchatpost/](https://support.questetra.com/addons/questetra-openchatpost/)
+
+## 差分確認 (Table and Table) <small>en:Diff (Table and Table)</small>
+
+last-modified:2018-10-01, engine-type : 1
+
+### Summary
+
+> ２つのテーブル型データ項目を行単位で差分確認します
+>> Confirm difference information of two table type data items line by line
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Tables-Diff.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Tables-Diff.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/tables-diff/](https://support.questetra.com/ja/addons/tables-diff/)
+    - [EN : https://support.questetra.com/addons/tables-diff/](https://support.questetra.com/addons/tables-diff/)
 
 ## サービスタスク定義ファイル(XML)をパースする <small>en:Parse service task definition file (XML)</small>
 
@@ -369,23 +369,6 @@ last-modified:2018-09-28, engine-type : <font color="Red">undefined</font>
     - [JA : https://github.com/yambal/Parse-service-task-definition-file-XML-file-data](https://github.com/yambal/Parse-service-task-definition-file-XML-file-data)
     - EN : <font color="Red">なし</font>
 
-## コンバータ (Table to Options) <small>en:Converter (Table to Options)</small>
-
-last-modified:2018-09-26, engine-type : 1
-
-### Summary
-
-> テーブル型データ項目（1列目2列目）に格納されたID(value)-Label(display)を、２つの複数行文字列型に格納します。（選択肢XMLとして基盤登録するには、選択肢型データで２つの文字列型データを参照します。その後、［サービスタスク（選択肢マスタ更新）］から当該選択肢型データを参照します）
->> Convert IDs-Labels defined in Table data to two String type data items. (In order to base registration as Options XML, refer to two String type data from Select type data. Then, refer to the Select type data from [Service Task (Choices Update)].)
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Table-Options.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Table-Options.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/addons/converter-table-options/](https://support.questetra.com/addons/converter-table-options/)
-    - [EN : https://support.questetra.com/ja/addons/converter-table-options/](https://support.questetra.com/ja/addons/converter-table-options/)
-
 ## コンバータ (Options to Table) <small>en:Converter (Options to Table)</small>
 
 last-modified:2018-09-26, engine-type : 1
@@ -402,6 +385,23 @@ last-modified:2018-09-26, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/converter-options-table/](https://support.questetra.com/ja/addons/converter-options-table/)
     - [EN : https://support.questetra.com/addons/converter-options-table/](https://support.questetra.com/addons/converter-options-table/)
+
+## コンバータ (Table to Options) <small>en:Converter (Table to Options)</small>
+
+last-modified:2018-09-26, engine-type : 1
+
+### Summary
+
+> テーブル型データ項目（1列目2列目）に格納されたID(value)-Label(display)を、２つの複数行文字列型に格納します。（選択肢XMLとして基盤登録するには、選択肢型データで２つの文字列型データを参照します。その後、［サービスタスク（選択肢マスタ更新）］から当該選択肢型データを参照します）
+>> Convert IDs-Labels defined in Table data to two String type data items. (In order to base registration as Options XML, refer to two String type data from Select type data. Then, refer to the Select type data from [Service Task (Choices Update)].)
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Table-Options.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Table-Options.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/addons/converter-table-options/](https://support.questetra.com/addons/converter-table-options/)
+    - [EN : https://support.questetra.com/ja/addons/converter-table-options/](https://support.questetra.com/ja/addons/converter-table-options/)
 
 ## Google Sheets 行追加 (TSV) <small>en:New Record to Google Sheets (TSV)</small>
 
@@ -435,22 +435,6 @@ last-modified:2018-08-31, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/services/hangoutschat-messageadd/](https://support.questetra.com/ja/addons/services/hangoutschat-messageadd/)
     - [EN : https://support.questetra.com/addons/services/hangoutschat-messageadd/](https://support.questetra.com/addons/services/hangoutschat-messageadd/)
 
-## コンバータ (Table to Excel-CSV FILE) <small>en:Converter (Table to Excel-CSV FILE)</small>
-
-last-modified:2018-08-29, engine-type : 1
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsv.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/)
-    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsv/](https://support.questetra.com/addons/converter-tabletoexcelcsv/)
-
 ## コンバータ (Table to Excel-CSV FILE) sjis <small>en:Converter (Table to Excel-CSV FILE) sjis</small>
 
 last-modified:2018-08-29, engine-type : 1
@@ -466,6 +450,22 @@ last-modified:2018-08-29, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/)
     - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/)
+
+## コンバータ (Table to Excel-CSV FILE) <small>en:Converter (Table to Excel-CSV FILE)</small>
+
+last-modified:2018-08-29, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsv.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/)
+    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsv/](https://support.questetra.com/addons/converter-tabletoexcelcsv/)
 
 ## Microsoft Teams メッセージ投稿 <small>en:Microsoft Teams Post Message</small>
 

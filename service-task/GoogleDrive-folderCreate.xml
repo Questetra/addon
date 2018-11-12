@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-10-12</last-modified>
+<last-modified>2018-11-07</last-modified>
 <engine-type>1</engine-type>
 <label>Creating Folder on Google Drive</label>
 <label locale="ja">Google Drive フォルダ生成</label>
@@ -48,13 +48,13 @@ function main(){
   if (quser == null) {
     throw "User not found:" + userId;
   }
-  
+  engine.log("User Name:" + quser.getName());
   // get OAuth token
   var token;
   try{
     token = httpClient.getGoogleOAuth2Token(quser, "Drive");
   }catch(e){
-    throw "This User isn't connected with Google Drive."
+    throw "This User has not connected with Google Drive."
   }
   var json = createFolder(token, parentFolderId, folderName);
 
