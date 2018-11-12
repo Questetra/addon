@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # サービスタスク定義ファイルリスト A 2018-11-12 17:47:05
+=======
+# サービスタスク定義ファイルリスト A 2018-11-12 17:36:06
+>>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
 
 |label|last modified|src|dl|help|help|
 |:---|:---|:---|:---|:---|:---|
@@ -8,11 +12,18 @@
 |Questetra ロールメンバー削除|2018-11-06|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipDel.xml)|[XML](https://questetra.github.io/addon/service-task/Questetra-rolemembershipDel.xml)|[Ja](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)|[En](https://support.questetra.com/addons/questetra-rolemembershipadd/)|
 |Questetra 組織メンバー追加|2018-11-06|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipAdd.xml)|[XML](https://questetra.github.io/addon/service-task/Questetra-membershipAdd.xml)|[Ja](https://support.questetra.com/ja/addons/questetra-membershipadd/)|[En](https://support.questetra.com/addons/questetra-membershipadd/)|
 |Questetra ロールメンバー追加|2018-11-06|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-rolemembershipAdd.xml)|[XML](https://questetra.github.io/addon/service-task/Questetra-rolemembershipAdd.xml)|[Ja](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)|[En](https://support.questetra.com/addons/questetra-rolemembershipadd/)|
+<<<<<<< HEAD
 |Questetra 組織メンバー削除|2018-11-06|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipDelete.xml)|[XML](https://questetra.github.io/addon/service-task/Questetra-membershipDelete.xml)|[Ja](https://support.questetra.com/ja/addons/questetra-membershipdelete/)|[En](https://support.questetra.com/addons/questetra-membershipdelete/)|
+=======
+|Googleドライブ ファイル削除|2018-11-02|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)|[Ja](https://support.questetra.com/ja/addons/googledrive-folderdelete/)|[En](https://support.questetra.com/addons/googledrive-folderdelete/)|
+>>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
 |データ複製 (テーブル)|2018-11-01|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Duplicator-table.xml)|[XML](https://questetra.github.io/addon/service-task/Duplicator-table.xml)|[Ja](https://support.questetra.com/ja/addons/duplicator-table/)|[En](https://support.questetra.com/addons/duplicator-table/)|
 |BoxのWebhookのJSONを解析|2018-10-26|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-json-parse.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-json-parse.xml)|[Ja](https://support.questetra.com/ja/addons/box-webhook-json-parse/)|[En](https://support.questetra.com/addons/box-webhook-json-parse/)|
 |BoxのWebhookを作成(フォルダの監視)|2018-10-24|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)|[Ja](https://support.questetra.com/ja/addons/box-webhook-create/)|[En](https://support.questetra.com/addons/box-webhook-create/)|
+<<<<<<< HEAD
 |BoxのWebhookを削除|2018-10-24|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-delete.xml)|[XML](https://questetra.github.io/addon/service-task/Box-webhook-delete.xml)|[Ja](https://support.questetra.com/ja/addons/box-webhook-delete/)|[En](https://support.questetra.com/addons/box-webhook-delete/)|
+=======
+>>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
 |Google Drive 共有設定|2018-10-19|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-permissionCreate.xml)|[XML](https://questetra.github.io/addon/service-task/GoogleDrive-permissionCreate.xml)|[Ja](https://support.questetra.com/ja/addons/googledrive-permissioncreate/)|[En](https://support.questetra.com/addons/googledrive-permissioncreate/)|
 |Typetalk メッセージ投稿|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost.xml)|[XML](https://questetra.github.io/addon/service-task/Typetalk-messagePost.xml)|[Ja](https://support.questetra.com/ja/addons/typetalk-messagepost/)|[En](https://support.questetra.com/addons/typetalk-messagepost/)|
 |Typetalk メッセージ投稿（APIトークン方式）|2018-10-15|[GitHub](https://github.com/Questetra/addon/blob/master/service-task/Typetalk-messagePost-token.xml)|[XML](https://questetra.github.io/addon/service-task/Typetalk-messagePost-token.xml)|[Ja](https://support.questetra.com/ja/addons/typetalk-messagepost-token/)|[En](https://support.questetra.com/addons/typetalk-messagepost-token/)|

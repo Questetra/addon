@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
+<<<<<<< HEAD
 <last-modified>2018-11-07</last-modified>
+=======
+<last-modified>2018-11-02</last-modified>
+>>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
 <engine-type>1</engine-type>
 <label>Deleting File on Google Drive</label>
 <label locale="ja">Googleドライブ ファイル削除</label>
