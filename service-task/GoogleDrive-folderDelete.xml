@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-10-24</last-modified>
+<last-modified>2018-11-02</last-modified>
 <engine-type>1</engine-type>
 <label>Deleting File on Google Drive</label>
-<label locale="ja">Googleドライブ上のファイルを削除する</label>
+<label locale="ja">Googleドライブ ファイル削除</label>
 <summary>Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.</summary>
 <summary locale="ja">Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。</summary>
 <help-page-url>https://support.questetra.com/addons/googledrive-folderdelete/</help-page-url>
