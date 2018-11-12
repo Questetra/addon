@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# サービスタスク定義ファイルリスト B 2018-11-12 17:47:05
-=======
-# サービスタスク定義ファイルリスト B 2018-11-12 17:36:06
->>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
+# サービスタスク定義ファイルリスト B 2018-11-12 17:49:46
 
 ## Google Sheets セル値の更新 <small>en:Google Spreadsheets value update</small>
 
@@ -116,7 +112,6 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
 
-<<<<<<< HEAD
 ## Questetra 組織メンバー削除 <small>en:Questetra Org Membership Delete</small>
 
 last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
@@ -136,24 +131,6 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/questetra-membershipdelete/](https://support.questetra.com/ja/addons/questetra-membershipdelete/)
     - [EN : https://support.questetra.com/addons/questetra-membershipdelete/](https://support.questetra.com/addons/questetra-membershipdelete/)
-=======
-## Googleドライブ ファイル削除 <small>en:Deleting File on Google Drive</small>
-
-last-modified:2018-11-02, engine-type : 1
-
-### Summary
-
-> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
->> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
-    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
->>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
 
 ## データ複製 (テーブル) <small>en:Data Duplicator (Table)</small>
 
@@ -206,7 +183,6 @@ last-modified:2018-10-24, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box-webhook-create/](https://support.questetra.com/ja/addons/box-webhook-create/)
     - [EN : https://support.questetra.com/addons/box-webhook-create/](https://support.questetra.com/addons/box-webhook-create/)
 
-<<<<<<< HEAD
 ## BoxのWebhookを削除 <small>en:Delete Box Webhook</small>
 
 last-modified:2018-10-24, engine-type : 1
@@ -224,8 +200,6 @@ last-modified:2018-10-24, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box-webhook-delete/](https://support.questetra.com/ja/addons/box-webhook-delete/)
     - [EN : https://support.questetra.com/addons/box-webhook-delete/](https://support.questetra.com/addons/box-webhook-delete/)
 
-=======
->>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
 ## Google Drive 共有設定 <small>en:Creating Permissions on Google Drive</small>
 
 last-modified:2018-10-19, engine-type : 1
