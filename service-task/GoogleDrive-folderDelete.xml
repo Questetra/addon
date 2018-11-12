@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<<<<<<< HEAD
 <last-modified>2018-11-07</last-modified>
-=======
-<last-modified>2018-11-02</last-modified>
->>>>>>> 1a01b113f6c56282f6ce303849adc03f205534d3
 <engine-type>1</engine-type>
 <label>Deleting File on Google Drive</label>
 <label locale="ja">Googleドライブ ファイル削除</label>
@@ -64,7 +60,7 @@ function deleteFile(token, fileId) {
 }
 
 ]]></script>
-  
+
   <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAECElEQVRYR8VXbYhUZRR+zr0z986d
 VttFF6NCWyJQI1wTIhSZzR/rgJFJJhKk6w//BOFKgXeIyj5wViJ2JPoV0UZBwRK5kjSzP3TECPsh
 rYiyGKRGrabFzrrivfN1T7x3nJ3Z+zV32rD3zx3mfc85zznvcz5ewv+8qB37/YeLzxNXEwTqZXCn
