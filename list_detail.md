@@ -1,4 +1,4 @@
-# サービスタスク定義ファイルリスト B 2018-11-09 17:56:30
+# サービスタスク定義ファイルリスト B 2018-11-12 17:36:06
 
 ## Google Sheets セル値の更新 <small>en:Google Spreadsheets value update</small>
 
@@ -115,6 +115,23 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
 
+## Googleドライブ ファイル削除 <small>en:Deleting File on Google Drive</small>
+
+last-modified:2018-11-02, engine-type : 1
+
+### Summary
+
+> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
+>> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
+    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
+
 ## データ複製 (テーブル) <small>en:Data Duplicator (Table)</small>
 
 last-modified:2018-11-01, engine-type : 1
@@ -182,23 +199,6 @@ last-modified:2018-10-24, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/box-webhook-create/](https://support.questetra.com/ja/addons/box-webhook-create/)
     - [EN : https://support.questetra.com/addons/box-webhook-create/](https://support.questetra.com/addons/box-webhook-create/)
-
-## Googleドライブ上のファイルを削除する <small>en:Deleting File on Google Drive</small>
-
-last-modified:2018-10-24, engine-type : 1
-
-### Summary
-
-> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
->> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
-    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
 
 ## Google Drive 共有設定 <small>en:Creating Permissions on Google Drive</small>
 
