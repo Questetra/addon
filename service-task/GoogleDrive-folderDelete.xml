@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-11-02</last-modified>
+<last-modified>2018-11-07</last-modified>
 <engine-type>1</engine-type>
 <label>Deleting File on Google Drive</label>
 <label locale="ja">Googleドライブ ファイル削除</label>
@@ -26,17 +26,18 @@ function main(){
   if (fileIds == null) {
     throw "IDs aren't set.";
   }
-  
+  engine.log("File ID:" + fileIds);
   var userId = configs.get("UserID");
   var quser = quserDao.findById(parseInt(userId));
   if (quser == null) {
     throw "User not found:" + userId;
   }
+  engine.log("User Name:" + quser.getName());
   var token;
   try{
     token = httpClient.getGoogleOAuth2Token(quser, "Drive");
   }catch(e){
-    throw "This User isn't connected with Google Drive."
+    throw "This User has not connected with Google Drive."
   }
   fileIds += '';
   fileIds.split("\n").forEach(function(fileId) {
@@ -53,6 +54,8 @@ function deleteFile(token, fileId) {
   if (status >= 300) {
     var error = "Failed to delete:" + fileId + "\n" + status + "\n" + response.getResponseAsString();
     throw error;
+  }else{
+    engine.log("status:" + status + "\n"+"delete successful");
   }
 }
 
