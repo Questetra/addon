@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-task-definition>
-<last-modified>2018-10-19</last-modified>
+<last-modified>2018-11-07</last-modified>
 <engine-type>1</engine-type>
 <label>Creating Permissions on Google Drive</label>
 <label locale="ja">Google Drive 共有設定</label>
@@ -40,26 +40,26 @@ function main() {
     throw "ID isn't set.";
   }
   fileIds += "";
-
+  
   var userId = configs.get("UserID");
   var quser = quserDao.findById(parseInt(userId));
   if (quser == null) {
     throw "User not found:" + userId;
   }
-
+  
   //var sharedRange = readChoicesFromConfig("SharedRange", ["public", "domain"]);
   var sharedRange = "public";
   var allowFileDiscovery = readChoicesFromConfig("AllowFileDiscovery", ["true", "false"]);
   var editable = readChoicesFromConfig("Editable", ["true", "false"]);
-
+  
   // get OAuth token
   var token;
   try{
     token = httpClient.getGoogleOAuth2Token(quser, "Drive");
   }catch(e){
-    throw "This User isn't connected with Google Drive."
+    throw "This User has not connected with Google Drive."
   }
-
+  
   fileIds.split("\n").forEach(function(fileId){
     createPermission(token, fileId, sharedRange, allowFileDiscovery, editable);
   });
@@ -82,7 +82,7 @@ function createPermission(token, fileId, shareRange, allowFileDiscovery, editabl
   json["role"] = editable == "true" ? "writer" : "reader";
   json["type"] = shareRange == "public" ? "anyone" : "domain";
   json["allowFileDiscovery"] = allowFileDiscovery + '';
-
+  
   var url = 'https://www.googleapis.com/drive/v3/files/' + fileId + '/permissions';
   var response = httpClient.begin()
     .bearer(token)
