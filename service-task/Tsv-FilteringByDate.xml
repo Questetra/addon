@@ -3,7 +3,7 @@
 <label>TSV Filtering by Date</label>
 <label locale="ja">日付によるTSVフィルタ</label>
 
-<last-modified>2018-08-18</last-modified>
+<last-modified>2018-11-14</last-modified>
 <help-page-url>https://support.questetra.com/addons/tsv-filteringbydate/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/tsv-filteringbydate/</help-page-url>
 
@@ -45,7 +45,7 @@ Date-only strings (e.g. "1970-01-01") are treated as UTC, not local.</summary>
 
 //////// START "main()" ////////
 main();
-function main(){ 
+function main(){
 
 
 //// == Config Retrieving / 工程コンフィグの参照 ==
@@ -125,7 +125,25 @@ engine.setDataByNumber( dataIdE, newTsv );
 
 
 <icon>
-iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+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
+RK5CYII=
 </icon>
 
 </service-task-definition>

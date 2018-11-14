@@ -10,7 +10,7 @@
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/journal-tsv-generator/</help-page-url>
 
 <engine-type>1</engine-type>
-<last-modified>2018-10-02</last-modified>
+<last-modified>2018-11-14</last-modified>
 
 
 <configs>
@@ -270,7 +270,7 @@ if(salesAmtMultiple !== 0){
   let myReceivedSales = 0;
 
 
-  //// Single 
+  //// Single
   if(salesAmtSingle !== 0){
     let dateSalesAmtSingleDate = new Date( salesAmtSingleDate );
 
@@ -340,7 +340,7 @@ if(salesAmtMultiple !== 0){
   // Following Months
   // Record on 1st of each month / 次月以降は1日に売上計上
   for( let i=1; i < salesAmtMultipleNum; i++){
-    arrSalesAmtMultipleDate[i] = new Date( 
+    arrSalesAmtMultipleDate[i] = new Date(
                                      arrSalesAmtMultipleDate[0].getFullYear(),
                                      arrSalesAmtMultipleDate[0].getMonth() + i,
                                      1); // 1st of each month
@@ -428,26 +428,22 @@ function funcMonthStr( dateObj ){
 
 
 <icon>
-iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEFUlEQVRYR8VXQVIbORT9X2bVXgRO
-EDjBhBPE2YFEVcgJEk4w5ASBE4w5QewT4FQhwS7mBIETBE4wnkU3G7p/6mkkl1rT7ZhJqugqqgC1
-paf333v/m+mZH37m8+mXAezt7W0z80tc5OHh4XY+ny+ecqn/DUBr/YmIPjDzdnqgiNwR0biqquk6
-YJ4MQGv9iojO84PzW4vITdM0766urgCo93kSANA9GAy+EdEmdhSRM6XU7OLiYo6/sa6U+kBEx8z8
-gojm1to3vw2A1vobM78SkX+IaOScuxmNRh5MSvfBwcFIRL4GkLt4rw/E2gxorVHvz+mmOLwoCoDa
-rOt6N6XbGCN4l5nfRIa6QDwFwPdQ96m1FjRTBmrmnHuH/6cM1HW9s0oHawGA8JgZtad0w1iSeDMI
-j5lhw1Fg6otz7vCXNaC1PmFm2O7WWgsXEOgfDod/h4Oumfl1ZsfrqqoOf2bFlQzEkGHmcRDfmXPu
-OKe/LMutoiiQB/62YOLy8nK2TiD1AtBaf2ZmX+v4pIIyxkyI6H2y/NFaO17n0NaeXR8Ifv+er1lr
-l4Dz+od3fR4Q0cRaO8UvxhiARNlg33nTNNNUlJ0MGGNA818icu+ca0VtDioVaKYBeH+zKzFF5Ng5
-d+Zt2sWA1nrGzG+RL03TnIS63kfkaQNCmfCDVCSiRThwWRqEFjPPQo/Au75xEZEvWR8AiO7P7EbL
-RNNa5+ut+kcG4Zq6rr0wlVJIzknUDgA553Y6AYSEAwveWriFc85HLp6O+o+bprlOlW+MucHhYC28
-v22t3drf3z9USp1jH2hqpQ0TtK1AiTGbl09ETp1zvmS4BDIgyRBc5A6xDW2IyLVzbrQSgNY6xu+S
-4vQGHfpZlGW5E8Mn757x/bSZ9QJIrSgiq+rfwiEiR6h1sKDPCrgphBT0AHGDiRmsmvoaovMxy8zw
-81aXFRNWugzkZ4SYlomd76qq2i2K4isSNWHilIPgWguZ+pcbpl2u63RQW1XVdlYCH2giAlEfBvrR
-tCDwBaeWAvogkqWP0+5njMGQ4TtdDwAvwijA4JiWZSE+ERlHJwDAf4SGPo/BEqNVUk+fjhk7pygb
-QiumZhjLzp1zu9ENw+FwLCIAjnREZ8Ve0MYXjpbCANnXwdLBA+FCRH9EH4cDsbEf0RKWOptTNsQc
-gQEfu2ihSqmPcXwK2ngd0Ebap3VdnwwGg9io5nVdHyFsgmswsi1LJCKTpmlO47pS6j0zx2j/NwfC
-mD0PU2xfeVvqzhjp+sySpZ4Nb8uyHEGs3oYBBMTSmmrCh6fMPMkHSwRSGFRicwHIe4zleBcJmIzn
-fqvgAHxpGUentIIING5sbPj2+/j4ePezLxURvFJqs2maRdf4jcthHe92TcdrDaW9dfkNC88O4AcI
-zqgZxW8imAAAAABJRU5ErkJggg==
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADQ0lEQVRYR8WXTUgbQRiGnw3+EBox
+kSJSItGUSsVCUw+CIK0VD3rwDxG8SBUPKwhqLx4UbHsWTDxIDQhaPfZge/BuoS3FgygVEQtaqqda
+bGKrVAlumV03xs2Pm/g3IIbdmfmemXnfb76VuOEmJRXfTyPwBAUPEnbAczJ+CYUAEuL/PF28Nzvv
++QCT2DmiF+gDNaiZFgB8ZDBKB+J33JYY4DXtWPAmEdgYSATvQOZdPIL4AOP4kNSVX0bzIfM81kSx
+AfxMAc8uI3J4DoUpuugwzhkNYFh5691WRspHsKXbkuJZC6xRNlt2dozCKF2qlsLtLIB25pORHdru
+tTFWMUZWelZSAKu/Vyl5WxJrTFOkJk4BNLVvGgWnA0hIDC8Ps/lHdInf6lx1tLhbSAAQIINC3R2n
+AH5eAi+MU+sA4nn3x25mvs1ERa+6U0W9q56QEsKeYafzfmciADH+FbIaj0gAYZnsVAAaXA3U5New
+tb+FO8ttBiCAjOMUQMtws7E21swRWCQLedY8dv7tqCDnHIEeRtWCtgMJPH8FItQAThyhAfiZV3N8
+jKYDCBsehA44Vo7VXkKU1jQroeMQR8dH4ZFpUpr6PIEI9b4fkKnUAb4DrkQAugj3jvZwZblY2V1h
++uk0wu/Vc9XhoROPJ8xoQPRfQuaRDqDEM1akCwYWBqjNryXflq+6ofdBrwqw8HMBp83J9t9tcq25
+ZgFARkoKoO9zH6W3Syl2FDO+Oo633KsCeL96ycnMYfdwl6aCppQATB+BngeE9y90BArLdOExLcJL
+TMUxRGjChsZMeAk7oF5M+g6cm4gEwODCII2Fjar1Fn8tIgQqNCASUVF2EevBdTb2NsxqICIRabng
+3FTc/6WfZnczzltOVXhDpUOpuiCIrJV3SV1GPZ962A/tEzgM4Mh0qHVCii6IcRlp17Fww5kL6Qoy
+YZAMCqKvY7EfN1qQ6OYwOEKcd0VeBemW9HjJMuZzkZTmfswZ34W3Xn9xfUUpvEGm3Uh0XWV51MoT
+74D+VitURIkeVSmZPI8g0J7ah4keQXOHKKXFn1kQEVh8mvku9mlmXKbYEYVKJDwo2JF4eFLdLCMR
+QGEJiflEKzavAZN7fNFu/wFdz58w0loS7gAAAABJRU5ErkJggg==
 </icon>
 
 </service-task-definition>
