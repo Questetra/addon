@@ -3,7 +3,7 @@
 <label>Converter (Table to Excel-CSV FILE) sjis</label>
 <label locale="ja">コンバータ (Table to Excel-CSV FILE) sjis</label>
 
-<last-modified>2018-08-29</last-modified>
+<last-modified>2018-11-14</last-modified>
 <help-page-url>https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/</help-page-url>
 
@@ -74,7 +74,7 @@ let myCsv = myTsv.replace( /,/g, "" ).replace( /\t/g, "," );
 myFiles.add(
   new com.questetra.bpms.core.event.scripttask.NewQfile(
     fileName,
-//    "text/tab-separated-values; charset=x-UTF-16LE-BOM", 
+//    "text/tab-separated-values; charset=x-UTF-16LE-BOM",
     "text/comma-separated-values; charset=Shift_JIS", // for sjis
 //    myTsv
     myCsv
@@ -87,7 +87,20 @@ engine.setDataByNumber( dataIdD, myFiles );
 
 
 <icon>
-iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACx0lEQVRYR8WXz0sUYRjHP5O0CLX+
+uHTIQ7sHIby0BdIh0EU6hwmd20Vx9mb9AUvlQQSRVhBq0WW3gxcFKzx4000kBKO2QNgSssgS6uDu
+oQQJJt4ZZ3ecH+s4O+kLyy7s+z7fz/PM87zPMxKnvKRj6afpBbpRiCDRAkQOzhdQKCEhvvMkeOnW
+7tEAWVrYZwi4B6qom1UCUgSYII747bhqAzwhxhkeH0PYLCTE48i8cCJwBnhKCkn13I+VQua+nSF7
+gDQ54K4fyhUbCjkSxM02rQD+en5YT2GChJpLlXUYQHvmWV89txq7bcyJKoCW7Vt1JJxb7hIBwnp1
+VAHSPAQeuLVSa99U1xTzW/Msflt02vYIWdXDCCBKptkPgI07GzQFmhhcGXSCKCHTWgXQbrjnRvGe
+iz20nWvzxJO8lqS9uZ3t39u1INRc0CJgk/nCi47WDk8AxkOOEAcVoQGkyat3vGH5BbD3d4/RwijD
+b4fNzrxCJqoDfAEuGXdMd03TeaHTUwRC50NqDgjx8Q/jJN8k7ewUkLmqAyielBwOieiFg+Fa4tpJ
+GelIgODZIJnuDDt/dhh67a41rN5aZfnHspPnVWwDgOURiF1CPBvN0hvqJfcxx8DKgH+BUnhPgohj
+EhrFG6QG1n6usVne9ASw9H2J3CfR3w4tQxLalOHszVn6wn0I8XpXppixRs9UhpaLaPLGJP2X+2ls
+aKxXH1sAMFxE2l1guYqNEHOf51j4uuAJplgqsv5r3Xi2jKyNd0c2Ix1iZnPGzyS0aUZaOxbVYGlI
+Y9fH2N3fZeTdiKcImA6VCRCytmOx61QHEh3zf45kUAm9LndyQyk8QyZmfoYnNZZbPK8dAf1fbVAR
+V5jXSakMxLy9mOgQWnWIUVp83IIIYfFqlqrv1cz8wEREFKJIRFBoQeKKukU0FokSCgUk8rU8dp8D
+flS8Cxv/AFp57iGwqv7bAAAAAElFTkSuQmCC
 </icon>
 
 </service-task-definition>
