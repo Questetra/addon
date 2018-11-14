@@ -1,4 +1,199 @@
-# サービスタスク定義ファイルリスト B 2018-11-12 18:01:46
+# サービスタスク定義ファイルリスト B 2018-11-14 16:24:25
+
+## コンバータ (TSV to Excel-CSV FILE) <small>en:Converter (TSV to Excel-CSV FILE)</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TsvToExcelCsv.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsv.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/](https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/)
+    - [EN : https://support.questetra.com/addons/converter-tsvtoexcelcsv/](https://support.questetra.com/addons/converter-tsvtoexcelcsv/)
+
+## コンバータ (Email to Quser) <small>en:Converter (Email to Quser)</small>
+
+last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/User-EmailToQuser.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/User-EmailToQuser.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/user-emailtoquser/](https://support.questetra.com/ja/addons/user-emailtoquser/)
+    - [EN : https://support.questetra.com/addons/user-emailtoquser/](https://support.questetra.com/addons/user-emailtoquser/)
+
+## コンバータ (Quser to ID, Name, Email) <small>en:Converter (Quser to ID, Name, Email)</small>
+
+last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/User-Converter.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/User-Converter.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/user-converter/](https://support.questetra.com/ja/addons/user-converter/)
+    - [EN : https://support.questetra.com/addons/user-converter/](https://support.questetra.com/addons/user-converter/)
+
+## コンバータ (Tsv to Table) <small>en:Converter (Tsv to Table)</small>
+
+last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TsvToTable.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TsvToTable.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tsvtotable/](https://support.questetra.com/ja/addons/converter-tsvtotable/)
+    - [EN : https://support.questetra.com/addons/converter-tsvtotable/](https://support.questetra.com/addons/converter-tsvtotable/)
+
+## コンバータ (TSV to Excel-CSV FILE) sjis <small>en:Converter (TSV to Excel-CSV FILE) sjis</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TsvToExcelCsvSjis.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsvSjis.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tsvtoexcelcsvsjis/](https://support.questetra.com/ja/addons/converter-tsvtoexcelcsvsjis/)
+    - [EN : https://support.questetra.com/addons/converter-tsvtoexcelcsvsjis/](https://support.questetra.com/addons/converter-tsvtoexcelcsvsjis/)
+
+## コンバータ (Options to Table) <small>en:Converter (Options to Table)</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> 選択肢XML（M319）に定義されたID(value)-Label(display)を、テーブル型データ項目（２列）に展開します。
+>> Convert IDs-Labels (values-displays) defined in Options XML (M319) to Table type data item (2 columns).
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Options-Table.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Options-Table.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-options-table/](https://support.questetra.com/ja/addons/converter-options-table/)
+    - [EN : https://support.questetra.com/addons/converter-options-table/](https://support.questetra.com/addons/converter-options-table/)
+
+## コンバータ (Table to Excel-CSV FILE) sjis <small>en:Converter (Table to Excel-CSV FILE) sjis</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsvSjis.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsvSjis.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/)
+    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/)
+
+## コンバータ (Table to Excel-CSV FILE) <small>en:Converter (Table to Excel-CSV FILE)</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsv.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/)
+    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsv/](https://support.questetra.com/addons/converter-tabletoexcelcsv/)
+
+## コンバータ (Date to 和暦テキスト) <small>en:Converter (Date to Japanese Era String)</small>
+
+last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-DateToJpEra.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-DateToJpEra.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-datetojpera/](https://support.questetra.com/ja/addons/converter-datetojpera/)
+    - [EN : https://support.questetra.com/addons/converter-datetojpera/](https://support.questetra.com/addons/converter-datetojpera/)
+
+## コンバータ (Email-Str to Quser) <small>en:Converter (Email-Str to Quser)</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> 文字型データ項目に格納されているメールアドレス文字列からQuestetraユーザを判定し、ユーザ型データ項目を更新します。
+>> Judging the Questetra User by the email address string stored in the string type data item and update the User type data item.
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-EmailStr-Quser.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-EmailStr-Quser.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-emailstr-quser/](https://support.questetra.com/ja/addons/converter-emailstr-quser/)
+    - [EN : https://support.questetra.com/addons/converter-emailstr-quser/](https://support.questetra.com/addons/converter-emailstr-quser/)
+
+## コンバータ (Table to Options) <small>en:Converter (Table to Options)</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> テーブル型データ項目（1列目2列目）に格納されたID(value)-Label(display)を、２つの複数行文字列型に格納します。（選択肢XMLとして基盤登録するには、選択肢型データで２つの文字列型データを参照します。その後、［サービスタスク（選択肢マスタ更新）］から当該選択肢型データを参照します）
+>> Convert IDs-Labels defined in Table data to two String type data items. (In order to base registration as Options XML, refer to two String type data from Select type data. Then, refer to the Select type data from [Service Task (Choices Update)].)
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Table-Options.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Table-Options.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/addons/converter-table-options/](https://support.questetra.com/addons/converter-table-options/)
+    - [EN : https://support.questetra.com/ja/addons/converter-table-options/](https://support.questetra.com/ja/addons/converter-table-options/)
+
+## コンバータ (Table to TSV) <small>en:Converter (Table to TSV)</small>
+
+last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToTsv.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToTsv.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tabletotsv/](https://support.questetra.com/ja/addons/converter-tabletotsv/)
+    - [EN : https://support.questetra.com/addons/converter-tabletotsv/](https://support.questetra.com/addons/converter-tabletotsv/)
 
 ## Google Sheets セル値の更新 <small>en:Google Spreadsheets value update</small>
 
@@ -35,22 +230,22 @@ last-modified:2018-11-09, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/googlesheets-getidslabels/](https://support.questetra.com/ja/addons/googlesheets-getidslabels/)
     - [EN : https://support.questetra.com/addons/googlesheets-getidslabels/](https://support.questetra.com/addons/googlesheets-getidslabels/)
 
-## Googleドライブ ファイル削除 <small>en:Deleting File on Google Drive</small>
+## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
 
 last-modified:2018-11-07, engine-type : 1
 
 ### Summary
 
-> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
->> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
+> Google Drive の指定フォルダ内に新しいフォルダを作成します
+>> Create a new folder in the specified folder on Google Drive
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
-    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
+    - [JA : https://support.questetra.com/ja/addons/googledrive-foldercreate/](https://support.questetra.com/ja/addons/googledrive-foldercreate/)
+    - [EN : https://support.questetra.com/addons/googledrive-foldercreate/](https://support.questetra.com/addons/googledrive-foldercreate/)
 
 ## Google Drive 共有設定 <small>en:Creating Permissions on Google Drive</small>
 
@@ -69,22 +264,22 @@ last-modified:2018-11-07, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/googledrive-permissioncreate/](https://support.questetra.com/ja/addons/googledrive-permissioncreate/)
     - [EN : https://support.questetra.com/addons/googledrive-permissioncreate/](https://support.questetra.com/addons/googledrive-permissioncreate/)
 
-## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
+## Googleドライブ ファイル削除 <small>en:Deleting File on Google Drive</small>
 
 last-modified:2018-11-07, engine-type : 1
 
 ### Summary
 
-> Google Drive の指定フォルダ内に新しいフォルダを作成します
->> Create a new folder in the specified folder on Google Drive
+> Google Drive上のファイルやフォルダを削除します。一度に複数の削除が可能です。複数削除する場合、データ項目では1行につき1つずつIDを書くようにしてください。
+>> Delete files or folders on Google Drive.You can delete multiple files or folders at once.When you delete multiple ones,you should write one file/folder ID on each line.
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderDelete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderDelete.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googledrive-foldercreate/](https://support.questetra.com/ja/addons/googledrive-foldercreate/)
-    - [EN : https://support.questetra.com/addons/googledrive-foldercreate/](https://support.questetra.com/addons/googledrive-foldercreate/)
+    - [JA : https://support.questetra.com/ja/addons/googledrive-folderdelete/](https://support.questetra.com/ja/addons/googledrive-folderdelete/)
+    - [EN : https://support.questetra.com/addons/googledrive-folderdelete/](https://support.questetra.com/addons/googledrive-folderdelete/)
 
 ## Questetra ロールメンバー削除 <small>en:Questetra Role Membership Delete</small>
 
@@ -106,26 +301,6 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/questetra-rolemembershipadd/](https://support.questetra.com/ja/addons/questetra-rolemembershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-rolemembershipadd/](https://support.questetra.com/addons/questetra-rolemembershipadd/)
 
-## Questetra 組織メンバー削除 <small>en:Questetra Org Membership Delete</small>
-
-last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> JA : <font color="Red">なし</font>
->> System Administrator Authority and User Manager Authority required
-1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
-2. Config [OAuth 2.0 Setting]
-
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipDelete.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-membershipDelete.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/questetra-membershipdelete/](https://support.questetra.com/ja/addons/questetra-membershipdelete/)
-    - [EN : https://support.questetra.com/addons/questetra-membershipdelete/](https://support.questetra.com/addons/questetra-membershipdelete/)
-
 ## Questetra 組織メンバー追加 <small>en:Questetra Org Membership Add</small>
 
 last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
@@ -145,6 +320,26 @@ last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/questetra-membershipadd/](https://support.questetra.com/ja/addons/questetra-membershipadd/)
     - [EN : https://support.questetra.com/addons/questetra-membershipadd/](https://support.questetra.com/addons/questetra-membershipadd/)
+
+## Questetra 組織メンバー削除 <small>en:Questetra Org Membership Delete</small>
+
+last-modified:2018-11-06, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> JA : <font color="Red">なし</font>
+>> System Administrator Authority and User Manager Authority required
+1. Get Secret: https://{YOUR}.questetra.net/Admin/OAuth2/Client/list
+2. Config [OAuth 2.0 Setting]
+
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Questetra-membershipDelete.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Questetra-membershipDelete.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/questetra-membershipdelete/](https://support.questetra.com/ja/addons/questetra-membershipdelete/)
+    - [EN : https://support.questetra.com/addons/questetra-membershipdelete/](https://support.questetra.com/addons/questetra-membershipdelete/)
 
 ## Questetra ロールメンバー追加 <small>en:Questetra Role Membership Add</small>
 
@@ -200,6 +395,23 @@ last-modified:2018-10-26, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box-webhook-json-parse/](https://support.questetra.com/ja/addons/box-webhook-json-parse/)
     - [EN : https://support.questetra.com/addons/box-webhook-json-parse/](https://support.questetra.com/addons/box-webhook-json-parse/)
 
+## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
+
+last-modified:2018-10-24, engine-type : 1
+
+### Summary
+
+> フォルダ単位での監視を行うBoxのWebhookを作成します。事前にOAuth2の設定が必要です。
+>> Create a Box webhook to check events on the folder. In advance,you have to configure the OAuth2.
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/box-webhook-create/](https://support.questetra.com/ja/addons/box-webhook-create/)
+    - [EN : https://support.questetra.com/addons/box-webhook-create/](https://support.questetra.com/addons/box-webhook-create/)
+
 ## BoxのWebhookを削除 <small>en:Delete Box Webhook</small>
 
 last-modified:2018-10-24, engine-type : 1
@@ -217,22 +429,22 @@ last-modified:2018-10-24, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/box-webhook-delete/](https://support.questetra.com/ja/addons/box-webhook-delete/)
     - [EN : https://support.questetra.com/addons/box-webhook-delete/](https://support.questetra.com/addons/box-webhook-delete/)
 
-## BoxのWebhookを作成(フォルダの監視) <small>en:Create Box Webhook(folder)</small>
+## 法人番号 企業情報 参照 <small>en:Houjin-Bango Corporate Info Retrieve</small>
 
-last-modified:2018-10-24, engine-type : 1
+last-modified:2018-10-15, engine-type : <font color="Red">undefined</font>
 
 ### Summary
 
-> フォルダ単位での監視を行うBoxのWebhookを作成します。事前にOAuth2の設定が必要です。
->> Create a Box webhook to check events on the folder. In advance,you have to configure the OAuth2.
+> 国税庁 法人番号 Web-API v3 にアクセスし、法人番号（13桁数字）に対応する正式商号・登記住所・フリガナ・最終更新日等の各データを取得します。事前に、国税庁から「アプリケーションID」の発行（無料）を受けておく必要があります
+>> Access the National Tax Agency corporate number Web-API v3 and obtain the business name, address and reading data corresponding to the corporate number (13 digit number). "Application ID" from the National Tax Agency (free) needed
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Box-webhook-create.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Box-webhook-create.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/HoujinBangou-CorpInfo-retrieve.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/HoujinBangou-CorpInfo-retrieve.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/box-webhook-create/](https://support.questetra.com/ja/addons/box-webhook-create/)
-    - [EN : https://support.questetra.com/addons/box-webhook-create/](https://support.questetra.com/addons/box-webhook-create/)
+    - [JA : https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/)
+    - [EN : https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/)
 
 ## Typetalk メッセージ投稿（APIトークン方式） <small>en:Typetalk Post Message (use API token)</small>
 
@@ -267,40 +479,6 @@ last-modified:2018-10-15, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/typetalk-messagepost/](https://support.questetra.com/ja/addons/typetalk-messagepost/)
     - [EN : https://support.questetra.com/addons/typetalk-messagepost/](https://support.questetra.com/addons/typetalk-messagepost/)
 
-## 法人番号 企業情報 参照 <small>en:Houjin-Bango Corporate Info Retrieve</small>
-
-last-modified:2018-10-15, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> 国税庁 法人番号 Web-API v3 にアクセスし、法人番号（13桁数字）に対応する正式商号・登記住所・フリガナ・最終更新日等の各データを取得します。事前に、国税庁から「アプリケーションID」の発行（無料）を受けておく必要があります
->> Access the National Tax Agency corporate number Web-API v3 and obtain the business name, address and reading data corresponding to the corporate number (13 digit number). "Application ID" from the National Tax Agency (free) needed
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/HoujinBangou-CorpInfo-retrieve.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/HoujinBangou-CorpInfo-retrieve.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/ja/addons/houjinbangou-corpinfo-retrieve/)
-    - [EN : https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/](https://support.questetra.com/addons/houjinbangou-corpinfo-retrieve/)
-
-## コンバータ (Email-Str to Quser) <small>en:Converter (Email-Str to Quser)</small>
-
-last-modified:2018-10-10, engine-type : 1
-
-### Summary
-
-> 文字型データ項目に格納されているメールアドレス文字列からQuestetraユーザを判定し、ユーザ型データ項目を更新します。
->> Judging the Questetra User by the email address string stored in the string type data item and update the User type data item.
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-EmailStr-Quser.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-EmailStr-Quser.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-emailstr-quser/](https://support.questetra.com/ja/addons/converter-emailstr-quser/)
-    - [EN : https://support.questetra.com/addons/converter-emailstr-quser/](https://support.questetra.com/addons/converter-emailstr-quser/)
-
 ## 請求データから仕訳伝票TSVの生成 <small>en:Journal Slip TSV from Invoice Data</small>
 
 last-modified:2018-10-02, engine-type : 1
@@ -317,23 +495,6 @@ last-modified:2018-10-02, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/journal-tsv-generator/](https://support.questetra.com/ja/addons/journal-tsv-generator/)
     - [EN : https://support.questetra.com/addons/journal-tsv-generator/](https://support.questetra.com/addons/journal-tsv-generator/)
-
-## 差分確認 (Table and Table) <small>en:Diff (Table and Table)</small>
-
-last-modified:2018-10-01, engine-type : 1
-
-### Summary
-
-> ２つのテーブル型データ項目を行単位で差分確認します
->> Confirm difference information of two table type data items line by line
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Tables-Diff.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Tables-Diff.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/tables-diff/](https://support.questetra.com/ja/addons/tables-diff/)
-    - [EN : https://support.questetra.com/addons/tables-diff/](https://support.questetra.com/addons/tables-diff/)
 
 ## OpenChat 投稿 (Questetra 内の社内SNS機能) <small>en:Post to OpenChat (Questetra's Enterprise Social)</small>
 
@@ -352,6 +513,23 @@ last-modified:2018-10-01, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/questetra-openchatpost/](https://support.questetra.com/ja/addons/questetra-openchatpost/)
     - [EN : https://support.questetra.com/addons/questetra-openchatpost/](https://support.questetra.com/addons/questetra-openchatpost/)
 
+## 差分確認 (Table and Table) <small>en:Diff (Table and Table)</small>
+
+last-modified:2018-10-01, engine-type : 1
+
+### Summary
+
+> ２つのテーブル型データ項目を行単位で差分確認します
+>> Confirm difference information of two table type data items line by line
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Tables-Diff.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Tables-Diff.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/tables-diff/](https://support.questetra.com/ja/addons/tables-diff/)
+    - [EN : https://support.questetra.com/addons/tables-diff/](https://support.questetra.com/addons/tables-diff/)
+
 ## サービスタスク定義ファイル(XML)をパースする <small>en:Parse service task definition file (XML)</small>
 
 last-modified:2018-09-28, engine-type : <font color="Red">undefined</font>
@@ -368,40 +546,6 @@ last-modified:2018-09-28, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://github.com/yambal/Parse-service-task-definition-file-XML-file-data](https://github.com/yambal/Parse-service-task-definition-file-XML-file-data)
     - EN : <font color="Red">なし</font>
-
-## コンバータ (Table to Options) <small>en:Converter (Table to Options)</small>
-
-last-modified:2018-09-26, engine-type : 1
-
-### Summary
-
-> テーブル型データ項目（1列目2列目）に格納されたID(value)-Label(display)を、２つの複数行文字列型に格納します。（選択肢XMLとして基盤登録するには、選択肢型データで２つの文字列型データを参照します。その後、［サービスタスク（選択肢マスタ更新）］から当該選択肢型データを参照します）
->> Convert IDs-Labels defined in Table data to two String type data items. (In order to base registration as Options XML, refer to two String type data from Select type data. Then, refer to the Select type data from [Service Task (Choices Update)].)
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Table-Options.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Table-Options.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/addons/converter-table-options/](https://support.questetra.com/addons/converter-table-options/)
-    - [EN : https://support.questetra.com/ja/addons/converter-table-options/](https://support.questetra.com/ja/addons/converter-table-options/)
-
-## コンバータ (Options to Table) <small>en:Converter (Options to Table)</small>
-
-last-modified:2018-09-26, engine-type : 1
-
-### Summary
-
-> 選択肢XML（M319）に定義されたID(value)-Label(display)を、テーブル型データ項目（２列）に展開します。
->> Convert IDs-Labels (values-displays) defined in Options XML (M319) to Table type data item (2 columns).
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Options-Table.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Options-Table.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-options-table/](https://support.questetra.com/ja/addons/converter-options-table/)
-    - [EN : https://support.questetra.com/addons/converter-options-table/](https://support.questetra.com/addons/converter-options-table/)
 
 ## Google Sheets 行追加 (TSV) <small>en:New Record to Google Sheets (TSV)</small>
 
@@ -435,54 +579,6 @@ last-modified:2018-08-31, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/services/hangoutschat-messageadd/](https://support.questetra.com/ja/addons/services/hangoutschat-messageadd/)
     - [EN : https://support.questetra.com/addons/services/hangoutschat-messageadd/](https://support.questetra.com/addons/services/hangoutschat-messageadd/)
 
-## コンバータ (Table to Excel-CSV FILE) sjis <small>en:Converter (Table to Excel-CSV FILE) sjis</small>
-
-last-modified:2018-08-29, engine-type : 1
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsvSjis.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsvSjis.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/)
-    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/)
-
-## コンバータ (Table to Excel-CSV FILE) <small>en:Converter (Table to Excel-CSV FILE)</small>
-
-last-modified:2018-08-29, engine-type : 1
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsv.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/)
-    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsv/](https://support.questetra.com/addons/converter-tabletoexcelcsv/)
-
-## Microsoft Teams メッセージ投稿 <small>en:Microsoft Teams Post Message</small>
-
-last-modified:2018-08-24, engine-type : 1
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/MicrosoftTeams-messagePost.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/MicrosoftTeams-messagePost.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/microsoftteams-messagepost/](https://support.questetra.com/ja/addons/microsoftteams-messagepost/)
-    - [EN : https://support.questetra.com/addons/microsoftteams-messagepost/](https://support.questetra.com/addons/microsoftteams-messagepost/)
-
 ## ChatWork メッセージ追加 <small>en:ChatWork Add Message</small>
 
 last-modified:2018-08-24, engine-type : 1
@@ -515,9 +611,9 @@ last-modified:2018-08-24, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/zendesksupport-ticketupdateapitoken/](https://support.questetra.com/ja/addons/zendesksupport-ticketupdateapitoken/)
     - [EN : https://support.questetra.com/addons/zendesksupport-ticketupdateapitoken/](https://support.questetra.com/addons/zendesksupport-ticketupdateapitoken/)
 
-## コンバータ (TSV to Excel-CSV FILE) sjis <small>en:Converter (TSV to Excel-CSV FILE) sjis</small>
+## Microsoft Teams メッセージ投稿 <small>en:Microsoft Teams Post Message</small>
 
-last-modified:2018-08-20, engine-type : 1
+last-modified:2018-08-24, engine-type : 1
 
 ### Summary
 
@@ -525,11 +621,11 @@ last-modified:2018-08-20, engine-type : 1
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TsvToExcelCsvSjis.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsvSjis.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/MicrosoftTeams-messagePost.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/MicrosoftTeams-messagePost.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tsvtoexcelcsvsjis/](https://support.questetra.com/ja/addons/converter-tsvtoexcelcsvsjis/)
-    - [EN : https://support.questetra.com/addons/converter-tsvtoexcelcsvsjis/](https://support.questetra.com/addons/converter-tsvtoexcelcsvsjis/)
+    - [JA : https://support.questetra.com/ja/addons/microsoftteams-messagepost/](https://support.questetra.com/ja/addons/microsoftteams-messagepost/)
+    - [EN : https://support.questetra.com/addons/microsoftteams-messagepost/](https://support.questetra.com/addons/microsoftteams-messagepost/)
 
 ## Google Sheets の値のTSV取得 <small>en:Get Google Sheets Values as TSV</small>
 
@@ -546,22 +642,6 @@ last-modified:2018-08-19, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/googlesheets-getvaluesastsv/](https://support.questetra.com/ja/addons/googlesheets-getvaluesastsv/)
     - [EN : https://support.questetra.com/addons/googlesheets-getvaluesastsv/](https://support.questetra.com/addons/googlesheets-getvaluesastsv/)
-
-## コンバータ (TSV to Excel-CSV FILE) <small>en:Converter (TSV to Excel-CSV FILE)</small>
-
-last-modified:2018-08-19, engine-type : 1
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TsvToExcelCsv.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TsvToExcelCsv.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/](https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/)
-    - [EN : https://support.questetra.com/addons/converter-tsvtoexcelcsv/](https://support.questetra.com/addons/converter-tsvtoexcelcsv/)
 
 ## 数値によるTSVフィルタ <small>en:TSV Filtering by Number</small>
 
@@ -616,22 +696,6 @@ last-modified:2018-08-17, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/tsv-changeorder/](https://support.questetra.com/ja/addons/tsv-changeorder/)
     - [EN : https://support.questetra.com/addons/tsv-changeorder/](https://support.questetra.com/addons/tsv-changeorder/)
 
-## TSV の行削除 <small>en:Delete Rows of Tsv</small>
-
-last-modified:2018-08-16, engine-type : 1
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Tsv-DeleteRows.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Tsv-DeleteRows.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/tsv-deleterows/](https://support.questetra.com/ja/addons/tsv-deleterows/)
-    - [EN : https://support.questetra.com/addons/tsv-deleterows/](https://support.questetra.com/addons/tsv-deleterows/)
-
 ## TSV の列追加 <small>en:Add Column to Tsv</small>
 
 last-modified:2018-08-16, engine-type : 1
@@ -647,6 +711,22 @@ last-modified:2018-08-16, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/tsv-addcolumn/](https://support.questetra.com/ja/addons/tsv-addcolumn/)
     - [EN : https://support.questetra.com/addons/tsv-addcolumn/](https://support.questetra.com/addons/tsv-addcolumn/)
+
+## TSV の行削除 <small>en:Delete Rows of Tsv</small>
+
+last-modified:2018-08-16, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Tsv-DeleteRows.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Tsv-DeleteRows.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/tsv-deleterows/](https://support.questetra.com/ja/addons/tsv-deleterows/)
+    - [EN : https://support.questetra.com/addons/tsv-deleterows/](https://support.questetra.com/addons/tsv-deleterows/)
 
 ## JSONPath による JSON Value の取得 <small>en:Single Value from a JSON object using JSONPath</small>
 
@@ -665,23 +745,6 @@ last-modified:2018-07-10, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/jsonvalue-extractor/](https://support.questetra.com/ja/addons/jsonvalue-extractor/)
     - [EN : https://support.questetra.com/addons/jsonvalue-extractor/](https://support.questetra.com/addons/jsonvalue-extractor/)
 
-## LINE Notifyでメッセージ投稿 <small>en:Post message through LINE Notify</small>
-
-last-modified:2018-04-20, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> LINE Notifyを通してLINEグループにメッセージを投稿します。事前にパーソナルアクセストークンを取得してください。送信先はトークンを取得するユーザー本人、またはその人の参加しているグループの中からトークン取得時に選択します。
->> Post message to your LINE Group through LINE Notify. In advance you have to get a personal access token. When get the one, choose where messages are sent. 
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Line-pushNotify.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Line-pushNotify.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/line-pushnotify/](https://support.questetra.com/ja/addons/line-pushnotify/)
-    - [EN : https://support.questetra.com/addons/line-pushnotify/](https://support.questetra.com/addons/line-pushnotify/)
-
 ## ユーザの指定組織への所属を判定 <small>en:Check the user is in the organization</small>
 
 last-modified:2018-04-20, engine-type : <font color="Red">undefined</font>
@@ -698,6 +761,23 @@ last-modified:2018-04-20, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/services/questetra-userorgposition/](https://support.questetra.com/ja/addons/services/questetra-userorgposition/)
     - [EN : https://support.questetra.com/addons/services/questetra-userorgposition/](https://support.questetra.com/addons/services/questetra-userorgposition/)
+
+## LINE Notifyでメッセージ投稿 <small>en:Post message through LINE Notify</small>
+
+last-modified:2018-04-20, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> LINE Notifyを通してLINEグループにメッセージを投稿します。事前にパーソナルアクセストークンを取得してください。送信先はトークンを取得するユーザー本人、またはその人の参加しているグループの中からトークン取得時に選択します。
+>> Post message to your LINE Group through LINE Notify. In advance you have to get a personal access token. When get the one, choose where messages are sent. 
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Line-pushNotify.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Line-pushNotify.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/line-pushnotify/](https://support.questetra.com/ja/addons/line-pushnotify/)
+    - [EN : https://support.questetra.com/addons/line-pushnotify/](https://support.questetra.com/addons/line-pushnotify/)
 
 ## PayPal 請求書 生成 (JPY) <small>en:PayPal Invoicing Create (JPY)</small>
 
@@ -830,22 +910,6 @@ last-modified:2017-11-19, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/templates/http-filesget/](https://support.questetra.com/ja/templates/http-filesget/)
     - [EN : https://support.questetra.com/addons/http-filesget/](https://support.questetra.com/addons/http-filesget/)
-
-## コンバータ (Tsv to Table) <small>en:Converter (Tsv to Table)</small>
-
-last-modified:2017-11-19, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TsvToTable.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TsvToTable.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tsvtotable/](https://support.questetra.com/ja/addons/converter-tsvtotable/)
-    - [EN : https://support.questetra.com/addons/converter-tsvtotable/](https://support.questetra.com/addons/converter-tsvtotable/)
 
 ## Google Sheets 行追加 <small>en:Google Sheets Append Cells</small>
 
@@ -1002,25 +1066,6 @@ last-modified:2017-08-01, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/](https://support.questetra.com/ja/addons/services/googlecalendar-eventslist/)
     - [EN : https://support.questetra.com/addons/services/googlecalendar-eventslist/](https://support.questetra.com/addons/services/googlecalendar-eventslist/)
 
-## Google Analytics レポート (Domain ranking) <small>en:Google Analytics reports (Domain ranking)</small>
-
-last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> JA : <font color="Red">なし</font>
->> 1. Get Secret: https://console.developers.google.com/apis/dashboard
-2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/analytics.readonly
-
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleAnalytics-reportsDomain.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsDomain.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/)
-    - [EN : https://support.questetra.com/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/addons/services/googleanalytics-reportsdomain/)
-
 ## Google Analytics レポート (PV ranking) <small>en:Google Analytics reports (PV ranking)</small>
 
 last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
@@ -1039,6 +1084,25 @@ last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/googleanalytics-reportspv/](https://support.questetra.com/ja/addons/googleanalytics-reportspv/)
     - [EN : https://support.questetra.com/addons/googleanalytics-reportspv/](https://support.questetra.com/addons/googleanalytics-reportspv/)
+
+## Google Analytics レポート (Domain ranking) <small>en:Google Analytics reports (Domain ranking)</small>
+
+last-modified:2017-07-24, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> JA : <font color="Red">なし</font>
+>> 1. Get Secret: https://console.developers.google.com/apis/dashboard
+2. Config [OAuth 2.0 Setting] (scope) https://www.googleapis.com/auth/analytics.readonly
+
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleAnalytics-reportsDomain.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleAnalytics-reportsDomain.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/ja/addons/services/googleanalytics-reportsdomain/)
+    - [EN : https://support.questetra.com/addons/services/googleanalytics-reportsdomain/](https://support.questetra.com/addons/services/googleanalytics-reportsdomain/)
 
 ## Google Analytics レポート (Referrer ranking) <small>en:Google Analytics reports (Referrer ranking)</small>
 
@@ -1200,22 +1264,6 @@ last-modified:2016-12-22, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/process-bulkstarttsv/](https://support.questetra.com/ja/addons/process-bulkstarttsv/)
     - [EN : https://support.questetra.com/addons/process-bulkstarttsv/](https://support.questetra.com/addons/process-bulkstarttsv/)
 
-## コンバータ (Email to Quser) <small>en:Converter (Email to Quser)</small>
-
-last-modified:2016-12-21, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/User-EmailToQuser.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/User-EmailToQuser.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/user-emailtoquser/](https://support.questetra.com/ja/addons/user-emailtoquser/)
-    - [EN : https://support.questetra.com/addons/user-emailtoquser/](https://support.questetra.com/addons/user-emailtoquser/)
-
 ## OpenChat 投稿 (Questetra 内のコラボレーション機能) <small>en:Post to OpenChat (Team Collaboration Tool on Questetra)</small>
 
 last-modified:2016-11-31, engine-type : <font color="Red">undefined</font>
@@ -1248,9 +1296,9 @@ last-modified:2016-11-22, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/data-delete/](https://support.questetra.com/ja/addons/data-delete/)
     - [EN : https://support.questetra.com/addons/data-delete/](https://support.questetra.com/addons/data-delete/)
 
-## コンバータ (Quser to ID, Name, Email) <small>en:Converter (Quser to ID, Name, Email)</small>
+## Google Cloud Print ジョブ送信 <small>en:Submit Print Job via GCP Service</small>
 
-last-modified:2016-11-15, engine-type : <font color="Red">undefined</font>
+last-modified:2016-11-07, engine-type : <font color="Red">undefined</font>
 
 ### Summary
 
@@ -1258,11 +1306,11 @@ last-modified:2016-11-15, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/User-Converter.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/User-Converter.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleCloudPrint-print.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleCloudPrint-print.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/user-converter/](https://support.questetra.com/ja/addons/user-converter/)
-    - [EN : https://support.questetra.com/addons/user-converter/](https://support.questetra.com/addons/user-converter/)
+    - [JA : https://support.questetra.com/ja/addons/googlecloudprint-print/](https://support.questetra.com/ja/addons/googlecloudprint-print/)
+    - [EN : https://support.questetra.com/addons/googlecloudprint-print/](https://support.questetra.com/addons/googlecloudprint-print/)
 
 ## Google Cloud Print ジョブ送信 <small>en:Submit Print Job via GCP Service</small>
 
@@ -1279,22 +1327,6 @@ last-modified:2016-11-07, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/](https://support.questetra.com/ja/addons/services/googlecloudprint-printsingle/)
     - [EN : https://support.questetra.com/addons/services/googlecloudprint-printsingle/](https://support.questetra.com/addons/services/googlecloudprint-printsingle/)
-
-## Google Cloud Print ジョブ送信 <small>en:Submit Print Job via GCP Service</small>
-
-last-modified:2016-11-07, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleCloudPrint-print.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleCloudPrint-print.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googlecloudprint-print/](https://support.questetra.com/ja/addons/googlecloudprint-print/)
-    - [EN : https://support.questetra.com/addons/googlecloudprint-print/](https://support.questetra.com/addons/googlecloudprint-print/)
 
 ## 法人番号 API 企業情報の取得 <small>en:Get Info via Corporate Number API</small>
 
@@ -1440,22 +1472,6 @@ last-modified:2016-09-15, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/addons/googlesheets-appendtable/](https://support.questetra.com/addons/googlesheets-appendtable/)
     - [EN : https://support.questetra.com/ja/addons/googlesheets-appendtable/](https://support.questetra.com/ja/addons/googlesheets-appendtable/)
 
-## Google Sheets のセル合計（カンマ除去版） <small>en:Sum of cells in a Google Spreadsheet</small>
-
-last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbersCom.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/)
-    - [EN : https://support.questetra.com/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/addons/services/googlesheets-sumnumberscom/)
-
 ## Google Sheets のセル合計 <small>en:Sum of cells in a Google Spreadsheet</small>
 
 last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
@@ -1472,9 +1488,9 @@ last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/googlesheets-sumnumbers/](https://support.questetra.com/ja/addons/googlesheets-sumnumbers/)
     - [EN : https://support.questetra.com/addons/googlesheets-sumnumbers/](https://support.questetra.com/addons/googlesheets-sumnumbers/)
 
-## コンバータ (Date to 和暦テキスト) <small>en:Converter (Date to Japanese Era String)</small>
+## Google Sheets のセル合計（カンマ除去版） <small>en:Sum of cells in a Google Spreadsheet</small>
 
-last-modified:2016-09-09, engine-type : <font color="Red">undefined</font>
+last-modified:2016-09-13, engine-type : <font color="Red">undefined</font>
 
 ### Summary
 
@@ -1482,11 +1498,11 @@ last-modified:2016-09-09, engine-type : <font color="Red">undefined</font>
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-DateToJpEra.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-DateToJpEra.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleSheets-sumNumbersCom.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleSheets-sumNumbersCom.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-datetojpera/](https://support.questetra.com/ja/addons/converter-datetojpera/)
-    - [EN : https://support.questetra.com/addons/converter-datetojpera/](https://support.questetra.com/addons/converter-datetojpera/)
+    - [JA : https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/ja/addons/services/googlesheets-sumnumberscom/)
+    - [EN : https://support.questetra.com/addons/services/googlesheets-sumnumberscom/](https://support.questetra.com/addons/services/googlesheets-sumnumberscom/)
 
 ## パスワード・ジェネレータ <small>en:Random Password Generator</small>
 
@@ -1616,22 +1632,6 @@ last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/openchat-postjointextdata/](https://support.questetra.com/ja/addons/openchat-postjointextdata/)
     - [EN : https://support.questetra.com/addons/openchat-postjointextdata/](https://support.questetra.com/addons/openchat-postjointextdata/)
 
-## コンバータ (Table to TSV) <small>en:Converter (Table to TSV)</small>
-
-last-modified:2016-08-29, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToTsv.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToTsv.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tabletotsv/](https://support.questetra.com/ja/addons/converter-tabletotsv/)
-    - [EN : https://support.questetra.com/addons/converter-tabletotsv/](https://support.questetra.com/addons/converter-tabletotsv/)
-
 ## Hash Calculator (MD5) <small>en:Hash Calculator (MD5)</small>
 
 last-modified:2016-08-22, engine-type : <font color="Red">undefined</font>
@@ -1664,7 +1664,7 @@ last-modified:2016-08-22, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/hash-calculatesha256/](https://support.questetra.com/ja/addons/hash-calculatesha256/)
     - [EN : https://support.questetra.com/addons/hash-calculatesha256/](https://support.questetra.com/addons/hash-calculatesha256/)
 
-## 時間計算(分) <small>en:Minites Calculator</small>
+## Excel-CSV のメール送付 (Table) <small>en:Email a Excel-CSV (Table)</small>
 
 last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
 
@@ -1674,8 +1674,25 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Minites-Calculator.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Minites-Calculator.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Email-SendExcelCsvSjis.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Email-SendExcelCsvSjis.xml)
+- ヘルプページURL
+    - JA : <font color="Red">なし</font>
+    - EN : <font color="Red">なし</font>
+
+## データ複製 (テーブル) <small>en:Data Duplicator (Table)</small>
+
+last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> 最新版をご利用ください（https://support.questetra.com/addons/duplicator-table/）
+>> EN : <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Table-DataDuplicator.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Table-DataDuplicator.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
@@ -1697,23 +1714,6 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
     - [JA : https://www.questetra.com/ja/tour/m4/m415/addon-line-counter](https://www.questetra.com/ja/tour/m4/m415/addon-line-counter)
     - [EN : https://www.questetra.com/tour/m4/m415/addon-line-counter](https://www.questetra.com/tour/m4/m415/addon-line-counter)
 
-## データ複製 (テーブル) <small>en:Data Duplicator (Table)</small>
-
-last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> 最新版をご利用ください（https://support.questetra.com/addons/duplicator-table/）
->> EN : <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Table-DataDuplicator.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Table-DataDuplicator.xml)
-- ヘルプページURL
-    - JA : <font color="Red">なし</font>
-    - EN : <font color="Red">なし</font>
-
 ## 振替伝票の生成 <small>en:Generate Transfer Slips</small>
 
 last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
@@ -1726,22 +1726,6 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 - [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Generate-TransferSlips.xml)
 - [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Generate-TransferSlips.xml)
-- ヘルプページURL
-    - JA : <font color="Red">なし</font>
-    - EN : <font color="Red">なし</font>
-
-## データ複製 (Files) <small>en:Data Duplicator (Files)</small>
-
-last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/File-Duplicator.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/File-Duplicator.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
@@ -1762,7 +1746,7 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
 
-## Excel-CSV のメール送付 (Table) <small>en:Email a Excel-CSV (Table)</small>
+## データ複製 (Files) <small>en:Data Duplicator (Files)</small>
 
 last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
 
@@ -1772,8 +1756,8 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Email-SendExcelCsvSjis.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Email-SendExcelCsvSjis.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/File-Duplicator.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/File-Duplicator.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
@@ -1806,6 +1790,22 @@ last-modified : <font color="Red">undefined</font>, engine-type : <font color="R
 
 - [GitHub](https://github.com/Questetra/addon/blob/master/service-task/AccumulatedHours-Calculator.xml)
 - [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/AccumulatedHours-Calculator.xml)
+- ヘルプページURL
+    - JA : <font color="Red">なし</font>
+    - EN : <font color="Red">なし</font>
+
+## 時間計算(分) <small>en:Minites Calculator</small>
+
+last-modified : <font color="Red">undefined</font>, engine-type : <font color="Red">undefined</font>
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Minites-Calculator.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Minites-Calculator.xml)
 - ヘルプページURL
     - JA : <font color="Red">なし</font>
     - EN : <font color="Red">なし</font>
