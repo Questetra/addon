@@ -3,7 +3,7 @@
 <label>Delete Rows of Tsv</label>
 <label locale="ja">TSV の行削除</label>
 
-<last-modified>2018-08-16</last-modified>
+<last-modified>2018-11-15</last-modified>
 <help-page-url>https://support.questetra.com/addons/tsv-deleterows/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/tsv-deleterows/</help-page-url>
 
@@ -30,7 +30,7 @@
 
 //////// START "main()" ////////
 main();
-function main(){ 
+function main(){
 
 
 //// == Config Retrieving / 工程コンフィグの参照 ==
@@ -72,7 +72,22 @@ engine.setDataByNumber( dataIdC, newTsv );
 
 
 <icon>
-iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB7klEQVRYR8WXwVHCQBSG94cbHMQK1ArUCgw3ZsMMYwVCBdKBUoFSgdgBB/KGm7ED7IASckmOec4yWWeNidmwAbjyZr+Pf9+8t0A09JFS3gghRkQ0q3Mk6hSX1So4gA8hRI+ZZ0T0bHuus4AJ11BmnhDRwkbCSaAIrqFpmt632+0oTdO7JEnmYRhGRUKuAlsAFyW/VAF76jtm3iRJ0i+ScBVQjRcCOKuKu0zCSUBBs+63liCiW1PWWSCTGAN4q0ohu45bItro2kYE1GG+76uuf6iQeA+CYHySBJh5S0RXecFGErDtAwD91WoVNprAYDC4XK/XWxuJohScEtCDiJmXRDSxlPg1JfcWyE9BZl7kJJbM7OUHVT6FvQTKRrCWqLoWc1fUFvhv/gshvuI49syRK6X8MyPMFGoJ1IXrbpdSvgJ4NLufmXcDyVpgX7iG+r6vpt+1sbLnRDS1EnCFK6jqi1artTEWVxQEwXmlQBNwI4WpEOLlZw8A/X8FmoQb/bAEMMoW06xU4BDw/FUw82ehwKHgRgrPAJ4KBQ4N1xLD4dBTi+lXAseCF27DU8CVyC6BU8F3AqeEa4Go5Fn9Z7HYPDrr1iA/o7MDjgLfJeB5Xq/b7ap3ml4UR4P/NKGS6HQ6CwBRHMfTsv9xdeO1qf8G4yxv7ljnMNoAAAAASUVORK5CYII=
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADV0lEQVRYR8WXTUgUYRjHf5O2aSBu
+EiFWVBQRWPlBQfTBih8HO5UnQSjFw3gQK0FBUDNBQg9mltiC1HbQk2BaHQrygzqV4opdooMFKmER
+KyIr1jbxzjg6+zHujJq9sOzCPvP8/8/z/p+PkfjPR7KF7+YK4EIhHQknkL7yvBcFHxLie5gy+q36
+jU7gCU6WuQHcBBXUyvEBbTi4Twnit+lZn0Anxezgng3gUCABXoLMMzMG5gQe0YakRr4Vpw2ZW5Ec
+RSbgxgNc3wrkVR8KHsooCfUZTsBm5Ak7E2g/387bb295/Onx+pwV7lOmamn1BBPQ7vyJ1cgFeG9e
+L3kH8phZnKH8XTn9X6MWwFWjJtYIaGqfsio4I7iE5mbOP4c/4GdoZoiSkbBs63H5cHBEr441Am4a
+gNtWoxd2Dy88pPREKXExcUGPBZQA3Z+7uT5sKqM7yCreCnXxy63Wa6IdAsLWk+Wh6FgRsTtigx71
+//ZT+6GW1snWSC59yOxZI6B1uD674MI+/2A+Xa4uUnanGASv8GbmDQWvC1j4tWDmVtWCdgU2lW/0
+WJ1WTU1GDU5HcJMc/T5K9otscwIrFaERcDOs9nibp+lsEzn7cxj4OkBVWlUQieU/yzR7m6kfrTfz
+OoJMlk7gC3DIDr4ArzxdqQpw8uckfVN9pCalcjzxOKeSTqmuxn+M43ruMsuCF5kMnYCyUXC9/Gre
+16iNqPBoIR0XO0jalcRSYInGsUbueu9Gdi8j2SZgjDwUXEcx2ggx5r7MjUrA0hVYAdeRXl1+pXbI
+2cVZrg1dY3B2MJiEwgRlpFsWoR1wgXRu3zl6cnpIjk+mYayBlomW0CwYRBilDO2C60iNZxqpOFnB
+g48PqButC82AOpj0DJg2oo2CCzQxLxIdiUwvTkfSgKERab0grBVvBjxKVc0ja+ud6TD6h+ACN8Iw
+0saxqAZ1II0VjJG5N1MNRIxZvc7t9AsT23kcHA4fx8LasJCIIdN5qZP4mPitBBcoJguJTncTg8lC
+dlZTr9tu31IKT5EpDiW5XWt5WOTrZ0D/V1tUxIpue1NacTEPFG/sxUQnoVWHWKXFxyoRASxezdo2
+92oWemEiIwpZSKSj4EQiTTURg0XCh4IXieH1IrauAQuS3gqTvxXhUDBgMFNwAAAAAElFTkSuQmCC
 </icon>
 
 </service-task-definition>
