@@ -1,87 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?><service-task-definition>
 
-<label>Submit Print Job via GCP Service</label>
-<label locale="ja">Google Cloud Print ジョブ送信</label>
-<last-modified>2016-11-07</last-modified>
+<label>Submit Print Jobs via Google Cloud Print Service</label>
+<label locale="ja">Google Cloud Print ジョブの送信</label>
+<last-modified>2018-09-01</last-modified>
 
 <help-page-url>https://support.questetra.com/addons/googlecloudprint-print/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/googlecloudprint-print/</help-page-url>
+
+<summary>Prints files attached as workflow data (via Google Cloud Print). Detail to the "GCP /submit API".</summary>
+<summary locale="ja">ワークフローデータとして添付されているファイル群を印刷します。（Google Cloud Print 経由）</summary>
+
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
     <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
     <label locale="ja">A: OAuth2通信許可設定名 (←［OAuth 2.0 設定］)</label>
   </config>
-  <config name="conf_DataIdB" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
-    <label>B: Select STRING/SELECT for Printer ID (Non-existent Error)</label>
-    <label locale="ja">B: Printer ID が格納されている文字列型データor選択肢型データを選択してください（存在しない場合、エラー）</label>
+  <config name="conf_PrinterId" required="true" el-enabled="true" form-type="TEXTFIELD">
+    <label>B: Set Printer Id (e.g. "a2c4e6g8-...")</label>
+    <label locale="ja">B: プリンタIDをセットしてください (例 "a2c4e6g8-...")</label>
   </config>
   <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="FILE">
-    <label>C: Select FILE DATA for Print</label>
-    <label locale="ja">C: Printファイルが格納されているファイル型データを選択してください</label>
+    <label>C: Select FILES DATA for Print (PDF, PNG, DOCX, etc)</label>
+    <label locale="ja">C: 印刷するファイル群が格納されているファイル型データを選択してください（PDF、PNG、DOCX等）</label>
   </config>
-  <config name="conf_DataIdD" required="false" form-type="SELECT" select-data-type="STRING_TEXTFIELD|SELECT_SINGLE">
-    <label>D: Select STRING/SELECT for Cloud Job Ticket</label>
-    <label locale="ja">D: Cloud Job Ticket が格納されている文字列型データor選択肢型データを選択してください</label>
-  </config>
-  <config name="conf_DataIdX" required="false" form-type="SELECT" select-data-type="STRING_TEXTAREA">
-    <label>X: Select STRING DATA for Access Log (update)</label>
-    <label locale="ja">X: 通信ログが格納される文字列型データを選択してください (更新)</label>
+  <config name="conf_JobTicket" required="false" el-enabled="true" form-type="TEXTFIELD">
+    <label>D: Set CJT Options (e.g. '{"version":"1.0","print":{}}')</label>
+    <label locale="ja">D: 必要であればCJT印刷オプションをセットしてください (例 '{"version":"1.0","print":{}}')</label>
   </config>
 </configs>
 
 
+<engine-type>1</engine-type>
+
 <script><![CDATA[
-// Submit a Print Job via Google Cloud Print Service (ver. 20161107)
-// (c) 2016, Questetra, Inc. (the MIT License)
+// Submit Print Jobs via Google Cloud Print Service
+// (c) 2018, Questetra, Inc. (the MIT License)
 
-//// == 工程コンフィグの参照 / Config Retrieving ==
-var oauth2 = configs.get( "conf_OAuth2" );
-var dataIdB = configs.get( "conf_DataIdB" ); // (returns Number)
-var dataIdC = configs.get( "conf_DataIdC" ); // (returns Number)
-var dataIdD = configs.get( "conf_DataIdD" ); // (returns Number)
-var dataIdX = configs.get( "conf_DataIdX" ) + ""; // (returns Number)
+// OAuth2 Example Setting:
+// <Google Developers Console>
+// Application Type: Web Application
+// Name: questetra-print
+// Redirect URL: https://s.questetra.net/oauth2callback
+// <Questetra OAuth2.0 Setting of Workflow App>
+// Name: google-cloud-print
+// Authorization Endpoint URL: https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force
+// Token Endpoint URL: https://accounts.google.com/o/oauth2/token
+// Scope: https://www.googleapis.com/auth/cloudprint
+// Consumer Key: (Copy from Google Developers Console)
+// Consumer Secret: (Copy from Google Developers Console)
+/// https://console.developers.google.com/apis/credentials
 
-//// == ワークフローデータの参照 / Data Retrieving ==
-var printerId = "";
-if( data.get( dataIdB ) instanceof java.util.ArrayList ){
-  printerId = data.get( dataIdB ).get(0).getValue() + "";
-}else if( data.get( dataIdB ) instanceof java.lang.String ){
-  printerId = data.get( dataIdB ) + "";
-}
-var files = data.get( dataIdC );
-var cloudJobTicket = "";
-if( data.get( dataIdD ) instanceof java.util.ArrayList ){
-  cloudJobTicket = data.get( dataIdD ).get(0).getValue() + "";
-}else if( data.get( dataIdD ) instanceof java.lang.String ){
-  cloudJobTicket = data.get( dataIdD ) + "";
-}
-if( cloudJobTicket === "" ){
-  cloudJobTicket = '{"version": "1.0", "print": {}}';
-}
-var jobTitle = "Questetra-" + processInstance.getProcessInstanceId() + "";
+// PrinterID: Get via "chrome://devices/"
+// Cloud Job Ticket (CJT):
+// REF https://developers.google.com/cloud-print/docs/cdd#cjt
+// If not specified, it is printed with the printer's default setting '{"version": "1.0", "print": {}}'
+// Other Examples
+// {"version":"1.0","print":{"vendor_ticket_item":[],"duplex":{"type":"LONG_EDGE"}}}
+// {"version":"1.0","print":{"vendor_ticket_item":[],"color":{"type":"STANDARD_MONOCHROME"},"copies":{"copies": 2}}}
 
-//// == 演算 / Calculating ==
-var accessLog = "";
-var token = httpClient.getOAuth2Token( oauth2 );
+// Supported File Types:
+// "text/html", "text/plain", "application/postscript",,,
+// "application/pdf", "image/jpeg", "image/png",,,
+// "application/vnd.openxmlformats-officedocument.wordprocessingml.document" (docx),,,
+// "application/vnd.openxmlformats-officedocument.presentationml.presentation" (pptx),,,
+// REF https://developers.google.com/cloud-print/docs/appDevGuide
+// REF https://developers.google.com/cloud-print/docs/appInterfaces
 
-for( var i = 0; i < files.size(); i++  ){
-  var uri = "https://www.google.com/cloudprint/submit";
-  var response = httpClient.begin()
-    .bearer( token )
-    .multipart( "printerid", printerId )
-    .multipart( "title", jobTitle )
-    .multipart( "ticket", cloudJobTicket )
-    .multipart( "content", files.get(i) )
-    .post( uri );
-  accessLog += "---POST request--- " + response.getStatusCode() + "\n";
-  accessLog += response.getResponseAsString() + "\n";
+
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+// https://wiki.openjdk.java.net/display/Nashorn/Rhino+Migration+Guide#RhinoMigrationGuide-JavaScriptvsJavaStrings
+// https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/api.html#sthref21
+
+const oauth2    = configs.get( "conf_OAuth2" ) + "";
+const printerId = configs.get( "conf_PrinterId" ) + "";
+let   jobTicket = configs.get( "conf_JobTicket" ) + "";
+  if( jobTicket === "" ){
+    jobTicket = '{"version": "1.0", "print": {}}';
+  }
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+const myFiles   = engine.findDataByNumber( dataIdC ); // java.util.ArrayList
+// com.questetra.bpms.core.event.scripttask.NewQfile
+if( myFiles === null ){
+  throw new Error( "Files data is NULL" );
 }
 
-//// == ワークフローデータへの代入 / Data Updating ==
-if( dataIdX !== "" ){
-  retVal.put( dataIdX, accessLog );
+//// == Calculating / 演算 ==
+const jobTitle  = "Questetra-" + processInstance.getProcessInstanceId() + "";
+const token     = httpClient.getOAuth2Token( oauth2 );
+
+for( let i = 0; i < myFiles.size(); i++ ){
+  // prepare API Request
+  // com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+  let apiRequest = httpClient.begin(); // HttpRequestWrapper
+  apiRequest     = apiRequest.bearer( token );
+  apiRequest     = apiRequest.multipart( "title", jobTitle );
+  apiRequest     = apiRequest.multipart( "printerid", printerId );
+  apiRequest     = apiRequest.multipart( "ticket", jobTicket );
+  apiRequest     = apiRequest.multipart( "content", myFiles.get(i) );
+
+  // access API (with post())
+  let response   = apiRequest.post( "https://www.google.com/cloudprint/submit" );
+  let httpStatus = response.getStatusCode() + "";
+  let responseStr= response.getResponseAsString() + "";
+  engine.log( "Submit Print Job: " + jobTitle + " (" + httpStatus + ")" );
+  if( httpStatus !== "200" ){
+    let errorMessage = "\n- HTTP STATUS is not 200, Service Task stopped. -\n";
+    errorMessage += responseStr + "\n";
+    throw new Error( errorMessage );
+  }
 }
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+// (nothing)
+
+} //////// END "main()" ////////
+
 ]]></script>
 
 
