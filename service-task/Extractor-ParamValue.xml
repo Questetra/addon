@@ -9,7 +9,7 @@
 <help-page-url>https://support.questetra.com/addons/extractor-serialized-string/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/extractor-serialized-string/</help-page-url>
 
-<last-modified>2018-10-18</last-modified>
+<last-modified>2018-11-29</last-modified>
 
 <configs>
   <config name="conf_DataIdA" required="true" form-type="SELECT" select-data-type="STRING_TEXTFIELD|STRING_TEXTAREA">
@@ -37,7 +37,7 @@
 
 //////// START "main()" ////////
 main();
-function main(){ 
+function main(){
 
 //// == Config Retrieving / 工程コンフィグの参照 ==
 const dataIdA = configs.get( "conf_DataIdA" ) + "";
@@ -78,23 +78,27 @@ function getParam(name, querystr) {
 
 
 <icon>
-iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADXUlEQVRYR61XUVLbMBDVmr+YmcIJ
-mp6g9AR1/kBipukJmp6gcALgBNATFE7QdAaJT8wJSE5QbtB0Bpu/bOe5kisUx7JD9ZdY9j7t2933
-RKLHklJ+EEKMiWjIzDtEtIfXmXlGRAtmfhBCTI0xP7p+lmIb9/f3h0mSnBDRWAixE9tvnwPMtCzL
-4zzPF23vrAWQZdnOYDD4QkRHPQKHsQDkwhhztg5EIwAb/Nal2Ht5LoS4JKLZ4+PjzJ0O+7e3t/eY
-GZRMhBBv/YCgqCzLUVM2VgBIKfeI6NY/NTPfJUlyen19nXeh4PDwMFsul6dE9N7bj2yMjDEz/xvP
-AOAkaZr+dMGZ+bcQ4sgYc9klcLhHSjkhom8+iKIo3viZqAGEabfBsxBxXyDIqBAiJ6JXrmOMMe/c
-d2oAUkqk7MRuwslbgx8cHKAd0Zbg96qt2i2t9y4oM58ZY07xuwLQkPrPbWlH8CRJvnvZyLXWo7bs
-BHQsHBUVAKUUOP5kT39njMnaPubvd/uKotiN9byUElS4wrzSWk8cgF+u8IhoFKt2pRRmw7mX0t/G
-mOiQQncwMzoMa6G13qUgnXOtdTVe25Yt2ClO07dTlFJow2pOLJfLjxSk81hrfRED8JLnQbF/JZ+X
-LukPg9uhMzbGgJbo8mnAgAOAezdyuxSSi2BbC3UAXqOF696DuG1tbWHY/VVRpRS7h1rrqDpa/s+J
-CDO/Wn0A2K6rY/YGgH6G4BARqr4qppcCqKuyDwUhl7HZ0USBEGK+cRFuCmClCDdtw00BrLShP4hQ
-lb5StfXUCwDUXVcNIgSRUi6cXHadBZsACN6pxveKGEG7OygbxjX8omtFuJ1JzA0rpaADTuj+iZHt
-7QfPNLTKcaBqNVNtc8SXY+hHWZZDqGejIYFSNfk3bwri5MOwRpzJCP+PGhL3gq9UMRDRoW83NJjc
-Z4q7YkoHg0FNhQVx/L9MqZ96d4BGW+6bSLsRTuYsZlTcR221w1/WzmqdyV17MUnTFHeAlQsG7n7M
-nD89Pc2dBYPCEdFrIkJAmNXQ1MyLosg6XUx8bjG1cC9w3dGVd08l4a5xNasccNPqJL9pml4wM05W
-efvYQrqJaFoUxVHMqEYB+MHs2B4zM1JeyzFUjZlxC56Bnpubm2kMpHv+B4f7Zsut/FA0AAAAAElF
-TkSuQmCC
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAESklEQVRYR8WXb0iVdxTHP486qVbT
+Yhgsh0WZQ8zuCkLGVi5Grb2IORpEUV7BuPdF6dYbub1orhdREe0WhPrC/BNR0IvmfSeKWRZk4HZv
+lNva2pJyhW16XTnRZc84z9Oj9/l3e1zSDlzuw/M7v3O+5/zO+f7Oo/A/izIt/3V8CqxDxYdCJuB7
+vj+KShwF+e8kSItXuy8G0EAm41QCX4Dm1IvEgTDpHKcMeXaV5ABq8JPCN9NwbHUkzssI8K0bAncA
+tYRRtMhnQsIE+NLJkDOAOhqB0pnwPGlDpZEgZVabdgBJIp/32jx2vbOLkiUl5GbkMidtjmbv0egj
+YoMxTt8+zYW7F9xxqxwnqNXSpJgB6Gfe4GShamUVewv3kjU7y9XBhDpB7M8Y+67vo/V+q5teSWJN
+TAHQq/03a8FJ1PXr6ilZXEJaSpqnUxkaG+JQ9BBHYkec9OOks8TojikAdVQDX1l3NBU3sT13O6lK
+qmnp8T+P6R7oJi8jj+y52SiYkxkfjxPqDlH7Q60TiK8JaP4SdtVp/ZqRqF29upoqXxWzUmeZjIw8
+HdHSfOLmCfIz84l8HGHpG0ttju49uYe/00/H7x329gwwfwqAznCm6lmesZzIxgh5mXk2ww/+fkDp
+xVLa+tu0tVuf3yJ/fr5NT0Xl3C/n2NaxzSkLWi3oeXOo/JAvxP7V+23Ri7oUW6QvQsXVCvYU7KGi
+oMJRT3T7nvSxtX0r1waumUE87wgdQB2dGscnSMvGFjbnbPZUdMmURp+OUt1T7VSQlwhQbAC4C+Qk
+Gur5rIdVb65ytS3p7R3qpfl2s5aBRa8vctR9pj6jpreG3Vd3W9ejBHjXAKBaV93OVfQGRgc4duMY
+h2OHWf/Wepo/bHYFIPr1P9ZTfrncDjCAMm0AEtGVh1e06E/9dArhiZkAYDuC1k9a2ZC9wfUI+kf6
+2Xlxp7aeDMDYxBgHvz/Ige8OWIswRhCfaxEeLTpKZUGlK/t5BTA4NkiwK8j5X89bg0koQoc23PT2
+JhqKG1g4e6FjFrwC6HrYxdrIWrsNSxvaiEh2NBY3siN3BylKismA8MCdv+5QfkkvLLkrlmUss9Hx
+8PgwoeshrQscJIGIdC6wUbHQ7NmPzlK4oNC034jeoFgBefL9k1pBGiIgz/x8htJOx7FimIA+3r3w
+MpKjqPmghpy5UzQhxoVghAtEJEMyGxgXkrxvu9/GlrYtyKXlIA6XkX4dSzeYLiTZXJRVRPi9MGuy
+1tjSbDUuwKQ9JfUuzodJZ7H9OhZLSQYSWZZUC/evWLDCxP0ScXwsTnt/u0ZQNt43o3QZSAwlj8Oo
+MKDQrxxH9I8ovfFeV85IWJhMvfHu1Q2l0EQAvxXlqxrLbZEnz4Cxqg8qMqLbCtNLvoFhwP/fPkwM
+D3p3yCgtP69AxLF8moVf7tPMGqZkRKUYBR8qmSis1FRUYijEUYmi0JksYu814DHHL6v2L11ZmjCA
+SJiYAAAAAElFTkSuQmCC
 </icon>
 
 </service-task-definition>

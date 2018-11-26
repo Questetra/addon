@@ -1,4 +1,21 @@
-# サービスタスク定義ファイルリスト B 2018-11-22 11:52:41
+# サービスタスク定義ファイルリスト B 2018-11-26 10:23:29
+
+## クエリ文字列 から Value 抽出 <small>en:Extract Value from Query String</small>
+
+last-modified:2018-11-29, engine-type : 1
+
+### Summary
+
+> シリアライズされたクエリ文字列（例 "a=123&amp;b=456"）から、指定パラメータの値（value）を抽出し、ワークフローデータとして格納します
+>> Extracts the value of the specified parameter from the serialized query-string (e.g. "a=123&amp;b=456") and stores it as workflow data
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Extractor-ParamValue.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Extractor-ParamValue.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/extractor-serialized-string/](https://support.questetra.com/ja/addons/extractor-serialized-string/)
+    - [EN : https://support.questetra.com/addons/extractor-serialized-string/](https://support.questetra.com/addons/extractor-serialized-string/)
 
 ## TSV の列追加 <small>en:Add Column to Tsv</small>
 
@@ -63,23 +80,6 @@ last-modified:2018-11-14, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/](https://support.questetra.com/ja/addons/converter-tsvtoexcelcsv/)
     - [EN : https://support.questetra.com/addons/converter-tsvtoexcelcsv/](https://support.questetra.com/addons/converter-tsvtoexcelcsv/)
-
-## コンバータ (Table to Options) <small>en:Converter (Table to Options)</small>
-
-last-modified:2018-11-14, engine-type : 1
-
-### Summary
-
-> テーブル型データ項目（1列目2列目）に格納されたID(value)-Label(display)を、２つの複数行文字列型に格納します。（選択肢XMLとして基盤登録するには、選択肢型データで２つの文字列型データを参照します。その後、［サービスタスク（選択肢マスタ更新）］から当該選択肢型データを参照します）
->> Convert IDs-Labels defined in Table data to two String type data items. (In order to base registration as Options XML, refer to two String type data from Select type data. Then, refer to the Select type data from [Service Task (Choices Update)].)
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Table-Options.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Table-Options.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/addons/converter-table-options/](https://support.questetra.com/addons/converter-table-options/)
-    - [EN : https://support.questetra.com/ja/addons/converter-table-options/](https://support.questetra.com/ja/addons/converter-table-options/)
 
 ## 請求データから仕訳伝票TSVの生成 <small>en:Journal Slip TSV from Invoice Data</small>
 
@@ -151,6 +151,22 @@ last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/converter-datetojpera/](https://support.questetra.com/ja/addons/converter-datetojpera/)
     - [EN : https://support.questetra.com/addons/converter-datetojpera/](https://support.questetra.com/addons/converter-datetojpera/)
 
+## コンバータ (Table to Excel-CSV FILE) <small>en:Converter (Table to Excel-CSV FILE)</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> <font color="Red">なし</font>
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsv.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/)
+    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsv/](https://support.questetra.com/addons/converter-tabletoexcelcsv/)
+
 ## コンバータ (Quser to ID, Name, Email) <small>en:Converter (Quser to ID, Name, Email)</small>
 
 last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
@@ -166,22 +182,6 @@ last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/user-converter/](https://support.questetra.com/ja/addons/user-converter/)
     - [EN : https://support.questetra.com/addons/user-converter/](https://support.questetra.com/addons/user-converter/)
-
-## コンバータ (Email to Quser) <small>en:Converter (Email to Quser)</small>
-
-last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
-
-### Summary
-
-> <font color="Red">なし</font>
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/User-EmailToQuser.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/User-EmailToQuser.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/user-emailtoquser/](https://support.questetra.com/ja/addons/user-emailtoquser/)
-    - [EN : https://support.questetra.com/addons/user-emailtoquser/](https://support.questetra.com/addons/user-emailtoquser/)
 
 ## コンバータ (Tsv to Table) <small>en:Converter (Tsv to Table)</small>
 
@@ -216,9 +216,9 @@ last-modified:2018-11-14, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/converter-options-table/](https://support.questetra.com/ja/addons/converter-options-table/)
     - [EN : https://support.questetra.com/addons/converter-options-table/](https://support.questetra.com/addons/converter-options-table/)
 
-## コンバータ (Table to Excel-CSV FILE) <small>en:Converter (Table to Excel-CSV FILE)</small>
+## コンバータ (Email to Quser) <small>en:Converter (Email to Quser)</small>
 
-last-modified:2018-11-14, engine-type : 1
+last-modified:2018-11-14, engine-type : <font color="Red">undefined</font>
 
 ### Summary
 
@@ -226,11 +226,11 @@ last-modified:2018-11-14, engine-type : 1
 
 ### URLs
 
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-TableToExcelCsv.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-TableToExcelCsv.xml)
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/User-EmailToQuser.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/User-EmailToQuser.xml)
 - ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsv/)
-    - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsv/](https://support.questetra.com/addons/converter-tabletoexcelcsv/)
+    - [JA : https://support.questetra.com/ja/addons/user-emailtoquser/](https://support.questetra.com/ja/addons/user-emailtoquser/)
+    - [EN : https://support.questetra.com/addons/user-emailtoquser/](https://support.questetra.com/addons/user-emailtoquser/)
 
 ## コンバータ (TSV to Excel-CSV FILE) sjis <small>en:Converter (TSV to Excel-CSV FILE) sjis</small>
 
@@ -297,6 +297,23 @@ last-modified:2018-11-14, engine-type : 1
     - [JA : https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/ja/addons/converter-tabletoexcelcsvsjis/)
     - [EN : https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/](https://support.questetra.com/addons/converter-tabletoexcelcsvsjis/)
 
+## コンバータ (Table to Options) <small>en:Converter (Table to Options)</small>
+
+last-modified:2018-11-14, engine-type : 1
+
+### Summary
+
+> テーブル型データ項目（1列目2列目）に格納されたID(value)-Label(display)を、２つの複数行文字列型に格納します。（選択肢XMLとして基盤登録するには、選択肢型データで２つの文字列型データを参照します。その後、［サービスタスク（選択肢マスタ更新）］から当該選択肢型データを参照します）
+>> Convert IDs-Labels defined in Table data to two String type data items. (In order to base registration as Options XML, refer to two String type data from Select type data. Then, refer to the Select type data from [Service Task (Choices Update)].)
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Converter-Table-Options.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Converter-Table-Options.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/addons/converter-table-options/](https://support.questetra.com/addons/converter-table-options/)
+    - [EN : https://support.questetra.com/ja/addons/converter-table-options/](https://support.questetra.com/ja/addons/converter-table-options/)
+
 ## Google Sheets 2列データの一括取得 <small>en:Batch to Get Two Column Values from Google Sheet</small>
 
 last-modified:2018-11-09, engine-type : <font color="Red">undefined</font>
@@ -332,23 +349,6 @@ last-modified:2018-11-09, engine-type : <font color="Red">undefined</font>
     - [JA : https://support.questetra.com/ja/addons/googlesheets-valueupdate/](https://support.questetra.com/ja/addons/googlesheets-valueupdate/)
     - [EN : https://support.questetra.com/addons/googlesheets-valueupdate/](https://support.questetra.com/addons/googlesheets-valueupdate/)
 
-## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
-
-last-modified:2018-11-07, engine-type : 1
-
-### Summary
-
-> Google Drive の指定フォルダ内に新しいフォルダを作成します
->> Create a new folder in the specified folder on Google Drive
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/googledrive-foldercreate/](https://support.questetra.com/ja/addons/googledrive-foldercreate/)
-    - [EN : https://support.questetra.com/addons/googledrive-foldercreate/](https://support.questetra.com/addons/googledrive-foldercreate/)
-
 ## Google Drive 共有設定 <small>en:Creating Permissions on Google Drive</small>
 
 last-modified:2018-11-07, engine-type : 1
@@ -365,6 +365,23 @@ last-modified:2018-11-07, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/googledrive-permissioncreate/](https://support.questetra.com/ja/addons/googledrive-permissioncreate/)
     - [EN : https://support.questetra.com/addons/googledrive-permissioncreate/](https://support.questetra.com/addons/googledrive-permissioncreate/)
+
+## Google Drive フォルダ生成 <small>en:Creating Folder on Google Drive</small>
+
+last-modified:2018-11-07, engine-type : 1
+
+### Summary
+
+> Google Drive の指定フォルダ内に新しいフォルダを作成します
+>> Create a new folder in the specified folder on Google Drive
+
+### URLs
+
+- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/GoogleDrive-folderCreate.xml)
+- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/GoogleDrive-folderCreate.xml)
+- ヘルプページURL
+    - [JA : https://support.questetra.com/ja/addons/googledrive-foldercreate/](https://support.questetra.com/ja/addons/googledrive-foldercreate/)
+    - [EN : https://support.questetra.com/addons/googledrive-foldercreate/](https://support.questetra.com/addons/googledrive-foldercreate/)
 
 ## Googleドライブ ファイル削除 <small>en:Deleting File on Google Drive</small>
 
@@ -530,23 +547,6 @@ last-modified:2018-10-24, engine-type : 1
 - ヘルプページURL
     - [JA : https://support.questetra.com/ja/addons/box-webhook-delete/](https://support.questetra.com/ja/addons/box-webhook-delete/)
     - [EN : https://support.questetra.com/addons/box-webhook-delete/](https://support.questetra.com/addons/box-webhook-delete/)
-
-## クエリ文字列 から Value 抽出 <small>en:Extract Value from Query String</small>
-
-last-modified:2018-10-18, engine-type : 1
-
-### Summary
-
-> シリアライズされたクエリ文字列（例 "a=123&amp;b=456"）から、指定パラメータの値（value）を抽出し、ワークフローデータとして格納します
->> Extracts the value of the specified parameter from the serialized query-string (e.g. "a=123&amp;b=456") and stores it as workflow data
-
-### URLs
-
-- [GitHub](https://github.com/Questetra/addon/blob/master/service-task/Extractor-ParamValue.xml)
-- [Download URL (GitHub Pages)](https://questetra.github.io/addon/service-task/Extractor-ParamValue.xml)
-- ヘルプページURL
-    - [JA : https://support.questetra.com/ja/addons/extractor-serialized-string/](https://support.questetra.com/ja/addons/extractor-serialized-string/)
-    - [EN : https://support.questetra.com/addons/extractor-serialized-string/](https://support.questetra.com/addons/extractor-serialized-string/)
 
 ## Typetalk メッセージ投稿 <small>en:Typetalk Post Message</small>
 
