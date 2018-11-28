@@ -2,3 +2,4 @@ service-task/QBPMS Capture.sublime-project
 *node_modules/
 .sublime-grunt.cache
 package-lock.json
+.DS_Store
