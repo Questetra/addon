@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Slack: Chat Post</label>
+<label locale="ja">Slack: チャット投稿</label>
+
+<help-page-url>https://support.questetra.com/addons/slack-chat-post/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/slack-chat-post/</help-page-url>
+
+<summary>Sends a message to a channel. SLACK CHANNEL can be an encoded ID, or a name for channel, private group, or IM channel to send message to.</summary>
+<summary locale="ja">メッセージをChannelに送信します。SLACK CHANNEL には、チャンネル・プライベートグループ・IMチャネルの名前（やエンコードID）を指定することができます。</summary>
+
+<license>(C) Questetra, Inc. (MIT License)</license>
+<engine-type>1</engine-type>
+<last-modified>2018-12-02</last-modified>
+
+<configs>
+  <config name="conf_Channel" el-enabled="true" required="true" form-type="TEXTFIELD">
+    <label>A: Set SLACK CHANNEL to Post (e.g. "#general")</label>
+    <label locale="ja">A: 投稿先の SLACK CHANNEL をセットしてください (例 "#general")</label>
+  </config>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>B: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">B: 通信許可の設定名（［OAuth2.0設定］メニュー）をセットしてください</label>
+  </config>
+  <config name="conf_DataIdC" required="true" form-type="SELECT" select-data-type="STRING">
+    <label>C: Select TEXT DATA for Post Message</label>
+    <label locale="ja">C: 投稿メッセージが格納されている文字列型データ項目を選択してください</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//// == OAuth2 Setting example ==
+// Authorization Endpoint URL: "https://slack.com/oauth/authorize"
+// Token Endpoint URL: "https://slack.com/api/oauth.access"
+// Scope: "chat:write:bot" (or "bot" etc)
+// Client ID: ( from https://api.slack.com/apps )
+// Consumer Secret: ( from https://api.slack.com/apps )
+// -more- https://api.slack.com/methods/chat.postMessage
+
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const channel = configs.get( "conf_Channel" ) + "";
+const oauth2  = configs.get( "conf_OAuth2" ) + "";
+const dataIdC = configs.get( "conf_DataIdC" ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+if( channel === "" ){
+  throw new Error( " SLACK CHANNEL not specified" );
+}
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+const myText  = engine.findDataByNumber( dataIdC ) + "";
+
+
+//// == Calculating / 演算 ==
+// obtain OAuth2 Access Token
+const token   = httpClient.getOAuth2Token( oauth2 );
+
+// prepare API Request
+let apiRequest = httpClient.begin(); // HttpRequestWrapper
+// - com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+apiRequest     = apiRequest.formParam( "token", token );
+// not "apiRequest.bearer( token )"
+apiRequest     = apiRequest.formParam( "channel", channel );
+apiRequest     = apiRequest.formParam( "text", myText );
+
+// access API (with post(), get(), put(), etc.)
+const response = apiRequest.post( "https://slack.com/api/chat.postMessage" );
+// - HttpResponseWrapper
+const httpStatus  = response.getStatusCode() + "";
+engine.log( "STATUS: " + httpStatus );
+const responseStr = response.getResponseAsString() + "";
+engine.log( "RESPONSE: \n" + responseStr );
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+// (nothing)
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFRklEQVRYR8VXW0zbVRj/nX9bWkop
+pdwsYysgbAu0rMxtYUt0c95IG828xKgvY/FB48vYi+PN+UZ9GUuMiQ/qfDEmRocm1EuiYy7osnmB
+wW6Ocdmg3KGF3mjL/5hz4N+0/f9bOpfM7/Gc7zvf7/u+3/edcwj+ZyH34//d654jRMRBAjgoqImA
+OJg9Be0nID4K9IPQXnej69tcz90UQPvoeZMuFDlORbGdEGLK5WBKqY8IQldErzvTVfOkL5tNVgAd
+13raqIjTuTpOd8SAUBU59kGDszsTiIwATg55ughwPJeIN9OhQJfb5jyhpKcIoGPIcxbA0c0Ovr99
+erbT5jqWbiMDkEvk2w1laDRWoFJnRHFePtREgEgpFmMhDPimcHFhVBEbBc64bc725M0UAKzmoOQz
+JevaAjP2m614tKAEOpUGmWpHAYyFFtHtvYbZ1YDsKFHAi8mcSJzD2K4NhEbTCbc134RnK7aDARAy
+uk31w0AMB+bx6fgVGQBGzFWDvkbqjgSAjsGeUyDkvWQLR1ElWh/ZgSK1TjGlIih8sQiMai0vQ7LE
+qIifZ2/jwvyI3JbS9zvtrlNsIwHg5KDHRwiKJG0W+WtbHTBr8jNyjaX49PBFvF7lQFORRabnjSzj
+49FLiIprKXssC267qzgBgE04QcS5ZK0XLA1oMVsTCFlary/PYDy0hMPlddAJagTiUXw1eRVaQYWa
+AjNGggtordiJkjw9P4o5/n7mJi4t3s3IBZ4BJea/XdMCq56D5MIAXF68i+6pa3indj8Mai1ursyi
+d24Ey/EI1zGqdWiz7oFFV5iwuer34suJATkXNjqCA+gY9PSC4GCy1om6x1GuNSSWWL1Hgov4ZOyy
+YkmetzRgb3EVNESVsj+zGsBHI7/JygCKC51256F1AEM9YwCxZgIQXIviu6nruOqf4ip5ggrNpi1o
+LqpEgTqPtxwD21qxg+8lS2gthm7vEAaXp1N5ANrvtrmaNwB4WIZT5M3qfagrKOFrDEDP1A0UafKx
+Ksbxp28Cb9W08EG0RkXO9L99k3i1ahePlJWHAWKHx6mI83N38MvcsCxznTYnyQjg5Uo7HiuuknX+
+ZGQZH97pwxFLI/aZt3FAA34vz4Ikz5TX42BpLVRE4Ny5snQP57xD2QDIS/BEaS2eLq+HJq2/A2tR
+fD05iGA8CpNGl5JaFvXhsjrUG0qhV2kSDq8sTeAb72B6CQbcNpcjIwnZHHhjqwOmjTnAIpkI+9C3
+MM4jlqSxsAJNJgvGgku4HZhDm3Vvog2l7lHMQDIJM11AR7ftwc7CMu6L1frX+VH8NPsPSvP0mI+G
+8MoWO3ab1ss0HFzgHZLevowTP8zcwu+L42kZWL+YeAaUBhFbP1Rai6fK6xNjlhGKgiImipzZWkEN
+1n6M+WwnLopQC0LKnTEVWcEX9/7igJNFupQyjmKp3SS2JxuzctxamUVYjKPJaIFqncsyYXz5cfoW
+/vBNpEZP4Xfbnfx5l/UyYgoHzFY8p9Dfih43FhnAhWgInukbuLEyK1dVuozWr+PwWPKFJFm+VGnD
+btMW3labOfbHwri8dA99C2Py6cdGOoV/1ZBfLbuO2cHZHiSsrw+UVKNQrU2ZDYwXS7Ew74J+/yQf
+19kk44NEMtrsScZ63aIzguViLhrERNif1WFa8RPvAGn9IT5K8XmnzdmWjvahPMuRRLqcAUjzgazh
+rBIxc8k7IxxVoe0/fUwkB/xrFgi1U5D2XIEwxwS0K2LQdz3Q1yw9yo3P6SFC4aCEf053MR0KOkAo
+8VGCfiqgN1vE91WCXNL8oDr/Ag5BVz8MMElBAAAAAElFTkSuQmCC
+</icon>
+
+</service-task-definition>
