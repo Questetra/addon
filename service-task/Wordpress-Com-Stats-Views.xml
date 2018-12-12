@@ -11,7 +11,7 @@
 
 <license>(C) Questetra, Inc. (MIT License)</license>
 <engine-type>1</engine-type>
-<last-modified>2018-12-01</last-modified>
+<last-modified>2018-12-12</last-modified>
 
 <configs>
   <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
@@ -26,7 +26,7 @@
     <label>C: Set POST ID (e.g. "1234")</label>
     <label locale="ja">C: 記事 ID をセットしてください (例 "1234")</label>
   </config>
-  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="FILE">
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="STRING|DECIMAL">
     <label>D: Select STRING/NUMERIC DATA for #Views (update)</label>
     <label locale="ja">D: 累計ビュー数が格納される文字列型or数値型データ項目を選択してください (更新)</label>
   </config>
