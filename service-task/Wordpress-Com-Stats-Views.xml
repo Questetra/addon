@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><service-task-definition>
+
+<label>Wordpress.Com: Stats Views</label>
+<label locale="ja">Wordpress.Com: 統計 ビュー数</label>
+
+<help-page-url>https://support.questetra.com/addons/wordpress-com-stats-views/</help-page-url>
+<help-page-url locale="ja">https://support.questetra.com/ja/addons/wordpress-com-stats-views/</help-page-url>
+
+<summary>Gets a post's views. By specifying WORDPRESS-DOMAIN and POST'ID, the cumulative number of page views is stored.</summary>
+<summary locale="ja">記事のビュー数を取得します。WORDPRESS-DOMAIN および 記事ID を指定することで、累計のページビュー数が格納されます。</summary>
+
+<license>(C) Questetra, Inc. (MIT License)</license>
+<engine-type>1</engine-type>
+<last-modified>2018-12-01</last-modified>
+
+<configs>
+  <config name="conf_OAuth2" required="true" form-type="TEXTFIELD">
+    <label>A: Set OAuth2 Config Name (at [OAuth 2.0 Setting])</label>
+    <label locale="ja">A: 通信許可の設定名（［OAuth2.0設定］メニュー）をセットしてください</label>
+  </config>
+  <config name="conf_WpDomain" el-enabled="true" required="true" form-type="TEXTFIELD">
+    <label>B: Set WORDPRESS DOMAIN (e.g. "example.com" or ID)</label>
+    <label locale="ja">B: WORDPRESS DOMAIN をセットしてください (例 "example.com" or ID)</label>
+  </config>
+  <config name="conf_PostId" el-enabled="true" required="true" form-type="TEXTFIELD">
+    <label>C: Set POST ID (e.g. "1234")</label>
+    <label locale="ja">C: 記事 ID をセットしてください (例 "1234")</label>
+  </config>
+  <config name="conf_DataIdD" required="true" form-type="SELECT" select-data-type="FILE">
+    <label>D: Select STRING/NUMERIC DATA for #Views (update)</label>
+    <label locale="ja">D: 累計ビュー数が格納される文字列型or数値型データ項目を選択してください (更新)</label>
+  </config>
+</configs>
+
+
+<script><![CDATA[
+// (c) 2018, Questetra, Inc. (the MIT License)
+
+//// == OAuth2 Setting example ==
+// Authorization Endpoint URL:
+//  "https://public-api.wordpress.com/oauth2/authorize"
+// Token Endpoint URL:
+//  "https://public-api.wordpress.com/oauth2/token"
+// Scope: "global" (or "auth")
+// Client ID: ( from https://developer.wordpress.com/apps/ )
+// Consumer Secret: ( from https://developer.wordpress.com/apps/ )
+// -- "Redirect URLs": "https://s.questetra.net/oauth2callback"
+// -more-
+// https://developer.wordpress.com/docs/oauth2/
+// https://developer.wordpress.com/docs/api/1.1/get/sites/%24site/stats/post/%24post_id/
+
+
+//////// START "main()" ////////
+main();
+function main(){ 
+
+//// == Config Retrieving / 工程コンフィグの参照 ==
+const oauth2   = configs.get( "conf_OAuth2" ) + "";
+const wpDomain = configs.get( "conf_WpDomain" ) + "";
+const postId   = configs.get( "conf_PostId" ) + "";
+const dataIdD  = configs.get( "conf_DataIdD" ) + "";
+// 'java.lang.String' (String Obj) to javascript primitive 'string'
+if(postId === ""){
+  throw new Error( '\n PostID not Defined \n' );
+}
+if(wpDomain === ""){
+  throw new Error( '\n Wordpress Domain not Defined \n' );
+}
+
+
+//// == Data Retrieving / ワークフローデータの参照 ==
+// (nothing)
+
+
+//// == Calculating / 演算 ==
+/// obtain OAuth2 Access Token
+const token   = httpClient.getOAuth2Token( oauth2 );
+
+/// prepare API Request
+let apiRequest = httpClient.begin(); // HttpRequestWrapper
+// - com.questetra.bpms.core.event.scripttask.HttpClientWrapper
+apiRequest     = apiRequest.bearer( token );
+apiRequest     = apiRequest.queryParam( "fields", "views" );
+
+/// access API (with post(), get(), put(), etc.)
+const apiUri = "https://public-api.wordpress.com/rest/v1.1/sites/"
+               + wpDomain + "/stats/post/" + postId;
+const response = apiRequest.get( apiUri );
+// - HttpResponseWrapper
+const httpStatus  = response.getStatusCode() + "";
+engine.log( "STATUS: " + httpStatus );
+const responseStr = response.getResponseAsString() + "";
+engine.log( "RESPONSE: \n" + responseStr );
+
+/// parse Response-JSON
+const responseObj = JSON.parse( responseStr );
+
+
+//// == Data Updating / ワークフローデータへの代入 ==
+if( engine.findDataDefinitionByNumber( dataIdD ).matchDataType( "DECIMAL" ) ){
+  engine.setDataByNumber( dataIdD, new java.math.BigDecimal(responseObj.views) );
+}else{
+  engine.setDataByNumber( dataIdD, responseObj.views );
+}
+
+} //////// END "main()" ////////
+
+]]></script>
+
+
+<icon>
+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
+</icon>
+
+</service-task-definition>
