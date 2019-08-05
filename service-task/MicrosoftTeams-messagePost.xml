@@ -4,7 +4,7 @@
 <label locale="ja">Microsoft Teams メッセージ投稿</label>
 
 <engine-type>1</engine-type>
-<last-modified>2018-08-24</last-modified>
+<last-modified>2019-08-02</last-modified>
 
 <help-page-url>https://support.questetra.com/addons/microsoftteams-messagepost/</help-page-url>
 <help-page-url locale="ja">https://support.questetra.com/ja/addons/microsoftteams-messagepost/</help-page-url>
@@ -34,7 +34,11 @@
 var endpointUrl = configs.get("conf_EndpointUrl") + "";
 
 //// == ワークフローデータの参照 / Data Retrieving ==
-var title = engine.findDataByNumber( configs.get("conf_Title") ) + "";
+var dataNum_Title = configs.get("conf_Title") + "";
+var title = "";
+if (dataNum_Title !== "") {
+  title = engine.findDataByNumber( configs.get("conf_Title") ) + "";
+}
 var text = engine.findDataByNumber( configs.get("conf_Text") ) + "";
 
 //// == 演算 / Calculating ==
